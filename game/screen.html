@@ -47,7 +47,12 @@
 			// remove previous player
 			$("#player").remove();
 			player = '<audio id="player" autoplay="true"> <source src="' +  msg[0].streamUrl + '" type="audio/mpeg"></audio>';
+			
 			$("body").append(player);
+				
+			// turn volume down
+			// $("#player").prop("volume", 0.1);
+			
 			$("#current_artist").html(library[randomSong].artist);
 			$("#current_title").html(library[randomSong].title);
 			$("#current_album").html(library[randomSong].album);
