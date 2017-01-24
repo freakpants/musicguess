@@ -1,0 +1,6 @@
+{
+  "name": "musicguess",
+  "dependencies": {
+    "playmusic" : "^2.2.0"
+  }
+}

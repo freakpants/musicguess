@@ -1,0 +1,99 @@
+<head>
+<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.6.0.js"></script>
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shared.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="screen-wrapper">
+	<div>Guess the song that is currently playing!</div>
+	<div class="debug" id="current_artist"></div>
+	<div class="debug" id="current_title"></div>
+	<div class="debug" id="current_album"></div>
+	<div class="debug" id="current_year"></div>
+	<div class="debug" id="current_album_art"></div>
+	
+</div>
+
+
+    <script type="text/javascript">
+    var air_console = new AirConsole();
+	
+	// whether or not to display all information
+	var debug = true;
+	
+	// variable to store the library in after an initial query
+	var library;
+	
+
+
+	// get list of songs, choose one at random
+	$.ajax(
+		{ method: "POST", url: "ajax.php", data: {} , dataType: "json" })
+		.done(function( msg ) {
+			library = msg;
+			play_random_song();
+		});
+	
+	
+	
+	function play_random_song(){
+		randomSong = Math.floor(Math.random() * library.length) + 1;
+		console.log( library[randomSong] );
+		$.ajax(
+		{ method: "POST", url: "ajax.php", data: { track_id: library[randomSong].nid } , dataType: "json" })
+			.done(function( msg ) {
+			// remove previous player
+			$("#player").remove();
+			player = '<audio id="player" autoplay="true"> <source src="' +  msg[0].streamUrl + '" type="audio/mpeg"></audio>';
+			$("body").append(player);
+			$("#current_artist").html(library[randomSong].artist);
+			$("#current_title").html(library[randomSong].title);
+			$("#current_album").html(library[randomSong].album);
+			$("#current_year").html(library[randomSong].year);
+			$("#current_album_art").html('<img src="' + library[randomSong].albumArtRef[0].url + '" />');
+			
+			var solution = [];
+			solution.push({ type: "solution", artist: library[randomSong].artist.replace(/ /g,'').toUpperCase(), title: library[randomSong].title.replace(/ /g,'').toUpperCase() });
+			// send the solution to all clients
+			air_console.broadcast( solution );
+			
+		});
+	}
+	
+    // Listen for messages from other devices
+    air_console.onMessage = function(from, message) {
+		// handle message
+		var type = message[0].type;
+		console.log(type);
+		if( type === 'nextSong'){
+			play_random_song();
+		} else if ( type === 'debug' ){
+			if( debug ){
+				// turn it off
+				debug = false;
+				$(".debug").hide();
+			} else {
+				// turn it on
+				debug = true;
+				$(".debug").show();
+			}
+		} else if ( type === 'correctGuess' ){
+			console.log("Player " + from + " guessed a letter!");
+			// check if the player already has a guess area
+			guessArea = false;
+			$("#player_" + from).each(function(){
+				guessArea = true;
+			});
+			if( ! guessArea ){
+				// add guessArea
+				$("#screen-wrapper").append('<div class="playerGuesses" id="player_' + from +'"></div>');
+			}
+			$("#player_" + from).html("Player " + from + ": " + message[0].word);
+		}
+    };
+	
+    </script>
+	
+</body>
