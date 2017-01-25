@@ -6,7 +6,7 @@ Instructions:
 
 - extract directory into root of webserver or subdirectory
 - create /game/config.php with the mysql credentials:
-	```PHP
+	```Php
 	<?php
 	$user = 'username';
 	$password = 'password';
