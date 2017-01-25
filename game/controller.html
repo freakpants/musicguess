@@ -30,18 +30,24 @@
 <script type="text/javascript">
     var air_console = new AirConsole();
 	
-	// tracks whether or not the player has one or more letters on the artist
-	var on_artist_track = 0;
-	var artist_track_word = '';
-	// tracks whether or not the player has one or more letters on the title
-	var on_title_track = 0;
-	var title_track_word = '';
+	// globally tracks whether or not the player has one or more letters on the artist
+	document.on_artist_track = 0;
+	document.artist_track_word = '';
+	// globally tracks whether or not the player has one or more letters on the title
+	document.on_title_track = 0;
+	document.title_track_word = '';
 	
 	// array of all reasonable characters
 	var alphabet = [ 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0' ];
 	
 	// mix random characters onto the grid
 	function mix_characters( solution , type_of_track ){
+		console.log("mixing characters for solution " + solution.artist + " - " + solution.title);
+	
+		// get the values for use inside the function
+		on_title_track = document.on_title_track;
+		on_artist_track = document.on_artist_track;
+	
 		// remove previous click handlers or we will end up crashing the browser(s)
 		$(".correctArtist").off('click');
 		$(".correctTitle").off('click');
@@ -54,20 +60,29 @@
 	
 		if ( typeof type_of_track === 'undefined' ){
 			// determine where to put each correct letter
-			title_solution = Math.floor(Math.random() * 15 ) + 1;
-			artist_solution = Math.floor(Math.random() * 15 ) + 1;
+			title_solution = Math.floor(Math.random() * 14  + 1);
+			artist_solution = Math.floor(Math.random() * 14  + 1);
 			// make sure the two solutions have different spaces
 			while( artist_solution === title_solution ){
-				artist_solution = Math.floor(Math.random() * 15 ) + 1;
+				artist_solution = Math.floor(Math.random() * 14 + 1);
 			}
 		} else {
 			// check to see which path we are on to make sure we mix in the correct next character
 			if( type_of_track === 'title' ){
-				title_solution = Math.floor(Math.random() * 15 ) + 1;
+				title_solution = Math.floor(Math.random() * 14 + 1);
+
 			} else if ( type_of_track === 'artist' ){
-				artist_solution = Math.floor(Math.random() * 15 ) + 1;
+				artist_solution = Math.floor(Math.random() * 14 + 1);
 			}
 		}
+		console.log("progress on title track: " + on_title_track);
+		if( type_of_track === 'title' ){
+			console.log("putting correct letter " + solution.title[on_title_track] + " for title in " + title_solution);
+		} else if ( type_of_track === 'artist' ){
+			console.log("putting correct letter " + solution.artist[on_artist_track] + " for artist in " + title_solution);
+		}
+
+		
 		for( var counter = 1; counter < 15; counter++ ){
 			if( counter === title_solution ){
 				$("#choice_" + counter).html(solution.title[on_title_track]);
@@ -79,9 +94,10 @@
 				// do it randomly
 				letterIndex = Math.floor(Math.random() * alphabet.length );
 				$("#choice_" + counter).html(alphabet[letterIndex]);
-				// if the added letter is also correct, also add the class
+				// if the randomly added letter is also correct, also add the class
 				if( alphabet[letterIndex] === solution.title[on_title_track]){
 					$("#choice_" + counter).addClass("correctTitle");
+					console.log("adding correct class to " + counter)
 				}
 				if( alphabet[letterIndex] === solution.artist[on_artist_track]){
 					$("#choice_" + counter).addClass("correctArtist");
@@ -91,26 +107,66 @@
 		
 		// handle clicking on a correct characters - this is done after generating the letters
 		$(".correctTitle").click(function(){
-			on_title_track++;
-			title_track_word = title_track_word + $(this).html();
+			document.on_title_track++;
+			// get it for use inside the click handler
+			on_title_track = document.on_title_track; 
+			
+			// increase word that will be displayed on the screen
+			document.title_track_word = document.title_track_word + solution.title[on_title_track-1];
 			// let the screen know somebody got a character right
 			var correctGuess = [];
-			correctGuess.push({ type: "correctGuess", type_of_guess: 'title' ,  progress: on_title_track, word: title_track_word });
+			correctGuess.push({ type: "correctGuess", type_of_guess: 'title' ,  progress: on_title_track, word: document.title_track_word });
 			air_console.message( 0 , correctGuess );
 			
-			// prepare next characters
-			mix_characters( solution , 'title' );
+			// track starts at 0
+			if ( solution.title.length === on_title_track ){
+				// player guessed the title completely
+				// check if he also guessed the artist
+				if ( on_artist_track === 'guessed' ){
+					console.log("Player guessed both artist and title!");
+				} else {
+					// otherwise, switch him to the artist track
+					console.log("Player guessed title!")
+					document.on_artist_track = 0;
+					document.artist_track_word = '';
+					document.on_title_track = "guessed";
+					mix_characters( solution , 'artist' );
+				}
+			} else {
+				// prepare next characters
+				mix_characters( solution , 'title' );
+			}
 		});
 		$(".correctArtist").click(function(){
-			on_artist_track++;
-			artist_track_word = artist_track_word + $(this).html();
+			document.on_artist_track++;
+			// get it for use inside the click handler
+			on_artist_track = document.on_artist_track
+			
+			// increase word that will be displayed on the screen
+			document.artist_track_word = document.artist_track_word + solution.artist[on_artist_track-1];
 			// let the screen know somebody got a character right
 			var correctGuess = [];
-			correctGuess.push({ type: "correctGuess", type_of_guess: 'artist' ,  progress: on_artist_track, word: artist_track_word });
+			correctGuess.push({ type: "correctGuess", type_of_guess: 'artist' ,  progress: on_artist_track, word: document.artist_track_word });
 			air_console.message( 0 , correctGuess );
 
-			// prepare next characters
-			mix_characters( solution , 'artist' );
+			// track starts at 0
+			if ( solution.artist.length === on_artist_track ){
+				// player guessed the artist completely
+				// check if he also guessed the title
+				if ( on_title_track === 'guessed' ){
+					console.log("Player guessed both artist and title!");
+				} else {
+					// otherwise, switch him to the title track
+					console.log("Player guessed artist!")
+					document.on_title_track = 0;
+					document.title_track_word = '';
+					document.on_artist_track = "guessed";
+					mix_characters( solution , 'title' );
+				}
+			} else {
+				// prepare next characters
+				mix_characters( solution , 'artist' );
+			}
 		});
 	}
 	
@@ -141,10 +197,10 @@
 		if ( data[0].type === "solution" ){
 			console.log('received solution');
 			// reset progress
-			var on_artist_track = 0;
-			var artist_track_word = '';
-			var on_title_track = 0;
-			var title_track_word = '';
+			on_artist_track = 0;
+			artist_track_word = '';
+			on_title_track = 0;
+			title_track_word = '';
 			// mix the characters a first time, including the first letter of each solution
 			mix_characters( data[0] );
 		}

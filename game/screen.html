@@ -21,25 +21,33 @@
     var air_console = new AirConsole();
 	
 	// whether or not to display all information
-	var debug = true;
+	var debug = false;
 	
 	// variable to store the library in after an initial query
 	var library;
 	
-
-
+	// initially hide the debug section (unless var is set to true)
+	if ( debug === false ){
+		$(".debug").hide();
+	}
+	
 	// get list of songs, choose one at random
 	$.ajax(
 		{ method: "POST", url: "ajax.php", data: {} , dataType: "json" })
 		.done(function( msg ) {
 			library = msg;
+			
 			play_random_song();
 		});
 	
-	
+	// stores the current solution
+	document.solution = [];
 	
 	function play_random_song(){
 		randomSong = Math.floor(Math.random() * library.length) + 1;
+		// manual debug override
+		// randomSong = 552;
+		console.log("playing song " + randomSong + " in library");
 		console.log( library[randomSong] );
 		$.ajax(
 		{ method: "POST", url: "ajax.php", data: { track_id: library[randomSong].nid } , dataType: "json" })
@@ -60,10 +68,10 @@
 			$("#current_year").html(library[randomSong].year);
 			$("#current_album_art").html('<img src="' + library[randomSong].albumArtRef[0].url + '" />');
 			
-			var solution = [];
-			solution.push({ type: "solution", artist: library[randomSong].artist.replace(/ /g,'').toUpperCase(), title: library[randomSong].title.replace(/ /g,'').toUpperCase() });
+			document.solution = [];
+			document.solution.push({ type: "solution", artist: library[randomSong].artist.replace(/ /g,'').toUpperCase(), title: library[randomSong].title.replace(/ /g,'').toUpperCase() });
 			// send the solution to all clients
-			air_console.broadcast( solution );
+			air_console.broadcast( document.solution );
 			
 		});
 	}
@@ -72,7 +80,7 @@
     air_console.onMessage = function(from, message) {
 		// handle message
 		var type = message[0].type;
-		console.log(type);
+		console.log('handling ' + type + ' message.');
 		if( type === 'nextSong'){
 			play_random_song();
 		} else if ( type === 'debug' ){
@@ -86,7 +94,24 @@
 				$(".debug").show();
 			}
 		} else if ( type === 'correctGuess' ){
+			var finished_title = false;
+			var finished_artist = false;
+			
 			console.log("Player " + from + " guessed a letter!");
+			// check the length of the guess word versus the solution
+			console.log(message[0].type_of_guess);
+			if( message[0].type_of_guess === 'title' ){
+				if( document.solution[0].title.length === message[0].progress ){
+					// player finished the title!
+					finished_title = true;
+				}
+			} else if ( message[0].type_of_guess === 'artist' ){
+				if( document.solution[0].artist.length === message[0].progress ){
+					// player finished the artist!
+					finished_artist = true;
+				}
+			}
+
 			// check if the player already has a guess area
 			guessArea = false;
 			$("#player_" + from).each(function(){
@@ -97,6 +122,12 @@
 				$("#screen-wrapper").append('<div class="playerGuesses" id="player_' + from +'"></div>');
 			}
 			$("#player_" + from).html("Player " + from + ": " + message[0].word);
+			if( finished_title || finished_artist ){
+				$("#player_" + from).css('color', 'green');
+			} else {
+				// reset color
+				$("#player_" + from).css('color', 'black');
+			}
 		}
     };
 	
