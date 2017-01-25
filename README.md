@@ -5,11 +5,13 @@ requires node/php/msql/airconsole
 Instructions:
 
 - extract directory into root of webserver or subdirectory
-- create /game/config.php with the mysql credentials:
-	```php
+- create /game/config.php with the mysql credentials:  
+```php
 	<?php
-	class GO_Example_Model_Thing extends GO_Base_Db_ActiveRecord {
-	```
+	$user = 'username';
+	$password = 'password';
+	?>
+```
 - create /config.js with the google play credentials:
 	```Javascript
 	function email(){
