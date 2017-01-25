@@ -9,6 +9,7 @@ Instructions:
 	```php
 	<?php
 	class GO_Example_Model_Thing extends GO_Base_Db_ActiveRecord {
+	```
 - create /config.js with the google play credentials:
 	```Javascript
 	function email(){
