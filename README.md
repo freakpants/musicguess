@@ -8,9 +8,7 @@ Instructions:
 - create /game/config.php with the mysql credentials:
 	```php
 	<?php
-	$user = 'username';
-	$password = 'password';
-	```
+	class GO_Example_Model_Thing extends GO_Base_Db_ActiveRecord {
 - create /config.js with the google play credentials:
 	```Javascript
 	function email(){
