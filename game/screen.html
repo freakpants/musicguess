@@ -46,12 +46,13 @@
 			.done(function( msg ) {
 			// remove previous player
 			$("#player").remove();
-			player = '<audio id="player" autoplay="true"> <source src="' +  msg[0].streamUrl + '" type="audio/mpeg"></audio>';
+			
+			player = '<audio id="player" autoplay="true"> <source src="/game/proxy.php?hash=' +  msg + '" type="audio/mpeg"></audio>';
 			
 			$("body").append(player);
 				
 			// turn volume down
-			// $("#player").prop("volume", 0.1);
+			$("#player").prop("volume", 0.1);
 			
 			$("#current_artist").html(library[randomSong].artist);
 			$("#current_title").html(library[randomSong].title);
