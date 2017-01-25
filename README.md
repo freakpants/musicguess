@@ -1,16 +1,19 @@
-"# musicguess" 
+"# musicguess" - a simple music guessing game for airconsole
 
-requires node/php/msql
+requires node/php/msql/airconsole
 
 Instructions:
 
 - extract directory into root of webserver or subdirectory
 - create /game/config.php with the mysql credentials:
+	```PHP
 	<?php
 	$user = 'username';
 	$password = 'password';
 	?>
+	```
 - create /config.js with the google play credentials:
+	```Javascript
 	function email(){
 		return "emailadress";
 	}
@@ -19,6 +22,7 @@ Instructions:
 	}
 	module.exports.email = email;
 	module.exports.pw = pw;
+	```
 	
 	NOTE: If you are using 2FA on your google account, you need to provide an App
 	Password instead. These are created on https://myaccount.google.com/apppasswords
