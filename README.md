@@ -10,7 +10,6 @@ Instructions:
 	<?php
 	$user = 'username';
 	$password = 'password';
-    ?>
 	```
 - create /config.js with the google play credentials:
 	```Javascript
