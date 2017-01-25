@@ -82,6 +82,10 @@
 		var type = message[0].type;
 		console.log('handling ' + type + ' message.');
 		if( type === 'nextSong'){
+			// reset guess areas
+			$(".resetme").each(function(){
+				$(this).html("");
+			});
 			play_random_song();
 		} else if ( type === 'debug' ){
 			if( debug ){
@@ -118,15 +122,26 @@
 				guessArea = true;
 			});
 			if( ! guessArea ){
-				// add guessArea
-				$("#screen-wrapper").append('<div class="playerGuesses" id="player_' + from +'"></div>');
+				// add empty guessArea
+				$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">Player ' + from + ':</div><div class="left resetme" id="player_' + from +'_artist"></div><div class="resetme"> - </div><div class="left resetme" id="player_' + from +'_title"> </div></div>');
 			}
-			$("#player_" + from).html("Player " + from + ": " + message[0].word);
-			if( finished_title || finished_artist ){
-				$("#player_" + from).css('color', 'green');
+			if( message[0].type_of_guess === 'title' ){
+				$("#player_" + from + "_title").html(message[0].word);
+			} else if ( message[0].type_of_guess === 'artist' ){
+				$("#player_" + from + "_artist").html(message[0].word);
+			}
+			
+			if( finished_title ){
+				$("#player_" + from + "_title").css('color', 'green');
 			} else {
 				// reset color
-				$("#player_" + from).css('color', 'black');
+				$("#player_" + from + "_title").css('color', 'black');
+			}
+			if( finished_artist ){
+				$("#player_" + from + "_artist").css('color', 'green');
+			} else {
+				// reset color
+				$("#player_" + from + "_artist").css('color', 'black');
 			}
 		}
     };

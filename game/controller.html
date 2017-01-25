@@ -197,10 +197,10 @@
 		if ( data[0].type === "solution" ){
 			console.log('received solution');
 			// reset progress
-			on_artist_track = 0;
-			artist_track_word = '';
-			on_title_track = 0;
-			title_track_word = '';
+			document.on_artist_track = 0;
+			document.artist_track_word = '';
+			document.on_title_track = 0;
+			document.title_track_word = '';
 			// mix the characters a first time, including the first letter of each solution
 			mix_characters( data[0] );
 		}

@@ -13,3 +13,7 @@
 #current_album_art img {
 	width:200px;
 }
+
+.left{
+	float:left;
+}
