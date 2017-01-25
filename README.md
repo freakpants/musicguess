@@ -8,6 +8,12 @@ Instructions:
 - create /game/config.php with the mysql credentials:
 	```php
 	<?php
+	class GO_Example_Model_Thing extends GO_Base_Db_ActiveRecord {
+    ...
+	```
+	
+	```php
+	<?php
 	$user = 'username';
 	$password = 'password';
 	?>
