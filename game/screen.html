@@ -98,23 +98,42 @@
 				$(".debug").show();
 			}
 		} else if ( type === 'correctGuess' ){
+			// these vars only concern the current guess
 			var finished_title = false;
 			var finished_artist = false;
-			
+		
 			console.log("Player " + from + " guessed a letter!");
 			// check the length of the guess word versus the solution
 			console.log(message[0].type_of_guess);
+			
+			// initialize the array that stores the general progress of the players
+			if( ! document.player ){
+				document.player = [];
+			}
+			
+			// initialize the array for the current device
+			if( ! document.player[from] ){
+				// initialize array if not already present
+				document.player[from] = [];
+			}
+			
 			if( message[0].type_of_guess === 'title' ){
 				if( document.solution[0].title.length === message[0].progress ){
 					// player finished the title!
 					finished_title = true;
+					// save completion status of device to global var
+					document.player[from].finished_title = true; 
 				}
 			} else if ( message[0].type_of_guess === 'artist' ){
 				if( document.solution[0].artist.length === message[0].progress ){
 					// player finished the artist!
 					finished_artist = true;
+					// save completion status of device to global var
+					document.player[from].finished_artist = true; 
 				}
 			}
+			
+
 
 			// check if the player already has a guess area
 			guessArea = false;
@@ -145,6 +164,13 @@
 				// reset color
 				$("#player_" + from + "_artist").css('color', 'black');
 			}
+			
+			// if global status says both artist and title are guessed correctly, display both of them green
+			if ( document.player[from] && document.player[from].finished_title && document.player[from].finished_artist ){
+				$("#player_" + from + "_title").css('color', 'green');
+				$("#player_" + from + "_artist").css('color', 'green');
+			}
+			
 		}
     };
 	
