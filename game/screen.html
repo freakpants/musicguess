@@ -122,8 +122,10 @@
 				guessArea = true;
 			});
 			if( ! guessArea ){
+				// determine nickname of player
+				nickname = air_console.getNickname( from );
 				// add empty guessArea
-				$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">Player ' + from + ':</div><div class="left resetme" id="player_' + from +'_artist"></div><div class="resetme"> - </div><div class="left resetme" id="player_' + from +'_title"> </div></div>');
+				$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">' + nickname + ':</div><div class="left resetme" id="player_' + from +'_artist"></div><div class="resetme"> - </div><div class="left resetme" id="player_' + from +'_title"> </div></div>');
 			}
 			if( message[0].type_of_guess === 'title' ){
 				$("#player_" + from + "_title").html(message[0].word);
