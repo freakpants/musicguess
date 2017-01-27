@@ -37,3 +37,29 @@
 	font-size:15px;
 	color:black;
 }
+
+#guessing_buttons{
+	display:none;	
+}
+
+#guessing_methods div{
+	width:100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size:16px;
+	font-weight:bold;	
+	height:50px;
+}
+
+#guessing_methods .odd {
+	background-color:#F86624;
+}
+
+#guessing_methods .even {
+	background-color:#EA3546;
+}
+
+#guessing_methods .instruction{
+	color:white;
+}

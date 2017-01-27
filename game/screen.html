@@ -7,14 +7,11 @@
 <body>
 
 <div id="screen-wrapper">
-	<div>Guess the song that is currently playing!</div>
-	<div class="debug" id="current_artist"></div>
-	<div class="debug" id="current_title"></div>
-	<div class="debug" id="current_album"></div>
-	<div class="debug" id="current_year"></div>
-	<div class="debug" id="current_album_art"></div>
+	<div>Connected Players:</div>
 	
+	<div>Choose your guessing method to start!</div>
 </div>
+
 
 
     <script type="text/javascript">
@@ -31,17 +28,27 @@
 		$(".debug").hide();
 	}
 	
-	// get list of songs, choose one at random
-	$.ajax(
-		{ method: "POST", url: "ajax.php", data: {} , dataType: "json" })
-		.done(function( msg ) {
-			library = msg;
-			
-			play_random_song();
-		});
 	
-	// stores the current solution
-	document.solution = [];
+	// start();
+	
+	function start(){
+		// override screen with play area
+		$("#screen-wrapper").html('<div>Guess the song that is currently playing!</div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
+		
+		// get list of songs, choose one at random
+		$.ajax(
+			{ method: "POST", url: "ajax.php", data: {} , dataType: "json" })
+			.done(function( msg ) {
+				library = msg;
+				
+				play_random_song();
+			});
+		
+		// stores the current solution
+		document.solution = [];
+	}
+	
+
 	
 	function play_random_song(){
 		randomSong = Math.floor(Math.random() * library.length) + 1;
@@ -81,7 +88,11 @@
 		// handle message
 		var type = message[0].type;
 		console.log('handling ' + type + ' message.');
-		if( type === 'nextSong'){
+		
+		if ( type === 'guessMethodLetter' ){
+			// start the game in guessing mode
+			start();
+		} else if( type === 'nextSong'){
 			// reset guess areas
 			$(".resetme").each(function(){
 				$(this).html("");

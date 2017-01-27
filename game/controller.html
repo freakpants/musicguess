@@ -7,25 +7,33 @@
 	
 <body>
 
-<div class="choice_1" id="choice_1"></div>
-<div class="choice_2" id="choice_2"></div>
-<div class="choice_3" id="choice_3"></div>
-<div class="choice_4" id="choice_4"></div>
+<div id="guessing_methods">
+	<div class="instruction">Choose your guessing method to start:</div>
+	<div id="guessing_method_letter" class="odd">Letter By Letter (Artist & Title)</div>
+	<div id="guessing_method_artist"  class="even">Full Artist only</div>
+</div>
 
-<div class="choice_3" id="choice_5"></div>
-<div class="choice_4" id="choice_6"></div>
-<div class="choice_1" id="choice_7"></div>
-<div class="choice_2" id="choice_8"></div>
-
-<div class="choice_2" id="choice_9"></div>
-<div class="choice_1" id="choice_10"></div>
-<div class="choice_4" id="choice_11"></div>
-<div class="choice_3" id="choice_12"></div>
-
-<div class="choice_4" id="choice_13"></div>
-<div class="choice_3" id="choice_14"></div>
-<div class="choice_D" id="choice_D">Debug</div>
-<div class="choice_N" id="choice_N">Next Song</div>
+<div id="guessing_buttons">
+	<div class="choice_1" id="choice_1"></div>
+	<div class="choice_2" id="choice_2"></div>
+	<div class="choice_3" id="choice_3"></div>
+	<div class="choice_4" id="choice_4"></div>
+	
+	<div class="choice_3" id="choice_5"></div>
+	<div class="choice_4" id="choice_6"></div>
+	<div class="choice_1" id="choice_7"></div>
+	<div class="choice_2" id="choice_8"></div>
+	
+	<div class="choice_2" id="choice_9"></div>
+	<div class="choice_1" id="choice_10"></div>
+	<div class="choice_4" id="choice_11"></div>
+	<div class="choice_3" id="choice_12"></div>
+	
+	<div class="choice_4" id="choice_13"></div>
+	<div class="choice_3" id="choice_14"></div>
+	<div class="choice_D" id="choice_D">Debug</div>
+	<div class="choice_N" id="choice_N">Next Song</div>
+</div>
 
 <script type="text/javascript">
     var air_console = new AirConsole();
@@ -175,7 +183,12 @@
 		$(".correctTitle").removeClass("correctTitle");
 	}
 	
-
+	$("#guessing_method_letter").click(function( event ){
+		// instruct the screen to start the game in letter by letter mode
+		var command = [];
+		command.push({ type: "guessMethodLetter" });
+		air_console.message( 0 , command );
+	});
 
 	$("#choice_N").click(function( event ){
 		// play next song
@@ -195,6 +208,9 @@
     air_console.onMessage = function(from, data) {
 		// analyze data
 		if ( data[0].type === "solution" ){
+			// hide the guessing type selection
+			$("#guessing_methods").hide();
+			
 			console.log('received solution');
 			// reset progress
 			document.on_artist_track = 0;
@@ -203,6 +219,9 @@
 			document.title_track_word = '';
 			// mix the characters a first time, including the first letter of each solution
 			mix_characters( data[0] );
+			
+			// display the guessing buttons
+			$("#guessing_buttons").show();
 		}
 	}
 
