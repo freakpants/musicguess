@@ -8,7 +8,7 @@ $hash = $_GET['hash'];
 require("config.php");
 
 // open connection
-$dbh = new PDO('mysql:host=localhost;dbname=musicguess', $user, $password);
+$dbh = new PDO('mysql:host=localhost;dbname=' . $dbname , $user, $password);
 		
 $sql = "SELECT stream_url FROM musicguess WHERE hash = :hash";
 $sth = $dbh->prepare($sql);

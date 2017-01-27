@@ -5,9 +5,11 @@ requires node/php/msql/airconsole
 Instructions:
 
 - extract directory into root of webserver or subdirectory
+- run the sql in musicguess.sql in your database to create the necessary table
 - create /game/config.php with the mysql credentials:  
 ```php
 	<?php
+	$dbname = 'dbname';
 	$user = 'username';
 	$password = 'password';
 	?>
