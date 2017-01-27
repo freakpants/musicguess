@@ -1,8 +1,8 @@
 // get password from config file
 var pw = require('./config.js').pw();
 var email = require('./config.js').email();
-var androidID = require('./config.js').android();
-var masterToken = require('./config.js').masterToken();
+// var androidID = require('./config.js').android();
+// var masterToken = require('./config.js').masterToken();
 
 // determine parameters
 var nid = process.argv[2];
