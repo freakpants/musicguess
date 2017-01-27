@@ -10,7 +10,7 @@ if( isset( $_GET['login']) ){
 } else{
 	if( isset( $_POST['track_id'] ) && $_POST['track_id'] !== '' ){
 		$arg = escapeshellarg ( $_POST['track_id'] );
-		exec("D:/nodejs/node.exe D:/playmusic/get_stream_url_by_track_id.js " . $arg, $output);
+		exec("node ../get_stream_url_by_track_id.js " . $arg, $output);
 
 		$stream_url = $output[0];
 		$stream_url = json_decode($output[0])[0]->streamUrl;
@@ -19,7 +19,7 @@ if( isset( $_GET['login']) ){
 		$hash = hash ( "md5" , $stream_url );
 
 		// open connection
-		$dbh = new PDO('mysql:host=localhost;dbname=musicguess', $user, $password);
+		$dbh = new PDO('mysql:host=localhost;dbname=' . $dbname , $user, $password);
 
 		$sql = "INSERT INTO musicguess (hash, stream_url) VALUES ('$hash', '$stream_url')";
 		$dbh->query($sql);
@@ -30,7 +30,7 @@ if( isset( $_GET['login']) ){
 		echo json_encode($hash);
 
 	} else {
-		exec("D:/nodejs/node.exe D:/playmusic/get_library.js", $output);
+		exec("node ../get_library.js", $output);
 		echo $output[0];		
 	}
 }
