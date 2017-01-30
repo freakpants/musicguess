@@ -49,8 +49,6 @@
 		document.solution = [];
 	}
 	
-
-	
 	function play_random_song(){
 		randomSong = Math.floor(Math.random() * library.length) + 1;
 		// manual debug override
@@ -90,101 +88,110 @@
 		var type = message[0].type;
 		console.log('handling ' + type + ' message.');
 		
-		if ( type === 'guessMethodLetter' ){
-			// start the game in guessing mode
-			start();
-		} else if( type === 'nextSong'){
-			// reset guess areas
-			$(".resetme").each(function(){
-				$(this).html("");
-			});
-			play_random_song();
-		} else if ( type === 'debug' ){
-			if( debug ){
-				// turn it off
-				debug = false;
-				$(".debug").hide();
-			} else {
-				// turn it on
-				debug = true;
-				$(".debug").show();
-			}
-		} else if ( type === 'correctGuess' ){
-			// these vars only concern the current guess
-			var finished_title = false;
-			var finished_artist = false;
 		
-			console.log("Player " + from + " guessed a letter!");
-			// check the length of the guess word versus the solution
-			console.log(message[0].type_of_guess);
-			
-			// initialize the array that stores the general progress of the players
-			if( ! document.player ){
-				document.player = [];
-			}
-			
-			// initialize the array for the current device
-			if( ! document.player[from] ){
-				// initialize array if not already present
-				document.player[from] = [];
-			}
-			
-			if( message[0].type_of_guess === 'title' ){
-				if( document.solution[0].title.length === message[0].progress ){
-					// player finished the title!
-					finished_title = true;
-					// save completion status of device to global var
-					document.player[from].finished_title = true; 
+		switch( type ){
+			case 'guessMethodLetter':
+				// start the game in letter guessing mode
+				start();
+			break;
+			case 'nextSong':
+				// reset guess areas
+				$(".resetme").each(function(){
+					$(this).html("");
+				});
+				play_random_song();
+			break;
+			case 'debug':
+				if( debug ){
+					// turn it off
+					debug = false;
+					$(".debug").hide();
+				} else {
+					// turn it on
+					debug = true;
+					$(".debug").show();
 				}
-			} else if ( message[0].type_of_guess === 'artist' ){
-				if( document.solution[0].artist.length === message[0].progress ){
-					// player finished the artist!
-					finished_artist = true;
-					// save completion status of device to global var
-					document.player[from].finished_artist = true; 
-				}
-			}
-			
-
-
-			// check if the player already has a guess area
-			guessArea = false;
-			$("#player_" + from).each(function(){
-				guessArea = true;
-			});
-			if( ! guessArea ){
-				// determine nickname of player
-				nickname = air_console.getNickname( from );
-				// add empty guessArea
-				$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">' + nickname + ':</div><div class="left resetme" id="player_' + from +'_artist"></div><div class="resetme"> - </div><div class="left resetme" id="player_' + from +'_title"> </div></div>');
-			}
-			if( message[0].type_of_guess === 'title' ){
-				$("#player_" + from + "_title").html(message[0].word);
-			} else if ( message[0].type_of_guess === 'artist' ){
-				$("#player_" + from + "_artist").html(message[0].word);
-			}
-			
-			if( finished_title ){
-				$("#player_" + from + "_title").css('color', 'green');
-			} else {
-				// reset color
-				$("#player_" + from + "_title").css('color', 'black');
-			}
-			if( finished_artist ){
-				$("#player_" + from + "_artist").css('color', 'green');
-			} else {
-				// reset color
-				$("#player_" + from + "_artist").css('color', 'black');
-			}
-			
-			// if global status says both artist and title are guessed correctly, display both of them green
-			if ( document.player[from] && document.player[from].finished_title && document.player[from].finished_artist ){
-				$("#player_" + from + "_title").css('color', 'green');
-				$("#player_" + from + "_artist").css('color', 'green');
-			}
-			
+			break;
+			case 'correctGuess':
+				handle_correct_guess( message);
+			break:
 		}
     };
+	
+	function handle_correct_guess( message ){
+		// these vars only concern the current guess
+		var finished_title = false;
+		var finished_artist = false;
+	
+		console.log("Player " + from + " guessed a letter!");
+		// check the length of the guess word versus the solution
+		console.log(message[0].type_of_guess);
+		
+		// initialize the array that stores the general progress of the players
+		if( ! document.player ){
+			document.player = [];
+		}
+		
+		// initialize the array for the current device
+		if( ! document.player[from] ){
+			// initialize array if not already present
+			document.player[from] = [];
+		}
+		
+		if( message[0].type_of_guess === 'title' ){
+			if( document.solution[0].title.length === message[0].progress ){
+				// player finished the title!
+				finished_title = true;
+				// save completion status of device to global var
+				document.player[from].finished_title = true; 
+			}
+		} else if ( message[0].type_of_guess === 'artist' ){
+			if( document.solution[0].artist.length === message[0].progress ){
+				// player finished the artist!
+				finished_artist = true;
+				// save completion status of device to global var
+				document.player[from].finished_artist = true; 
+			}
+		}
+		
+
+
+		// check if the player already has a guess area
+		guessArea = false;
+		$("#player_" + from).each(function(){
+			guessArea = true;
+		});
+		if( ! guessArea ){
+			// determine nickname of player
+			nickname = air_console.getNickname( from );
+			// add empty guessArea
+			$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">' + nickname + ':</div><div class="left resetme" id="player_' + from +'_artist"></div><div class="resetme"> - </div><div class="left resetme" id="player_' + from +'_title"> </div></div>');
+		}
+		if( message[0].type_of_guess === 'title' ){
+			$("#player_" + from + "_title").html(message[0].word);
+		} else if ( message[0].type_of_guess === 'artist' ){
+			$("#player_" + from + "_artist").html(message[0].word);
+		}
+		
+		if( finished_title ){
+			$("#player_" + from + "_title").css('color', 'green');
+		} else {
+			// reset color
+			$("#player_" + from + "_title").css('color', 'black');
+		}
+		if( finished_artist ){
+			$("#player_" + from + "_artist").css('color', 'green');
+		} else {
+			// reset color
+			$("#player_" + from + "_artist").css('color', 'black');
+		}
+		
+		// if global status says both artist and title are guessed correctly, display both of them green
+		if ( document.player[from] && document.player[from].finished_title && document.player[from].finished_artist ){
+			$("#player_" + from + "_title").css('color', 'green');
+			$("#player_" + from + "_artist").css('color', 'green');
+		}
+	}
 	
     </script>
 	

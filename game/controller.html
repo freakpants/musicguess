@@ -10,7 +10,7 @@
 <div id="guessing_methods">
 	<div class="instruction">Choose your guessing method to start:</div>
 	<div id="guessing_method_letter" class="odd">Letter By Letter (Artist & Title)</div>
-	<div id="guessing_method_artist"  class="even">Full Artist only</div>
+	<div id="guessing_method_full"  class="even">Full Artist or Title</div>
 </div>
 
 <div id="guessing_buttons">
@@ -187,6 +187,13 @@
 		// instruct the screen to start the game in letter by letter mode
 		var command = [];
 		command.push({ type: "guessMethodLetter" });
+		air_console.message( 0 , command );
+	});
+	
+	$("#guessing_method_full").click(function( event ){
+		// instruct the screen to start the game in full word mode
+		var command = [];
+		command.push({ type: "guessMethodFull" });
 		air_console.message( 0 , command );
 	});
 
