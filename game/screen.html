@@ -34,6 +34,7 @@
 	function start(){
 		// override screen with play area
 		$("#screen-wrapper").html('<div>Guess the song that is currently playing!</div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
+		$(".debug").hide();
 		
 		// get list of songs, choose one at random
 		$.ajax(
