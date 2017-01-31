@@ -12,187 +12,306 @@
 	<div>Choose your guessing method to start!</div>
 </div>
 
+<script type="text/javascript">
+var air_console = new AirConsole();
 
+// whether or not to display all information
+var debug = false;
 
-    <script type="text/javascript">
-    var air_console = new AirConsole();
+// variable to store the library in after an initial query
+var library;
+
+// initially hide the debug section (unless var is set to true)
+if ( debug === false ){
+	$(".debug").hide();
+}
+
+// store amount of correct full guesses
+document.amount_of_finished_players = 0;
+
+function start(){
+	// override screen with play area
+	$("#screen-wrapper").html('<div>Guess the song that is currently playing!</div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
+	$(".debug").hide();
 	
-	// whether or not to display all information
-	var debug = false;
+	// get list of songs, choose one at random
+	$.ajax(
+		{ method: "POST", url: "ajax.php", data: {} , dataType: "json" })
+		.done(function( msg ) {
+			library = msg;
+			
+			play_random_song();
+		});
 	
-	// variable to store the library in after an initial query
-	var library;
+	// stores the current solution
+	document.solution = [];
+}
+
+function randomIntFromInterval( min, max ){
+    return Math.floor( Math.random() * ( max - min + 1 ) + min );
+}
+
+function play_random_song(){
+	randomSongIndex = Math.floor(Math.random() * library.length) + 1;
+	randomSong = library[randomSongIndex];
+
+	// manual debug override
+	// randomSong = 552;
 	
-	// initially hide the debug section (unless var is set to true)
-	if ( debug === false ){
-		$(".debug").hide();
+	// get wrong answers for multiple choice
+	wrong_answers = 0;
+	wrong_answers_array = [];
+	while(wrong_answers < 3){
+		// 50:50 chance that wrong answer is either artist or title
+		artist_or_title = randomIntFromInterval( 0, 1 );	
+		suitable_wrong_answer = true;
+		wrongSongIndex = Math.floor(Math.random() * library.length) + 1;
+		wrongSong = library[wrongSongIndex];
+		if( artist_or_title === 0 ){
+			// artist
+			// check if the wrongSong has the same artist as the actual song
+			if( wrongSong.artist === randomSong.artist ){
+				suitable_wrong_answer = false;
+			}
+			// check if wrong contains right, or vice versa
+			if( wrongSong.artist.indexOf(randomSong.artist) !== -1 && randomSong.artist.indexOf( wrongSong.artist ) ){
+				suitable_wrong_answer = false;
+			}
+			// check if the selection is already in the array
+			if( $.inArray( wrongSong.artist, wrong_answers_array ) !== -1 ){
+				suitable_wrong_answer = false;
+			}
+			if( suitable_wrong_answer ){
+				wrong_answers_array.push(wrongSong.artist);
+			}
+		} else {
+			// title
+			// check if the wrongSong has the same title as the actual song
+			if( wrongSong.title === randomSong.title ){
+				suitable_wrong_answer = false;
+			}
+			// check if wrong contains right, or vice versa
+			if( wrongSong.title.indexOf( randomSong.title ) !== -1 && randomSong.title.indexOf( wrongSong.title ) !== -1 ){
+				suitable_wrong_answer = false;
+			}
+			// check if the selection is already in the array
+			if( $.inArray( wrongSong.title, wrong_answers_array ) !== -1 ){
+				suitable_wrong_answer = false;
+			}
+			if( suitable_wrong_answer ){
+				wrong_answers_array.push(wrongSong.title);
+			}
+		}
+		if( suitable_wrong_answer ){
+			wrong_answers++;
+		}
+	}
+
+	console.log( "array of wrong answers" + wrong_answers_array );
+	
+	console.log("playing song " + randomSongIndex + " in library");
+	console.log( randomSong );
+	$.ajax(
+	{ method: "POST", url: "ajax.php", data: { track_id: randomSong.nid } , dataType: "json" })
+		.done(function( msg ) {
+		// remove previous player
+		$("#player").remove();
+		
+		player = '<audio id="player" autoplay="true"> <source src="/game/proxy.php?hash=' +  msg + '" type="audio/mpeg"></audio>';
+		
+		$("body").append(player);
+
+		// record start time
+		document.startTime = new Date().getTime();
+			
+		// turn volume down
+		$("#player").prop("volume", 0.1);
+		
+		$("#current_artist").html(randomSong.artist);
+		$("#current_title").html(randomSong.title);
+		$("#current_album").html(randomSong.album);
+		$("#current_year").html(randomSong.year);
+		$("#current_album_art").html('<img src="' + randomSong.albumArtRef[0].url + '" />');
+		
+		artist = randomSong.artist;
+		title = randomSong.title;
+
+		if( document.guessingMethod === 'letter' ){
+			artist = artist.replace(/ /g,'').toUpperCase();
+			title = title.replace(/ /g,'').toUpperCase();
+		}
+
+		document.solution = [];
+		document.solution.push({ 
+			type: "solution", 
+			artist: artist, 
+			title: title, 
+			guessingMethod: document.guessingMethod,
+			wrongAnswers: wrong_answers_array
+		});
+		// send the solution to all clients
+		air_console.broadcast( document.solution );
+		
+	});
+}
+
+// Listen for messages from other devices
+air_console.onMessage = function(from, message) {
+	// handle message
+	var type = message[0].type;
+	console.log('handling ' + type + ' message.');
+
+	switch( type ){
+		case 'guessMethodFull':
+			// save the type of guessing method
+			document.guessingMethod = 'full';
+			// start the game
+			start();
+		break;
+		case 'guessMethodLetter':
+			// save the type of guessing method
+			document.guessingMethod = 'letter';
+			// start the game
+			start();
+		break;
+		case 'nextSong':
+			// reset guess areas
+			$(".resetme").each(function(){
+				$(this).html("");
+			});
+			play_random_song();
+		break;
+		case 'debug':
+			if( debug ){
+				// turn it off
+				debug = false;
+				$(".debug").hide();
+			} else {
+				// turn it on
+				debug = true;
+				$(".debug").show();
+			}
+		break;
+		case 'wrongGuess':
+		case 'correctGuess':
+			handle_guess( message, from );
+		break;
+	}
+};
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function handle_guess( message, from ){
+	// these vars only concern the current guess
+	var finished_title = false;
+	var finished_artist = false;
+
+	console.log("Player " + from + " guessed a letter!");
+	// check the length of the guess word versus the solution
+	console.log(message[0].type_of_guess);
+	
+	// initialize the array that stores the general progress of the players
+	if( ! document.player ){
+		document.player = [];
 	}
 	
+	// initialize the array for the current device
+	if( ! document.player[from] ){
+		// initialize array if not already present
+		document.player[from] = [];
+	}
 	
-	// start();
-	
-	function start(){
-		// override screen with play area
-		$("#screen-wrapper").html('<div>Guess the song that is currently playing!</div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
-		$(".debug").hide();
-		
-		// get list of songs, choose one at random
-		$.ajax(
-			{ method: "POST", url: "ajax.php", data: {} , dataType: "json" })
-			.done(function( msg ) {
-				library = msg;
-				
+	if( message[0].type_of_guess === 'title' ){
+		if( document.solution[0].title.length === message[0].progress ){
+			// player finished the title!
+			finished_title = true;
+			// save completion status of device to global var
+			document.player[from].finished_title = true; 
+		}
+	} else if ( message[0].type_of_guess === 'artist' ){
+		if( document.solution[0].artist.length === message[0].progress ){
+			// player finished the artist!
+			finished_artist = true;
+			// save completion status of device to global var
+			document.player[from].finished_artist = true; 
+		}
+	} 
+
+	// check if the player already has a guess area
+	guessArea = false;
+	$("#player_" + from).each(function(){
+		guessArea = true;
+	});
+	if( ! guessArea ){
+		// determine nickname of player
+		nickname = air_console.getNickname( from );
+		// add empty guessArea
+		if( document.guessingMethod === 'letter' ){
+			$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">' + nickname + ':</div><div class="left resetme" id="player_' + from +'_artist"></div><div class="resetme"> - </div><div class="left resetme" id="player_' + from +'_title"> </div></div>');
+		} else if ( document.guessingMethod === 'full' ){
+			$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">' + nickname + ':</div><div class="left resetme" id="player_' + from +'_result"></div></div>');
+		}
+	}
+	if( message[0].type_of_guess === 'title' ){
+		$("#player_" + from + "_title").html(message[0].word);
+	} else if ( message[0].type_of_guess === 'artist' ){
+		$("#player_" + from + "_artist").html(message[0].word);
+	} else if ( message[0].type_of_guess === 'full' ){
+		guessTime = (new Date().getTime() - document.startTime);
+		points = 1000;
+		negative_points = Math.round(1000 / 10000 * guessTime);
+		actual_points = 1000 - negative_points;
+		if(actual_points < 0) actual_points = 0;
+		guessTime = guessTime / 1000;
+
+		if( message[0].type === "correctGuess" ){
+			$("#player_" + from + "_result").html("correct - " + guessTime + " seconds - " + actual_points + " points");
+			$("#player_" + from + "_result").css('color', 'green');
+		} else {
+			$("#player_" + from + "_result").html("wrong - " + guessTime + " seconds");
+			$("#player_" + from + "_result").css('color', 'red');
+			actual_points = 0;
+		}
+		document.amount_of_finished_players++;
+		console.log("Currently Connected: " + air_console.getControllerDeviceIds().length);
+		console.log("Amount of finished players: " + document.amount_of_finished_players);
+		// in theory this should play the next song when all connected devices have finished
+		// since a controller can join after the round has started, this is probably a blocker we need to handle
+		if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length){
+			debug = true;
+			$(".debug").show();
+			sleep(4000).then(() => {
+				document.amount_of_finished_players = 0;
+				// remove all guessing areas
+				$(".playerGuesses").remove();
+				debug = false;
+				$(".debug").hide();
 				play_random_song();
 			});
-		
-		// stores the current solution
-		document.solution = [];
-	}
-	
-	function play_random_song(){
-		randomSong = Math.floor(Math.random() * library.length) + 1;
-		// manual debug override
-		// randomSong = 552;
-		console.log("playing song " + randomSong + " in library");
-		console.log( library[randomSong] );
-		$.ajax(
-		{ method: "POST", url: "ajax.php", data: { track_id: library[randomSong].nid } , dataType: "json" })
-			.done(function( msg ) {
-			// remove previous player
-			$("#player").remove();
-			
-			player = '<audio id="player" autoplay="true"> <source src="/game/proxy.php?hash=' +  msg + '" type="audio/mpeg"></audio>';
-			
-			$("body").append(player);
-				
-			// turn volume down
-			$("#player").prop("volume", 0.1);
-			
-			$("#current_artist").html(library[randomSong].artist);
-			$("#current_title").html(library[randomSong].title);
-			$("#current_album").html(library[randomSong].album);
-			$("#current_year").html(library[randomSong].year);
-			$("#current_album_art").html('<img src="' + library[randomSong].albumArtRef[0].url + '" />');
-			
-			document.solution = [];
-			document.solution.push({ type: "solution", artist: library[randomSong].artist.replace(/ /g,'').toUpperCase(), title: library[randomSong].title.replace(/ /g,'').toUpperCase() });
-			// send the solution to all clients
-			air_console.broadcast( document.solution );
-			
-		});
-	}
-	
-    // Listen for messages from other devices
-    air_console.onMessage = function(from, message) {
-		// handle message
-		var type = message[0].type;
-		console.log('handling ' + type + ' message.');
-		
-		
-		switch( type ){
-			case 'guessMethodLetter':
-				// start the game in letter guessing mode
-				start();
-			break;
-			case 'nextSong':
-				// reset guess areas
-				$(".resetme").each(function(){
-					$(this).html("");
-				});
-				play_random_song();
-			break;
-			case 'debug':
-				if( debug ){
-					// turn it off
-					debug = false;
-					$(".debug").hide();
-				} else {
-					// turn it on
-					debug = true;
-					$(".debug").show();
-				}
-			break;
-			case 'correctGuess':
-				handle_correct_guess( message);
-			break:
-		}
-    };
-	
-	function handle_correct_guess( message ){
-		// these vars only concern the current guess
-		var finished_title = false;
-		var finished_artist = false;
-	
-		console.log("Player " + from + " guessed a letter!");
-		// check the length of the guess word versus the solution
-		console.log(message[0].type_of_guess);
-		
-		// initialize the array that stores the general progress of the players
-		if( ! document.player ){
-			document.player = [];
-		}
-		
-		// initialize the array for the current device
-		if( ! document.player[from] ){
-			// initialize array if not already present
-			document.player[from] = [];
-		}
-		
-		if( message[0].type_of_guess === 'title' ){
-			if( document.solution[0].title.length === message[0].progress ){
-				// player finished the title!
-				finished_title = true;
-				// save completion status of device to global var
-				document.player[from].finished_title = true; 
-			}
-		} else if ( message[0].type_of_guess === 'artist' ){
-			if( document.solution[0].artist.length === message[0].progress ){
-				// player finished the artist!
-				finished_artist = true;
-				// save completion status of device to global var
-				document.player[from].finished_artist = true; 
-			}
-		}
-		
-
-
-		// check if the player already has a guess area
-		guessArea = false;
-		$("#player_" + from).each(function(){
-			guessArea = true;
-		});
-		if( ! guessArea ){
-			// determine nickname of player
-			nickname = air_console.getNickname( from );
-			// add empty guessArea
-			$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">' + nickname + ':</div><div class="left resetme" id="player_' + from +'_artist"></div><div class="resetme"> - </div><div class="left resetme" id="player_' + from +'_title"> </div></div>');
-		}
-		if( message[0].type_of_guess === 'title' ){
-			$("#player_" + from + "_title").html(message[0].word);
-		} else if ( message[0].type_of_guess === 'artist' ){
-			$("#player_" + from + "_artist").html(message[0].word);
-		}
-		
-		if( finished_title ){
-			$("#player_" + from + "_title").css('color', 'green');
-		} else {
-			// reset color
-			$("#player_" + from + "_title").css('color', 'black');
-		}
-		if( finished_artist ){
-			$("#player_" + from + "_artist").css('color', 'green');
-		} else {
-			// reset color
-			$("#player_" + from + "_artist").css('color', 'black');
-		}
-		
-		// if global status says both artist and title are guessed correctly, display both of them green
-		if ( document.player[from] && document.player[from].finished_title && document.player[from].finished_artist ){
-			$("#player_" + from + "_title").css('color', 'green');
-			$("#player_" + from + "_artist").css('color', 'green');
 		}
 	}
 	
-    </script>
+	if( finished_title ){
+		$("#player_" + from + "_title").css('color', 'green');
+	} else {
+		// reset color
+		$("#player_" + from + "_title").css('color', 'black');
+	}
+	if( finished_artist ){
+		$("#player_" + from + "_artist").css('color', 'green');
+	} else {
+		// reset color
+		$("#player_" + from + "_artist").css('color', 'black');
+	}
+	
+	// if global status says both artist and title are guessed correctly, display both of them green
+	if ( document.player[from] && document.player[from].finished_title && document.player[from].finished_artist ){
+		$("#player_" + from + "_title").css('color', 'green');
+		$("#player_" + from + "_artist").css('color', 'green');
+	}
+}
+</script>
 	
 </body>
