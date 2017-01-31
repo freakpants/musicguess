@@ -48,12 +48,12 @@
 	background-color:#43BCCD;
 }
 
-.choice_N{
+#guessing_buttons_letter .choice_N{
 	background-color:black;
 	font-size:15px;
 }
 
-.choice_D{
+#guessing_buttons_letter .choice_D{
 	background-color:white;
 	font-size:15px;
 	color:black;
