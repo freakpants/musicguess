@@ -117,7 +117,7 @@ function play_random_song(){
 		// remove previous player
 		$("#player").remove();
 		
-		player = '<audio id="player" autoplay="true"> <source src="/game/proxy.php?hash=' +  msg + '" type="audio/mpeg"></audio>';
+		player = '<audio id="player" autoplay> <source src="/game/proxy.php?hash=' +  msg + '" type="audio/mpeg"></audio>';
 		
 		$("body").append(player);
 
@@ -126,6 +126,7 @@ function play_random_song(){
 			
 		// turn volume down
 		$("#player").prop("volume", 0.1);
+		$('#player').get(0).currentTime = 5;
 		
 		$("#current_artist").html(randomSong.artist);
 		$("#current_title").html(randomSong.title);

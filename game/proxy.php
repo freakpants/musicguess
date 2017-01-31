@@ -1,6 +1,8 @@
 <?php
 // Set your return content type
 header('Content-type: audio/mpeg');
+header("Accept-Ranges:bytes");
+header("Content-length:12000000");
 
 $hash = $_GET['hash'];
 
@@ -15,6 +17,8 @@ $sth = $dbh->prepare($sql);
 $sth->execute(array(':hash' => $hash));
 $daurl = $sth->fetchColumn();
 
+
+
 $sql = "DELETE FROM musicguess WHERE hash = :hash";
 $sth = $dbh->prepare($sql);
 $sth->execute(array(':hash' => $hash));
@@ -24,6 +28,8 @@ $dbh = null;
  
 // Get that website's content
 $handle = fopen($daurl, "r");
+
+
  
 // If there is something, read and return
 if ($handle) {
