@@ -6,13 +6,16 @@ var pm = new PlayMusic();
 pm.init({email: email, password: pw }, function(err) {
     if(err) console.error(err);
 	pm.getAllTracks(function(err, library) {
+		
+		freshLibrary = [];
 		// remove self uploaded songs
 		for( var item in library.data.items){
 			data_item = library.data.items[item];
-			if( typeof data_item.storeId === "undefined" ){
-				library.data.items.splice( item, 1 );
+			if ( typeof data_item.storeId !== "undefined"){
+				freshLibrary.push(data_item);
 			}
+			
 		}
-		console.log(JSON.stringify(library.data.items));
+		console.log(JSON.stringify(freshLibrary));
 	});
 })
