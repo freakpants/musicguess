@@ -30,8 +30,28 @@ if( isset( $_GET['login']) ){
 		echo json_encode($hash);
 
 	} else {
+		
+		// open connection
+		/* $dbh = new PDO('mysql:host=localhost;dbname=' . $dbname , $user, $password);
+
+
+
+		$sql = "SET NAMES 'utf-8'";
+		$dbh->query($sql);
+		
 		exec("node ../get_library.js", $output);
-		echo $output[0];		
+		$items = json_decode($output[0]);
+		foreach( $items as $item ){
+			$artist = utf8_decode( $item->artist );
+			$title = utf8_decode( $item->title );
+			
+			$sql = "INSERT INTO tracks ( artist, title ) VALUES (:artist, :title)";
+			$sth = $dbh->prepare($sql);
+			$sth->execute(array(":artist" => $artist, ":title" => $title));
+		}	
+		
+		// close connection
+		$dbh = null; */
 	}
 }
   
