@@ -111,49 +111,45 @@ function play_random_song(){
 	
 	console.log("playing song " + randomSongIndex + " in library");
 	console.log( randomSong );
-	$.ajax(
-	{ method: "POST", url: "ajax.php", data: { track_id: randomSong.nid } , dataType: "json" })
-		.done(function( msg ) {
-		// remove previous player
-		$("#player").remove();
+	
+	// remove previous player
+	$("#player").remove();
 		
-		player = '<audio id="player" autoplay> <source src="/game/proxy.php?hash=' +  msg + '" type="audio/mpeg"></audio>';
+	player = '<audio id="player" autoplay> <source src="/game/proxy.php?hash=' +  randomSong.preview_url + '" type="audio/mpeg"></audio>';
 		
-		$("body").append(player);
+	$("body").append(player);
 
-		// record start time
-		document.startTime = new Date().getTime();
-			
-		// turn volume down
-		$("#player").prop("volume", 0.1);
-		$('#player').get(0).currentTime = 5;
+	// record start time
+	document.startTime = new Date().getTime();
 		
-		$("#current_artist").html(randomSong.artist);
-		$("#current_title").html(randomSong.title);
-		$("#current_album").html(randomSong.album);
-		$("#current_year").html(randomSong.year);
-		$("#current_album_art").html('<img src="' + randomSong.albumArtRef[0].url + '" />');
-		
-		artist = randomSong.artist;
-		title = randomSong.title;
+	// turn volume down
+	$("#player").prop("volume", 0.1);
+	$('#player').get(0).currentTime = 5;
+	
+	$("#current_artist").html(randomSong.artist);
+	$("#current_title").html(randomSong.title);
+	$("#current_album").html(randomSong.album);
+	$("#current_year").html(randomSong.year);
+	// $("#current_album_art").html('<img src="' + randomSong.albumArtRef[0].url + '" />');
+	
+	artist = randomSong.artist;
+	title = randomSong.title;
 
-		if( document.guessingMethod === 'letter' ){
-			artist = artist.replace(/ /g,'').toUpperCase();
-			title = title.replace(/ /g,'').toUpperCase();
-		}
+	if( document.guessingMethod === 'letter' ){
+		artist = artist.replace(/ /g,'').toUpperCase();
+		title = title.replace(/ /g,'').toUpperCase();
+	}
 
-		document.solution = [];
-		document.solution.push({ 
-			type: "solution", 
-			artist: artist, 
-			title: title, 
-			guessingMethod: document.guessingMethod,
-			wrongAnswers: wrong_answers_array
-		});
-		// send the solution to all clients
-		air_console.broadcast( document.solution );
-		
+	document.solution = [];
+	document.solution.push({ 
+		type: "solution", 
+		artist: artist, 
+		title: title, 
+		guessingMethod: document.guessingMethod,
+		wrongAnswers: wrong_answers_array
 	});
+	// send the solution to all clients
+	air_console.broadcast( document.solution );
 }
 
 // Listen for messages from other devices
