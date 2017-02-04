@@ -30,8 +30,38 @@ if( isset( $_GET['login']) ){
 		echo json_encode($hash);
 
 	} else {
-		exec("node ../get_library.js", $output);
-		echo $output[0];		
+		// open connection
+		$dbh = new PDO('mysql:host=localhost;dbname=' . $dbname , $user, $password);
+
+		$sql = "SET NAMES 'utf-8'";
+		$dbh->query($sql);
+		
+		$sql = "SELECT * FROM tracks";
+		$sth = $dbh->prepare($sql);
+		$sth->execute();
+		$results = $sth->fetchAll();
+
+		// close connection
+		$dbh = null;
+		
+		foreach ( $results as &$result ){
+			$result['artist'] = utf8_encode( $result['artist'] );
+			$result['title'] = utf8_encode( $result['title'] );
+			$result['itunes_artist'] = utf8_encode( $result['itunes_artist'] );
+			$result['itunes_title'] = utf8_encode( $result['itunes_title'] );
+			
+			unset($result[0]);
+			unset($result[1]);
+			unset($result[2]);
+			unset($result[3]);
+			unset($result[4]);
+			unset($result[5]);
+			unset($result[6]);
+		}
+		
+		$json = json_encode($results);
+	
+		echo $json;		
 	}
 }
   
