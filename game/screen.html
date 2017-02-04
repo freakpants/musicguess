@@ -31,7 +31,7 @@ document.amount_of_finished_players = 0;
 
 function start(){
 	// override screen with play area
-	$("#screen-wrapper").html('<div>Guess the song that is currently playing!</div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
+	$("#screen-wrapper").html('<div>Guess the artist or title that is currently playing!</div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
 	$(".debug").hide();
 	
 	// get list of songs, choose one at random
@@ -47,6 +47,13 @@ function start(){
 	document.solution = [];
 }
 
+// Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
 function randomIntFromInterval( min, max ){
     return Math.floor( Math.random() * ( max - min + 1 ) + min );
 }
@@ -54,9 +61,8 @@ function randomIntFromInterval( min, max ){
 function play_random_song(){
 	randomSongIndex = Math.floor(Math.random() * library.length) + 1;
 	randomSong = library[randomSongIndex];
-
-	// manual debug override
-	// randomSong = 552;
+	// remove song from the library so it will not get played more than once
+	library.remove(randomSongIndex);
 	
 	// get wrong answers for multiple choice
 	wrong_answers = 0;
