@@ -115,7 +115,7 @@ function play_random_song(){
 	// remove previous player
 	$("#player").remove();
 		
-	player = '<audio id="player" autoplay> <source src="/game/proxy.php?hash=' +  randomSong.preview_url + '" type="audio/mpeg"></audio>';
+	player = '<audio id="player" autoplay> <source src="' +  randomSong.preview_url + '" type="audio/mpeg"></audio>';
 		
 	$("body").append(player);
 
