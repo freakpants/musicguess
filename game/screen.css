@@ -32,8 +32,8 @@ body{
 #roundTime{
 	font-size:160px;
 	position:absolute;
-	left:10px;
-	bottom:10px;
+	left:25px;
+	bottom:25px;
 	line-height:160px;
 	background-color: rgba(0, 0, 0, 0.6);
 	width:190px;
