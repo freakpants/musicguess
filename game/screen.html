@@ -5,7 +5,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
-
+	
 <div id="screen-wrapper">
 	<div>Connected Players:</div>
 	
@@ -36,7 +36,7 @@ function start(){
 	
 	// get list of songs, choose one at random
 	$.ajax(
-		{ method: "POST", url: "ajax.php", data: {} , dataType: "json" })
+		{ method: "POST", url: "library.json", data: {} , dataType: "json" })
 		.done(function( msg ) {
 			library = msg;
 			
