@@ -12,6 +12,36 @@ body{
 #screen-wrapper{
 }
 
+#player-results{
+	position:absolute;
+	bottom:0px;
+	left:225px;
+	overflow:hidden;
+	margin-bottom:-5px;
+}
+
+.single-result{
+	background-color: rgba(0, 0, 0, 0.6);
+	margin-left:25px;
+	border: 5px solid;
+    border-radius: 25px;
+	float:left;
+	width:200px;
+}
+
+.single-result img{
+	width:64px;
+	height:64px;
+}
+
+.single-result span{
+	width:100%;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	line-height:30px;
+}
+
 #screen-wrapper div{
 	width:100%;
 	display: flex;
