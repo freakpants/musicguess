@@ -36,7 +36,7 @@ function start(){
 	
 	// get list of songs, choose one at random
 	$.ajax(
-		{ method: "POST", url: "library.json", data: {} , dataType: "json" })
+		{ method: "GET", url: "library.json", data: {} , dataType: "json" })
 		.done(function( msg ) {
 			library = msg;
 			
