@@ -29,6 +29,21 @@ body{
 	float:left;
 }
 
+#roundTime{
+	font-size:160px;
+	position:absolute;
+	left:25px;
+	bottom:25px;
+	line-height:160px;
+	background-color: rgba(0, 0, 0, 0.6);
+	width:190px;
+	border: 5px solid;
+    border-radius: 25px;
+	justify-content: center;
+	align-items: center;
+	display:none;
+}
+
 #playanimation{
 	margin-top:50px;
 	width:200px;

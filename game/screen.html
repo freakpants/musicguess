@@ -11,6 +11,7 @@
 <div id="screen-wrapper">
 	<div class="instruction">Welcome to MusicGuess. Press start to play!</div>
 </div>
+<div id="roundTime"></div>
 
 <script type="text/javascript">
 var air_console = new AirConsole();
@@ -56,8 +57,14 @@ function start(){
 	// initiate round time keeptracker
 	decreaseRoundTime();
 	
+	// reset the roundTime again, at the actual start of the round
+	document.RoundTime = 30;
+	$("#roundTime").html(document.RoundTime);
+	$("#roundTime").css("display","flex");
+	
+	
 	// override screen with play area
-	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div id="roundTime"></div><div><img id="playanimation" src="audio.svg" /></div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
+	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div><img id="playanimation" src="audio.svg" /></div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
 	$(".debug").hide();
 	
 	// get list of songs, choose one at random
@@ -65,7 +72,6 @@ function start(){
 		{ method: "GET", url: "library.json", data: {} , dataType: "json" })
 		.done(function( msg ) {
 			library = msg;
-			
 			play_random_song();
 		});
 	
@@ -266,7 +272,8 @@ function round_end(){
 					$(".instruction").html("Guess the artist or title that is currently playing!");
 					// reset the roundTime again, at the actual start of the round
 					document.RoundTime = 30;
-					$("#roundTime").show();
+					$("#roundTime").html(document.RoundTime);
+					$("#roundTime").css("display","flex");
 					play_random_song();
 				});
 			});
