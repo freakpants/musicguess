@@ -266,6 +266,7 @@ function round_end(){
 					$(".instruction").html("Guess the artist or title that is currently playing!");
 					// reset the roundTime again, at the actual start of the round
 					document.RoundTime = 30;
+					$("#roundTime").html(document.RoundTime);
 					$("#roundTime").show();
 					play_random_song();
 				});
