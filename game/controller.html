@@ -247,6 +247,11 @@ air_console.onMessage = function(from, data) {
 		// hide the guessing type selection
 		$("#guessing_methods").hide();
 		console.log('received solution');
+		// unnattach all event handlers so we dont start triggering multiple messages 
+		
+		$(".correct").off();
+		$(".wrong").off();
+		
 		if( data[0].guessingMethod === 'full' ){
 			// reset css on buttons
 			$("#guessing_buttons_full .choice_1").css('opacity', '1');
