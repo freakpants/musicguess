@@ -12,6 +12,7 @@
 	<div class="instruction">Welcome to MusicGuess. Press start to play!</div>
 </div>
 <div id="roundTime"></div>
+<div id="player-results"></div>
 
 <script type="text/javascript">
 var air_console = new AirConsole();
@@ -257,8 +258,7 @@ function round_end(){
 	
 	sleep(4000).then(() =>{
 		document.amount_of_finished_players = 0;
-		// remove all guessing areas
-		$(".playerGuesses").remove();
+	
 		debug = false;
 		$(".debug").hide();
 		$(".instruction").html("Get ready for the next round!");
@@ -270,6 +270,11 @@ function round_end(){
 				sleep(1000).then(() =>{
 					$("#status").html("");
 					$(".instruction").html("Guess the artist or title that is currently playing!");
+					
+					// reset all Points etc
+					$(".score_change").html("&nbsp;");
+					$(".current_time").html("&nbsp;");
+					$(".single-result").css('background-color', 'rgba(0, 0, 0, 0.6)');
 					// reset the roundTime again, at the actual start of the round
 					document.RoundTime = 30;
 					$("#roundTime").html(document.RoundTime);
@@ -319,7 +324,7 @@ function handle_guess( message, from ){
 
 	// check if the player already has a guess area
 	guessArea = false;
-	$("#player_" + from).each(function(){
+	$("#player_" + from + "_result").each(function(){
 		guessArea = true;
 	});
 	if( ! guessArea ){
@@ -329,7 +334,7 @@ function handle_guess( message, from ){
 		if( document.guessingMethod === 'letter' ){
 			$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">' + nickname + ':</div><div class="left resetme" id="player_' + from +'_artist"></div><div class="resetme"> - </div><div class="left resetme" id="player_' + from +'_title"> </div></div>');
 		} else if ( document.guessingMethod === 'full' ){
-			$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">' + nickname + ':</div><div class="left resetme" id="player_' + from +'_result"></div></div>');
+			$("#player-results").append('<div class="single-result" id="player_' + from +'_result"><span class="position">1.</span><span class="current_score">0</span><span class="profile"><img src="http://www.teequilla.com/images/tq/empty-avatar.png"></span><span class="current_time"></span><span class="score_change">+2100</span><span class="player_name">' + nickname + '</span></div>');
 		}
 	}
 	if( message[0].type_of_guess === 'title' ){
@@ -344,12 +349,20 @@ function handle_guess( message, from ){
 		if(actual_points < 0) actual_points = 0;
 		guessTime = guessTime / 1000;
 
+		url = air_console.getProfilePicture(from);
+		
+		resultArea = $("#player_" + from + "_result");
+		resultArea.find(".profile img").attr("src",url);
 		if( message[0].type === "correctGuess" ){
-			$("#player_" + from + "_result").html("correct - " + guessTime + " seconds - " + actual_points + " points");
-			$("#player_" + from + "_result").css('color', 'green');
+			newScore = parseInt(resultArea.find(".current_score").html()) + actual_points;
+			resultArea.find(".current_score").html(newScore);
+			resultArea.find(".score_change").html("+ " + actual_points + " Points");
+			resultArea.find(".current_time").html(guessTime + " seconds");
+			resultArea.css('background-color', 'green');
 		} else {
-			$("#player_" + from + "_result").html("wrong - " + guessTime + " seconds");
-			$("#player_" + from + "_result").css('color', 'red');
+			resultArea.find(".score_change").html("No Points");
+			resultArea.find(".current_time").html(guessTime + " seconds");
+			resultArea.css('background-color', 'red');
 			actual_points = 0;
 		}
 		document.amount_of_finished_players++;
