@@ -128,8 +128,8 @@ function play_random_song(){
 	// record start time
 	document.startTime = new Date().getTime();
 		
-	// turn volume down
-	// $("#player").prop("volume", 0);
+	// turn volume back up
+	$("#player").prop("volume", "1");
 	$('#player').get(0).currentTime = 5;
 	
 	$("#current_artist").html(randomSong.artist);
@@ -285,7 +285,11 @@ function handle_guess( message, from ){
 		if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length){
 			debug = true;
 			$(".debug").show();
-			sleep(4000).then(() => {
+			
+			$("#playanimation").hide();
+			$("#player").animate({volume: 0}, 4000);
+			
+			sleep(4000).then(() =>{
 				document.amount_of_finished_players = 0;
 				// remove all guessing areas
 				$(".playerGuesses").remove();
