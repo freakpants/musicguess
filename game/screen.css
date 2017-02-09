@@ -1,3 +1,14 @@
+body{
+	background: url("background.svg");
+}
+
+.instruction{
+	color:white;
+	margin-top:50px;
+	font-family:'Oswald', sans-serif;
+	text-transform:uppercase;
+}
+
 #screen-wrapper{
 }
 
@@ -16,4 +27,9 @@
 
 .left{
 	float:left;
+}
+
+#playanimation{
+	margin-top:50px;
+	width:200px;
 }
