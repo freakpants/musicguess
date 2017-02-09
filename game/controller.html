@@ -2,6 +2,7 @@
 <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.6.0.js"></script>
   <link rel="stylesheet" href="controller.css">
   <link rel="stylesheet" href="shared.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 	
@@ -37,10 +38,10 @@
 </div>
 
 <div id="guessing_buttons_full">
-	<div class="choice_1" id="choice_1"></div>
-	<div class="choice_2" id="choice_2"></div>
-	<div class="choice_3" id="choice_3"></div>
-	<div class="choice_4" id="choice_4"></div>
+	<div class="choice_1 unselected" id="choice_1"></div>
+	<div class="choice_2 unselected" id="choice_2"></div>
+	<div class="choice_3 unselected" id="choice_3"></div>
+	<div class="choice_4 unselected" id="choice_4"></div>
 </div>
 
 <script type="text/javascript">
@@ -247,6 +248,17 @@ air_console.onMessage = function(from, data) {
 		$("#guessing_methods").hide();
 		console.log('received solution');
 		if( data[0].guessingMethod === 'full' ){
+			// reset css on buttons
+			$("#guessing_buttons_full .choice_1").css('opacity', '1');
+			$("#guessing_buttons_full .choice_2").css('opacity', '1');
+			$("#guessing_buttons_full .choice_3").css('opacity', '1');
+			$("#guessing_buttons_full .choice_4").css('opacity', '1');
+			
+			$("#guessing_buttons_full .choice_1").removeClass("correct-selected wrong-selected");
+			$("#guessing_buttons_full .choice_2").removeClass("correct-selected wrong-selected");
+			$("#guessing_buttons_full .choice_3").removeClass("correct-selected wrong-selected");
+			$("#guessing_buttons_full .choice_4").removeClass("correct-selected wrong-selected");
+		
 			// 50:50 chance that correct answer is either artist or title
 			artist_or_title = randomIntFromInterval( 0, 1 );
 			choices = data[0].wrongAnswers;
@@ -292,7 +304,18 @@ air_console.onMessage = function(from, data) {
 				var correctGuess = [];
 				correctGuess.push({ type: "correctGuess", type_of_guess: 'full'});
 				air_console.message( 0 , correctGuess );
-				$("#guessing_buttons_full").hide();
+				
+				// $("#guessing_buttons_full").hide();
+				// grey out the other answers
+				$("#guessing_buttons_full .choice_1").css('opacity', '0.2');
+				$("#guessing_buttons_full .choice_2").css('opacity', '0.2');
+				$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
+				$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
+				
+				id = $(this).attr("id");
+				$("#guessing_buttons_full ." + id).css('opacity', '1');
+				$("#guessing_buttons_full ." + id).addClass('correct-selected');
+				
 				// unnattach all event handlers so we dont start triggering multiple messages
 				$(".correct").off();
 				$(".wrong").off();
@@ -305,7 +328,18 @@ air_console.onMessage = function(from, data) {
 				var wrongGuess = [];
 				wrongGuess.push({ type: "wrongGuess", type_of_guess: 'full'});
 				air_console.message( 0 , wrongGuess );
-				$("#guessing_buttons_full").hide();
+				
+				// $("#guessing_buttons_full").hide();
+				// grey out the other answers
+				$("#guessing_buttons_full .choice_1").css('opacity', '0.2');
+				$("#guessing_buttons_full .choice_2").css('opacity', '0.2');
+				$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
+				$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
+				
+				id = $(this).attr("id");
+				$("#guessing_buttons_full ." + id).css('opacity', '1');
+				$("#guessing_buttons_full ." + id).addClass('wrong-selected');
+				
 				// unnattach all event handlers so we dont start triggering multiple messages
 				$(".correct").off();
 				$(".wrong").off();
