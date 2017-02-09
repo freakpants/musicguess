@@ -2,15 +2,14 @@
 <script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.6.0.js"></script>
   <link rel="stylesheet" href="screen.css">
   <link rel="stylesheet" href="shared.css">
+  <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body>
 	
 
 <div id="screen-wrapper">
-	<div>Connected Players:</div>
-	
-	<div>Choose your guessing method to start!</div>
+	<div class="instruction">Welcome to MusicGuess. Press start to play!</div>
 </div>
 
 <script type="text/javascript">
@@ -32,7 +31,7 @@ document.amount_of_finished_players = 0;
 
 function start(){
 	// override screen with play area
-	$("#screen-wrapper").html('<div>Guess the artist or title that is currently playing!</div><div><img src="audio.svg" /></div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
+	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div><img id="playanimation" src="audio.svg" /></div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
 	$(".debug").hide();
 	
 	// get list of songs, choose one at random
@@ -130,7 +129,7 @@ function play_random_song(){
 	document.startTime = new Date().getTime();
 		
 	// turn volume down
-	$("#player").prop("volume", 0.1);
+	// $("#player").prop("volume", 0);
 	$('#player').get(0).currentTime = 5;
 	
 	$("#current_artist").html(randomSong.artist);
