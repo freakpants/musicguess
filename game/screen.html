@@ -29,9 +29,35 @@ if ( debug === false ){
 // store amount of correct full guesses
 document.amount_of_finished_players = 0;
 
+document.round = 0;
+document.RoundTime = 30;
+
+function decreaseRoundTime(){
+	
+	$("#roundTime").html(document.RoundTime);
+
+	if( document.RoundTime === 6){
+		$("#player").animate({volume: 0}, 6000);
+	}
+
+	if( document.RoundTime > 0 ){
+		document.RoundTime--;
+		sleep(1000).then(() =>{
+			decreaseRoundTime();
+		});
+	} else {
+		round_end();
+		decreaseRoundTime();
+	}
+}
+
 function start(){
+
+	// initiate round time keeptracker
+	decreaseRoundTime();
+	
 	// override screen with play area
-	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div><img id="playanimation" src="audio.svg" /></div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
+	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div id="roundTime"></div><div><img id="playanimation" src="audio.svg" /></div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
 	$(".debug").hide();
 	
 	// get list of songs, choose one at random
@@ -59,6 +85,10 @@ function randomIntFromInterval( min, max ){
 }
 
 function play_random_song(){
+	document.round++;
+	
+	$(".instruction").append(" Round " + document.round);
+	
 	randomSongIndex = Math.floor(Math.random() * library.length) + 1;
 	randomSong = library[randomSongIndex];
 	// remove song from the library so it will not get played more than once
@@ -130,7 +160,8 @@ function play_random_song(){
 		
 	// turn volume back up
 	$("#player").prop("volume", "1");
-	$('#player').get(0).currentTime = 5;
+	// $('#player').get(0).currentTime = 5;
+	$("#playanimation").show();
 	
 	$("#current_artist").html(randomSong.artist);
 	$("#current_title").html(randomSong.title);
@@ -204,6 +235,43 @@ air_console.onMessage = function(from, message) {
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function round_end(){
+	// reset the roundTime so time cant run out in the time between matches
+	document.RoundTime = 30;
+	$("#roundTime").hide();
+
+	debug = true;
+	$(".debug").show();
+	
+	$("#playanimation").hide();
+	$("#player").animate({volume: 0}, 6000);
+	$(".instruction").html("Round is over!");
+	
+	sleep(4000).then(() =>{
+		document.amount_of_finished_players = 0;
+		// remove all guessing areas
+		$(".playerGuesses").remove();
+		debug = false;
+		$(".debug").hide();
+		$(".instruction").html("Get ready for the next round!");
+		$("#status").html("3");
+		sleep(1000).then(() =>{
+			$("#status").html("2");
+			sleep(1000).then(() =>{
+				$("#status").html("1");
+				sleep(1000).then(() =>{
+					$("#status").html("");
+					$(".instruction").html("Guess the artist or title that is currently playing!");
+					// reset the roundTime again, at the actual start of the round
+					document.RoundTime = 30;
+					$("#roundTime").show();
+					play_random_song();
+				});
+			});
+		});
+	});
 }
 
 function handle_guess( message, from ){
@@ -283,20 +351,7 @@ function handle_guess( message, from ){
 		// in theory this should play the next song when all connected devices have finished
 		// since a controller can join after the round has started, this is probably a blocker we need to handle
 		if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length){
-			debug = true;
-			$(".debug").show();
-			
-			$("#playanimation").hide();
-			$("#player").animate({volume: 0}, 4000);
-			
-			sleep(4000).then(() =>{
-				document.amount_of_finished_players = 0;
-				// remove all guessing areas
-				$(".playerGuesses").remove();
-				debug = false;
-				$(".debug").hide();
-				play_random_song();
-			});
+			round_end();
 		}
 	}
 	
