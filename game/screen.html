@@ -60,7 +60,7 @@ function start(){
 	// reset the roundTime again, at the actual start of the round
 	document.RoundTime = 30;
 	$("#roundTime").html(document.RoundTime);
-	$("#roundTime").show();
+	$("#roundTime").css("display","flex");
 	
 	
 	// override screen with play area
@@ -273,7 +273,7 @@ function round_end(){
 					// reset the roundTime again, at the actual start of the round
 					document.RoundTime = 30;
 					$("#roundTime").html(document.RoundTime);
-					$("#roundTime").show();
+					$("#roundTime").css("display","flex");
 					play_random_song();
 				});
 			});
