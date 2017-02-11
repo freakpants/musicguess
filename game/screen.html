@@ -34,6 +34,9 @@ document.amount_of_finished_players = 0;
 document.round = 0;
 document.RoundTime = 30;
 
+// store current scores of players
+document.playerScores = [];
+
 function decreaseRoundTime(){
 	
 	$("#roundTime").html(document.RoundTime);
@@ -351,10 +354,34 @@ function handle_guess( message, from ){
 
 		url = air_console.getProfilePicture(from);
 		
+		newScore = actual_points;
+		
+		// try selecting current score
+		playerScore = document.playerScores.filter(function(obj){
+			return obj.player === from; 
+		});
+		
+		if( playerScore[0] && playerScore[0].score > 0 ){
+			newScore = playerScore[0].score + actual_points;
+			playerScore[0].score = newScore;
+		} else {
+			document.playerScores.push({ player: from, score: newScore });
+		}
+		
+		document.playerScores.sort(function(a,b) {
+			return b.score - a.score;
+		});
+		
 		resultArea = $("#player_" + from + "_result");
 		resultArea.find(".profile img").attr("src",url);
+		
+		position = 1;
+		document.playerScores.forEach(function(element){
+			$("#player_" + element.player + "_result").find(".position").html(position + ".");
+			position++;
+		});
+		
 		if( message[0].type === "correctGuess" ){
-			newScore = parseInt(resultArea.find(".current_score").html()) + actual_points;
 			resultArea.find(".current_score").html(newScore);
 			resultArea.find(".score_change").html("+ " + actual_points + " Points");
 			resultArea.find(".current_time").html(guessTime + " seconds");
