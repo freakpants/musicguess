@@ -59,7 +59,11 @@ function decreaseRoundTime(){
 
 function start(){
 
-
+	// reset scores of players
+	document.playerScores = [];
+	
+	// reset guessing areas
+	$("#player-results").html("");
 	
 	// reset the roundTime again, at the actual start of the round
 	document.RoundTime = 30;
