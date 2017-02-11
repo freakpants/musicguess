@@ -33,6 +33,7 @@ document.amount_of_finished_players = 0;
 
 document.round = 0;
 document.RoundTime = 30;
+document.maxRound = 10;
 
 // store current scores of players
 document.playerScores = [];
@@ -50,7 +51,7 @@ function decreaseRoundTime(){
 		sleep(1000).then(() =>{
 			decreaseRoundTime();
 		});
-	} else {
+	} else if (document.RoundTime != -10) {
 		round_end();
 		decreaseRoundTime();
 	}
@@ -58,11 +59,15 @@ function decreaseRoundTime(){
 
 function start(){
 
-	// initiate round time keeptracker
-	decreaseRoundTime();
+
 	
 	// reset the roundTime again, at the actual start of the round
 	document.RoundTime = 30;
+	
+	// initiate round time keeptracker
+	decreaseRoundTime();
+	
+	document.round = 0;
 	$("#roundTime").html(document.RoundTime);
 	$("#roundTime").css("display","flex");
 	
@@ -248,6 +253,8 @@ function sleep(ms) {
 }
 
 function round_end(){
+
+	
 	// reset the roundTime so time cant run out in the time between matches
 	document.RoundTime = 30;
 	$("#roundTime").hide();
@@ -261,31 +268,45 @@ function round_end(){
 	
 	sleep(4000).then(() =>{
 		document.amount_of_finished_players = 0;
-	
 		debug = false;
 		$(".debug").hide();
-		$(".instruction").html("Get ready for the next round!");
-		$("#status").html("3");
-		sleep(1000).then(() =>{
-			$("#status").html("2");
+		
+		if( document.round === document.maxRound ){
+			// handle end of game
+			$(".instruction").html("Game Over!");
+			// set roundTime extra high so the end doesnt happen more than once
+			document.RoundTime = -10;
+			console.log("game over");
+			
+			game_end = [];
+			game_end.push({ type: "game_end" });
+			// send game end message to the controllers
+			air_console.broadcast( game_end );
+		} else {
+			// initiate next round
+			$(".instruction").html("Get ready for the next round!");
+			$("#status").html("3");
 			sleep(1000).then(() =>{
-				$("#status").html("1");
+				$("#status").html("2");
 				sleep(1000).then(() =>{
-					$("#status").html("");
-					$(".instruction").html("Guess the artist or title that is currently playing!");
-					
-					// reset all Points etc
-					$(".score_change").html("&nbsp;");
-					$(".current_time").html("&nbsp;");
-					$(".single-result").css('background-color', 'rgba(0, 0, 0, 0.6)');
-					// reset the roundTime again, at the actual start of the round
-					document.RoundTime = 30;
-					$("#roundTime").html(document.RoundTime);
-					$("#roundTime").css("display","flex");
-					play_random_song();
+					$("#status").html("1");
+					sleep(1000).then(() =>{
+						$("#status").html("");
+						$(".instruction").html("Guess the artist or title that is currently playing!");
+						
+						// reset all Points etc
+						$(".score_change").html("&nbsp;");
+						$(".current_time").html("&nbsp;");
+						$(".single-result").css('background-color', 'rgba(0, 0, 0, 0.6)');
+						// reset the roundTime again, at the actual start of the round
+						document.RoundTime = 30;
+						$("#roundTime").html(document.RoundTime);
+						$("#roundTime").css("display","flex");
+						play_random_song();
+					});
 				});
 			});
-		});
+		}
 	});
 }
 
