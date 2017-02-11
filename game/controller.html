@@ -12,7 +12,7 @@
 	<!-- <div class="instruction">Choose your guessing method to start:</div> -->
 	<!-- <div id="guessing_method_letter" class="odd">Letter By Letter (Artist & Title)</div> -->
 	<!-- <div id="guessing_method_full"  class="even">Full Artist or Title</div> -->
-	<div id="guessing_method_full"  class="unselected">Start the game!</div>
+	<div id="guessing_method_full"  class="unselected">Start the game with 10 rounds!</div>
 </div>
 
 <div id="guessing_buttons_letter">
@@ -242,6 +242,30 @@ $("#choice_D").click(function( event ){
 
 // Listen for messages from other devices
 air_console.onMessage = function(from, data) {
+	
+	if( data[0].type === "game_end" ){
+		console.log("handling game end");
+		$("#guessing_buttons_full .choice_1").css('opacity', '1');
+		$("#guessing_buttons_full .choice_2").css('opacity', '1');
+		$("#guessing_buttons_full .choice_3").css('opacity', '1');
+		$("#guessing_buttons_full .choice_4").css('opacity', '1');
+			
+		$("#guessing_buttons_full .choice_1").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full .choice_2").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full .choice_3").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full .choice_4").removeClass("correct-selected wrong-selected");
+		
+		$("#guessing_buttons_full").hide();
+		
+		// show the start command
+		$("#guessing_methods").show();
+
+		// unnattach all event handlers so we dont start triggering multiple messages 
+		
+		$(".correct").off();
+		$(".wrong").off();
+	}
+	
 	// analyze data
 	if ( data[0].type === "solution" ){
 		// hide the guessing type selection
