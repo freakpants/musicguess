@@ -13,6 +13,8 @@
 	<!-- <div id="guessing_method_letter" class="odd">Letter By Letter (Artist & Title)</div> -->
 	<!-- <div id="guessing_method_full"  class="even">Full Artist or Title</div> -->
 	<div id="guessing_method_full"  class="unselected">Start the game with 10 rounds!</div>
+	<div id="next_playlist"  class="unselected">Next Playlist</div>
+	<div id="previous_playlist"  class="unselected">Previous Playlist</div>
 </div>
 
 <div id="guessing_buttons_letter">
@@ -235,6 +237,18 @@ $("#choice_D").click(function( event ){
 	// turn debug on/off
 	var command = [];
 	command.push({ type: "debug" });
+	air_console.message( 0 , command );
+});
+
+$("#next_playlist").click(function( event ){
+	var command = [];
+	command.push({ type: "next_playlist" });
+	air_console.message( 0 , command );
+});
+
+$("#previous_playlist").click(function( event ){
+	var command = [];
+	command.push({ type: "previous_playlist" });
 	air_console.message( 0 , command );
 });
 
