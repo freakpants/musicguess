@@ -82,7 +82,7 @@ function start(){
 	
 	// get list of songs, choose one at random
 	$.ajax(
-		{ method: "GET", url: "library.json", data: {} , dataType: "json" })
+		{ method: "GET", url: "/game/playlists/1_popular_stuff.json", data: {} , dataType: "json" })
 		.done(function( msg ) {
 			library = msg;
 			play_random_song();
