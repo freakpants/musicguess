@@ -14,6 +14,10 @@
 <div id="playlist-selector"></div>
 <div id="roundTime"></div>
 <div id="player-results"></div>
+<audio id="sound-effect-switch" ><source src="/game/sounds/rollover3.wav" type="audio/wav"></audio>
+<audio id="sound-effect-clock" ><source src="/game/sounds/beep-shinymetal.wav" type="audio/wav"></audio>
+<audio id="sound-effect-correct" ><source src="/game/sounds/xylophone_affirm1.wav" type="audio/wav"></audio>
+<audio id="sound-effect-wrong" ><source src="/game/sounds/zap_digi_down.wav" type="audio/wav"></audio>
 
 <script type="text/javascript">
 var air_console = new AirConsole();
@@ -28,6 +32,9 @@ var library;
 if ( debug === false ){
 	$(".debug").hide();
 }
+
+// relative to the sound effects
+document.musicVolume = 0.4;
 
 // store amount of correct full guesses
 document.amount_of_finished_players = 0;
@@ -230,7 +237,7 @@ function play_random_song(){
 	document.startTime = new Date().getTime();
 		
 	// turn volume back up
-	$("#player").prop("volume", "1");
+	$("#player").prop("volume", document.musicVolume);
 	// $('#player').get(0).currentTime = 5;
 	$("#playanimation").show();
 	
@@ -297,8 +304,18 @@ air_console.onMessage = function(from, message) {
 				$(".debug").show();
 			}
 		break;
-		case 'wrongGuess':
 		case 'correctGuess':
+			$("#player").stop();
+			$("#player").prop("volume", "0");
+			document.getElementById("sound-effect-correct").play();
+			$("#player").animate({volume: document.musicVolume}, 2400);
+			handle_guess( message, from );
+			break;
+		case 'wrongGuess':	
+			$("#player").stop();
+			$("#player").prop("volume", "0");
+			document.getElementById("sound-effect-wrong").play();
+			$("#player").animate({volume: document.musicVolume}, 1200);
 			handle_guess( message, from );
 		break;
 		case 'next_playlist':
@@ -314,6 +331,8 @@ function switch_playlist( type ){
 	console.log("Handling switch of playlist to " + type );
 	console.log("all playlists:");
 	console.log(playlists);
+	
+	document.getElementById("sound-effect-switch").play();
 	
 	$("#playlist_" + document.selectedPlaylist).removeClass("active");
 	
@@ -346,6 +365,8 @@ function sleep(ms) {
 
 function round_end(){
 
+	// stop animations in progress
+	// $("#player").stop();
 	
 	// reset the roundTime so time cant run out in the time between matches
 	document.RoundTime = 30;
@@ -355,7 +376,7 @@ function round_end(){
 	$(".debug").show();
 	
 	$("#playanimation").hide();
-	$("#player").animate({volume: 0}, 6000);
+	$("#player").animate({volume: 0}, 4000);
 	$(".instruction").html("Round is over!");
 	
 	sleep(4000).then(() =>{
@@ -378,9 +399,12 @@ function round_end(){
 			// initiate next round
 			$(".instruction").html("Get ready for the next round!");
 			$("#status").html("3");
+			document.getElementById("sound-effect-clock").play();
 			sleep(1000).then(() =>{
+				document.getElementById("sound-effect-clock").play();
 				$("#status").html("2");
 				sleep(1000).then(() =>{
+					document.getElementById("sound-effect-clock").play();
 					$("#status").html("1");
 					sleep(1000).then(() =>{
 						$("#status").html("");
