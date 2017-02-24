@@ -9,8 +9,9 @@
 	
 
 <div id="screen-wrapper">
-	<div class="instruction">Welcome to MusicGuess. Press start to play!</div>
+	<div class="instruction">Welcome to MusicGuess. Select a playlist and press start to play!</div>
 </div>
+<div id="playlist-selector"></div>
 <div id="roundTime"></div>
 <div id="player-results"></div>
 
@@ -37,6 +38,47 @@ document.maxRound = 10;
 
 // store current scores of players
 document.playerScores = [];
+
+// stores the number of the selected playlist (not the id!!)
+document.selectedPlaylist = 3;
+
+$( document ).ready(function(){
+	// get the playlists info
+	$.ajax({ method: "GET", url: "/game/playlists/playlist_info.json", data: {} , dataType: "json" })
+		.done(function( msg ) {
+			playlists = msg;
+			
+			// display info for the first playlist
+			
+			html = '';
+			counter = 0;
+			playlists.forEach(function(playlist){
+				if( counter === 3){
+					// defaults to popular stuff
+					document.selectedPlaylist = 3;
+					html += '<div id="playlist_' + counter + '" class="album_art active">';
+				} else {
+					html += '<div id="playlist_' + counter + '" class="album_art">';
+				}
+				playlist.album_art.forEach(function(element) {
+					html = html + '<img width="100px" height="100px" src="' + element + '" />';
+				});
+				html += '<div class="playlist-text"><b>' + playlist.name + '</b></br>'; 		
+				html += playlist.amount_of_tracks + ' Tracks</br>'; 
+				html += '<i>' + playlist.description + '</i>';
+				html += '</div>';
+				html += '</div>';
+				counter++;
+			});
+						
+			$("#playlist-selector").html(html);
+			
+			
+			
+			$("#playlist-selector").css("display","flex");
+			
+		});
+});
 
 function decreaseRoundTime(){
 	
@@ -75,6 +117,9 @@ function start(){
 	$("#roundTime").html(document.RoundTime);
 	$("#roundTime").css("display","flex");
 	
+	// hide playlist selector
+	$("#playlist-selector").hide();
+	
 	
 	// override screen with play area
 	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div><img id="playanimation" src="audio.svg" /></div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
@@ -82,9 +127,12 @@ function start(){
 	
 	// get list of songs, choose one at random
 	$.ajax(
-		{ method: "GET", url: "/game/playlists/1_popular_stuff.json", data: {} , dataType: "json" })
+		{ method: "GET", url: "/game/playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {} , dataType: "json" })
 		.done(function( msg ) {
 			library = msg;
+			
+			console.log(library);
+			
 			play_random_song();
 		});
 	
@@ -108,7 +156,7 @@ function play_random_song(){
 	
 	$(".instruction").append(" Round " + document.round);
 	
-	randomSongIndex = Math.floor(Math.random() * library.length) + 1;
+	randomSongIndex = randomIntFromInterval(0,library.length-1);
 	randomSong = library[randomSongIndex];
 	// remove song from the library so it will not get played more than once
 	library.remove(randomSongIndex);
@@ -120,7 +168,11 @@ function play_random_song(){
 		// 50:50 chance that wrong answer is either artist or title
 		artist_or_title = randomIntFromInterval( 0, 1 );	
 		suitable_wrong_answer = true;
-		wrongSongIndex = Math.floor(Math.random() * library.length) + 1;
+		wrongSongIndex = randomIntFromInterval(0,library.length-1);
+		
+		console.log("wrong song index " + wrongSongIndex);
+		
+		
 		wrongSong = library[wrongSongIndex];
 		if( artist_or_title === 0 ){
 			// artist
@@ -249,8 +301,44 @@ air_console.onMessage = function(from, message) {
 		case 'correctGuess':
 			handle_guess( message, from );
 		break;
+		case 'next_playlist':
+			switch_playlist('next');
+		break;
+		case 'previous_playlist':
+			switch_playlist('previous');
+		break;
 	}
 };
+
+function switch_playlist( type ){
+	console.log("Handling switch of playlist to " + type );
+	console.log("all playlists:");
+	console.log(playlists);
+	
+	$("#playlist_" + document.selectedPlaylist).removeClass("active");
+	
+	if( type === "next" ){
+		if( document.selectedPlaylist === playlists.length-1 ){
+			document.selectedPlaylist = 0;
+		} else {
+			document.selectedPlaylist += 1;
+		}
+		$('#playlist-selector').animate({left: "-=210"}, 'fast');
+	} else {
+		// previous
+		if( document.selectedPlaylist === 0 ){
+			document.selectedPlaylist = playlists.length-1;
+		} else {
+			document.selectedPlaylist -= 1;
+		}
+		$('#playlist-selector').animate({left: "+=210"}, 'fast');
+	} 
+	
+	$("#playlist_" + document.selectedPlaylist).addClass("active");
+	
+	console.log("newly selected playlist" + document.selectedPlaylist);
+	
+}
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
