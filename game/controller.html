@@ -12,7 +12,7 @@
 	<!-- <div class="instruction">Choose your guessing method to start:</div> -->
 	<!-- <div id="guessing_method_letter" class="odd">Letter By Letter (Artist & Title)</div> -->
 	<!-- <div id="guessing_method_full"  class="even">Full Artist or Title</div> -->
-	<div id="guessing_method_full"  class="unselected">Start the game with 10 rounds!</div>
+	<div id="guessing_method_full"  class="unselected">Start the game with 25 rounds!</div>
 	<div id="next_playlist"  class="unselected">Next Playlist</div>
 	<div id="previous_playlist"  class="unselected">Previous Playlist</div>
 </div>
@@ -302,8 +302,7 @@ air_console.onMessage = function(from, data) {
 			$("#guessing_buttons_full .choice_3").removeClass("correct-selected wrong-selected");
 			$("#guessing_buttons_full .choice_4").removeClass("correct-selected wrong-selected");
 		
-			// 50:50 chance that correct answer is either artist or title
-			artist_or_title = randomIntFromInterval( 0, 1 );
+			artist_or_title = data[0].answerType;
 			choices = data[0].wrongAnswers;
 			console.log(choices);
 			if( artist_or_title === 0 ){

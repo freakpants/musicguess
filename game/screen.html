@@ -41,7 +41,7 @@ document.amount_of_finished_players = 0;
 
 document.round = 0;
 document.RoundTime = 30;
-document.maxRound = 10;
+document.maxRound = 25;
 
 // store current scores of players
 document.playerScores = [];
@@ -171,9 +171,10 @@ function play_random_song(){
 	// get wrong answers for multiple choice
 	wrong_answers = 0;
 	wrong_answers_array = [];
+	artist_or_title = randomIntFromInterval( 0, 1 );	
 	while(wrong_answers < 3){
 		// 50:50 chance that wrong answer is either artist or title
-		artist_or_title = randomIntFromInterval( 0, 1 );	
+
 		suitable_wrong_answer = true;
 		wrongSongIndex = randomIntFromInterval(0,library.length-1);
 		
@@ -261,7 +262,8 @@ function play_random_song(){
 		artist: artist, 
 		title: title, 
 		guessingMethod: document.guessingMethod,
-		wrongAnswers: wrong_answers_array
+		wrongAnswers: wrong_answers_array,§
+		answerType: artist_or_title
 	});
 	// send the solution to all clients
 	air_console.broadcast( document.solution );
