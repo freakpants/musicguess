@@ -262,7 +262,7 @@ function play_random_song(){
 		artist: artist, 
 		title: title, 
 		guessingMethod: document.guessingMethod,
-		wrongAnswers: wrong_answers_array,§
+		wrongAnswers: wrong_answers_array,
 		answerType: artist_or_title
 	});
 	// send the solution to all clients
@@ -392,6 +392,9 @@ function round_end(){
 			// set roundTime extra high so the end doesnt happen more than once
 			document.RoundTime = -10;
 			console.log("game over");
+			
+			// hide playlist selector
+			$("#playlist-selector").show();
 			
 			game_end = [];
 			game_end.push({ type: "game_end" });
