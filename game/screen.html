@@ -134,7 +134,7 @@ function start(){
 	
 	// get list of songs, choose one at random
 	$.ajax(
-		{ method: "GET", url: "/playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {} , dataType: "json" })
+		{ method: "GET", url: "playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {} , dataType: "json" })
 		.done(function( msg ) {
 			library = msg;
 			
