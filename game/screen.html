@@ -47,7 +47,7 @@ document.maxRound = 25;
 document.playerScores = [];
 
 // stores the number of the selected playlist (not the id!!)
-document.selectedPlaylist = 3;
+// document.selectedPlaylist = 5;
 
 $( document ).ready(function(){
 	// get the playlists info
@@ -59,13 +59,16 @@ $( document ).ready(function(){
 			
 			html = '';
 			counter = 0;
+			
+			middle_id = Math.floor( playlists.length / 2 );
+			
 			playlists.forEach(function(playlist){
-				if( counter === 3){
+				if( counter === middle_id){
 					// defaults to popular stuff
-					document.selectedPlaylist = 3;
-					html += '<div id="playlist_' + counter + '" class="album_art active">';
+					document.selectedPlaylist = middle_id;
+					html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art active">';
 				} else {
-					html += '<div id="playlist_' + counter + '" class="album_art">';
+					html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art">';
 				}
 				playlist.album_art.forEach(function(element) {
 					html = html + '<img width="100px" height="100px" src="' + element + '" />';
@@ -336,15 +339,12 @@ function switch_playlist( type ){
 	
 	document.getElementById("sound-effect-switch").play();
 	
-	$("#playlist_" + document.selectedPlaylist).removeClass("active");
-	
 	if( type === "next" ){
 		if( document.selectedPlaylist === playlists.length-1 ){
 			document.selectedPlaylist = 0;
 		} else {
 			document.selectedPlaylist += 1;
 		}
-		$('#playlist-selector').animate({left: "-=210"}, 'fast');
 	} else {
 		// previous
 		if( document.selectedPlaylist === 0 ){
@@ -352,10 +352,41 @@ function switch_playlist( type ){
 		} else {
 			document.selectedPlaylist -= 1;
 		}
-		$('#playlist-selector').animate({left: "+=210"}, 'fast');
 	} 
 	
-	$("#playlist_" + document.selectedPlaylist).addClass("active");
+	// move the contents of the playlist containers 
+	first_content = $("[data-html-id=" + 0 + "]").html();
+	last_content = $("[data-html-id=" + 10 + "]").html();
+	
+	stored_content = new Array();
+	
+	$("#playlist-selector .album_art").each(function(){
+		// determine id of current_div
+		current_id = parseInt( $(this).attr("data-html-id") );
+		
+		next_id = current_id + 1;
+		previous_id = current_id - 1;
+		
+		next_content = $("[data-html-id=" + next_id + "]").html();
+		
+		if( type === "next" ){
+			// replace current content with next content 
+			if( current_id === playlists.length-1 ){
+				$(this).html(first_content);
+			}else {
+				$(this).html(next_content);
+			}
+		} else if ( type === "previous" ) {
+			// store current content for use in next loop
+			stored_content[current_id] = $(this).html();
+			if( current_id === 0){
+				$(this).html(last_content);
+			} else {
+				$(this).html(stored_content[current_id-1]);
+			}
+		}
+		
+	});
 	
 	console.log("newly selected playlist" + document.selectedPlaylist);
 	
