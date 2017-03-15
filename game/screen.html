@@ -46,9 +46,6 @@ document.maxRound = 25;
 // store current scores of players
 document.playerScores = [];
 
-// stores the number of the selected playlist (not the id!!)
-// document.selectedPlaylist = 5;
-
 $( document ).ready(function(){
 	// get the playlists info
 	$.ajax({ method: "GET", url: "playlists/playlist_info.json", data: {} , dataType: "json" })
