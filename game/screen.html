@@ -312,16 +312,16 @@ air_console.onMessage = function(from, message) {
 		break;
 		case 'correctGuess':
 			$("#player").stop();
-			$("#player").prop("volume", "0");
+			//$("#player").prop("volume", "0");
 			document.getElementById("sound-effect-correct").play();
-			$("#player").animate({volume: document.musicVolume}, 2400);
+			//$("#player").animate({volume: document.musicVolume}, 2400);
 			handle_guess( message, from );
 			break;
 		case 'wrongGuess':	
 			$("#player").stop();
-			$("#player").prop("volume", "0");
+			//$("#player").prop("volume", "0");
 			document.getElementById("sound-effect-wrong").play();
-			$("#player").animate({volume: document.musicVolume}, 1200);
+			//$("#player").animate({volume: document.musicVolume}, 1200);
 			handle_guess( message, from );
 		break;
 		case 'next_playlist':
