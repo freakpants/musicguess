@@ -508,11 +508,7 @@ function handle_guess( message, from ){
 		// determine nickname of player
 		nickname = air_console.getNickname( from );
 		// add empty guessArea
-		if( document.guessingMethod === 'letter' ){
-			$("#screen-wrapper").append('<div class="playerGuesses left" id="player_' + from +'"><div class="left" id="player_' + from +'_label">' + nickname + ':</div><div class="left resetme" id="player_' + from +'_artist"></div><div class="resetme"> - </div><div class="left resetme" id="player_' + from +'_title"> </div></div>');
-		} else if ( document.guessingMethod === 'full' ){
-			$("#player-results").append('<div class="single-result" id="player_' + from +'_result"><span class="position">1.</span><span class="current_score">0</span><span class="profile"><img src="http://www.teequilla.com/images/tq/empty-avatar.png"></span><span class="current_time"></span><span class="score_change">+2100</span><span class="player_name">' + nickname + '</span></div>');
-		}
+		$("#player-results").append('<div class="single-result" id="player_' + from +'_result"><span class="position">1.</span><span class="current_score">0</span><span class="profile"><img src="http://www.teequilla.com/images/tq/empty-avatar.png"></span><span class="current_time"></span><span class="score_change">+2100</span><span class="player_name">' + nickname + '</span></div>');
 	}
 	if( message[0].type_of_guess === 'title' ){
 		$("#player_" + from + "_title").html(message[0].word);
