@@ -446,11 +446,7 @@ function round_end(){
 					sleep(1000).then(() =>{
 						$("#status").html("");
 						$(".instruction").html("Guess the artist or title that is currently playing!");
-						
-						// reset all Points etc
-						$(".score_change").html("&nbsp;");
-						$(".current_time").html("&nbsp;");
-						$(".single-result").css('background-color', 'rgba(0, 0, 0, 0.6)');
+					
 						// reset the roundTime again, at the actual start of the round
 						document.RoundTime = 30;
 						$("#roundTime").html(document.RoundTime);
@@ -508,7 +504,7 @@ function handle_guess( message, from ){
 		// determine nickname of player
 		nickname = air_console.getNickname( from );
 		// add empty guessArea
-		$("#player-results").append('<div class="single-result" id="player_' + from +'_result"><span class="position">1.</span><span class="current_score">0</span><span class="profile"><img src="http://www.teequilla.com/images/tq/empty-avatar.png"></span><span class="current_time"></span><span class="score_change">+2100</span><span class="player_name">' + nickname + '</span></div>');
+		$("#player-results").append('<div class="single-result" id="player_' + from +'_result"><div class="position_display">1</div><div class="darken_image"></div><img src="http://www.teequilla.com/images/tq/empty-avatar.png"><div class="player_name">' + nickname + '</div></div>');
 	}
 	if( message[0].type_of_guess === 'title' ){
 		$("#player_" + from + "_title").html(message[0].word);
@@ -522,7 +518,7 @@ function handle_guess( message, from ){
 		if(actual_points < 0) actual_points = 0;
 		guessTime = guessTime / 1000;
 
-		url = air_console.getProfilePicture(from);
+		url = air_console.getProfilePicture(from, 120);
 		
 		if( message[0].type !== "correctGuess" ){
 			actual_points = 0;
@@ -557,7 +553,7 @@ function handle_guess( message, from ){
 		console.log(document.playerScores);
 		
 		resultArea = $("#player_" + from + "_result");
-		resultArea.find(".profile img").attr("src",url);
+		resultArea.find("img").attr("src",url);
 		
 		position = 1;
 		document.playerScores.forEach(function(element){
@@ -569,11 +565,9 @@ function handle_guess( message, from ){
 			resultArea.find(".current_score").html(newScore);
 			resultArea.find(".score_change").html("+ " + actual_points + " Points");
 			resultArea.find(".current_time").html(guessTime + " seconds");
-			resultArea.css('background-color', 'green');
 		} else {
 			resultArea.find(".score_change").html("No Points");
 			resultArea.find(".current_time").html(guessTime + " seconds");
-			resultArea.css('background-color', 'red');
 			actual_points = 0;
 		}
 		document.amount_of_finished_players++;
