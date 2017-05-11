@@ -21,6 +21,16 @@
 	<div class="choice_4 unselected" id="choice_4"></div>
 </div>
 
+<div id="round_over_song_details">
+	<div class="player_round_result"></div>
+	<div class="player_score"></div>
+	<div class="song_title"></div>
+	<div class="song_artist"></div>
+	<div class="song_album"></div>
+	<div class="song_albumart"></div>
+	<div class="song_buylink"></div>
+</div>
+
 <script type="text/javascript">
 var air_console = new AirConsole();
 
@@ -90,12 +100,20 @@ air_console.onMessage = function(from, data) {
 		// hide the guessing type selection
 		$("#guessing_methods").hide();
 		console.log('received solution');
-		// unnattach all event handlers so we dont start triggering multiple messages 
-		
+		// unnattach all event handlers so we dont start triggering multiple messages 		
 		$(".correct").off();
 		$(".wrong").off();
 		
 		if( data[0].guessingMethod === 'full' ){
+			// hide the song area from previous rounds
+			$("#round_over_song_details").hide();
+	
+			// push the correct information from the song to the round over screen
+			$(".song_artist").html(data[0].artist);
+			$(".song_title").html(data[0].title);
+			$(".song_album").html(data[0].album);
+			$(".song_albumart").html('<img src="' + data[0].album_art + '" />');
+	
 			// reset css on buttons
 			$("#guessing_buttons_full .choice_1").css('opacity', '1');
 			$("#guessing_buttons_full .choice_2").css('opacity', '1');
@@ -159,6 +177,15 @@ air_console.onMessage = function(from, data) {
 				$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
 				$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
 				
+				// wait 2 seconds, then display the correct result including link to buy the song
+				sleep(2000);
+				// hide all guessing buttons
+				$("#guessing_buttons_full").hide();
+				// unhide player result area
+				$("#round_over_song_details").show();
+				//inform player of result
+				$(".player_round_result").html("You guessed correctly!");
+				
 				id = $(this).attr("id");
 				$("#guessing_buttons_full ." + id).css('opacity', '1');
 				$("#guessing_buttons_full ." + id).addClass('correct-selected');
@@ -176,12 +203,20 @@ air_console.onMessage = function(from, data) {
 				wrongGuess.push({ type: "wrongGuess", type_of_guess: 'full'});
 				air_console.message( 0 , wrongGuess );
 				
-				// $("#guessing_buttons_full").hide();
 				// grey out the other answers
 				$("#guessing_buttons_full .choice_1").css('opacity', '0.2');
 				$("#guessing_buttons_full .choice_2").css('opacity', '0.2');
 				$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
 				$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
+				
+				// wait 2 seconds, then display the correct result including link to buy the song
+				sleep(2000);
+				// hide all guessing buttons
+				$("#guessing_buttons_full").hide();
+				// unhide player result area
+				$("#round_over_song_details").show();
+				//inform player of result
+				$(".player_round_result").html("You guessed wrong!");
 				
 				id = $(this).attr("id");
 				$("#guessing_buttons_full ." + id).css('opacity', '1');
@@ -196,6 +231,9 @@ air_console.onMessage = function(from, data) {
 			$("#guessing_buttons_full").show();
 		} 
 	}
+}
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 </script>
 

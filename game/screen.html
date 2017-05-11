@@ -254,6 +254,8 @@ function play_random_song(){
 	
 	artist = randomSong.artist;
 	title = randomSong.title;
+	album = randomSong.album;
+	album_art = randomSong.album_art;
 
 	if( document.guessingMethod === 'letter' ){
 		artist = artist.replace(/ /g,'').toUpperCase();
@@ -265,6 +267,8 @@ function play_random_song(){
 		type: "solution", 
 		artist: artist, 
 		title: title, 
+		album: album,
+		album_art: album_art,
 		guessingMethod: document.guessingMethod,
 		wrongAnswers: wrong_answers_array,
 		answerType: artist_or_title

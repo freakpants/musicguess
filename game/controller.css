@@ -160,3 +160,18 @@ body {
 	color:white;
 }
 
+#round_over_song_details{
+	display:none;
+}
+
+#round_over_song_details div,
+#round_over_song_details .song_albumart{
+	width:100%;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+
+#round_over_song_details .song_albumart img{
+	width:100%;
+}
