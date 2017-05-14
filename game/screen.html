@@ -44,7 +44,9 @@ document.musicVolume = 0.4;
 document.amount_of_finished_players = 0;
 
 document.round = 0;
-document.RoundTime = 30;
+// the setting that is used to count downwards. could potentially be modified by settings
+document.RoundTimeSetting = 30;
+document.RoundTime = document.RoundTimeSetting;
 document.maxRound = 25;
 
 // store current scores of players
@@ -91,8 +93,14 @@ $( document ).ready(function(){
 		});
 });
 
-function decreaseRoundTime(){
+function calculateRoundTime(){
 	
+	// calculate the difference between the start of the round and now
+	currentTime = new Date().getTime();
+	timePassed = Math.floor((currentTime - document.RoundStartTime) / 1000);
+	// substract the time passed from the roundtime setting (30 secs unless set otherwise)
+	document.RoundTime = document.RoundTimeSetting - timePassed;
+	// display the current time on the UI
 	$("#roundTime").html(document.RoundTime);
 
 	if( document.RoundTime === 6){
@@ -100,13 +108,9 @@ function decreaseRoundTime(){
 	}
 
 	if( document.RoundTime > 0 ){
-		document.RoundTime--;
-		sleep(1000).then(() =>{
-			decreaseRoundTime();
-		});
-	} else if (document.RoundTime != -10) {
+		setTimeout(calculateRoundTime, 0);
+	} else {
 		round_end();
-		decreaseRoundTime();
 	}
 }
 
@@ -119,10 +123,12 @@ function start(){
 	$("#player-results").html("");
 	
 	// reset the roundTime again, at the actual start of the round
-	document.RoundTime = 30;
+	document.RoundTime = document.RoundTimeSetting;
+	// also reset the startTime of the current Round so we can keep track of how many seconds have passed
+	document.RoundStartTime = new Date().getTime();
 	
 	// initiate round time keeptracker
-	decreaseRoundTime();
+	calculateRoundTime();
 	
 	document.round = 0;
 	$("#roundTime").html(document.RoundTime);
@@ -407,7 +413,7 @@ function round_end(){
 	// $("#player").stop();
 	
 	// reset the roundTime so time cant run out in the time between matches
-	document.RoundTime = 30;
+	document.RoundTime = document.RoundTimeSetting;
 	$("#roundTime").hide();
 
 	debug = true;
@@ -440,8 +446,8 @@ function round_end(){
 			// initiate next round
 			$(".instruction").html("Get ready for the next round!");
 			$("#status").html("3");
-			document.getElementById("sound-effect-clock").play();
 			sleep(1000).then(() =>{
+			document.getElementById("sound-effect-clock").play();
 				document.getElementById("sound-effect-clock").play();
 				$("#status").html("2");
 				sleep(1000).then(() =>{
@@ -452,8 +458,13 @@ function round_end(){
 						$(".instruction").html("Guess the artist or title that is currently playing!");
 					
 						// reset the roundTime again, at the actual start of the round
-						document.RoundTime = 30;
-						$("#roundTime").html(document.RoundTime);
+						document.RoundTime = document.RoundTimeSetting;
+						// also reset the startTime of the current Round so we can keep track of how many seconds have passed
+						document.RoundStartTime = new Date().getTime();
+						
+						// initiate round time keeptracker
+						calculateRoundTime();
+
 						$("#roundTime").css("display","flex");
 						play_random_song();
 					});

@@ -1,0 +1,45 @@
+<head>
+<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.6.0.js"></script>
+  <link rel="stylesheet" href="screen.css">
+  <link rel="stylesheet" href="shared.css">
+  <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+
+/* var start_time = new Date().getTime();
+var timer = 0;
+(timer);
+setInterval(function(){
+	currentTime = new Date().getTime();
+	if( currentTime >= start_time + 1000 ){
+		timer++;
+		$("body").html(timer);
+		start_time = new Date().getTime();
+	}
+}, 1); */
+
+
+function render(time) {
+	$("body").html( Math.floor((time - startTime) / 1000) );
+}
+
+window.onload = function()
+{
+    var time;
+	startTime = new Date().getTime();
+    animate();
+    function animate () {
+        time = new Date().getTime();
+        render(time);
+        setTimeout(animate, 0);
+    }
+}
+	
+
+
+</script>
+	
+</body>
