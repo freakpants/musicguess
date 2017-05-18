@@ -160,3 +160,21 @@ video#bgvid {
 img#game_logo {
 	width:500px;
 }
+
+div#current_song_service #disclaimer, div#current_song_service #get_it_link{
+	width:100%;
+	font-size:28px;
+}
+div#current_song_service{
+	display:block;
+	padding-top:20px;
+	} 
+
+div#current_song_service #get_it_link a{
+	cursor:pointer;
+}
+
+img.itunes{
+	width:250px;
+	padding-top:20px;
+}

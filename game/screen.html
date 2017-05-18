@@ -139,7 +139,7 @@ function start(){
 	
 	
 	// override screen with play area
-	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div><img id="playanimation" src="audio.svg" /></div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div>');
+	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div><img id="playanimation" src="audio.svg" /></div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div><div id="current_song_service"></div>');
 	$(".debug").hide();
 	
 	// get list of songs, choose one at random
@@ -252,6 +252,8 @@ function play_random_song(){
 	// $('#player').get(0).currentTime = 5;
 	$("#playanimation").show();
 	
+	
+	$("#current_song_service").html("<div id='disclaimer'>This song is provided by the Itunes Search API Preview</div><div id='get_it_link'><a href='http://www.google.com'><img src='images/itunes.svg' class='itunes' /></a></div>");
 	$("#current_artist").html(randomSong.artist);
 	$("#current_title").html(randomSong.title);
 	$("#current_album").html(randomSong.album);
