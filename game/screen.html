@@ -253,16 +253,11 @@ function play_random_song(){
 	// $('#player').get(0).currentTime = 5;
 	$("#playanimation").show();
 	
-	$("#current_song_service").html("<div id='disclaimer'>This song is provided by the Itunes Search API Preview</div><div id='get_it_link'><a  href='http://www.google.com'><img id='getitonitunes' src='images/itunes.svg' class='itunes' /></a></div>");
+	$("#current_song_service").html("<div id='disclaimer'>This song is provided by the Itunes Search API Preview</div><div id='get_it_link'><img src='images/itunes.svg' class='itunes' /></div>");
 	$("#current_artist").html(randomSong.artist);
 	$("#current_title").html(randomSong.title);
 	$("#current_album").html(randomSong.album);
 	$("#current_year").html(randomSong.year);
-	
-	// attach click handler to itunes image
-	$("#disclaimer").click(function( event ){
-		console.log("i was called"); 
-	});
 	
 	
 	// $("#current_album_art").html('<img src="' + randomSong.albumArtRef[0].url + '" />');
