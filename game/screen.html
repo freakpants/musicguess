@@ -557,6 +557,15 @@ function handle_guess( message, from ){
 			document.playerScores.push({ player: from, score: newScore });
 		}
 		
+		// send the score to the controller
+		document.score = [];
+		document.score.push({ 
+			type: "score",
+			score: newScore,
+		});
+		// send the score to the specific client
+		air_console.message( from, document.score );
+		
 		console.log(document.playerScores);
 		
 		document.playerScores.sort(function(a,b) {
