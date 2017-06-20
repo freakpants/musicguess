@@ -1,6 +1,7 @@
 .nomargin{
 	margin:0px;
 	margin-top:40px;
+	background-color:#282828;
 }
 
 #guessing_buttons_letter .choice_1, 
@@ -170,14 +171,13 @@ body {
 }
 
 #round_over_song_details .text_info{
-	background-color:gray;
+	background-color:#424242;
 	width:100%;
-	height:100%;
+	height:34%;
 }
 
 #round_over_song_details div,
 #round_over_song_details .song_albumart{
-	display: flex;
 	justify-content: center;
 	align-items: center;
 
@@ -186,6 +186,21 @@ body {
 #round_over_song_details .song_albumart{
 	padding: 40px;
 	padding-top:0px;
+}
+
+#round_over_song_details .song_artist, #round_over_song_details .song_title, #round_over_song_details .song_album{
+	margin-left:40px;
+	margin-right:40px;
+}
+
+#round_over_song_details .song_title{
+	font-size:30px;
+	overflow-x: scroll;
+	white-space: nowrap; 
+}
+
+#round_over_song_details .song_title::-webkit-scrollbar{
+	display:none;
 }
 
 #round_over_song_details .song_albumart img{

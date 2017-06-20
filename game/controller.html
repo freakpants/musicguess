@@ -27,15 +27,33 @@
 	<div class="player_score"></div>
 	
 	<div class="text_info">
-		<div class="song_artist"></div>
 		<div class="song_title"></div>
 		<div class="song_album"></div>
+		<div class="song_artist"></div>
 		<div class="song_buylink"></div>
 	</div>
 </div>
 
 <script type="text/javascript">
 var air_console = new AirConsole();
+
+function animatethis(targetElement, speed) {
+    var scrollWidth = $(targetElement).get(0).scrollWidth;
+    var clientWidth = $(targetElement).get(0).clientWidth;
+    $(targetElement).animate({ scrollLeft: scrollWidth - clientWidth },
+    {
+        duration: speed,
+        complete: function () {
+            targetElement.animate({ scrollLeft: 0 },
+            {
+                duration: speed,
+                complete: function () {
+                    animatethis(targetElement, speed);
+                }
+            });
+        }
+    });
+};
 
 /**
  * Shuffles array in place.
@@ -185,9 +203,11 @@ air_console.onMessage = function(from, data) {
 				$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
 				$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
 				
+				animatethis($('.song_title'), 3000);
+				
 				// wait 2 seconds, then display the correct result including link to buy the song
 				sleep(2000);
-				
+							
 				// fix body padding
 				$("body").addClass("nomargin");
 				
@@ -221,8 +241,11 @@ air_console.onMessage = function(from, data) {
 				$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
 				$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
 				
+				animatethis($('.song_title'), 3000);
+				
 				// wait 2 seconds, then display the correct result including link to buy the song
 				sleep(2000);
+				
 				// fix body margin
 				$("body").addClass("nomargin");
 				
