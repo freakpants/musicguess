@@ -8,8 +8,8 @@
 	
 <body>
 
-<div id="guessing_methods">
-	<div id="guessing_method_full"  class="unselected">Start the game with 25 rounds!</div>
+<div id="menu">
+	<div id="start_game"  class="unselected">Start the game with 25 rounds!</div>
 	<div id="next_playlist"  class="unselected">Next Playlist</div>
 	<div id="previous_playlist"  class="unselected">Previous Playlist</div>
 </div>
@@ -24,6 +24,7 @@
 <div id="round_over_song_details">
 	<div class="result_banner">
 		<div class="player_round_result"></div>
+		<div class="player_score"></div>
 	</div>
 	<div class="image">
 		<div class="song_albumart"></div>
@@ -73,7 +74,7 @@ function shuffle(a) {
     }
 }
 
-$("#guessing_method_full").click(function( event ){
+$("#start_game").click(function( event ){
 	// instruct the screen to start the game in full word mode
 	var command = [];
 	command.push({ type: "guessMethodFull" });
@@ -99,7 +100,7 @@ air_console.onMessage = function(from, data) {
 	
 	if( data[0].type === "score" ){
 		console.log("received score");
-		$(".player_round_result").html(data[0].score + " Points (+" + data[0].increase + ")");
+		$(".player_score").html(data[0].score + " Points (+" + data[0].increase + ")");
 	}
 	
 	if( data[0].type === "game_end" ){
@@ -117,7 +118,7 @@ air_console.onMessage = function(from, data) {
 		$("#guessing_buttons_full").hide();
 		
 		// show the start command
-		$("#guessing_methods").show();
+		$("#menu").show();
 
 		// unnattach all event handlers so we dont start triggering multiple messages 
 		
@@ -128,7 +129,7 @@ air_console.onMessage = function(from, data) {
 	// analyze data
 	if ( data[0].type === "solution" ){
 		// hide the guessing type selection
-		$("#guessing_methods").hide();
+		$("#menu").hide();
 		console.log('received solution');
 		// unnattach all event handlers so we dont start triggering multiple messages 		
 		$(".correct").off();
@@ -211,9 +212,6 @@ air_console.onMessage = function(from, data) {
 				
 				// wait 2 seconds, then display the correct result including link to buy the song
 				sleep(2000);
-							
-				// fix body padding
-				$("body").addClass("nomargin");
 				
 				// hide all guessing buttons
 				$("#guessing_buttons_full").hide();
@@ -249,9 +247,6 @@ air_console.onMessage = function(from, data) {
 				
 				// wait 2 seconds, then display the correct result including link to buy the song
 				sleep(2000);
-				
-				// fix body margin
-				$("body").addClass("nomargin");
 				
 				// hide all guessing buttons
 				$("#guessing_buttons_full").hide();

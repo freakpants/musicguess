@@ -1,167 +1,49 @@
-.nomargin{
+body{
 	margin:0px;
 	background-color:#282828;
 }
 
-#guessing_buttons_letter .choice_1, 
-#guessing_buttons_letter .choice_2, 
-#guessing_buttons_letter .choice_3, 
-#guessing_buttons_letter .choice_4, 
-#guessing_buttons_letter .choice_N, 
-#guessing_buttons_letter .choice_D{
-	width:25%;
-	height:25%;
-	font-size:25px;
-	color:white;
-	float:left;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-weight:bold;
+
+#guessing_buttons_full{
+	display:none;
+}
+
+#guessing_buttons_full, #menu{
+	padding-left:40px;
+	padding-right:40px;
+	margin-top:40px;
 }
 
 #guessing_buttons_full .choice_1, 
 #guessing_buttons_full .choice_2, 
 #guessing_buttons_full .choice_3, 
-#guessing_buttons_full .choice_4{
+#guessing_buttons_full .choice_4,
+#start_game,
+#next_playlist,
+#previous_playlist
+{
+	display: flex;
+	align-items: center;
+	box-sizing:border-box;
 	width:100%;
-	height:10%;
-	font-size:16px;
+	height:20%;
+	font-size:20px;
 	color:white;
 	float:left;
 	font-family: 'Roboto', sans-serif;
 	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	font-weight:bold;
 	margin-bottom:10px;
+	overflow: hidden;
+	padding-left:20px;
+	padding-right:20px;
 }
 
 .unselected{
-	-moz-box-shadow:inset 0px -3px 7px 0px #29bbff;
-	-webkit-box-shadow:inset 0px -3px 7px 0px #29bbff;
-	box-shadow:inset 0px -3px 7px 0px #29bbff;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #2dabf9), color-stop(1, #0688fa));
-	background:-moz-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
-	background:-webkit-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
-	background:-o-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
-	background:-ms-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
-	background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#2dabf9', endColorstr='#0688fa',GradientType=0);
-	background-color:#2dabf9;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px; 
-	border-radius:3px;
-	border:1px solid #0b0e07;
-	cursor:pointer;
-	color:#ffffff; 
-}
-.correct-selected {
-	-moz-box-shadow:inset 0px -3px 7px 0px #a4e271;
-	-webkit-box-shadow:inset 0px -3px 7px 0px #a4e271;
-	box-shadow:inset 0px -3px 7px 0px #a4e271;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809));
-	background:-moz-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:-webkit-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:-o-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:-ms-linear-gradient(top, #89c403 5%, #77a809 100%);
-	background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809',GradientType=0);
-	background-color:#89c403;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	border-radius:3px;
-	border:1px solid #74b807;
-	cursor:pointer;
-	color:#ffffff;
-	text-shadow:0px 1px 0px #528009;
+	background-color:#424242;
 }
 
-.wrong-selected {
-	-moz-box-shadow:inset 0px -3px 7px 0px #f29c93;
-	-webkit-box-shadow:inset 0px -3px 7px 0px #f29c93;
-	box-shadow:inset 0px -3px 7px 0px #f29c93;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100));
-	background:-moz-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-	background:-webkit-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-	background:-o-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-	background:-ms-linear-gradient(top, #fe1a00 5%, #ce0100 100%);
-	background:linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100',GradientType=0);
-	background-color:#fe1a00;
-	-moz-border-radius:3px;
-	-webkit-border-radius:3px;
-	border-radius:3px;
-	border:1px solid #d83526;
-	cursor:pointer;
-	color:#ffffff;
-	text-shadow:0px 1px 0px #b23e35;
-}
-
-
-
-.choice_1{
-	background-color:#F86624;
-}
-
-.choice_2{
-	background-color:#EA3546;
-}
-
-.choice_3{
-	background-color:#662E9B;
-}
-
-.choice_4{
-	background-color:#43BCCD;
-}
-
-#guessing_buttons_letter .choice_N{
-	background-color:black;
-	font-size:15px;
-}
-
-#guessing_buttons_letter .choice_D{
-	background-color:white;
-	font-size:15px;
-	color:black;
-}
-
-#guessing_buttons_letter, #guessing_buttons_full{
-	display:none;	
-}
-
-#guessing_buttons_full{
-	padding-left:10px;
-	padding-right:10px;
-}
-
-/* avoid clashing with the airconsole back to menu button */
-body {
-	margin-top:50px;
-}
-
-#guessing_methods div{
-	width:100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size:16px;
-	font-weight:bold;	
-	height:50px;
-}
-
-#guessing_methods .odd {
-	background-color:#F86624;
-}
-
-#guessing_methods .even {
-	background-color:#EA3546;
-}
-
-#guessing_methods .instruction{
+#menu .instruction{
 	color:white;
 }
 
@@ -175,13 +57,14 @@ body {
 	width:100%;
 	height:15%;
 	padding-top:40px;
-	font-size:25px;
+	font-size:20px;
 	box-sizing:border-box;
 	overflow:hidden;
+	padding-left:40px;
+	padding-right:40px;
 }
 
 #round_over_song_details .image{
-	padding-top:40px;
 	background-color:#333333;
 	width:100%;
 }
@@ -190,7 +73,8 @@ body {
 	background-color:#424242;
 	width:100%;
 	height:25%;
-
+	padding-top: 15px;
+	box-sizing:border-box;
 }
 
 #round_over_song_details div,
@@ -202,13 +86,11 @@ body {
 
 #round_over_song_details .song_albumart{
 	padding: 40px;
-	padding-top:0px;
 }
 
 #round_over_song_details .song_artist, 
 #round_over_song_details .song_title, 
-#round_over_song_details .song_album,
-#round_over_song_details .player_round_result,
+#round_over_song_details .song_album
 {
 	margin-left:40px;
 	margin-right:40px;
@@ -237,3 +119,8 @@ body {
 #round_over_song_details .song_albumart img{
 	width:100%;
 }
+
+#round_over_song_details .player_score, #round_over_song_details .player_round_result{
+	display:inline;
+}
+
