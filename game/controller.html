@@ -22,9 +22,13 @@
 </div>
 
 <div id="round_over_song_details">
-	<div class="song_albumart"></div>
-	<div class="player_round_result"></div>
-	<div class="player_score"></div>
+	<div class="result_banner">
+		<div class="player_round_result"></div>
+	</div>
+	<div class="image">
+		<div class="song_albumart"></div>
+
+	</div>
 	
 	<div class="text_info">
 		<div class="song_title"></div>
@@ -95,7 +99,7 @@ air_console.onMessage = function(from, data) {
 	
 	if( data[0].type === "score" ){
 		console.log("received score");
-		$(".player_score").html(data[0].score + " Points (+" + data[0].increase + ")");
+		$(".player_round_result").html(data[0].score + " Points (+" + data[0].increase + ")");
 	}
 	
 	if( data[0].type === "game_end" ){
@@ -216,7 +220,7 @@ air_console.onMessage = function(from, data) {
 				// unhide player result area
 				$("#round_over_song_details").show();
 				//inform player of result
-				$(".player_round_result").html("You guessed correctly!");
+				$(".player_round_result").html("Correct!");
 				
 				id = $(this).attr("id");
 				$("#guessing_buttons_full ." + id).css('opacity', '1');
@@ -254,7 +258,7 @@ air_console.onMessage = function(from, data) {
 				// unhide player result area
 				$("#round_over_song_details").show();
 				//inform player of result
-				$(".player_round_result").html("You guessed wrong!");
+				$(".player_round_result").html("Wrong!");
 				
 				id = $(this).attr("id");
 				$("#guessing_buttons_full ." + id).css('opacity', '1');
