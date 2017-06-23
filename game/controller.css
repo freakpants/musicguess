@@ -64,6 +64,7 @@ body{
 	background-color:#333333;
 	width:100%;
 	position:relative;
+	height:60%;
 }
 
 #round_over_song_details .text_info{
@@ -124,7 +125,6 @@ body{
 .itunes{
 	width:160px;
 	position:absolute;
-	top:-70px;
 }
 
 .song_buylink{
