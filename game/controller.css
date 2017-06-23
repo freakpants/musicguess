@@ -67,6 +67,7 @@ body{
 #round_over_song_details .image{
 	background-color:#333333;
 	width:100%;
+	position:relative;
 }
 
 #round_over_song_details .text_info{
@@ -122,5 +123,18 @@ body{
 
 #round_over_song_details .player_score, #round_over_song_details .player_round_result{
 	display:inline;
+}
+
+.itunes{
+	width:160px;
+	position:absolute;
+	top:-70px;
+}
+
+.song_buylink{
+	display: flex;
+	align-items: center;
+	width:100%;
+	position:absolute;
 }
 

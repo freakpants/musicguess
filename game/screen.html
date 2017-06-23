@@ -266,6 +266,7 @@ function play_random_song(){
 	title = randomSong.title;
 	album = randomSong.album;
 	album_art = randomSong.album_art;
+	buy_link = randomSong.buy_link;
 
 	if( document.guessingMethod === 'letter' ){
 		artist = artist.replace(/ /g,'').toUpperCase();
@@ -281,7 +282,8 @@ function play_random_song(){
 		album_art: album_art,
 		guessingMethod: document.guessingMethod,
 		wrongAnswers: wrong_answers_array,
-		answerType: artist_or_title
+		answerType: artist_or_title,
+		buy_link: buy_link
 	});
 	// send the solution to all clients
 	air_console.broadcast( document.solution );

@@ -28,19 +28,20 @@
 	</div>
 	<div class="image">
 		<div class="song_albumart"></div>
-
+		<div class="song_buylink">
+			<img src='images/itunes.svg' class='itunes' onclick="air_console.openExternalUrl(buy_link)"/>
+		</div>
 	</div>
-	
 	<div class="text_info">
 		<div class="song_title"></div>
 		<div class="song_album"></div>
 		<div class="song_artist"></div>
-		<div class="song_buylink"></div>
 	</div>
 </div>
 
 <script type="text/javascript">
 var air_console = new AirConsole();
+var buy_link = "https://www.apple.com/lae/music/";
 
 function animatethis(targetElement, speed) {
     var scrollWidth = $(targetElement).get(0).scrollWidth;
@@ -144,6 +145,7 @@ air_console.onMessage = function(from, data) {
 			$(".song_title").html(data[0].title);
 			$(".song_album").html(data[0].album);
 			$(".song_albumart").html('<img src="' + data[0].album_art + '" />');
+			buy_link = data[0].buy_link;
 	
 			// reset css on buttons
 			$("#guessing_buttons_full .choice_1").css('opacity', '1');
