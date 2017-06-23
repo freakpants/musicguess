@@ -3,7 +3,6 @@ body{
 	background-color:#282828;
 }
 
-
 #guessing_buttons_full{
 	display:none;
 }
@@ -24,7 +23,7 @@ body{
 	box-sizing:border-box;
 	width:100%;
 	height:10%;
-	font-size:20px;
+	font-size:16px;
 	color:white;
 	float:left;
 	font-family: 'Roboto', sans-serif;
@@ -32,7 +31,7 @@ body{
 	font-weight:bold;
 	margin-bottom:10px;
 	overflow: hidden;
-	padding-left:20px;
+	padding-left:65px;
 	padding-right:20px;
 }
 
@@ -155,6 +154,18 @@ body{
 	font-size:20px !important;
 	color:white;
 }
+
+.bars-position{
+	top:40px;
+}
+
+.bars{
+	padding-top:13px;
+	padding-left:10px;
+	font-size:20px !important;
+	color:white;
+}
+
 
 .button_circle{
 	padding-top:8px;

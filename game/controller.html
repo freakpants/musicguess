@@ -6,11 +6,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 </head>
-	
 <body>
-
-
-
 <div id="menu">
 	<div class="flexbox" id="start_game">
 		<div id="button_icon">			
@@ -46,11 +42,36 @@
 	</div>
 </div>
 
-<div id="guessing_buttons_full">
-	<div class="choice_1 unselected" id="choice_1"></div>
-	<div class="choice_2 unselected" id="choice_2"></div>
-	<div class="choice_3 unselected" id="choice_3"></div>
-	<div class="choice_4 unselected" id="choice_4"></div>
+<div id="guessing_buttons_full">		
+	<div class="button_wrapper">
+		<span class="fa-stack fa-lg bars-position">
+			<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+			<i class="fa fa-bars fa-stack-1x bars"></i>
+		</span>
+		<div class="choice_1 unselected" id="choice_1"></div>
+	</div>
+	<div class="button_wrapper">
+		<span class="fa-stack fa-lg bars-position">
+			<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+			<i class="fa fa-bars fa-stack-1x bars"></i>
+		</span>
+		<div class="choice_2 unselected" id="choice_2"></div>
+	</div>
+	<div class="button_wrapper">
+		<span class="fa-stack fa-lg bars-position">
+			<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+			<i class="fa fa-bars fa-stack-1x bars"></i>
+		</span>
+		<div class="choice_3 unselected" id="choice_3"></div>
+	</div>
+	<div class="button_wrapper">
+		<span class="fa-stack fa-lg bars-position">
+			<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+			<i class="fa fa-bars fa-stack-1x bars"></i>
+		</span>
+		<div class="choice_4 unselected" id="choice_4"></div>
+	</div>
+	
 </div>
 
 <div id="round_over_song_details">
@@ -126,8 +147,6 @@ $("#previous_playlist").click(function( event ){
 	air_console.message( 0 , command );
 });
 
-
-
 // Listen for messages from other devices
 air_console.onMessage = function(from, data) {
 	
@@ -149,6 +168,7 @@ air_console.onMessage = function(from, data) {
 		$("#guessing_buttons_full .choice_4").removeClass("correct-selected wrong-selected");
 		
 		$("#guessing_buttons_full").hide();
+		$("#round_over_song_details").hide();
 		
 		// show the start command
 		$("#menu").show();
