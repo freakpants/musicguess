@@ -123,13 +123,13 @@ div .darken_image{
 
 #playlist-selector .album_art.active{
 	background:#0c0b52;
-	min-width:250px;
-	height:400px;
+	min-width:400px;
+	height:550px;
 }
 
 #playlist-selector .album_art.active img{
-	width:125px;
-	height:125px;
+	width:200px;
+	height:200px;
 }
 
 #playlist-selector .playlist-text{
