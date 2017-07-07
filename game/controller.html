@@ -40,6 +40,23 @@
 		<div class="button_text">Previous playlist</div>
 		<div class="button_comment">Same, but different</div>
 	</div>
+	
+	<div class="flexbox">
+		<div id="button_icon" class="decrease_rounds">			
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+				<i class="fa fa-minus fa-stack-1x minus"></i>
+			</span>
+		</div>
+		<div class="button_text_reduced" id="round_amount">25 rounds</div>
+		<div class="button_comment_reduced">more/less rounds</div>
+		<div id="button_icon" class="increase_rounds">			
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+				<i class="fa fa-plus fa-stack-1x plus"></i>
+			</span>
+		</div>
+	</div>
 </div>
 
 <div id="guessing_buttons_full">		
@@ -95,6 +112,7 @@
 <script type="text/javascript">
 var air_console = new AirConsole();
 var buy_link = "https://www.apple.com/lae/music/";
+document.maxRound = 25;
 
 function animatethis(targetElement, speed) {
     var scrollWidth = $(targetElement).get(0).scrollWidth;
@@ -147,8 +165,33 @@ $("#previous_playlist").click(function( event ){
 	air_console.message( 0 , command );
 });
 
+$(".decrease_rounds").click(function( event ){
+	if ( document.maxRound == 1 ){
+		// dont decrease rounds below 1
+	} else {
+		document.maxRound = document.maxRound - 1;
+		$("#round_amount").html(document.maxRound + " Rounds");
+		var command = [];
+		command.push({ type: "decrease_rounds" });
+		air_console.message( 0 , command );
+	}
+});
+
+$(".increase_rounds").click(function( event ){
+	document.maxRound = document.maxRound + 1;
+	$("#round_amount").html(document.maxRound + " Rounds");
+	var command = [];
+	command.push({ type: "increase_rounds" });
+	air_console.message( 0 , command );
+});
+
 // Listen for messages from other devices
 air_console.onMessage = function(from, data) {
+	
+	if( data[0].type === "round_change" ){
+		document.maxRound = data[0].maxRound;
+		$("#round_amount").html(document.maxRound + " Rounds");
+	}
 	
 	if( data[0].type === "score" ){
 		console.log("received score");

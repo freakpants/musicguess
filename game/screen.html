@@ -47,7 +47,7 @@ document.round = 0;
 // the setting that is used to count downwards. could potentially be modified by settings
 document.RoundTimeSetting = 30;
 document.RoundTime = document.RoundTimeSetting;
-document.maxRound = 102;
+document.maxRound = 25;
 
 // store current scores of players
 document.playerScores = [];
@@ -345,6 +345,20 @@ air_console.onMessage = function(from, message) {
 		break;
 		case 'previous_playlist':
 			switch_playlist('previous');
+		break;
+		case 'decrease_rounds':
+			document.maxRound = document.maxRound - 1;
+			round_change = [];
+			round_change.push({ type: "round_change", maxRound: document.maxRound });
+			// send round change message to the controllers
+			air_console.broadcast( round_change );
+		break;
+		case 'increase_rounds':
+			document.maxRound = document.maxRound + 1;
+			round_change = [];
+			round_change.push({ type: "round_change", maxRound: document.maxRound });
+			// send round change message to the controllers
+			air_console.broadcast( round_change );
 		break;
 	}
 };
