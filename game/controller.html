@@ -41,7 +41,7 @@
 		<div class="button_comment">Same, but different</div>
 	</div>
 	
-	<div class="flexbox">
+	<div class="flexbox" id="round_change_buttons">
 		<div id="button_icon" class="decrease_rounds">			
 			<span class="fa-stack fa-lg">
 				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
@@ -57,7 +57,19 @@
 			</span>
 		</div>
 	</div>
+	<div class="flexbox" id="game_over">
+		<div id="button_icon">			
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+				<i class="fa fa-undo fa-stack-1x undo"></i>
+			</span>
+		</div>
+		<div class="button_text">Return to main menu</div>
+		<div class="button_comment">Return to the options</div>
+	</div>
 </div>
+
+
 
 <div id="guessing_buttons_full">		
 	<div class="button_wrapper">
@@ -177,6 +189,22 @@ $(".decrease_rounds").click(function( event ){
 	}
 });
 
+function back_to_main(){
+	$("#start_game").show();
+	$("#next_playlist").show();	
+	$("#previous_playlist").show();	
+	$("#round_change_buttons").show();
+	$("#game_over").hide();
+	$("#menu").show();	
+}
+
+$("#game_over").click(function( event ){
+	back_to_main();	
+	var command = [];
+	command.push({ type: "back_to_main" });
+	air_console.message( 0 , command );
+});
+
 $(".increase_rounds").click(function( event ){
 	document.maxRound = document.maxRound + 1;
 	$("#round_amount").html(document.maxRound + " Rounds");
@@ -188,6 +216,11 @@ $(".increase_rounds").click(function( event ){
 // Listen for messages from other devices
 air_console.onMessage = function(from, data) {
 	
+	if( data[0].type === "back_to_main"){
+		// also reset this controllers menu
+		back_to_main();
+	}
+
 	if( data[0].type === "round_change" ){
 		document.maxRound = data[0].maxRound;
 		$("#round_amount").html(document.maxRound + " Rounds");
@@ -213,8 +246,13 @@ air_console.onMessage = function(from, data) {
 		$("#guessing_buttons_full").hide();
 		$("#round_over_song_details").hide();
 		
-		// show the start command
-		$("#menu").show();
+		// show the go back command, but hide the other menu buttons
+		$("#start_game").hide();
+		$("#next_playlist").hide();	
+		$("#previous_playlist").hide();	
+		$("#round_change_buttons").hide();
+		$("#game_over").css("display","flex");
+		$("#menu").show();	
 
 		// unnattach all event handlers so we dont start triggering multiple messages 
 		

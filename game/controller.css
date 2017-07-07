@@ -43,7 +43,7 @@ body{
 	color:white;
 }
 
-#round_over_song_details{
+#round_over_song_details, #game_over{
 	display:none;
 }
 
@@ -137,6 +137,13 @@ body{
 .play_icon{
 	padding-top:13px;
 	padding-left:12px;
+	font-size:20px !important;
+	color:white;
+}
+
+.undo{
+	padding-top:13px;
+	padding-left:11px;
 	font-size:20px !important;
 	color:white;
 }

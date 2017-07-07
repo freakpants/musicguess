@@ -360,6 +360,13 @@ air_console.onMessage = function(from, message) {
 			// send round change message to the controllers
 			air_console.broadcast( round_change );
 		break;
+		case 'back_to_main':
+			$(".instruction").html('<img id="game_logo" src="mg_logo.svg" />');
+			$("#playlist-selector").show();
+			back_to_main = [];
+			back_to_main.push({ type: "back_to_main"});
+			air_console.broadcast( back_to_main );
+		break;
 	}
 };
 
@@ -454,9 +461,8 @@ function round_end(){
 			// set roundTime extra high so the end doesnt happen more than once
 			document.RoundTime = -10;
 			console.log("game over");
-			
-			// hide playlist selector
-			$("#playlist-selector").show();
+
+			$("#current_song_service").hide();
 			
 			game_end = [];
 			game_end.push({ type: "game_end" });
