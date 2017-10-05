@@ -94,6 +94,8 @@ $( document ).ready(function(){
 		});
 });
 
+document.roundEndInitiated = false;
+
 function calculateRoundTime(){
 	
 	// calculate the difference between the start of the round and now
@@ -110,7 +112,8 @@ function calculateRoundTime(){
 
 	if( document.RoundTime > 0 ){
 		setTimeout(calculateRoundTime, 0);
-	} else {
+	} else if ( document.roundEndInitiated == false ){
+		document.roundEndInitiated = true;
 		round_end();
 	}
 }
@@ -489,6 +492,7 @@ function round_end(){
 						document.RoundStartTime = new Date().getTime();
 						
 						// initiate round time keeptracker
+						document.roundEndInitiated = false;
 						calculateRoundTime();
 
 						$("#roundTime").css("display","flex");
