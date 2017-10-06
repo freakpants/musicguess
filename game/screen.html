@@ -435,6 +435,10 @@ function switch_playlist( type ){
 		
 	});
 	
+	if( document.maxRound > playlists[document.selectedPlaylist]['amount_of_tracks'] ){
+		document.maxRound = playlists[document.selectedPlaylist]['amount_of_tracks'];
+	}
+	
 	update_max_rounds_on_controllers();
 	
 	console.log("newly selected playlist" + document.selectedPlaylist);

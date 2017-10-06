@@ -249,6 +249,13 @@ air_console.onMessage = function(from, data) {
 	
 	if( data[0].type === "playlist_rounds"){
 		document.maxPlaylistRounds = data[0].playlist_rounds;
+		// when switching playlists, the round amount can be too high, fix this
+		if( document.maxRound > document.maxPlaylistRounds ) {
+			document.maxRound = document.maxPlaylistRounds;
+			$("#round_amount").html(document.maxRound + " Rounds");
+		}
+		decrease_check();
+		increase_check();
 	}
 	
 	if( data[0].type === "back_to_main"){
