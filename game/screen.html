@@ -151,7 +151,7 @@ function start(){
 		{ method: "GET", url: "playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {} , dataType: "json" })
 		.done(function( msg ) {
 			library = msg;
-			
+			library_copy_for_wrong_answers = library.slice();
 			console.log(library);
 			
 			play_random_song();
@@ -190,12 +190,11 @@ function play_random_song(){
 		// 50:50 chance that wrong answer is either artist or title
 
 		suitable_wrong_answer = true;
-		wrongSongIndex = randomIntFromInterval(0,library.length-1);
+		wrongSongIndex = randomIntFromInterval(0,library_copy_for_wrong_answers.length-1);
 		
 		console.log("wrong song index " + wrongSongIndex);
 		
-		
-		wrongSong = library[wrongSongIndex];
+		wrongSong = library_copy_for_wrong_answers[wrongSongIndex];
 		if( artist_or_title === 0 ){
 			// artist
 			// check if the wrongSong has the same artist as the actual song
@@ -631,6 +630,7 @@ function handle_guess( message, from ){
 		// in theory this should play the next song when all connected devices have finished
 		// since a controller can join after the round has started, this is probably a blocker we need to handle
 		if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length){
+			document.roundEndInitiated = true;
 			round_end();
 		}
 	}
