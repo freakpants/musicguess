@@ -182,6 +182,8 @@ $(".decrease_rounds").click(function( event ){
 		// dont decrease rounds below 1
 	} else {
 		document.maxRound = document.maxRound - 1;
+		decrease_check();
+		
 		$("#round_amount").html(document.maxRound + " Rounds");
 		var command = [];
 		command.push({ type: "decrease_rounds" });
@@ -206,15 +208,48 @@ $("#game_over").click(function( event ){
 });
 
 $(".increase_rounds").click(function( event ){
-	document.maxRound = document.maxRound + 1;
-	$("#round_amount").html(document.maxRound + " Rounds");
-	var command = [];
-	command.push({ type: "increase_rounds" });
-	air_console.message( 0 , command );
+	if( document.maxRound === document.maxPlaylistRounds ){
+		// cant increase further
+	} else {
+		document.maxRound = document.maxRound + 1;
+		increase_check();
+		
+		$("#round_amount").html(document.maxRound + " Rounds");
+		var command = [];
+		command.push({ type: "increase_rounds" });
+		air_console.message( 0 , command );
+	}
 });
+
+/* these functions check for the boundaries of the amonut of rounds */
+function increase_check(){
+	// if the max number of rounds is reached, hide the increase button
+	if( document.maxRound === document.maxPlaylistRounds ){
+		$(".increase_rounds").children().hide();
+	}
+	// if the new value is higher than 1, show the decrease button again
+	if( document.maxRound > 1 ){
+		$(".decrease_rounds").children().show();
+	}
+}
+
+function decrease_check(){
+	// if the new value is below the limit, show the increase button again
+	if( document.maxRound < document.maxPlaylistRounds ){
+		$(".increase_rounds").children().show();
+	}
+	// if the new value is exactly 1, hide the decrease button so we dont get 0 rounds
+	if( document.maxRound === 1 ){
+		$(".decrease_rounds").children().hide();
+	}
+}
 
 // Listen for messages from other devices
 air_console.onMessage = function(from, data) {
+	
+	if( data[0].type === "playlist_rounds"){
+		document.maxPlaylistRounds = data[0].playlist_rounds;
+	}
 	
 	if( data[0].type === "back_to_main"){
 		// also reset this controllers menu
@@ -224,6 +259,8 @@ air_console.onMessage = function(from, data) {
 	if( data[0].type === "round_change" ){
 		document.maxRound = data[0].maxRound;
 		$("#round_amount").html(document.maxRound + " Rounds");
+		decrease_check();
+		increase_check();
 	}
 	
 	if( data[0].type === "score" ){

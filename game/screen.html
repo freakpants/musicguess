@@ -70,6 +70,7 @@ $( document ).ready(function(){
 				if( counter === middle_id){
 					// defaults to popular stuff
 					document.selectedPlaylist = middle_id;
+					update_max_rounds_on_controllers();
 					html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art active">';
 				} else {
 					html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art">';
@@ -356,11 +357,17 @@ air_console.onMessage = function(from, message) {
 			air_console.broadcast( round_change );
 		break;
 		case 'increase_rounds':
-			document.maxRound = document.maxRound + 1;
-			round_change = [];
-			round_change.push({ type: "round_change", maxRound: document.maxRound });
-			// send round change message to the controllers
-			air_console.broadcast( round_change );
+			// check if the maximum amount of rounds for this playlist has been reached or not
+			if( (document.maxRound) == playlists[document.selectedPlaylist]['amount_of_tracks']){
+				// dont increase
+			} else {
+				document.maxRound = document.maxRound + 1;
+				round_change = [];
+				round_change.push({ type: "round_change", maxRound: document.maxRound });
+				// send round change message to the controllers
+				air_console.broadcast( round_change );
+			}
+
 		break;
 		case 'back_to_main':
 			$(".instruction").html('<img id="game_logo" src="mg_logo.svg" />');
@@ -428,8 +435,17 @@ function switch_playlist( type ){
 		
 	});
 	
+	update_max_rounds_on_controllers();
+	
 	console.log("newly selected playlist" + document.selectedPlaylist);
 	
+}
+
+function update_max_rounds_on_controllers(){
+	// also send the current playlist max rounds to the controllers, so it knows when not to increase the count locally
+	playlist_rounds = [];
+	playlist_rounds.push({ type: "playlist_rounds" , playlist_rounds: playlists[document.selectedPlaylist]['amount_of_tracks']});
+	air_console.broadcast(playlist_rounds);
 }
 
 function sleep(ms) {
