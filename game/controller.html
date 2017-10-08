@@ -161,7 +161,7 @@ function shuffle(a) {
 $("#start_game").click(function( event ){
 	// instruct the screen to start the game in full word mode
 	var command = [];
-	command.push({ type: "guessMethodFull" });
+	command.push({ type: "startGame" });
 	air_console.message( 0 , command );
 });
 
@@ -313,139 +313,137 @@ air_console.onMessage = function(from, data) {
 		$(".correct").off();
 		$(".wrong").off();
 		
-		if( data[0].guessingMethod === 'full' ){
-			// hide the song area from previous rounds
-			$("#round_over_song_details").hide();
-	
-			// push the correct information from the song to the round over screen
-			$(".song_artist").html(data[0].artist);
-			$(".song_title").html(data[0].title);
-			$(".song_album").html(data[0].album);
-			$(".song_albumart").html('<img src="' + data[0].album_art + '" />');
-			buy_link = data[0].buy_link;
-	
-			// reset css on buttons
-			$("#guessing_buttons_full .choice_1").css('opacity', '1');
-			$("#guessing_buttons_full .choice_2").css('opacity', '1');
-			$("#guessing_buttons_full .choice_3").css('opacity', '1');
-			$("#guessing_buttons_full .choice_4").css('opacity', '1');
-			
-			$("#guessing_buttons_full .choice_1").removeClass("correct-selected wrong-selected");
-			$("#guessing_buttons_full .choice_2").removeClass("correct-selected wrong-selected");
-			$("#guessing_buttons_full .choice_3").removeClass("correct-selected wrong-selected");
-			$("#guessing_buttons_full .choice_4").removeClass("correct-selected wrong-selected");
+		// hide the song area from previous rounds
+		$("#round_over_song_details").hide();
+
+		// push the correct information from the song to the round over screen
+		$(".song_artist").html(data[0].artist);
+		$(".song_title").html(data[0].title);
+		$(".song_album").html(data[0].album);
+		$(".song_albumart").html('<img src="' + data[0].album_art + '" />');
+		buy_link = data[0].buy_link;
+
+		// reset css on buttons
+		$("#guessing_buttons_full .choice_1").css('opacity', '1');
+		$("#guessing_buttons_full .choice_2").css('opacity', '1');
+		$("#guessing_buttons_full .choice_3").css('opacity', '1');
+		$("#guessing_buttons_full .choice_4").css('opacity', '1');
 		
-			artist_or_title = data[0].answerType;
-			choices = data[0].wrongAnswers;
-			console.log(choices);
+		$("#guessing_buttons_full .choice_1").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full .choice_2").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full .choice_3").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full .choice_4").removeClass("correct-selected wrong-selected");
+	
+		artist_or_title = data[0].answerType;
+		choices = data[0].wrongAnswers;
+		console.log(choices);
+		if( artist_or_title === 0 ){
+			// add artist to array of choices
+			choices.push( data[0].artist );
+		} else {
+			// add title to array of choices
+			choices.push( data[0].title );
+		}
+
+		shuffle(choices);
+		console.log( "choices: " + choices );
+
+		for( var counter = 1; counter < 5; counter++ ){
+			current_choice = choices[counter-1];
+			targetElement = $("#guessing_buttons_full .choice_" + counter);
+			targetElement.removeClass("wrong");
+			targetElement.removeClass("correct");
 			if( artist_or_title === 0 ){
-				// add artist to array of choices
-				choices.push( data[0].artist );
-			} else {
-				// add title to array of choices
-				choices.push( data[0].title );
-			}
-
-			shuffle(choices);
-			console.log( "choices: " + choices );
-
-			for( var counter = 1; counter < 5; counter++ ){
-				current_choice = choices[counter-1];
-				targetElement = $("#guessing_buttons_full .choice_" + counter);
-				targetElement.removeClass("wrong");
-				targetElement.removeClass("correct");
-				if( artist_or_title === 0 ){
-					// check artist against current choice
-					if( current_choice === data[0].artist ){
-						targetElement.addClass("correct");
-					} else {
-						targetElement.addClass("wrong");
-					}
+				// check artist against current choice
+				if( current_choice === data[0].artist ){
+					targetElement.addClass("correct");
 				} else {
-					// check title against current choice
-					if( current_choice === data[0].title ){
-						targetElement.addClass("correct");
-					} else {
-						targetElement.addClass("wrong");
-					}
+					targetElement.addClass("wrong");
 				}
-				targetElement.html( current_choice );
+			} else {
+				// check title against current choice
+				if( current_choice === data[0].title ){
+					targetElement.addClass("correct");
+				} else {
+					targetElement.addClass("wrong");
+				}
 			}
+			targetElement.html( current_choice );
+		}
 
-			// handle correct multiple choice answer
-			$(".correct").click(function(){
-				// let the screen know somebody got it right
-				console.log("handling correct guess on controller");
-				var correctGuess = [];
-				correctGuess.push({ type: "correctGuess", type_of_guess: 'full'});
-				air_console.message( 0 , correctGuess );
-				
-				// $("#guessing_buttons_full").hide();
-				// grey out the other answers
-				$("#guessing_buttons_full .choice_1").css('opacity', '0.2');
-				$("#guessing_buttons_full .choice_2").css('opacity', '0.2');
-				$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
-				$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
-				
-				animatethis($('.song_title'), 3000);
-				
-				// wait 2 seconds, then display the correct result including link to buy the song
-				sleep(2000);
-				
-				// hide all guessing buttons
-				$("#guessing_buttons_full").hide();
-				// unhide player result area
-				$("#round_over_song_details").show();
-				//inform player of result
-				$(".player_round_result").html("Correct!");
-				
-				id = $(this).attr("id");
-				$("#guessing_buttons_full ." + id).css('opacity', '1');
-				$("#guessing_buttons_full ." + id).addClass('correct-selected');
-				
-				// unnattach all event handlers so we dont start triggering multiple messages
-				$(".correct").off();
-				$(".wrong").off();
-			});
+		// handle correct multiple choice answer
+		$(".correct").click(function(){
+			// let the screen know somebody got it right
+			console.log("handling correct guess on controller");
+			var correctGuess = [];
+			correctGuess.push({ type: "correctGuess", type_of_guess: 'full'});
+			air_console.message( 0 , correctGuess );
+			
+			// $("#guessing_buttons_full").hide();
+			// grey out the other answers
+			$("#guessing_buttons_full .choice_1").css('opacity', '0.2');
+			$("#guessing_buttons_full .choice_2").css('opacity', '0.2');
+			$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
+			$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
+			
+			animatethis($('.song_title'), 3000);
+			
+			// wait 2 seconds, then display the correct result including link to buy the song
+			sleep(2000);
+			
+			// hide all guessing buttons
+			$("#guessing_buttons_full").hide();
+			// unhide player result area
+			$("#round_over_song_details").show();
+			//inform player of result
+			$(".player_round_result").html("Correct!");
+			
+			id = $(this).attr("id");
+			$("#guessing_buttons_full ." + id).css('opacity', '1');
+			$("#guessing_buttons_full ." + id).addClass('correct-selected');
+			
+			// unnattach all event handlers so we dont start triggering multiple messages
+			$(".correct").off();
+			$(".wrong").off();
+		});
 
-			// handle wrong multiple choice answer
-			$(".wrong").click(function(){
-				// let the screen know somebody got it right
-				console.log("handling wrong guess on controller");
-				var wrongGuess = [];
-				wrongGuess.push({ type: "wrongGuess", type_of_guess: 'full'});
-				air_console.message( 0 , wrongGuess );
-				
-				// grey out the other answers
-				$("#guessing_buttons_full .choice_1").css('opacity', '0.2');
-				$("#guessing_buttons_full .choice_2").css('opacity', '0.2');
-				$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
-				$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
-				
-				animatethis($('.song_title'), 3000);
-				
-				// wait 2 seconds, then display the correct result including link to buy the song
-				sleep(2000);
-				
-				// hide all guessing buttons
-				$("#guessing_buttons_full").hide();
-				// unhide player result area
-				$("#round_over_song_details").show();
-				//inform player of result
-				$(".player_round_result").html("Wrong!");
-				
-				id = $(this).attr("id");
-				$("#guessing_buttons_full ." + id).css('opacity', '1');
-				$("#guessing_buttons_full ." + id).addClass('wrong-selected');
-				
-				// unnattach all event handlers so we dont start triggering multiple messages
-				$(".correct").off();
-				$(".wrong").off();
-			});
+		// handle wrong multiple choice answer
+		$(".wrong").click(function(){
+			// let the screen know somebody got it right
+			console.log("handling wrong guess on controller");
+			var wrongGuess = [];
+			wrongGuess.push({ type: "wrongGuess", type_of_guess: 'full'});
+			air_console.message( 0 , wrongGuess );
+			
+			// grey out the other answers
+			$("#guessing_buttons_full .choice_1").css('opacity', '0.2');
+			$("#guessing_buttons_full .choice_2").css('opacity', '0.2');
+			$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
+			$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
+			
+			animatethis($('.song_title'), 3000);
+			
+			// wait 2 seconds, then display the correct result including link to buy the song
+			sleep(2000);
+			
+			// hide all guessing buttons
+			$("#guessing_buttons_full").hide();
+			// unhide player result area
+			$("#round_over_song_details").show();
+			//inform player of result
+			$(".player_round_result").html("Wrong!");
+			
+			id = $(this).attr("id");
+			$("#guessing_buttons_full ." + id).css('opacity', '1');
+			$("#guessing_buttons_full ." + id).addClass('wrong-selected');
+			
+			// unnattach all event handlers so we dont start triggering multiple messages
+			$(".correct").off();
+			$(".wrong").off();
+		});
 
-			// display the guessing buttons
-			$("#guessing_buttons_full").show();
-		} 
+		// display the guessing buttons
+		$("#guessing_buttons_full").show();
 	}
 }
 function sleep(ms) {

@@ -271,11 +271,6 @@ function play_random_song(){
 	album_art = randomSong.album_art;
 	buy_link = randomSong.buy_link;
 
-	if( document.guessingMethod === 'letter' ){
-		artist = artist.replace(/ /g,'').toUpperCase();
-		title = title.replace(/ /g,'').toUpperCase();
-	}
-
 	document.solution = [];
 	document.solution.push({ 
 		type: "solution", 
@@ -283,7 +278,6 @@ function play_random_song(){
 		title: title, 
 		album: album,
 		album_art: album_art,
-		guessingMethod: document.guessingMethod,
 		wrongAnswers: wrong_answers_array,
 		answerType: artist_or_title,
 		buy_link: buy_link
@@ -299,15 +293,7 @@ air_console.onMessage = function(from, message) {
 	console.log('handling ' + type + ' message.');
 
 	switch( type ){
-		case 'guessMethodFull':
-			// save the type of guessing method
-			document.guessingMethod = 'full';
-			// start the game
-			start();
-		break;
-		case 'guessMethodLetter':
-			// save the type of guessing method
-			document.guessingMethod = 'letter';
+		case 'startGame':
 			// start the game
 			start();
 		break;
