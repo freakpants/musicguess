@@ -286,6 +286,14 @@ function play_random_song(){
 	air_console.broadcast( document.solution );
 }
 
+// watch for new controllers connecting
+air_console.onConnect = function( device_id){
+	// let the new controller know how many rounds are currently selected
+	update_selected_rounds_on_controllers();
+	// also inform the new controller of the current limit for the selected playlist
+	update_max_rounds_on_controllers(); 
+};
+
 // Listen for messages from other devices
 air_console.onMessage = function(from, message) {
 	// handle message
@@ -337,10 +345,7 @@ air_console.onMessage = function(from, message) {
 		break;
 		case 'decrease_rounds':
 			document.maxRound = document.maxRound - 1;
-			round_change = [];
-			round_change.push({ type: "round_change", maxRound: document.maxRound });
-			// send round change message to the controllers
-			air_console.broadcast( round_change );
+			update_selected_rounds_on_controllers();
 		break;
 		case 'increase_rounds':
 			// check if the maximum amount of rounds for this playlist has been reached or not
@@ -348,10 +353,7 @@ air_console.onMessage = function(from, message) {
 				// dont increase
 			} else {
 				document.maxRound = document.maxRound + 1;
-				round_change = [];
-				round_change.push({ type: "round_change", maxRound: document.maxRound });
-				// send round change message to the controllers
-				air_console.broadcast( round_change );
+				update_selected_rounds_on_controllers();
 			}
 
 		break;
@@ -429,6 +431,12 @@ function switch_playlist( type ){
 	
 	console.log("newly selected playlist" + document.selectedPlaylist);
 	
+}
+function update_selected_rounds_on_controllers(){
+	round_change = [];
+	round_change.push({ type: "round_change", maxRound: document.maxRound });
+	// send round change message to the controllers
+	air_console.broadcast( round_change );
 }
 
 function update_max_rounds_on_controllers(){
