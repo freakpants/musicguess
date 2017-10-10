@@ -451,6 +451,8 @@ function round_end(){
 	document.RoundTime = document.RoundTimeSetting;
 	$("#roundTime").hide();
 
+	$("#current_song_service").hide();
+	
 	debug = true;
 	$(".debug").show();
 	
@@ -488,6 +490,7 @@ function round_end(){
 					document.getElementById("sound-effect-clock").play();
 					$("#status").html("1");
 					sleep(1000).then(() =>{
+						$("#current_song_service").show();
 						$("#status").html("");
 						$(".instruction").html("Guess the artist or title that is currently playing!");
 					
