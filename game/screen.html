@@ -521,13 +521,8 @@ function round_end(){
 }
 
 function handle_guess( message, from ){
-	// these vars only concern the current guess
-	var finished_title = false;
-	var finished_artist = false;
 
-	console.log("Player " + from + " guessed a letter!");
-	// check the length of the guess word versus the solution
-	console.log(message[0].type_of_guess);
+	console.log("Player " + from + " made a guess!");
 	
 	// initialize the array that stores the general progress of the players
 	if( ! document.player ){
@@ -539,22 +534,6 @@ function handle_guess( message, from ){
 		// initialize array if not already present
 		document.player[from] = [];
 	}
-	
-	if( message[0].type_of_guess === 'title' ){
-		if( document.solution[0].title.length === message[0].progress ){
-			// player finished the title!
-			finished_title = true;
-			// save completion status of device to global var
-			document.player[from].finished_title = true; 
-		}
-	} else if ( message[0].type_of_guess === 'artist' ){
-		if( document.solution[0].artist.length === message[0].progress ){
-			// player finished the artist!
-			finished_artist = true;
-			// save completion status of device to global var
-			document.player[from].finished_artist = true; 
-		}
-	} 
 
 	// check if the player already has a guess area
 	guessArea = false;
@@ -567,109 +546,86 @@ function handle_guess( message, from ){
 		// add empty guessArea
 		$("#player-results").append('<div class="single-result" id="player_' + from +'_result"><div class="position_display">1</div><div class="darken_image"></div><img src="http://www.teequilla.com/images/tq/empty-avatar.png"><div class="player_name">' + nickname + '</div></div>');
 	}
-	if( message[0].type_of_guess === 'title' ){
-		$("#player_" + from + "_title").html(message[0].word);
-	} else if ( message[0].type_of_guess === 'artist' ){
-		$("#player_" + from + "_artist").html(message[0].word);
-	} else if ( message[0].type_of_guess === 'full' ){
-		guessTime = (new Date().getTime() - document.startTime);
-		negative_points = Math.round(0.01 * guessTime);
-		
-		actual_points = 300 - negative_points;
-		if(actual_points < 0) actual_points = 0;
-		guessTime = guessTime / 1000;
+	guessTime = (new Date().getTime() - document.startTime);
+	negative_points = Math.round(0.01 * guessTime);
+	
+	actual_points = 300 - negative_points;
+	if(actual_points < 0) actual_points = 0;
+	guessTime = guessTime / 1000;
 
-		url = air_console.getProfilePicture(from, 120);
-		
-		if( message[0].type !== "correctGuess" ){
-			actual_points = 0;
-		}
-		
-		newScore = actual_points;
-		
-		// try selecting current score
-		playerScore = document.playerScores.filter(function(obj){
-			return obj.player === from; 
-		});
-		
-		if( playerScore[0] ){
-			newScore = playerScore[0].score + actual_points;
-			playerScore[0].score = newScore;
-		} else {
-			document.playerScores.push({ player: from, score: newScore });
-		}
-		
-		// send the score to the controller
-		document.score = [];
-		document.score.push({ 
-			type: "score",
-			score: newScore,
-			increase: actual_points,
-		});
-		// send the score to the specific client
-		air_console.message( from, document.score );
-		
-		console.log(document.playerScores);
-		
-		document.playerScores.sort(function(a,b) {
-			if(a.score > b.score){
-				return -1;
-			}
-			if(a.score < b.score){
-				return 1;
-			}
-			return 0;
-		});
-		
-		console.log(document.playerScores);
-		
-		resultArea = $("#player_" + from + "_result");
-		resultArea.find("img").attr("src",url);
-		
-		position = 1;
-		document.playerScores.forEach(function(element){
-			$("#player_" + element.player + "_result").find(".position_display").html(position + ".");
-			position++;
-		});
-		
-		if( message[0].type === "correctGuess" ){
-			resultArea.find(".current_score").html(newScore);
-			resultArea.find(".score_change").html("+ " + actual_points + " Points");
-			resultArea.find(".current_time").html(guessTime + " seconds");
-		} else {
-			resultArea.find(".score_change").html("No Points");
-			resultArea.find(".current_time").html(guessTime + " seconds");
-			actual_points = 0;
-		}
-		document.amount_of_finished_players++;
-		console.log("Currently Connected: " + air_console.getControllerDeviceIds().length);
-		console.log("Amount of finished players: " + document.amount_of_finished_players);
-		// in theory this should play the next song when all connected devices have finished
-		// since a controller can join after the round has started, this is probably a blocker we need to handle
-		if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length){
-			document.roundEndInitiated = true;
-			round_end();
-		}
+	url = air_console.getProfilePicture(from, 120);
+	
+	if( message[0].type !== "correctGuess" ){
+		actual_points = 0;
 	}
 	
-	if( finished_title ){
-		$("#player_" + from + "_title").css('color', 'green');
+	newScore = actual_points;
+	
+	// try selecting current score
+	playerScore = document.playerScores.filter(function(obj){
+		return obj.player === from; 
+	});
+	
+	if( playerScore[0] ){
+		newScore = playerScore[0].score + actual_points;
+		playerScore[0].score = newScore;
 	} else {
-		// reset color
-		$("#player_" + from + "_title").css('color', 'black');
-	}
-	if( finished_artist ){
-		$("#player_" + from + "_artist").css('color', 'green');
-	} else {
-		// reset color
-		$("#player_" + from + "_artist").css('color', 'black');
+		document.playerScores.push({ player: from, score: newScore });
 	}
 	
-	// if global status says both artist and title are guessed correctly, display both of them green
-	if ( document.player[from] && document.player[from].finished_title && document.player[from].finished_artist ){
-		$("#player_" + from + "_title").css('color', 'green');
-		$("#player_" + from + "_artist").css('color', 'green');
+	// send the score to the controller
+	document.score = [];
+	document.score.push({ 
+		type: "score",
+		score: newScore,
+		increase: actual_points,
+	});
+	// send the score to the specific client
+	air_console.message( from, document.score );
+	
+	console.log(document.playerScores);
+	
+	document.playerScores.sort(function(a,b) {
+		if(a.score > b.score){
+			return -1;
+		}
+		if(a.score < b.score){
+			return 1;
+		}
+		return 0;
+	});
+	
+	console.log(document.playerScores);
+	
+	resultArea = $("#player_" + from + "_result");
+	resultArea.find("img").attr("src",url);
+	
+	position = 1;
+	document.playerScores.forEach(function(element){
+		$("#player_" + element.player + "_result").find(".position_display").html(position + ".");
+		position++;
+	});
+	
+	if( message[0].type === "correctGuess" ){
+		resultArea.find(".current_score").html(newScore);
+		resultArea.find(".score_change").html("+ " + actual_points + " Points");
+		resultArea.find(".current_time").html(guessTime + " seconds");
+	} else {
+		resultArea.find(".score_change").html("No Points");
+		resultArea.find(".current_time").html(guessTime + " seconds");
+		actual_points = 0;
 	}
+	document.amount_of_finished_players++;
+	console.log("Currently Connected: " + air_console.getControllerDeviceIds().length);
+	console.log("Amount of finished players: " + document.amount_of_finished_players);
+	// in theory this should play the next song when all connected devices have finished
+	// since a controller can join after the round has started, this is probably a blocker we need to handle
+	if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length){
+		document.roundEndInitiated = true;
+		round_end();
+	}
+	
+	
 }
 </script>
 	

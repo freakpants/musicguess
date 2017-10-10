@@ -229,3 +229,11 @@ body{
 	box-sizing:border-box;
 	padding-bottom:10px;
 }
+
+.wrong-selected{
+	background-color:red;
+}
+
+.correct-selected{
+	background-color:green;
+}

@@ -126,6 +126,14 @@ var air_console = new AirConsole();
 var buy_link = "https://www.apple.com/lae/music/";
 document.maxRound = 25;
 
+// actions to perform when a new controller is connected
+$( document ).ready(function(){
+	// ask the screen for the round amount
+	var command = [];
+	command.push({ type: "request_round_amount" });
+	air_console.message( 0 , command );
+});
+
 function animatethis(targetElement, speed) {
     var scrollWidth = $(targetElement).get(0).scrollWidth;
     var clientWidth = $(targetElement).get(0).clientWidth;
@@ -386,33 +394,26 @@ air_console.onMessage = function(from, data) {
 			$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
 			$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
 			
-			animatethis($('.song_title'), 3000);
-			
-			// wait 2 seconds, then display the correct result including link to buy the song
-			sleep(2000);
-			
-			// hide all guessing buttons
-			$("#guessing_buttons_full").hide();
-			// unhide player result area
-			$("#round_over_song_details").show();
-			//inform player of result
-			$(".player_round_result").html("Correct!");
-			
+			// highlight the correct answer
 			id = $(this).attr("id");
 			$("#guessing_buttons_full ." + id).css('opacity', '1');
 			$("#guessing_buttons_full ." + id).addClass('correct-selected');
 			
-			// unnattach all event handlers so we dont start triggering multiple messages
-			$(".correct").off();
-			$(".wrong").off();
+			// what does this do?
+			animatethis($('.song_title'), 3000);
+			
+			// wait 2 seconds, then display the correct result including link to buy the song
+			sleep(2000).then(() =>{
+				show_result_screen("correct");
+			});
 		});
 
 		// handle wrong multiple choice answer
 		$(".wrong").click(function(){
-			// let the screen know somebody got it right
+			// let the screen know somebody got it wrong
 			console.log("handling wrong guess on controller");
 			var wrongGuess = [];
-			wrongGuess.push({ type: "wrongGuess", type_of_guess: 'full'});
+			wrongGuess.push({ type: "wrongGuess" });
 			air_console.message( 0 , wrongGuess );
 			
 			// grey out the other answers
@@ -421,31 +422,37 @@ air_console.onMessage = function(from, data) {
 			$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
 			$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
 			
-			animatethis($('.song_title'), 3000);
-			
-			// wait 2 seconds, then display the correct result including link to buy the song
-			sleep(2000);
-			
-			// hide all guessing buttons
-			$("#guessing_buttons_full").hide();
-			// unhide player result area
-			$("#round_over_song_details").show();
-			//inform player of result
-			$(".player_round_result").html("Wrong!");
-			
+			// highlight the wrong answer
 			id = $(this).attr("id");
 			$("#guessing_buttons_full ." + id).css('opacity', '1');
 			$("#guessing_buttons_full ." + id).addClass('wrong-selected');
 			
-			// unnattach all event handlers so we dont start triggering multiple messages
-			$(".correct").off();
-			$(".wrong").off();
+			animatethis($('.song_title'), 3000);
+			
+			// wait 2 seconds, then display the correct result including link to buy the song
+			sleep(2000).then(() =>{
+				show_result_screen("wrong");
+			});
 		});
 
 		// display the guessing buttons
 		$("#guessing_buttons_full").show();
 	}
 }
+
+function show_result_screen( type ){			
+	// hide all guessing buttons
+	$("#guessing_buttons_full").hide();
+	// unhide player result area
+	$("#round_over_song_details").show();
+	//inform player of result
+	$(".player_round_result").html(type + "!");	
+	
+	// unnattach all event handlers so we dont start triggering multiple messages
+	$(".correct").off();
+	$(".wrong").off();
+}
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
