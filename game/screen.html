@@ -146,9 +146,8 @@ function start(){
 	// hide playlist selector
 	$("#playlist-selector").hide();
 	
-	
 	// override screen with play area
-	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div><img id="playanimation" src="audio.svg" /></div><div class="debug" id="current_artist"></div><div class="debug" id="current_title"></div><div class="debug" id="current_album"></div><div class="debug" id="current_year"></div><div class="debug" id="current_album_art"></div><div id="current_song_service"></div>');
+	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div><img id="playanimation" src="audio.svg" /></div><div id="current_song_service"></div>');
 	$(".debug").hide();
 	
 	// get list of songs, choose one at random
@@ -261,13 +260,6 @@ function play_random_song(){
 	$("#playanimation").show();
 	
 	$("#current_song_service").html("<div id='disclaimer'>This song is provided by the Itunes Search API Preview</div><div id='get_it_link'><img src='images/itunes.svg' class='itunes' /></div>");
-	$("#current_artist").html(randomSong.artist);
-	$("#current_title").html(randomSong.title);
-	$("#current_album").html(randomSong.album);
-	$("#current_year").html(randomSong.year);
-	
-	
-	// $("#current_album_art").html('<img src="' + randomSong.albumArtRef[0].url + '" />');
 	
 	artist = randomSong.artist;
 	title = randomSong.title;
