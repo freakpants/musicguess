@@ -114,6 +114,10 @@ function calculateRoundTime(){
 	if( document.RoundTime > 0 ){
 		setTimeout(calculateRoundTime, 0);
 	} else if ( document.roundEndInitiated == false ){
+		// time has run out, tell the remaining controllers to also switch to the round over state
+		out_of_time = [];
+		out_of_time.push({ type: "out_of_time" });	
+		air_console.broadcast( out_of_time );
 		document.roundEndInitiated = true;
 		round_end();
 	}

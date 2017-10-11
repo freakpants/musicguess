@@ -125,14 +125,7 @@
 var air_console = new AirConsole();
 var buy_link = "https://www.apple.com/lae/music/";
 document.maxRound = 25;
-
-// actions to perform when a new controller is connected
-$( document ).ready(function(){
-	// ask the screen for the round amount
-	var command = [];
-	command.push({ type: "request_round_amount" });
-	air_console.message( 0 , command );
-});
+document.showing_result_screen = false;
 
 function animatethis(targetElement, speed) {
     var scrollWidth = $(targetElement).get(0).scrollWidth;
@@ -255,6 +248,13 @@ function decrease_check(){
 // Listen for messages from other devices
 air_console.onMessage = function(from, data) {
 	
+	if ( data[0].type === "out_of_time" ){
+		if(! document.showing_result_screen){
+			$(".player_score").html(document.currentScore + " Points (+" + 0 + ")");
+			show_result_screen("Out of time");
+		}
+	}
+	
 	if( data[0].type === "playlist_rounds"){
 		document.maxPlaylistRounds = data[0].playlist_rounds;
 		// when switching playlists, the round amount can be too high, fix this
@@ -280,6 +280,8 @@ air_console.onMessage = function(from, data) {
 	
 	if( data[0].type === "score" ){
 		console.log("received score");
+		// also store the current score for display when out of time 
+		document.currentScore = data[0].score;
 		$(".player_score").html(data[0].score + " Points (+" + data[0].increase + ")");
 	}
 	
@@ -314,7 +316,10 @@ air_console.onMessage = function(from, data) {
 	
 	// analyze data
 	if ( data[0].type === "solution" ){
-		// hide the guessing type selection
+		// switch state back to not displaying the result so we know if we can switch to it or not
+		document.showing_result_screen = false;
+		
+		// hide the menu
 		$("#menu").hide();
 		console.log('received solution');
 		// unnattach all event handlers so we dont start triggering multiple messages 		
@@ -402,6 +407,9 @@ air_console.onMessage = function(from, data) {
 			// what does this do?
 			animatethis($('.song_title'), 3000);
 			
+			// already switch to true, so that we dont get two different result types if we answer in the last 2 seconds
+			document.showing_result_screen = true;
+			
 			// wait 2 seconds, then display the correct result including link to buy the song
 			sleep(2000).then(() =>{
 				show_result_screen("correct");
@@ -429,6 +437,8 @@ air_console.onMessage = function(from, data) {
 			
 			animatethis($('.song_title'), 3000);
 			
+			// already switch to true, so that we dont get two different result types if we answer in the last 2 seconds
+			document.showing_result_screen = true;
 			// wait 2 seconds, then display the correct result including link to buy the song
 			sleep(2000).then(() =>{
 				show_result_screen("wrong");
@@ -440,7 +450,9 @@ air_console.onMessage = function(from, data) {
 	}
 }
 
-function show_result_screen( type ){			
+function show_result_screen( type ){
+	document.showing_result_screen = true;
+			
 	// hide all guessing buttons
 	$("#guessing_buttons_full").hide();
 	// unhide player result area
