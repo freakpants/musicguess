@@ -449,9 +449,6 @@ function sleep(ms) {
 function round_end(){
 	
 	// determine fastest player
-	$("#status").html();
-	
-
 	// clone array for sorting differently
 	fastestPlayers = document.playerScores.slice();
 	
@@ -502,6 +499,7 @@ function round_end(){
 	} else {
 		fastestString = "Nobody guessed correctly!";
 	}
+	// output fastest player to screen
 	$("#status").html(fastestString);
 	console.log(fastestString);
 
