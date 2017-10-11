@@ -447,6 +447,63 @@ function sleep(ms) {
 }
 
 function round_end(){
+	
+	// determine fastest player
+	$("#status").html();
+	
+
+	// clone array for sorting differently
+	fastestPlayers = document.playerScores.slice();
+	
+	fastestPlayers.sort(function(a,b) {
+		if(a.currentGuessTime < b.currentGuessTime){
+			if(a.correct){
+				// place a higher than b
+				return -1;
+			} else if (b.correct){
+				// place b higher than a
+				return 1;
+			} else {
+				// place a higher than b
+				return -1;
+			}
+		}
+		if(a.currentGuessTime > b.currentGuessTime){
+			if(b.correct){
+				// place b higher than a
+				return 1;
+			} else if (a.correct){
+				// place a higher than b
+				return -1;
+			} else {
+				// place b higher than a
+				return 1;
+			}
+		}                      
+		// place and b "equally"
+		if(a.correct && b.correct){
+			return 0;
+		}
+		if(!a.correct && !b.correct){
+			return 0;
+		}
+		if(a.correct){
+			// place a higher than b
+			return -1;	
+		} else {
+			// place b higher than a
+			return 1;
+		}
+		
+	});
+	
+	if(fastestPlayers[0].correct){
+		fastestString = "Fastest player: " + air_console.getNickname(fastestPlayers[0].player) + " with " + fastestPlayers[0].currentGuessTime + " seconds.";
+	} else {
+		fastestString = "Nobody guessed correctly!";
+	}
+	$("#status").html(fastestString);
+	console.log(fastestString);
 
 	// stop animations in progress
 	// $("#player").stop();
@@ -503,6 +560,12 @@ function round_end(){
 						// also reset the startTime of the current Round so we can keep track of how many seconds have passed
 						document.RoundStartTime = new Date().getTime();
 						
+						// reset the guessTime and correct/false for every player in case they dont answer
+						document.playerScores.forEach(function(element){
+							element.correct = false;
+							element.currentGuessTime = 0;
+						});
+						
 						// initiate round time keeptracker
 						document.roundEndInitiated = false;
 						calculateRoundTime();
@@ -551,8 +614,10 @@ function handle_guess( message, from ){
 
 	url = air_console.getProfilePicture(from, 120);
 	
+	correct = true;
 	if( message[0].type !== "correctGuess" ){
 		actual_points = 0;
+		correct = false;
 	}
 	
 	newScore = actual_points;
@@ -565,8 +630,10 @@ function handle_guess( message, from ){
 	if( playerScore[0] ){
 		newScore = playerScore[0].score + actual_points;
 		playerScore[0].score = newScore;
+		playerScore[0].currentGuessTime = guessTime;
+		playerScore[0].correct = correct;
 	} else {
-		document.playerScores.push({ player: from, score: newScore });
+		document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, correct: correct });
 	}
 	
 	// send the score to the controller
