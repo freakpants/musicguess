@@ -516,7 +516,7 @@ function round_end(){
 		
 	});
 	
-	if(typeof fastestPlayers !== 'undefined' && fastestPlayers[0].correct){
+	if(typeof fastestPlayers !== 'undefined' && typeof fastestPlayers[0] !== 'undefined' && fastestPlayers[0].correct){
 		fastestString = "Fastest player: " + air_console.getNickname(fastestPlayers[0].player) + " with " + fastestPlayers[0].currentGuessTime + " seconds.";
 	} else {
 		fastestString = "Nobody guessed correctly!";
