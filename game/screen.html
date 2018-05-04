@@ -112,6 +112,11 @@ function calculateRoundTime(){
 	if( document.RoundTime === 6){
 		$("#player").animate({volume: 0}, 6000);
 	}
+	
+	// if in an active round, since a disconnect isnt registered instantly, keep checking if the round is actually already over
+	if( document.round > 0 && ! document.roundEndInitiated){
+		check_if_all_players_have_guessed();
+	}
 
 	if( document.RoundTime > 0 ){
 		setTimeout(calculateRoundTime, 0);
@@ -695,17 +700,28 @@ function handle_guess( message, from ){
 		resultArea.find(".current_time").html(guessTime + " seconds");
 		actual_points = 0;
 	}
+	
+	// increase the amount of finished players
 	document.amount_of_finished_players++;
+
+	check_if_all_players_have_guessed();	
+}
+
+function check_if_all_players_have_guessed(){
 	console.log("Currently Connected: " + air_console.getControllerDeviceIds().length);
 	console.log("Amount of finished players: " + document.amount_of_finished_players);
+	console.log("Amount of inactive clients: " + document.inactiveClients);
 	// in theory this should play the next song when all connected devices have finished
 	// since a controller can join after the round has started, this is probably a blocker we need to handle
-	if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length){
+	if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length ){
+		document.roundEndInitiated = true;
+		round_end();
+	} 
+	// check if the total is correct when considering inactive players
+	else if ( air_console.getControllerDeviceIds().length === document.amount_of_finished_players + document.inactiveClients )  {
 		document.roundEndInitiated = true;
 		round_end();
 	}
-	
-	
 }
 </script>
 	
