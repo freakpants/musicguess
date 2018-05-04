@@ -3,7 +3,7 @@ body{
 	background-color:#282828;
 }
 
-#guessing_buttons_full{
+#guessing_buttons_full, #waiting_for_next_round{
 	display:none;
 }
 

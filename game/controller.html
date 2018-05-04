@@ -121,11 +121,18 @@
 	</div>
 </div>
 
+<div id="waiting_for_next_round">
+	Please wait for the next round to begin.
+</div>
+
+</div>
+
 <script type="text/javascript">
 var air_console = new AirConsole();
 var buy_link = "https://www.apple.com/lae/music/";
 document.maxRound = 25;
 document.showing_result_screen = false;
+document.currentScore = 0;
 
 function animatethis(targetElement, speed) {
     var scrollWidth = $(targetElement).get(0).scrollWidth;
@@ -248,6 +255,12 @@ function decrease_check(){
 // Listen for messages from other devices
 air_console.onMessage = function(from, data) {
 	
+	if ( data[0].type === "inactive" ){
+		// if there is a round in progress, hide the menu and display the wait message instead
+		$("#menu").hide();
+		$("#waiting_for_next_round").show();
+	}
+	
 	if ( data[0].type === "out_of_time" ){
 		if(! document.showing_result_screen){
 			$(".player_score").html(document.currentScore + " Points (+" + 0 + ")");
@@ -318,6 +331,9 @@ air_console.onMessage = function(from, data) {
 	if ( data[0].type === "solution" ){
 		// switch state back to not displaying the result so we know if we can switch to it or not
 		document.showing_result_screen = false;
+		
+		// hide the waiting_for_next_round message if it was showing
+		$("#waiting_for_next_round").hide();
 		
 		// hide the menu
 		$("#menu").hide();

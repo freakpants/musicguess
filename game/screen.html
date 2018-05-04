@@ -52,6 +52,8 @@ document.maxRound = 25;
 // store current scores of players
 document.playerScores = [];
 
+document.inactiveClients = 0;
+
 $( document ).ready(function(){
 
 	// get the playlists info
@@ -283,11 +285,26 @@ function play_random_song(){
 }
 
 // watch for new controllers connecting
-air_console.onConnect = function( device_id){
+air_console.onConnect = function( device_id ){
 	// let the new controller know how many rounds are currently selected
 	update_selected_rounds_on_controllers();
 	// also inform the new controller of the current limit for the selected playlist
 	update_max_rounds_on_controllers(); 
+	
+	// check if there is currently a round in progress
+	if( document.round > 0 && ! document.roundEndInitiated){
+		// if there is, let the new client know to display the please wait message instead of the menu
+		message = [];
+		message.push({ 
+			type: "inactive"
+		});
+		// send the score to the specific client
+		air_console.message( device_id, message );
+		
+		// store the fact that we have an inactive client in this round
+		document.inactiveClients += 1;
+	}
+	
 };
 
 // Listen for messages from other devices
@@ -494,7 +511,7 @@ function round_end(){
 		
 	});
 	
-	if(fastestPlayers[0].correct){
+	if(typeof fastestPlayers !== 'undefined' && fastestPlayers[0].correct){
 		fastestString = "Fastest player: " + air_console.getNickname(fastestPlayers[0].player) + " with " + fastestPlayers[0].currentGuessTime + " seconds.";
 	} else {
 		fastestString = "Nobody guessed correctly!";
@@ -539,6 +556,8 @@ function round_end(){
 			air_console.broadcast( game_end );
 		} else {
 			// initiate next round
+			// reset the number of inactive clients (clients that connect in this time can play the next round)
+			document.inactiveClients = 0;
 			$(".instruction").html("Get ready for the next round!");
 			$("#status").html("3");
 			sleep(1000).then(() =>{
