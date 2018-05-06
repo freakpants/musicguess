@@ -686,9 +686,6 @@ function handle_guess( message, from ){
 	resultArea.find("img").attr("src",url);
 	
 	position = 1;
-	
-	// 
-	
 	document.playerScores.forEach(function(element){
 		$("#player_" + element.player + "_result").find(".position_display").html(position + ".");
 		
