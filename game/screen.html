@@ -625,7 +625,7 @@ function handle_guess( message, from ){
 		// determine nickname of player
 		nickname = air_console.getNickname( from );
 		// add empty guessArea
-		$("#player-results").append('<div class="single-result" id="player_' + from +'_result"><div class="position_display">1</div><div class="darken_image"></div><img src="http://www.teequilla.com/images/tq/empty-avatar.png"><div class="player_name">' + nickname + '</div></div>');
+		$("#player-results").append('<div class="single-result" id="player_' + from +'_result"><div class="position_display">1</div><div class="darken_image"></div><img src=""><div class="player_name">' + nickname + '</div></div>');
 	}
 	guessTime = (new Date().getTime() - document.startTime);
 	negative_points = Math.round(0.01 * guessTime);
@@ -633,8 +633,6 @@ function handle_guess( message, from ){
 	actual_points = 300 - negative_points;
 	if(actual_points < 0) actual_points = 0;
 	guessTime = guessTime / 1000;
-
-	url = air_console.getProfilePicture(from, 120);
 	
 	correct = true;
 	if( message[0].type !== "correctGuess" ){
@@ -682,6 +680,7 @@ function handle_guess( message, from ){
 	
 	console.log(document.playerScores);
 	
+	url = air_console.getProfilePicture(from, 120);
 	resultArea = $("#player_" + from + "_result");
 	resultArea.find("img").attr("src",url);
 	
