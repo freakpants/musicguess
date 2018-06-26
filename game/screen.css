@@ -1,5 +1,6 @@
 body{
 	background: url("background.svg");
+	overflow:hidden;
 }
 
 .player_name{
@@ -30,8 +31,15 @@ div .position_display{
 	position:absolute;
 	bottom:0px;
 	left:225px;
+	height:170px;
 	overflow:hidden;
 	margin-bottom:-5px;
+}
+
+#results-scrollable{
+	position:relative;
+	display:flex;
+	height:170px;
 }
 
 .single-result{
@@ -39,6 +47,7 @@ div .position_display{
 	width:120px;
 	height:150px;
 	margin:10px;
+	position:relative;
 }
 
 .single-result img{
@@ -53,7 +62,7 @@ div .darken_image{
     width: 120px;
     height: 120px;
     position: absolute;
-    top: 10px;
+    top: 0px;
     border-radius: 60px;
     z-index: 2;
 }
@@ -86,7 +95,8 @@ div .darken_image{
 #roundTime{
 	font-size:160px;
 	position:absolute;
-	left:25px;
+	margin-left:25px;
+	left:0px;
 	bottom:25px;
 	line-height:160px;
 	background-color: rgba(0, 0, 0, 0.6);

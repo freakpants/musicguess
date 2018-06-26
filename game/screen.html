@@ -13,7 +13,9 @@
 </div>
 <div id="playlist-selector"></div>
 <div id="roundTime"></div>
-<div id="player-results"></div>
+<div id="player-results">
+	<div id="results-scrollable"></div>
+</div>
 <audio id="sound-effect-switch" ><source src="sounds/rollover3.wav" type="audio/wav"></audio>
 <audio id="sound-effect-clock" ><source src="sounds/beep-shinymetal.wav" type="audio/wav"></audio>
 <audio id="sound-effect-correct" ><source src="sounds/xylophone_affirm1.wav" type="audio/wav"></audio>
@@ -28,6 +30,9 @@ var air_console = new AirConsole();
 
 // whether or not to display all information
 var debug = false;
+
+// scroll the result areas or not
+document.scroll_results = false;
 
 // variable to store the library in after an initial query
 var library;
@@ -53,6 +58,8 @@ document.maxRound = 25;
 document.playerScores = [];
 
 document.inactiveClients = 0;
+
+document.game_in_progress = false;
 
 $( document ).ready(function(){
 
@@ -130,13 +137,108 @@ function calculateRoundTime(){
 	}
 }
 
+function initiateScrollingCheck(){
+	// check if the guessing area needs to scroll
+	determine_result_area_size();
+	// call the function itself again
+	if( document.game_in_progress ){
+		setTimeout(initiateScrollingCheck, 475);
+	}
+}
+
+document.scroll_in_progress = false;
+document.last_scroll_direction = "left";
+document.last_scroll_ended = new Date().getTime();
+
+function scroll(){
+	currentTime = new Date().getTime();
+	timePassed = Math.floor((currentTime - document.last_scroll_ended) / 1000);
+	
+	if( document.scroll_results && ! document.scroll_in_progress && timePassed >= 1){
+		document.scroll_in_progress = true;
+		scrollTime = 1000 * document.overlapping_result_areas;
+		scrollDistance = $(".single-result").first().outerWidth(true) * -1 * document.overlapping_result_areas;
+		
+		
+		if( document.last_scroll_direction == 'right'){
+			$("#results-scrollable").animate({left: scrollDistance + 'px'}, scrollTime, function(){
+				document.last_scroll_direction = "left";
+				document.scroll_in_progress = false;
+				document.last_scroll_ended = new Date().getTime();
+			});
+		} else {
+			$("#results-scrollable").animate({left: '0px'}, scrollTime, function(){
+				document.last_scroll_direction = "right";
+				document.scroll_in_progress = false;
+				document.last_scroll_ended = new Date().getTime();
+			});
+		}
+		// console.log("scrolling " + scrollDistance + "px for " + scrollTime + " milliseconds.");
+	}
+}
+
+function determine_result_area_size(){
+	// this function checks whether or not we need to make the result area scrollable
+	
+	full_window_width = $( window ).width();
+	// substract the size of the timer
+	available_area_width = full_window_width - $("#roundTime").outerWidth(true);
+	
+	single_result_area_width = $(".single-result").first().outerWidth(true);
+	// console.log("size of one result area: " + single_result_area_width);
+	number_of_possible_result_areas = Math.floor(available_area_width / single_result_area_width);
+	// console.log("amount of result areas that fit onto the screen before scrolling: " + number_of_possible_result_areas);
+	
+	// set the size of the result area so there are no cut off result areas (unless scrolling of course)
+	$("#player-results").width( number_of_possible_result_areas * single_result_area_width );
+	// also set the margins of the result area, so it is centered on the available space
+	results_margin_left = (available_area_width - $("#player-results").width()) / 2;
+	$("#player-results").css('margin-left',results_margin_left+'px')
+	// console.log("margin: " + results_margin_left);
+	
+	number_of_actual_result_areas = $(".single-result").length;
+	// console.log("amount of result areas: " +  number_of_actual_result_areas);
+	
+	document.overlapping_result_areas = number_of_actual_result_areas - number_of_possible_result_areas;
+	
+	// check if a line break is happening
+	if( number_of_actual_result_areas > number_of_possible_result_areas ){
+		// console.log("line break is happening!");
+		// store last amount of overlapping areas for reset purposes
+		document.last_overlap_amount = document.overlapping_result_areas;
+		if( ! document.scroll_in_progress ){
+			document.scroll_results = true;
+			scroll();
+		}
+	} else {
+		// disable the scrolling
+		if( ! document.scroll_in_progress && document.last_scroll_direction == "left" ){
+			document.scroll_in_progress = true;
+			// scroll back to initial position
+			scrollTime = 1000 * document.last_overlap_amount;
+			$("#results-scrollable").animate({left: '0px'}, scrollTime, function(){
+				document.last_scroll_direction = "right";
+				document.scroll_in_progress = false;
+				document.last_scroll_ended = new Date().getTime();
+			});
+		}
+		document.scroll_results = false;
+	}
+	// console.log("size of full window: " + full_window_width);	
+}
+
 function start(){
+
+	document.game_in_progress = true;
+
+	// start the function that keeps initiating the check for the result areas
+	initiateScrollingCheck();
 
 	// reset scores of players
 	document.playerScores = [];
 	
 	// reset guessing areas
-	$("#player-results").html("");
+	$("#results-scrollable").html("");
 	
 	// reset the roundTime again, at the actual start of the round
 	document.RoundTime = document.RoundTimeSetting;
@@ -376,6 +478,7 @@ air_console.onMessage = function(from, message) {
 
 		break;
 		case 'back_to_main':
+			document.game_in_progress = false;
 			$(".instruction").html('<img id="game_logo" src="mg_logo.svg" />');
 			$("#playlist-selector").show();
 			back_to_main = [];
@@ -625,7 +728,7 @@ function handle_guess( message, from ){
 		// determine nickname of player
 		nickname = air_console.getNickname( from );
 		// add empty guessArea
-		$("#player-results").append('<div class="single-result" id="player_' + from +'_result"><div class="position_display">1</div><div class="darken_image"></div><img src=""><div class="player_name">' + nickname + '</div></div>');
+		$("#results-scrollable").append('<div class="single-result" id="player_' + from +'_result"><div class="position_display">1</div><div class="darken_image"></div><img src=""><div class="player_name">' + nickname + '</div></div>');
 	}
 	guessTime = (new Date().getTime() - document.startTime);
 	negative_points = Math.round(0.01 * guessTime);
@@ -689,7 +792,7 @@ function handle_guess( message, from ){
 		$("#player_" + element.player + "_result").find(".position_display").html(position + ".");
 		
 		if( position === 1) {
-			$("#player_" + element.player + "_result").prependTo("#player-results");
+			$("#player_" + element.player + "_result").prependTo("#results-scrollable");
 		} else {
 			// insert after previous element
 			$("#player_" + element.player + "_result").insertAfter( "#player_" + previous_element.player + "_result" );
@@ -715,9 +818,9 @@ function handle_guess( message, from ){
 }
 
 function check_if_all_players_have_guessed(){
-	console.log("Currently Connected: " + air_console.getControllerDeviceIds().length);
-	console.log("Amount of finished players: " + document.amount_of_finished_players);
-	console.log("Amount of inactive clients: " + document.inactiveClients);
+	// console.log("Currently Connected: " + air_console.getControllerDeviceIds().length);
+	// console.log("Amount of finished players: " + document.amount_of_finished_players);
+	// console.log("Amount of inactive clients: " + document.inactiveClients);
 	// in theory this should play the next song when all connected devices have finished
 	// since a controller can join after the round has started, this is probably a blocker we need to handle
 	if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length ){
