@@ -562,9 +562,12 @@ function update_selected_rounds_on_controllers(){
 
 function update_max_rounds_on_controllers(){
 	// also send the current playlist max rounds to the controllers, so it knows when not to increase the count locally
-	playlist_rounds = [];
-	playlist_rounds.push({ type: "playlist_rounds" , playlist_rounds: playlists[document.selectedPlaylist]['amount_of_tracks']});
-	air_console.broadcast(playlist_rounds);
+	if( typeof playlists !== 'undefined' ){
+		// only attempt this is playlists is already initialized (takes some time because the json needs to be fetched first)
+		playlist_rounds = [];
+		playlist_rounds.push({ type: "playlist_rounds" , playlist_rounds: playlists[document.selectedPlaylist]['amount_of_tracks']});
+		air_console.broadcast(playlist_rounds);
+	}
 }
 
 function sleep(ms) {
