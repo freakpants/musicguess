@@ -7,6 +7,10 @@ body{
 	display:none;
 }
 
+#waiting_for_next_round{
+	padding:4em;
+}
+
 #guessing_buttons_full, #menu{
 	padding-left:40px;
 	padding-right:40px;
@@ -20,18 +24,14 @@ body{
 {
 	box-sizing:border-box;
 	width:100%;
-	height:10%;
-	font-size:16px;
+	font-size:15px;
 	color:white;
 	float:left;
 	font-family: 'Roboto', sans-serif;
-	margin: 0 auto;
-	font-weight:bold;
-	margin-bottom:10px;
 	overflow: hidden;
-	padding-left:65px;
-	padding-right:20px;
-	line-height:60px;
+	padding-right:10px;
+	padding-left:10px;
+	line-height:4em;
 	text-overflow: ellipsis;
 	white-space:nowrap;
 }
@@ -135,17 +135,6 @@ body{
 	position:absolute;
 }
 
-.bars-position{
-	top:40px;
-}
-
-.bars{
-	padding-top:13px;
-	padding-left:10px;
-	font-size:20px !important;
-	color:white;
-}
-
 #button_icon{
 	padding:0.4em
 }
@@ -194,10 +183,10 @@ body{
 	padding-bottom:10px;
 }
 
-.wrong-selected{
+.wrong-selected, .wrong-selected div{
 	background-color:red;
 }
 
-.correct-selected{
+.correct-selected, .correct-selected div{
 	background-color:green;
 }

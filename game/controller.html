@@ -79,34 +79,42 @@
 
 
 
-<div id="guessing_buttons_full">		
-	<div class="button_wrapper">
-		<span class="fa-stack fa-lg bars-position">
-			<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-			<i class="fa fa-bars fa-stack-1x bars"></i>
-		</span>
-		<div class="choice_1 unselected" id="choice_1"></div>
+<div id="guessing_buttons_full">	
+	<div class="flexbox" id="choice_1">
+		<div id="button_icon">			
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+				<i class="fa fa-bars fa-stack-1x play_icon"></i>
+			</span>
+		</div>
+		<div class="choice_1 unselected" ></div>
 	</div>
-	<div class="button_wrapper">
-		<span class="fa-stack fa-lg bars-position">
-			<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-			<i class="fa fa-bars fa-stack-1x bars"></i>
-		</span>
-		<div class="choice_2 unselected" id="choice_2"></div>
+	<div class="flexbox" id="choice_2">
+		<div id="button_icon">			
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+				<i class="fa fa-bars fa-stack-1x play_icon"></i>
+			</span>
+		</div>
+		<div class="choice_2 unselected" ></div>
 	</div>
-	<div class="button_wrapper">
-		<span class="fa-stack fa-lg bars-position">
-			<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-			<i class="fa fa-bars fa-stack-1x bars"></i>
-		</span>
-		<div class="choice_3 unselected" id="choice_3"></div>
+	<div class="flexbox" id="choice_3">
+		<div id="button_icon">			
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+				<i class="fa fa-bars fa-stack-1x play_icon"></i>
+			</span>
+		</div>
+		<div class="choice_3 unselected" ></div>
 	</div>
-	<div class="button_wrapper">
-		<span class="fa-stack fa-lg bars-position">
-			<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-			<i class="fa fa-bars fa-stack-1x bars"></i>
-		</span>
-		<div class="choice_4 unselected" id="choice_4"></div>
+	<div class="flexbox" id="choice_4">
+		<div id="button_icon">			
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
+				<i class="fa fa-bars fa-stack-1x play_icon"></i>
+			</span>
+		</div>
+		<div class="choice_4 unselected" ></div>
 	</div>
 	
 </div>
@@ -308,15 +316,15 @@ air_console.onMessage = function(from, data) {
 	
 	if( data[0].type === "game_end" ){
 		console.log("handling game end");
-		$("#guessing_buttons_full .choice_1").css('opacity', '1');
-		$("#guessing_buttons_full .choice_2").css('opacity', '1');
-		$("#guessing_buttons_full .choice_3").css('opacity', '1');
-		$("#guessing_buttons_full .choice_4").css('opacity', '1');
+		$("#guessing_buttons_full #choice_1").css('opacity', '1');
+		$("#guessing_buttons_full #choice_2").css('opacity', '1');
+		$("#guessing_buttons_full #choice_3").css('opacity', '1');
+		$("#guessing_buttons_full #choice_4").css('opacity', '1');
 			
-		$("#guessing_buttons_full .choice_1").removeClass("correct-selected wrong-selected");
-		$("#guessing_buttons_full .choice_2").removeClass("correct-selected wrong-selected");
-		$("#guessing_buttons_full .choice_3").removeClass("correct-selected wrong-selected");
-		$("#guessing_buttons_full .choice_4").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full #choice_1").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full #choice_2").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full #choice_3").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full #choice_4").removeClass("correct-selected wrong-selected");
 		
 		$("#guessing_buttons_full").hide();
 		$("#round_over_song_details").hide();
@@ -361,15 +369,15 @@ air_console.onMessage = function(from, data) {
 		buy_link = data[0].buy_link;
 
 		// reset css on buttons
-		$("#guessing_buttons_full .choice_1").css('opacity', '1');
-		$("#guessing_buttons_full .choice_2").css('opacity', '1');
-		$("#guessing_buttons_full .choice_3").css('opacity', '1');
-		$("#guessing_buttons_full .choice_4").css('opacity', '1');
+		$("#guessing_buttons_full #choice_1").css('opacity', '1');
+		$("#guessing_buttons_full #choice_2").css('opacity', '1');
+		$("#guessing_buttons_full #choice_3").css('opacity', '1');
+		$("#guessing_buttons_full #choice_4").css('opacity', '1');
 		
-		$("#guessing_buttons_full .choice_1").removeClass("correct-selected wrong-selected");
-		$("#guessing_buttons_full .choice_2").removeClass("correct-selected wrong-selected");
-		$("#guessing_buttons_full .choice_3").removeClass("correct-selected wrong-selected");
-		$("#guessing_buttons_full .choice_4").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full #choice_1").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full #choice_2").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full #choice_3").removeClass("correct-selected wrong-selected");
+		$("#guessing_buttons_full #choice_4").removeClass("correct-selected wrong-selected");
 	
 		artist_or_title = data[0].answerType;
 		choices = data[0].wrongAnswers;
@@ -387,7 +395,7 @@ air_console.onMessage = function(from, data) {
 
 		for( var counter = 1; counter < 5; counter++ ){
 			current_choice = choices[counter-1];
-			targetElement = $("#guessing_buttons_full .choice_" + counter);
+			targetElement = $("#guessing_buttons_full #choice_" + counter);
 			targetElement.removeClass("wrong");
 			targetElement.removeClass("correct");
 			if( artist_or_title === 0 ){
@@ -405,7 +413,7 @@ air_console.onMessage = function(from, data) {
 					targetElement.addClass("wrong");
 				}
 			}
-			targetElement.html( current_choice );
+			$(targetElement).find(".unselected").html( current_choice );
 		}
 
 		// handle correct multiple choice answer
@@ -416,17 +424,17 @@ air_console.onMessage = function(from, data) {
 			correctGuess.push({ type: "correctGuess", type_of_guess: 'full'});
 			air_console.message( 0 , correctGuess );
 			
-			// $("#guessing_buttons_full").hide();
 			// grey out the other answers
-			$("#guessing_buttons_full .choice_1").css('opacity', '0.2');
-			$("#guessing_buttons_full .choice_2").css('opacity', '0.2');
-			$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
-			$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
+			$("#guessing_buttons_full #choice_1").css('opacity', '0.2');
+			$("#guessing_buttons_full #choice_2").css('opacity', '0.2');
+			$("#guessing_buttons_full #choice_3").css('opacity', '0.2');
+			$("#guessing_buttons_full #choice_4").css('opacity', '0.2');
 			
 			// highlight the correct answer
 			id = $(this).attr("id");
-			$("#guessing_buttons_full ." + id).css('opacity', '1');
-			$("#guessing_buttons_full ." + id).addClass('correct-selected');
+			console.log("id of element is " + id);
+			$("#guessing_buttons_full #" + id).css('opacity', '1');
+			$("#guessing_buttons_full #" + id).addClass('correct-selected');
 			
 			// what does this do?
 			animatethis($('.song_title'), 3000);
@@ -449,15 +457,16 @@ air_console.onMessage = function(from, data) {
 			air_console.message( 0 , wrongGuess );
 			
 			// grey out the other answers
-			$("#guessing_buttons_full .choice_1").css('opacity', '0.2');
-			$("#guessing_buttons_full .choice_2").css('opacity', '0.2');
-			$("#guessing_buttons_full .choice_3").css('opacity', '0.2');
-			$("#guessing_buttons_full .choice_4").css('opacity', '0.2');
+			$("#guessing_buttons_full #choice_1").css('opacity', '0.2');
+			$("#guessing_buttons_full #choice_2").css('opacity', '0.2');
+			$("#guessing_buttons_full #choice_3").css('opacity', '0.2');
+			$("#guessing_buttons_full #choice_4").css('opacity', '0.2');
 			
 			// highlight the wrong answer
 			id = $(this).attr("id");
-			$("#guessing_buttons_full ." + id).css('opacity', '1');
-			$("#guessing_buttons_full ." + id).addClass('wrong-selected');
+			console.log("id of element is " + id);
+			$("#guessing_buttons_full #" + id).css('opacity', '1');
+			$("#guessing_buttons_full #" + id).addClass('wrong-selected');
 			
 			animatethis($('.song_title'), 3000);
 			
