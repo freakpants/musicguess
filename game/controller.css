@@ -135,41 +135,6 @@ body{
 	position:absolute;
 }
 
-.play_icon{
-	padding-top:13px;
-	padding-left:12px;
-	font-size:20px !important;
-	color:white;
-}
-
-.undo{
-	padding-top:13px;
-	padding-left:11px;
-	font-size:20px !important;
-	color:white;
-}
-
-.forward{
-	padding-top:13px;
-	padding-left:12px;
-	font-size:20px !important;
-	color:white;
-}
-
-.backward{
-	padding-top:13px;
-	padding-left:7px;
-	font-size:20px !important;
-	color:white;
-}
-
-.plus, .minus{
-	padding-top:13px;
-	padding-left:10px;
-	font-size:15px !important;
-	color:white;
-}
-
 .bars-position{
 	top:40px;
 }
@@ -181,39 +146,37 @@ body{
 	color:white;
 }
 
-
-.button_circle{
-	padding-top:8px;
-	padding-left:10px;
-	font-size:50px !important;
-	color:#282828;
+#button_icon{
+	padding:0.4em
 }
 
-#button_icon{
-	height:100%;
-	width:22%;
+.fa-stack{
+	font-size:1.6em !important;
 }
 
 
 .flexbox{
-	height: 11%;
+	height: 4em;
 	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	margin-bottom:5%;
+	margin-bottom:1em;
 }
+
+.vertical-container{
+	width:100%;
+}
+
 .flexbox div {
 	background-color:#424242;
 }
 
 .button_text, .button_comment{
-	width:80%;
+	width:100%;
 	height: 50%;
 	padding-left:10px;
 }
 
 .button_text_reduced, .button_comment_reduced{
-	width:58%;
+	width:100%;
 	height: 50%;
 	padding-left:10px;
 }
