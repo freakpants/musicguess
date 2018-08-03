@@ -288,7 +288,7 @@ function randomIntFromInterval( min, max ){
 function play_random_song(){
 	document.round++;
 	
-	$(".instruction").append(" Round " + document.round);
+	$(".instruction").append(" Round " + document.round + " of " + document.maxRound);
 	
 	randomSongIndex = randomIntFromInterval(0,library.length-1);
 	randomSong = library[randomSongIndex];
