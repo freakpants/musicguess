@@ -51,8 +51,6 @@ body{
 
 #round_over_song_details .result_banner{
 	background-color:#424242;
-	width:100%;
-	height:15%;
 	padding-top:40px;
 	font-size:20px;
 	box-sizing:border-box;
@@ -64,16 +62,14 @@ body{
 #round_over_song_details .image{
 	background-color:#333333;
 	width:100%;
-	position:relative;
-	height:60%;
+	padding-bottom:1em;
 }
 
 #round_over_song_details .text_info{
 	background-color:#424242;
 	width:100%;
-	height:25%;
-	padding-top: 15px;
 	box-sizing:border-box;
+	height:8em;
 }
 
 #round_over_song_details div,
@@ -84,7 +80,9 @@ body{
 }
 
 #round_over_song_details .song_albumart{
-	padding: 40px;
+	padding: 2.5em;
+	padding-top:1em;
+	padding-bottom:1em;
 }
 
 #round_over_song_details .song_artist, 
@@ -130,9 +128,7 @@ body{
 
 .song_buylink{
 	display: flex;
-	align-items: center;
-	width:100%;
-	position:absolute;
+	height:60px;
 }
 
 #button_icon{
