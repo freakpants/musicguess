@@ -420,6 +420,9 @@ air_console.onMessage = function(from, data) {
 
 		// handle correct multiple choice answer
 		$(".correct").click(function(){
+			// disable all buttons
+			disable_guessing_buttons_event_handlers();
+			
 			// let the screen know somebody got it right
 			console.log("handling correct guess on controller");
 			var correctGuess = [];
@@ -452,6 +455,9 @@ air_console.onMessage = function(from, data) {
 
 		// handle wrong multiple choice answer
 		$(".wrong").click(function(){
+			// disable all buttons
+			disable_guessing_buttons_event_handlers();
+		
 			// let the screen know somebody got it wrong
 			console.log("handling wrong guess on controller");
 			var wrongGuess = [];
@@ -494,8 +500,11 @@ function show_result_screen( type ){
 	$("#round_over_song_details").show();
 	//inform player of result
 	$(".player_round_result").html(type + "!");	
-	
+}
+
+function disable_guessing_buttons_event_handlers(){
 	// unnattach all event handlers so we dont start triggering multiple messages
+	console.log("disabling all buttons on controller, because the player guessed.");
 	$(".correct").off();
 	$(".wrong").off();
 }
