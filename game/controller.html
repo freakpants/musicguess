@@ -476,6 +476,12 @@ air_console.onMessage = function(from, data) {
 			$("#guessing_buttons_full #" + id).css('opacity', '1');
 			$("#guessing_buttons_full #" + id).addClass('wrong-selected');
 			
+			// flash the correct answer 
+			console.log("flashing correct answer");
+			$(".correct").addClass('correct-selected');
+			$(".correct").css('opacity', '1');
+			$(".correct").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+			
 			animatethis($('.song_title'), 3000);
 			
 			// already switch to true, so that we dont get two different result types if we answer in the last 2 seconds
