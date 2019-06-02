@@ -647,10 +647,16 @@ function round_end(){
 	$("#player").animate({volume: 0}, 4000);
 	$(".instruction").html("Round is over!");
 	
+
+	
 	sleep(4000).then(() =>{
 		document.amount_of_finished_players = 0;
 		debug = false;
 		$(".debug").hide();
+		
+		// remove correct/wrong classes - we wait for the timer to pass because otherwise the last players result wont get highlighted on the screen
+		$(".darken_image").removeClass("avatar_wrong");
+		$(".darken_image").removeClass("avatar_correct");
 		
 		if( document.round === document.maxRound ){
 			// handle end of game
@@ -808,9 +814,11 @@ function handle_guess( message, from ){
 		resultArea.find(".current_score").html(newScore);
 		resultArea.find(".score_change").html("+ " + actual_points + " Points");
 		resultArea.find(".current_time").html(guessTime + " seconds");
+		resultArea.find(".darken_image").addClass("avatar_correct");
 	} else {
 		resultArea.find(".score_change").html("No Points");
 		resultArea.find(".current_time").html(guessTime + " seconds");
+		resultArea.find(".darken_image").addClass("avatar_wrong");
 		actual_points = 0;
 	}
 	
