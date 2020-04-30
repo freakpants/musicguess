@@ -475,12 +475,14 @@ air_console.onMessage = function(from, message) {
 				document.maxRound = document.maxRound + 1;
 				update_selected_rounds_on_controllers();
 			}
-
 		break;
 		case 'back_to_main':
 			document.game_in_progress = false;
 			$(".instruction").html('<img id="game_logo" src="mg_logo.svg" />');
 			$("#playlist-selector").show();
+			// reset the results area and the round status
+			$("#results-scrollable").html("");
+			$("#status").html("");
 			back_to_main = [];
 			back_to_main.push({ type: "back_to_main"});
 			air_console.broadcast( back_to_main );
