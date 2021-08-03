@@ -24,9 +24,12 @@ div .position_display{
 }
 
 .instruction {
-	/* background-color: rgba(0, 0, 0, 0.2); */
+	background-color: rgba(0, 0, 0, 0.2);
 	padding:20px;
 	width:initial !important;
+}
+.instruction.logo{
+	background-color: unset;
 }
 
 #screen-wrapper{

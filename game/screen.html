@@ -12,7 +12,7 @@
 	
 
 <div id="screen-wrapper">
-	<div class="instruction"><span id="game_logo" >MusicGuess</span></div>
+	<div class="instruction logo"><span id="game_logo" >MusicGuess</span></div>
 </div>
 <div id="playlist-selector"></div>
 <div id="roundTime"></div>
@@ -481,7 +481,7 @@ air_console.onMessage = function(from, message) {
 		break;
 		case 'back_to_main':
 			document.game_in_progress = false;
-			$(".instruction").html('<img id="game_logo" src="mg_logo.svg" />');
+			$(".instruction").html('<span id="game_logo" >MusicGuess</span>');
 			$("#playlist-selector").show();
 			// reset the results area and the round status
 			$("#results-scrollable").html("");
