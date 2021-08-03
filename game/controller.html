@@ -143,6 +143,10 @@
 	Please wait for the next round to begin.
 </div>
 
+<div id="waiting_for_start">
+	Please wait for the master controller to start the game.
+</div>
+
 </div>
 
 <script type="text/javascript">
@@ -184,6 +188,7 @@ function shuffle(a) {
     }
 }
 
+
 $("#start_game").click(function( event ){
 	// instruct the screen to start the game in full word mode
 	var command = [];
@@ -223,7 +228,7 @@ function back_to_main(){
 	$("#previous_playlist").show();	
 	$("#round_change_buttons").show();
 	$("#game_over").hide();
-	$("#menu").show();	
+	check_for_master();
 }
 
 $("#game_over").click(function( event ){
@@ -270,8 +275,35 @@ function decrease_check(){
 	}
 }
 
+function check_for_master(){
+	// determine if we are the Master Controller
+	console.log("master id:" + air_console.getMasterControllerDeviceId());
+	console.log("controller id:" + air_console.getDeviceId());
+	if( air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId()){
+		console.log("master controller! ");
+		$("#menu").show();
+		$("#waiting_for_start").hide();
+	} else {
+		$("#menu").hide();
+		$("#waiting_for_start").show();
+	}
+}
+
+air_console.onDisconnect = function(device_id){
+	console.log("disconnect triggered on controller");
+	check_for_master();
+}
+
+air_console.onConnect = function(device_id){
+	console.log("disconnect triggered on controller");
+	check_for_master();
+}
+
+
 // Listen for messages from other devices
 air_console.onMessage = function(from, data) {
+	
+	console.log("received message " + data[0].type);
 	
 	if ( data[0].type === "inactive" ){
 		// if there is a round in progress, hide the menu and display the wait message instead
@@ -337,7 +369,7 @@ air_console.onMessage = function(from, data) {
 		$("#previous_playlist").hide();	
 		$("#round_change_buttons").hide();
 		$("#game_over").css("display","flex");
-		$("#menu").show();	
+		check_for_master();
 
 		// unnattach all event handlers so we dont start triggering multiple messages 
 		
@@ -355,6 +387,8 @@ air_console.onMessage = function(from, data) {
 		
 		// hide the menu
 		$("#menu").hide();
+		$("#waiting_for_start").hide();
+		
 		console.log('received solution');
 		// unnattach all event handlers so we dont start triggering multiple messages 		
 		$(".correct").off();

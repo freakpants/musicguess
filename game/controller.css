@@ -7,7 +7,7 @@ body{
 	display:none;
 }
 
-#waiting_for_next_round{
+#waiting_for_next_round, #waiting_for_start{
 	padding:4em;
 }
 
@@ -38,6 +38,10 @@ body{
 
 .unselected{
 	background-color:#424242;
+}
+
+#menu, #waiting_for_start{
+	display: none;
 }
 
 #menu .instruction{
