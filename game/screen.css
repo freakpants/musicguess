@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'DiscoFont';
+  src: url('Monoton-Regular.ttf')  format('truetype');
+}
+
 body{
 	background: url("background.svg");
 	overflow:hidden;
@@ -19,7 +24,7 @@ div .position_display{
 }
 
 .instruction {
-	background-color: rgba(0, 0, 0, 0.2);
+	/* background-color: rgba(0, 0, 0, 0.2); */
 	padding:20px;
 	width:initial !important;
 }
@@ -176,8 +181,13 @@ video#bgvid {
     background-size: cover; 
 }
 
-img#game_logo {
-	width:500px;
+#game_logo {
+	font-family: 'DiscoFont';
+	font-size: 115px;
+    background: -webkit-linear-gradient( #1210c5, #10e6a7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 115px;
 }
 
 div#current_song_service #disclaimer, div#current_song_service #get_it_link{
