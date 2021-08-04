@@ -1,10 +1,7 @@
 /*
-cardinal pink #cd1c24
-pale red #e49191
-raw umber brown #783f10
-dark gray #a28b4e
-rodeo dust light gray #c8b29f
-dark green #365e3f
+red #cd1c24
+dark green #025d16
+dark blue #1210c5
 */
 
 @font-face {
@@ -54,11 +51,11 @@ body{
 }
 
 .icon-container.plus{
-	background-color: #e49191;
+	background-color: #1210c5;
 }
 
 .icon-container.minus{
-	background-color: #a28b4e;
+	background-color: #025d16;
 }
 
 #next_playlist .icon-container{
@@ -96,7 +93,7 @@ body{
 }
 
 .vertical-container{
-	background-color: #783f10;
+	background-color: #cd1c24;
 	flex-direction: column;
 }
 
@@ -109,11 +106,11 @@ body{
 }
 
 #next_playlist{
-	background-color: #365e3f;
+	background-color: #025d16;
 }
 
 #previous_playlist{
-	background-color: #c8b29f;
+	background-color: #1210c5;
 }
 
 
