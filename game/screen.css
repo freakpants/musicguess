@@ -1,3 +1,12 @@
+/*
+cardinal pink #cd1c24
+pale red #e49191
+raw umber brown #783f10
+dark gray #a28b4e
+rodeo dust light gray #c8b29f
+dark green #365e3f
+*/
+
 @font-face {
   font-family: 'DiscoFont';
   src: url('Monoton-Regular.ttf')  format('truetype');
@@ -187,7 +196,7 @@ video#bgvid {
 #game_logo {
 	font-family: 'DiscoFont';
 	font-size: 115px;
-    background: -webkit-linear-gradient( #1210c5, #10e6a7);
+    background: -webkit-linear-gradient( #365e3f, #cd1c24);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     line-height: 115px;

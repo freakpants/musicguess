@@ -5,117 +5,92 @@
   <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Georama:wght@800&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="menu">
-	<div class="flexbox" id="start_game">
-		<div id="button_icon">			
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-				<i class="fa fa-play fa-stack-1x play_icon"></i>
-			</span>
-		</div>
-		<div class="vertical-container">
-			<div class="button_text">Start the game</div>
-			<div class="button_comment">Play with current settings</div>
-		</div>
+	<div class="flexbox" id="start_game">		
+		<span class="fa-lg icon-container">
+			<i class="fa fa-play play_icon"></i>
+		</span>
+		<div class="button_text">Start</div>
+		<!-- <div class="button_comment">Play with current settings</div> -->
 	</div>
 
-	<div class="flexbox" id="next_playlist">
-		<div id="button_icon">			
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-				<i class="fa fa-forward fa-stack-1x forward"></i>
-			</span>
-		</div>
-		<div class="vertical-container">
-			<div class="button_text">Next playlist</div>
-			<div class="button_comment">Scroll through awesome music</div>
-		</div>
-	</div>
+
 
 	<div class="flexbox" id="previous_playlist">
-		<div id="button_icon">			
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-				<i class="fa fa-backward fa-stack-1x backward"></i>
+					
+			<span class="fa-lg icon-container">
+				<i class="fa fa-backward backward"></i>
 			</span>
-		</div>
-		<div class="vertical-container">
-			<div class="button_text">Previous playlist</div>
-			<div class="button_comment">Same, but different</div>
-		</div>
+		
+		<div class="button_text">Last</div>
+		<!-- <div class="button_comment">Same, but different</div> -->
 	</div>
 	
-	<div class="flexbox" id="round_change_buttons">
-		<div id="button_icon" class="decrease_rounds">			
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-				<i class="fa fa-minus fa-stack-1x minus"></i>
+		<div class="flexbox" id="next_playlist">
+					
+			<span class="fa-lg icon-container">
+				<i class="fa fa-forward forward"></i>
 			</span>
+		
+		<div class="button_text">Next</div>
+		<!-- <div class="button_comment">Scroll through awesome music</div> -->
+	</div>
+	
+	<div id="round_change_buttons">
+				
+		<span class="fa-lg icon-container minus decrease_rounds">
+			<i class="fa fa-minus minus"></i>
+		</span>
+		
+		<div class="vertical-container" >
+			<span id="round_amount">25</span>
+			<span>rounds</span>
 		</div>
-		<div class="vertical-container">
-			<div class="button_text_reduced" id="round_amount">25 rounds</div>
-			<div class="button_comment_reduced">more/less rounds</div>
-		</div>
-		<div id="button_icon" class="increase_rounds">			
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-				<i class="fa fa-plus fa-stack-1x plus"></i>
-			</span>
-		</div>
+				
+		<span class="fa-lg icon-container plus increase_rounds">
+			<i class="fa fa-plus plus"></i>
+		</span>
 	</div>
 	<div class="flexbox" id="game_over">
-		<div id="button_icon">			
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-				<i class="fa fa-undo fa-stack-1x undo"></i>
+				
+			<span class="fa-lg icon-container">
+				<i class="fa fa-undo  undo"></i>
 			</span>
-		</div>
-		<div class="vertical-container">
+		
 			<div class="button_text">Return to main menu</div>
-			<div class="button_comment">Return to the options</div>
-		</div>
 	</div>
 </div>
 
 
 
 <div id="guessing_buttons_full">	
-	<div class="flexbox" id="choice_1">
-		<div id="button_icon">			
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-				<i class="fa fa-bars fa-stack-1x play_icon"></i>
-			</span>
-		</div>
-		<div class="choice_1 unselected" ></div>
+	<div id="choice_1" class="choice_container unselected">		
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-bars "></i>
+		</span>
+		<div class="choice_1 unselected" >Text Text Text Text Text Text Text Text Text</div>
 	</div>
-	<div class="flexbox" id="choice_2">
-		<div id="button_icon">			
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-				<i class="fa fa-bars fa-stack-1x play_icon"></i>
-			</span>
-		</div>
+		<div id="choice_2" class="choice_container unselected">		
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-bars "></i>
+		</span>
 		<div class="choice_2 unselected" ></div>
 	</div>
-	<div class="flexbox" id="choice_3">
-		<div id="button_icon">			
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-				<i class="fa fa-bars fa-stack-1x play_icon"></i>
-			</span>
-		</div>
+		<div id="choice_3" class="choice_container unselected">		
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-bars "></i>
+		</span>
 		<div class="choice_3 unselected" ></div>
 	</div>
-	<div class="flexbox" id="choice_4">
-		<div id="button_icon">			
-			<span class="fa-stack fa-lg">
-				<i class="fa fa-circle fa-stack-2x button_circle" style="color:#282828"></i>
-				<i class="fa fa-bars fa-stack-1x play_icon"></i>
-			</span>
-		</div>
+		<div id="choice_4" class="choice_container unselected">		
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-bars "></i>
+		</span>
 		<div class="choice_4 unselected" ></div>
 	</div>
 	
@@ -215,7 +190,7 @@ $(".decrease_rounds").click(function( event ){
 		document.maxRound = document.maxRound - 1;
 		decrease_check();
 		
-		$("#round_amount").html(document.maxRound + " Rounds");
+		$("#round_amount").html(document.maxRound);
 		var command = [];
 		command.push({ type: "decrease_rounds" });
 		air_console.message( 0 , command );
@@ -245,7 +220,7 @@ $(".increase_rounds").click(function( event ){
 		document.maxRound = document.maxRound + 1;
 		increase_check();
 		
-		$("#round_amount").html(document.maxRound + " Rounds");
+		$("#round_amount").html(document.maxRound);
 		var command = [];
 		command.push({ type: "increase_rounds" });
 		air_console.message( 0 , command );
@@ -281,7 +256,7 @@ function check_for_master(){
 	console.log("controller id:" + air_console.getDeviceId());
 	if( air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId()){
 		console.log("master controller! ");
-		$("#menu").show();
+		$("#menu").css("display", "flex");
 		$("#waiting_for_start").hide();
 	} else {
 		$("#menu").hide();
@@ -324,7 +299,7 @@ air_console.onMessage = function(from, data) {
 		// when switching playlists, the round amount can be too high, fix this
 		if( document.maxRound > document.maxPlaylistRounds ) {
 			document.maxRound = document.maxPlaylistRounds;
-			$("#round_amount").html(document.maxRound + " Rounds");
+			$("#round_amount").html(document.maxRound);
 		}
 		decrease_check();
 		increase_check();
@@ -337,7 +312,7 @@ air_console.onMessage = function(from, data) {
 
 	if( data[0].type === "round_change" ){
 		document.maxRound = data[0].maxRound;
-		$("#round_amount").html(document.maxRound + " Rounds");
+		$("#round_amount").html(document.maxRound);
 		decrease_check();
 		increase_check();
 	}

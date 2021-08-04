@@ -1,3 +1,17 @@
+/*
+cardinal pink #cd1c24
+pale red #e49191
+raw umber brown #783f10
+dark gray #a28b4e
+rodeo dust light gray #c8b29f
+dark green #365e3f
+*/
+
+@font-face {
+  font-family: 'DiscoFont';
+  src: url('Monoton-Regular.ttf')  format('truetype');
+}
+
 body{
 	margin:0px;
 	background-color:#282828;
@@ -11,33 +25,134 @@ body{
 	padding:4em;
 }
 
-#guessing_buttons_full, #menu{
-	padding-left:40px;
-	padding-right:40px;
-	margin-top:40px;
+#guessing_buttons_full .choice_container{
+	width: 100vw;
+	height: 25vh;
+	display: flex;
+    align-items: center;
 }
 
-#guessing_buttons_full .choice_1, 
-#guessing_buttons_full .choice_2, 
-#guessing_buttons_full .choice_3, 
-#guessing_buttons_full .choice_4
+#guessing_buttons_full .choice_container div{
+	display: flex;
+	height: 100%;
+	align-items: center;
+	padding: 15px;
+	overflow: hidden;
+}
+
+#menu{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    flex-wrap: wrap;	
+	position: relative;
+}
+
+.icon-container{
+	left: 10vw;
+    position: absolute;
+}
+
+.icon-container.plus{
+	background-color: #e49191;
+}
+
+.icon-container.minus{
+	background-color: #a28b4e;
+}
+
+#next_playlist .icon-container{
+	left: unset;
+	right: 1vw;
+}
+
+#previous_playlist .icon-container{
+	left: 1vw;
+}
+
+#round_change_buttons{
+	display: flex;
+	height: 33.333333vh;
+}
+
+#round_change_buttons .icon-container{
+	position: relative;
+	left: unset;
+}
+
+.fa.fa{
+	font-size: 2em;
+}
+
+#start_game,#round_change_buttons{
+	width: 100vw;
+}
+
+#round_change_buttons .icon-container, #round_change_buttons .vertical-container{
+	width: 33.33333%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.vertical-container{
+	background-color: #783f10;
+	flex-direction: column;
+}
+
+.vertical-container span{
+	line-height: 1;
+}
+
+#start_game{
+	background-color: #cd1c24;
+}
+
+#next_playlist{
+	background-color: #365e3f;
+}
+
+#previous_playlist{
+	background-color: #c8b29f;
+}
+
+
+#guessing_buttons_full{
+	width: 100vw;
+	height: 100vh;
+}
+
+#guessing_buttons_full .choice_container
 {
 	box-sizing:border-box;
 	width:100%;
 	font-size:15px;
 	color:white;
 	float:left;
-	font-family: 'Roboto', sans-serif;
+	font-family: Georama;
+    text-transform: uppercase;
 	overflow: hidden;
-	padding-right:10px;
-	padding-left:10px;
-	line-height:4em;
 	text-overflow: ellipsis;
-	white-space:nowrap;
 }
 
-.unselected{
-	background-color:#424242;
+#guessing_buttons_full .fa-stack{
+	padding: 1em;
+}
+
+#guessing_buttons_full .choice_1, #guessing_buttons_full #choice_1{
+	background-color: #e49191;
+}
+
+#guessing_buttons_full .choice_2, #guessing_buttons_full #choice_2{
+	background-color: #c8b29f;
+}
+
+#guessing_buttons_full .choice_3, #guessing_buttons_full #choice_3{
+	background-color: #783f10;
+}
+
+#guessing_buttons_full .choice_4, #guessing_buttons_full #choice_4{
+	background-color: #a28b4e;
 }
 
 #menu, #waiting_for_start{
@@ -50,6 +165,25 @@ body{
 
 #round_over_song_details, #game_over{
 	display:none;
+}
+
+#game_over .icon-container{
+	display: contents;
+	width: 100%;
+}
+
+#game_over .button_text{
+	width: 100%;
+	position: relative;
+	margin-top: 30px;
+}
+
+#game_over{
+	width: 100vw;
+    height: 100vh;
+	background-color: #cd1c24;
+	display:flex;
+	flex-direction:column;
 }
 
 
@@ -135,45 +269,37 @@ body{
 	height:60px;
 }
 
-#button_icon{
-	padding:0.4em
-}
-
 .fa-stack{
 	font-size:1.6em !important;
 }
 
 
 .flexbox{
-	height: 4em;
 	display: flex;
-	margin-bottom:1em;
+	height: 33.3333333vh;
+	width: 50vw;
+	justify-content: center;
+	align-items: center;
+	position: relative;
 }
 
-.vertical-container{
-	width:100%;
-}
-
-.flexbox div {
-	background-color:#424242;
-}
-
-.button_text, .button_comment{
+.button_comment{
 	width:100%;
 	height: 50%;
 	padding-left:10px;
 }
 
-.button_text_reduced, .button_comment_reduced{
-	width:100%;
-	height: 50%;
-	padding-left:10px;
+.button_text, .vertical-container{
+	font-family: Oswald;
+    text-transform: uppercase;
+    font-size: 2em;
+	transform: uppercase;
 }
-
-.button_text,.button_text_reduced{
-	font-size:15px;
-	padding-top:10px;
-	box-sizing:border-box;
+.button_text{
+	width: 75%;
+	display: flex;
+	justify-content: center;
+	position: absolute;
 }
 
 .button_comment, .button_comment_reduced{
@@ -183,10 +309,10 @@ body{
 	padding-bottom:10px;
 }
 
-.wrong-selected, .wrong-selected div{
+#guessing_buttons_full#guessing_buttons_full .wrong-selected.wrong-selected, #guessing_buttons_full#guessing_buttons_full .wrong-selected div{
 	background-color:red;
 }
 
-.correct-selected, .correct-selected div{
+#guessing_buttons_full#guessing_buttons_full .correct-selected.correct-selected, #guessing_buttons_full#guessing_buttons_full .correct-selected div{
 	background-color:green;
 }
