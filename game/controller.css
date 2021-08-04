@@ -2,6 +2,7 @@
 red #cd1c24
 dark green #025d16
 dark blue #1210c5
+gray #c8b29f
 */
 
 @font-face {
@@ -123,7 +124,7 @@ body{
 {
 	box-sizing:border-box;
 	width:100%;
-	font-size:15px;
+	font-size:1.4em;
 	color:white;
 	float:left;
 	font-family: Georama;
@@ -136,20 +137,23 @@ body{
 	padding: 1em;
 }
 
+
 #guessing_buttons_full .choice_1, #guessing_buttons_full #choice_1{
-	background-color: #e49191;
+	background-color: #1210c5;
 }
 
 #guessing_buttons_full .choice_2, #guessing_buttons_full #choice_2{
 	background-color: #c8b29f;
+	color:black;
 }
 
 #guessing_buttons_full .choice_3, #guessing_buttons_full #choice_3{
-	background-color: #783f10;
+	background-color: #1210c5;
 }
 
 #guessing_buttons_full .choice_4, #guessing_buttons_full #choice_4{
-	background-color: #a28b4e;
+	background-color: #c8b29f;
+	color:black;
 }
 
 #menu, #waiting_for_start{
