@@ -147,7 +147,12 @@
 				air_console.broadcast(out_of_time);
 				document.roundEndInitiated = true;
 				air_console.showAd();
-				round_end();
+				sleep(1000).then(() => {
+					if(!document.ad_showing){
+						console.log("no ad is showing, ending round");
+						round_end();
+					}
+				});
 			}
 		}
 
@@ -279,7 +284,7 @@
 				.done(function (msg) {
 					library = msg;
 					library_copy_for_wrong_answers = library.slice();
-					console.log(library);
+					// console.log(library);
 					console.log("playing random song for the first time");
 					play_random_song();
 				});
@@ -320,7 +325,7 @@
 				suitable_wrong_answer = true;
 				wrongSongIndex = randomIntFromInterval(0, library_copy_for_wrong_answers.length - 1);
 
-				console.log("wrong song index " + wrongSongIndex);
+				// console.log("wrong song index " + wrongSongIndex);
 
 				wrongSong = library_copy_for_wrong_answers[wrongSongIndex];
 				if (artist_or_title === 0) {
@@ -363,10 +368,10 @@
 				}
 			}
 
-			console.log("array of wrong answers" + wrong_answers_array);
+			// console.log("array of wrong answers" + wrong_answers_array);
 
-			console.log("playing song " + randomSongIndex + " in library");
-			console.log(randomSong);
+			// console.log("playing song " + randomSongIndex + " in library");
+			// console.log(randomSong);
 
 			// remove previous player
 			$("#player").remove();
@@ -433,7 +438,7 @@
 		air_console.onMessage = function (from, message) {
 			// handle message
 			var type = message[0].type;
-			console.log('handling ' + type + ' message.');
+			// console.log('handling ' + type + ' message.');
 
 			switch (type) {
 				case 'startGame':
@@ -510,9 +515,9 @@
 		};
 
 		function switch_playlist(type) {
-			console.log("Handling switch of playlist to " + type);
-			console.log("all playlists:");
-			console.log(playlists);
+			// console.log("Handling switch of playlist to " + type);
+			// console.log("all playlists:");
+			// console.log(playlists);
 
 			document.getElementById("sound-effect-switch").play();
 
@@ -571,7 +576,7 @@
 
 			update_max_rounds_on_controllers();
 
-			console.log("newly selected playlist" + document.selectedPlaylist);
+			// console.log("newly selected playlist" + document.selectedPlaylist);
 
 		}
 		function update_selected_rounds_on_controllers() {
@@ -598,11 +603,15 @@
 
 		air_console.onAdShow = function () {
 			console.log("ad has started showing");
+			// turn volume down
+			$("#player").prop("volume", 0);
 			document.ad_showing = true;
 		};
 
 		air_console.onAdComplete = function (ad_was_shown) {
 			if (ad_was_shown) {
+				// turn volume back up
+				$("#player").prop("volume", document.musicVolume);
 				console.log("ad was completed, initiate round end");
 				document.ad_showing = false;
 				round_end();
@@ -612,7 +621,7 @@
 		function round_end() {
 
 
-
+			console.log("round end function was called");
 			if (document.ad_showing) {
 				console.log("there is already an ad showing, quitting out of round_end");
 				return;
@@ -671,7 +680,7 @@
 			}
 			// output fastest player to screen
 			$("#status").html(fastestString);
-			console.log(fastestString);
+			// console.log(fastestString);
 
 			// stop animations in progress
 			// $("#player").stop();
@@ -708,7 +717,7 @@
 					$(".instruction").html("Game Over!");
 					// set roundTime extra high so the end doesnt happen more than once
 					document.RoundTime = -10;
-					console.log("game over");
+					// console.log("game over");
 
 					$("#current_song_service").hide();
 
@@ -761,7 +770,7 @@
 
 		function handle_guess(message, from) {
 
-			console.log("Player " + from + " made a guess!");
+			// console.log("Player " + from + " made a guess!");
 
 			// initialize the array that stores the general progress of the players
 			if (!document.player) {
@@ -824,7 +833,7 @@
 			// send the score to the specific client
 			air_console.message(from, document.score);
 
-			console.log(document.playerScores);
+			// console.log(document.playerScores);
 
 			document.playerScores.sort(function (a, b) {
 				if (a.score > b.score) {
@@ -836,7 +845,7 @@
 				return 0;
 			});
 
-			console.log(document.playerScores);
+			// console.log(document.playerScores);
 
 			url = air_console.getProfilePicture(from, 120);
 			resultArea = $("#player_" + from + "_result");
@@ -897,7 +906,13 @@
 			else if (air_console.getControllerDeviceIds().length === document.amount_of_finished_players + document.inactiveClients) {
 				document.roundEndInitiated = true;
 				air_console.showAd();
-				round_end();
+				// only initiate round end if no ad is showing (wait a second to give show ad a chance to be called)
+				sleep(1000).then(() => {
+					if(!document.ad_showing){
+						console.log("no ad is showing, ending round");
+						round_end();
+					}
+				});
 			}
 		}
 	</script>

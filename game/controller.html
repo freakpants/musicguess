@@ -252,10 +252,10 @@ function decrease_check(){
 
 function check_for_master(){
 	// determine if we are the Master Controller
-	console.log("master id:" + air_console.getMasterControllerDeviceId());
-	console.log("controller id:" + air_console.getDeviceId());
+	// console.log("master id:" + air_console.getMasterControllerDeviceId());
+	// console.log("controller id:" + air_console.getDeviceId());
 	if( air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId()){
-		console.log("master controller! ");
+		// console.log("master controller! ");
 		$("#menu").css("display", "flex");
 		$("#waiting_for_start").hide();
 	} else {
@@ -265,12 +265,12 @@ function check_for_master(){
 }
 
 air_console.onDisconnect = function(device_id){
-	console.log("disconnect triggered on controller");
+	// console.log("disconnect triggered on controller");
 	check_for_master();
 }
 
 air_console.onConnect = function(device_id){
-	console.log("disconnect triggered on controller");
+	// console.log("disconnect triggered on controller");
 	check_for_master();
 	// nothing
 }
@@ -279,7 +279,7 @@ air_console.onConnect = function(device_id){
 // Listen for messages from other devices
 air_console.onMessage = function(from, data) {
 	
-	console.log("received message " + data[0].type);
+	// console.log("received message " + data[0].type);
 	
 	if ( data[0].type === "inactive" ){
 		// if there is a round in progress, hide the menu and display the wait message instead
@@ -318,14 +318,14 @@ air_console.onMessage = function(from, data) {
 	}
 	
 	if( data[0].type === "score" ){
-		console.log("received score");
+		// console.log("received score");
 		// also store the current score for display when out of time 
 		document.currentScore = data[0].score;
 		$(".player_score").html(data[0].score + " Points (+" + data[0].increase + ")");
 	}
 	
 	if( data[0].type === "game_end" ){
-		console.log("handling game end");
+		// console.log("handling game end");
 		$("#guessing_buttons_full #choice_1").css('opacity', '1');
 		$("#guessing_buttons_full #choice_2").css('opacity', '1');
 		$("#guessing_buttons_full #choice_3").css('opacity', '1');
@@ -365,7 +365,7 @@ air_console.onMessage = function(from, data) {
 		$("#menu").hide();
 		$("#waiting_for_start").hide();
 		
-		console.log('received solution');
+		// console.log('received solution');
 		// unnattach all event handlers so we dont start triggering multiple messages 		
 		$(".correct").off();
 		$(".wrong").off();
@@ -393,7 +393,7 @@ air_console.onMessage = function(from, data) {
 	
 		artist_or_title = data[0].answerType;
 		choices = data[0].wrongAnswers;
-		console.log(choices);
+		// console.log(choices);
 		if( artist_or_title === 0 ){
 			// add artist to array of choices
 			choices.push( data[0].artist );
@@ -403,7 +403,7 @@ air_console.onMessage = function(from, data) {
 		}
 
 		shuffle(choices);
-		console.log( "choices: " + choices );
+		// console.log( "choices: " + choices );
 
 		for( var counter = 1; counter < 5; counter++ ){
 			current_choice = choices[counter-1];
@@ -434,7 +434,7 @@ air_console.onMessage = function(from, data) {
 			disable_guessing_buttons_event_handlers();
 			
 			// let the screen know somebody got it right
-			console.log("handling correct guess on controller");
+			// console.log("handling correct guess on controller");
 			var correctGuess = [];
 			correctGuess.push({ type: "correctGuess", type_of_guess: 'full'});
 			air_console.message( 0 , correctGuess );
@@ -447,7 +447,7 @@ air_console.onMessage = function(from, data) {
 			
 			// highlight the correct answer
 			id = $(this).attr("id");
-			console.log("id of element is " + id);
+			// console.log("id of element is " + id);
 			$("#guessing_buttons_full #" + id).css('opacity', '1');
 			$("#guessing_buttons_full #" + id).addClass('correct-selected');
 			
@@ -469,7 +469,7 @@ air_console.onMessage = function(from, data) {
 			disable_guessing_buttons_event_handlers();
 		
 			// let the screen know somebody got it wrong
-			console.log("handling wrong guess on controller");
+			// console.log("handling wrong guess on controller");
 			var wrongGuess = [];
 			wrongGuess.push({ type: "wrongGuess" });
 			air_console.message( 0 , wrongGuess );
@@ -482,12 +482,12 @@ air_console.onMessage = function(from, data) {
 			
 			// highlight the wrong answer
 			id = $(this).attr("id");
-			console.log("id of element is " + id);
+			// console.log("id of element is " + id);
 			$("#guessing_buttons_full #" + id).css('opacity', '1');
 			$("#guessing_buttons_full #" + id).addClass('wrong-selected');
 			
 			// flash the correct answer 
-			console.log("flashing correct answer");
+			// console.log("flashing correct answer");
 			$(".correct").addClass('correct-selected');
 			$(".correct").css('opacity', '1');
 			$(".correct").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
@@ -520,7 +520,7 @@ function show_result_screen( type ){
 
 function disable_guessing_buttons_event_handlers(){
 	// unnattach all event handlers so we dont start triggering multiple messages
-	console.log("disabling all buttons on controller, because the player guessed.");
+	// console.log("disabling all buttons on controller, because the player guessed.");
 	$(".correct").off();
 	$(".wrong").off();
 }
