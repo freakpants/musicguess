@@ -168,6 +168,11 @@ body{
 	display:none;
 }
 
+#round_over_song_details{
+	flex-direction: column;
+    height: 100vh;
+}
+
 #game_over .icon-container{
 	display: contents;
 	width: 100%;
@@ -190,38 +195,40 @@ body{
 
 #round_over_song_details .result_banner{
 	background-color:#424242;
-	padding-top:40px;
-	font-size:20px;
-	box-sizing:border-box;
-	overflow:hidden;
-	padding-left:40px;
-	padding-right:40px;
+	font-size: 1em;
+	display:flex;
+	height: 15vh;
 }
 
 #round_over_song_details .image{
 	background-color:#333333;
 	width:100%;
-	padding-bottom:1em;
+	height: 85vh;
+	display: flex;
+	flex-direction: column;
+	position: relative;
 }
 
 #round_over_song_details .text_info{
 	background-color:#424242;
 	width:100%;
-	box-sizing:border-box;
-	height:8em;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
 }
 
-#round_over_song_details div,
 #round_over_song_details .song_albumart{
+	width: 100vw;
+    height: 100vw;
+    position: relative;
+	background-size: contain;
+	background-repeat: no-repeat;
+    background-position: center;
+}
+
+#round_over_song_details div{
 	justify-content: center;
 	align-items: center;
-
-}
-
-#round_over_song_details .song_albumart{
-	padding: 2.5em;
-	padding-top:1em;
-	padding-bottom:1em;
 }
 
 #round_over_song_details .song_artist, 
@@ -233,14 +240,14 @@ body{
 }
 
 #round_over_song_details .song_title{
-	font-size:30px;
+	font-size: 1em;
 	overflow-x: scroll;
 	white-space: nowrap; 
 }
 
 #round_over_song_details .song_album,
 #round_over_song_details .song_artist{
-	font-size:25px;
+	font-size: 0.75em;
 	color:#A8A8A8;
 	overflow-x: scroll;
 	white-space: nowrap; 
@@ -258,16 +265,23 @@ body{
 
 #round_over_song_details .player_score, #round_over_song_details .player_round_result{
 	display:inline;
+	padding: 0.5em;
 }
 
 .itunes{
-	width:160px;
-	position:absolute;
+	width: 50vw;
+	height: 19vw;
+	background: url("images/itunes.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
 }
 
 .song_buylink{
 	display: flex;
-	height:60px;
+	width:100%;
+	position: absolute;
+	bottom: 0.5em;
 }
 
 .fa-stack{

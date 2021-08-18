@@ -102,16 +102,19 @@
 		<div class="player_score"></div>
 	</div>
 	<div class="image">
-		<div class="song_albumart"></div>
-		<div class="song_buylink">
-			<img src='images/itunes.svg' class='itunes' onclick="air_console.openExternalUrl(buy_link)"/>
+		<div class="song_albumart" onclick="air_console.openExternalUrl(buy_link)">
+			<div class="song_buylink">
+				<div class='itunes'></div>
+			</div>
+
+		</div>
+		<div class="text_info">
+			<div class="song_title"></div>
+			<div class="song_album"></div>
+			<div class="song_artist"></div>
 		</div>
 	</div>
-	<div class="text_info">
-		<div class="song_title"></div>
-		<div class="song_album"></div>
-		<div class="song_artist"></div>
-	</div>
+
 </div>
 
 <div id="waiting_for_next_round">
@@ -377,7 +380,8 @@ air_console.onMessage = function(from, data) {
 		$(".song_artist").html(data[0].artist);
 		$(".song_title").html(data[0].title);
 		$(".song_album").html(data[0].album);
-		$(".song_albumart").html('<img src="' + data[0].album_art + '" />');
+		$(".song_albumart").css('background-image', 'url(' + data[0].album_art + ')');
+
 		buy_link = data[0].buy_link;
 
 		// reset css on buttons
@@ -513,7 +517,7 @@ function show_result_screen( type ){
 	// hide all guessing buttons
 	$("#guessing_buttons_full").hide();
 	// unhide player result area
-	$("#round_over_song_details").show();
+	$("#round_over_song_details").css("display", "flex");
 	//inform player of result
 	$(".player_round_result").html(type + "!");	
 }
