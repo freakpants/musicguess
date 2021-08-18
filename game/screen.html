@@ -63,6 +63,7 @@ document.playerScores = [];
 document.inactiveClients = 0;
 
 document.game_in_progress = false;
+document.ad_showing = false;
 
 $( document ).ready(function(){
 
@@ -136,6 +137,7 @@ function calculateRoundTime(){
 		out_of_time.push({ type: "out_of_time" });	
 		air_console.broadcast( out_of_time );
 		document.roundEndInitiated = true;
+		air_console.showAd();
 		round_end();
 	}
 }
@@ -579,7 +581,25 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+
+air_console.onAdShow = function() {
+	document.ad_showing = true;
+};
+
+air_console.onAdComplete = function(ad_was_shown) {
+    if (ad_was_shown) {
+      document.ad_showing = false;
+	  round_end();
+    }
+  };
+
 function round_end(){
+
+	
+
+	if(document.ad_showing){
+		return;
+	}
 	
 	// determine fastest player
 	// clone array for sorting differently
@@ -655,6 +675,9 @@ function round_end(){
 
 	
 	sleep(4000).then(() =>{
+	
+
+	
 		document.amount_of_finished_players = 0;
 		debug = false;
 		$(".debug").hide();
@@ -841,11 +864,13 @@ function check_if_all_players_have_guessed(){
 	// since a controller can join after the round has started, this is probably a blocker we need to handle
 	if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length ){
 		document.roundEndInitiated = true;
+		air_console.showAd();
 		round_end();
 	} 
 	// check if the total is correct when considering inactive players
 	else if ( air_console.getControllerDeviceIds().length === document.amount_of_finished_players + document.inactiveClients )  {
 		document.roundEndInitiated = true;
+		air_console.showAd();
 		round_end();
 	}
 }
