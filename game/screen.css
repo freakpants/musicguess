@@ -41,9 +41,6 @@ div .position_display{
 	background-color: unset;
 }
 
-#screen-wrapper{
-}
-
 #player-results{
 	position:absolute;
 	bottom:0px;
@@ -150,31 +147,44 @@ div .avatar_wrong{
 
 #playlist-selector .album_art{
 	float:left;
-	width:200px;
-	min-width:200px;
-	background:#0688fa;
+	min-width: 11vw;
+	background:rgb(232 130 45);
 	margin-left:10px;
-	height:320px;
+	height:100%;
+	min-height: 33vh;
+	font-size: 0.5em;
+}
+
+#playlist-selector .album_art img{
+	width: 5.5vw;
+	height: 5.5vw;
 }
 
 #playlist-selector .album_art.active{
-	background:#0c0b52;
-	min-width:400px;
-	height:550px;
+	background:rgb(181 29 5);
+	min-width: 22vw;
+	height: 100%;
+	font-size: 1.1em;
 }
 
 #playlist-selector .album_art.active img{
-	width:200px;
-	height:200px;
+	width: 11vw;
+	height: 11vw;
 }
 
 #playlist-selector .playlist-text{
-	line-height:25px;
-	padding-left:15px;
-	padding-right:15px;
-	padding-top:10px;
+	padding: 1em;
 	color:white;
-	font-size:13px;
+	font-size: 1.8em;
+	flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+#playlist-selector .playlist-description{
+	color:rgb(255 220 64);
+	text-transform: none;
+	text-align:center;
 }
 
 video#bgvid { 
@@ -194,12 +204,51 @@ video#bgvid {
 }
 
 #game_logo {
-	font-family: 'DiscoFont';
-	font-size: 115px;
-    background: -webkit-linear-gradient( #1210c5, #10e6a7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-family: 'DiscoFont';
+    font-weight: 500;
+    font-size: 115px;
+    /* background: -webkit-linear-gradient( #1D808B, #B51D05); */
+    /* background: -webkit-linear-gradient( #ED7627, #81217C ); */
+    /* background: -webkit-linear-gradient( #81217C, #ED7627 ); */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: #ED7627; */
+    /* -webkit-text-fill-color: #fc3756; */
+    /* outline: aqua; */
+    /* -webkit-text-emphasis: #e8e823; */
+    /* -webkit-text-stroke: blanchedalmond; */
     line-height: 115px;
+    -webkit-text-stroke: 2px #fc3756;
+    /* color: white; */
+    text-shadow: -1px 1px 5px rgb(181 29 5), 
+	-2px 2px 5px rgb(181 29 5), 
+	-3px 3px 5px rgb(181 29 5), 
+	-4px 4px 5px rgb(181 29 5), 
+	-5px 5px 5px rgb(181 29 5), 
+	-6px 6px 5px rgb(181 29 5), 
+	-7px 7px 5px rgb(181 29 5), 
+	-8px 8px 5px rgb(181 29 5), 
+	-9px 9px 5px rgb(181 29 5), 
+	-10px 10px 5px rgb(181 29 5), 
+	-11px 11px 5px rgb(232 130 45), 
+	-12px 12px 5px rgb(232 130 45), 
+	-13px 13px 5px rgb(232 130 45), 
+	-14px 14px 5px rgb(232 130 45), 
+	-15px 15px 5px rgb(232 130 45), 
+	-16px 16px 5px rgb(232 130 45), 
+	-17px 17px 5px rgb(232 130 45), 
+	-18px 18px 5px rgb(232 130 45), 
+	-19px 19px 5px rgb(232 130 45), 
+	-20px 20px 5px rgb(232 130 45), 
+	-21px 21px 5px rgb(255 220 64), 
+	-22px 22px 5px rgb(255 220 64), 
+	-23px 23px 5px rgb(255 220 64), 
+	-24px 24px 5px rgb(255 220 64), 
+	-25px 25px 5px rgb(255 220 64), 
+	-26px 26px 5px rgb(255 220 64), 
+	-27px 27px 5px rgb(255 220 64), 
+	-28px 28px 5px rgb(255 220 64), 
+	-29px 29px 5px rgb(255 220 64), 
+	-30px 30px 5px rgb(255 220 64);
 }
 
 div#current_song_service #disclaimer, div#current_song_service #get_it_link{
