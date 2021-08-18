@@ -1,879 +1,905 @@
 <head>
-<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
-  <link rel="stylesheet" href="screen.css">
-  <link rel="stylesheet" href="shared.css">
-  <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
+	<link rel="stylesheet" href="screen.css">
+	<link rel="stylesheet" href="shared.css">
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
+
 <body>
 
-<!-- Video von <a href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav Jakupec</a> / <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a>
+	<!-- Video von <a href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav Jakupec</a> / <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a>
 -->
-	
 
-<div id="screen-wrapper">
-	<div class="instruction logo"><span id="game_logo" >MusicGuess</span></div>
-</div>
-<div id="playlist-selector"></div>
-<div id="roundTime"></div>
-<div id="player-results">
-	<div id="results-scrollable"></div>
-</div>
-<audio id="sound-effect-switch" ><source src="sounds/rollover3.wav" type="audio/wav"></audio>
-<audio id="sound-effect-clock" ><source src="sounds/beep-shinymetal.wav" type="audio/wav"></audio>
-<audio id="sound-effect-correct" ><source src="sounds/xylophone_affirm1.wav" type="audio/wav"></audio>
-<audio id="sound-effect-wrong" ><source src="sounds/zap_digi_down.wav" type="audio/wav"></audio>
 
-<video playsinline autoplay muted loop id="bgvid">
-    <source src="videos/disco_loop.mp4" type="video/mp4">
-</video>
+	<div id="screen-wrapper">
+		<div class="instruction logo"><span id="game_logo">MusicGuess</span></div>
+	</div>
+	<div id="playlist-selector"></div>
+	<div id="roundTime"></div>
+	<div id="player-results">
+		<div id="results-scrollable"></div>
+	</div>
+	<audio id="sound-effect-switch">
+		<source src="sounds/rollover3.wav" type="audio/wav">
+	</audio>
+	<audio id="sound-effect-clock">
+		<source src="sounds/beep-shinymetal.wav" type="audio/wav">
+	</audio>
+	<audio id="sound-effect-correct">
+		<source src="sounds/xylophone_affirm1.wav" type="audio/wav">
+	</audio>
+	<audio id="sound-effect-wrong">
+		<source src="sounds/zap_digi_down.wav" type="audio/wav">
+	</audio>
 
-<script type="text/javascript">
-var air_console = new AirConsole();
+	<video playsinline autoplay muted loop id="bgvid">
+		<source src="videos/disco_loop.mp4" type="video/mp4">
+	</video>
 
-// whether or not to display all information
-var debug = false;
+	<script type="text/javascript">
+		var air_console = new AirConsole();
 
-// scroll the result areas or not
-document.scroll_results = false;
+		// whether or not to display all information
+		var debug = false;
 
-// variable to store the library in after an initial query
-var library;
-
-// initially hide the debug section (unless var is set to true)
-if ( debug === false ){
-	$(".debug").hide();
-}
-
-// relative to the sound effects
-document.musicVolume = 0.4;
-
-// store amount of correct full guesses
-document.amount_of_finished_players = 0;
-
-document.round = 0;
-// the setting that is used to count downwards. could potentially be modified by settings
-document.RoundTimeSetting = 30;
-document.RoundTime = document.RoundTimeSetting;
-document.maxRound = 25;
-
-// store current scores of players
-document.playerScores = [];
-
-document.inactiveClients = 0;
-
-document.game_in_progress = false;
-document.ad_showing = false;
-
-$( document ).ready(function(){
-
-	// get the playlists info
-	$.ajax({ method: "GET", url: "playlists/playlist_info.json", data: {} , dataType: "json" })
-		.done(function( msg ) {
-			playlists = msg;
-			
-			// display info for the first playlist
-			
-			html = '';
-			counter = 0;
-			
-			middle_id = Math.floor( playlists.length / 2 );
-			
-			playlists.forEach(function(playlist){
-				if( counter === middle_id){
-					// defaults to popular stuff
-					document.selectedPlaylist = middle_id;
-					update_max_rounds_on_controllers();
-					html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art active">';
-				} else {
-					html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art">';
-				}
-				playlist.album_art.forEach(function(element) {
-					html = html + '<img width="100px" height="100px" src="' + element + '" />';
-				});
-				html += '<div class="playlist-text"><b>' + playlist.name + '</b></br>'; 		
-				html += playlist.amount_of_tracks + ' Tracks</br>'; 
-				html += '<i>' + playlist.description + '</i>';
-				html += '</div>';
-				html += '</div>';
-				counter++;
-			});
-						
-			$("#playlist-selector").html(html);
-			
-			
-			
-			$("#playlist-selector").css("display","flex");
-			
-		});
-});
-
-document.roundEndInitiated = false;
-
-function calculateRoundTime(){
-	
-	// calculate the difference between the start of the round and now
-	currentTime = new Date().getTime();
-	timePassed = Math.floor((currentTime - document.RoundStartTime) / 1000);
-	// substract the time passed from the roundtime setting (30 secs unless set otherwise)
-	document.RoundTime = document.RoundTimeSetting - timePassed;
-	// display the current time on the UI
-	$("#roundTime").html(document.RoundTime);
-
-	if( document.RoundTime === 6){
-		$("#player").animate({volume: 0}, 6000);
-	}
-	
-	// if in an active round, since a disconnect isnt registered instantly, keep checking if the round is actually already over
-	if( document.round > 0 && ! document.roundEndInitiated){
-		check_if_all_players_have_guessed();
-	}
-
-	if( document.RoundTime > 0 ){
-		setTimeout(calculateRoundTime, 0);
-	} else if ( document.roundEndInitiated == false ){
-		// time has run out, tell the remaining controllers to also switch to the round over state
-		out_of_time = [];
-		out_of_time.push({ type: "out_of_time" });	
-		air_console.broadcast( out_of_time );
-		document.roundEndInitiated = true;
-		air_console.showAd();
-		round_end();
-	}
-}
-
-function initiateScrollingCheck(){
-	// check if the guessing area needs to scroll
-	determine_result_area_size();
-	// call the function itself again
-	if( document.game_in_progress ){
-		setTimeout(initiateScrollingCheck, 475);
-	}
-}
-
-document.scroll_in_progress = false;
-document.last_scroll_direction = "left";
-document.last_scroll_ended = new Date().getTime();
-
-function scroll(){
-	currentTime = new Date().getTime();
-	timePassed = Math.floor((currentTime - document.last_scroll_ended) / 1000);
-	
-	if( document.scroll_results && ! document.scroll_in_progress && timePassed >= 1){
-		document.scroll_in_progress = true;
-		scrollTime = 1000 * document.overlapping_result_areas;
-		scrollDistance = $(".single-result").first().outerWidth(true) * -1 * document.overlapping_result_areas;
-		
-		
-		if( document.last_scroll_direction == 'right'){
-			$("#results-scrollable").animate({left: scrollDistance + 'px'}, scrollTime, function(){
-				document.last_scroll_direction = "left";
-				document.scroll_in_progress = false;
-				document.last_scroll_ended = new Date().getTime();
-			});
-		} else {
-			$("#results-scrollable").animate({left: '0px'}, scrollTime, function(){
-				document.last_scroll_direction = "right";
-				document.scroll_in_progress = false;
-				document.last_scroll_ended = new Date().getTime();
-			});
-		}
-		// console.log("scrolling " + scrollDistance + "px for " + scrollTime + " milliseconds.");
-	}
-}
-
-function determine_result_area_size(){
-	// this function checks whether or not we need to make the result area scrollable
-	
-	full_window_width = $( window ).width();
-	// substract the size of the timer
-	available_area_width = full_window_width - $("#roundTime").outerWidth(true);
-	
-	single_result_area_width = $(".single-result").first().outerWidth(true);
-	// console.log("size of one result area: " + single_result_area_width);
-	number_of_possible_result_areas = Math.floor(available_area_width / single_result_area_width);
-	// console.log("amount of result areas that fit onto the screen before scrolling: " + number_of_possible_result_areas);
-	
-	// set the size of the result area so there are no cut off result areas (unless scrolling of course)
-	$("#player-results").width( number_of_possible_result_areas * single_result_area_width );
-	// also set the margins of the result area, so it is centered on the available space
-	results_margin_left = (available_area_width - $("#player-results").width()) / 2;
-	$("#player-results").css('margin-left',results_margin_left+'px')
-	// console.log("margin: " + results_margin_left);
-	
-	number_of_actual_result_areas = $(".single-result").length;
-	// console.log("amount of result areas: " +  number_of_actual_result_areas);
-	
-	document.overlapping_result_areas = number_of_actual_result_areas - number_of_possible_result_areas;
-	
-	// check if a line break is happening
-	if( number_of_actual_result_areas > number_of_possible_result_areas ){
-		// console.log("line break is happening!");
-		// store last amount of overlapping areas for reset purposes
-		document.last_overlap_amount = document.overlapping_result_areas;
-		if( ! document.scroll_in_progress ){
-			document.scroll_results = true;
-			scroll();
-		}
-	} else {
-		// disable the scrolling
-		if( ! document.scroll_in_progress && document.last_scroll_direction == "left" ){
-			document.scroll_in_progress = true;
-			// scroll back to initial position
-			scrollTime = 1000 * document.last_overlap_amount;
-			$("#results-scrollable").animate({left: '0px'}, scrollTime, function(){
-				document.last_scroll_direction = "right";
-				document.scroll_in_progress = false;
-				document.last_scroll_ended = new Date().getTime();
-			});
-		}
+		// scroll the result areas or not
 		document.scroll_results = false;
-	}
-	// console.log("size of full window: " + full_window_width);	
-}
 
-function start(){
+		// variable to store the library in after an initial query
+		var library;
 
-	document.game_in_progress = true;
-
-	// start the function that keeps initiating the check for the result areas
-	initiateScrollingCheck();
-
-	// reset scores of players
-	document.playerScores = [];
-	
-	// reset guessing areas
-	$("#results-scrollable").html("");
-	
-	// reset the roundTime again, at the actual start of the round
-	document.RoundTime = document.RoundTimeSetting;
-	// also reset the startTime of the current Round so we can keep track of how many seconds have passed
-	document.RoundStartTime = new Date().getTime();
-	
-	// initiate round time keeptracker
-	calculateRoundTime();
-	
-	document.round = 0;
-	$("#roundTime").html(document.RoundTime);
-	$("#roundTime").css("display","flex");
-	
-	// hide playlist selector
-	$("#playlist-selector").hide();
-	
-	// override screen with play area
-	$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div><img id="playanimation" src="audio.svg" /></div><div id="current_song_service"></div>');
-	$(".debug").hide();
-	
-	// get list of songs, choose one at random
-	$.ajax(
-		{ method: "GET", url: "playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {} , dataType: "json" })
-		.done(function( msg ) {
-			library = msg;
-			library_copy_for_wrong_answers = library.slice();
-			console.log(library);
-			
-			play_random_song();
-		});
-	
-	// stores the current solution
-	document.solution = [];
-}
-
-// Array Remove - By John Resig (MIT Licensed)
-Array.prototype.remove = function(from, to) {
-  var rest = this.slice((to || from) + 1 || this.length);
-  this.length = from < 0 ? this.length + from : from;
-  return this.push.apply(this, rest);
-};
-
-function randomIntFromInterval( min, max ){
-    return Math.floor( Math.random() * ( max - min + 1 ) + min );
-}
-
-function play_random_song(){
-	document.round++;
-	
-	$(".instruction").append(" Round " + document.round + " of " + document.maxRound);
-	
-	randomSongIndex = randomIntFromInterval(0,library.length-1);
-	randomSong = library[randomSongIndex];
-	// remove song from the library so it will not get played more than once
-	library.remove(randomSongIndex);
-	
-	// get wrong answers for multiple choice
-	wrong_answers = 0;
-	wrong_answers_array = [];
-	artist_or_title = randomIntFromInterval( 0, 1 );	
-	while(wrong_answers < 3){
-		// 50:50 chance that wrong answer is either artist or title
-
-		suitable_wrong_answer = true;
-		wrongSongIndex = randomIntFromInterval(0,library_copy_for_wrong_answers.length-1);
-		
-		console.log("wrong song index " + wrongSongIndex);
-		
-		wrongSong = library_copy_for_wrong_answers[wrongSongIndex];
-		if( artist_or_title === 0 ){
-			// artist
-			// check if the wrongSong has the same artist as the actual song
-			if( wrongSong.artist === randomSong.artist ){
-				suitable_wrong_answer = false;
-			}
-			// check if wrong contains right, or vice versa
-			if( wrongSong.artist.indexOf(randomSong.artist) !== -1 && randomSong.artist.indexOf( wrongSong.artist ) ){
-				suitable_wrong_answer = false;
-			}
-			// check if the selection is already in the array
-			if( $.inArray( wrongSong.artist, wrong_answers_array ) !== -1 ){
-				suitable_wrong_answer = false;
-			}
-			if( suitable_wrong_answer ){
-				wrong_answers_array.push(wrongSong.artist);
-			}
-		} else {
-			// title
-			// check if the wrongSong has the same title as the actual song
-			if( wrongSong.title === randomSong.title ){
-				suitable_wrong_answer = false;
-			}
-			// check if wrong contains right, or vice versa
-			if( wrongSong.title.indexOf( randomSong.title ) !== -1 && randomSong.title.indexOf( wrongSong.title ) !== -1 ){
-				suitable_wrong_answer = false;
-			}
-			// check if the selection is already in the array
-			if( $.inArray( wrongSong.title, wrong_answers_array ) !== -1 ){
-				suitable_wrong_answer = false;
-			}
-			if( suitable_wrong_answer ){
-				wrong_answers_array.push(wrongSong.title);
-			}
+		// initially hide the debug section (unless var is set to true)
+		if (debug === false) {
+			$(".debug").hide();
 		}
-		if( suitable_wrong_answer ){
-			wrong_answers++;
-		}
-	}
 
-	console.log( "array of wrong answers" + wrong_answers_array );
-	
-	console.log("playing song " + randomSongIndex + " in library");
-	console.log( randomSong );
-	
-	// remove previous player
-	$("#player").remove();
-		
-	player = '<audio id="player" autoplay> <source src="' +  randomSong.preview_url + '" type="audio/mpeg"></audio>';
-		
-	$("body").append(player);
+		// relative to the sound effects
+		document.musicVolume = 0.4;
 
-	// record start time
-	document.startTime = new Date().getTime();
-		
-	// turn volume back up
-	$("#player").prop("volume", document.musicVolume);
-	// $('#player').get(0).currentTime = 5;
-	$("#playanimation").show();
-	
-	$("#current_song_service").html("<div id='disclaimer'>This song is provided by the Itunes Search API Preview</div><div id='get_it_link'><img src='images/itunes.svg' class='itunes' /></div>");
-	
-	artist = randomSong.artist;
-	title = randomSong.title;
-	album = randomSong.album;
-	album_art = randomSong.album_art;
-	buy_link = randomSong.buy_link;
-
-	document.solution = [];
-	document.solution.push({ 
-		type: "solution", 
-		artist: artist, 
-		title: title, 
-		album: album,
-		album_art: album_art,
-		wrongAnswers: wrong_answers_array,
-		answerType: artist_or_title,
-		buy_link: buy_link
-	});
-	// send the solution to all clients
-	air_console.broadcast( document.solution );
-}
-
-// watch for new controllers connecting
-air_console.onConnect = function( device_id ){
-	// let the new controller know how many rounds are currently selected
-	update_selected_rounds_on_controllers();
-	// also inform the new controller of the current limit for the selected playlist
-	update_max_rounds_on_controllers(); 
-	
-	// check if there is currently a round in progress
-	if( document.round > 0 && ! document.roundEndInitiated){
-		// if there is, let the new client know to display the please wait message instead of the menu
-		message = [];
-		message.push({ 
-			type: "inactive"
-		});
-		// send the score to the specific client
-		air_console.message( device_id, message );
-		
-		// store the fact that we have an inactive client in this round
-		document.inactiveClients += 1;
-	}
-	
-};
-
-// Listen for messages from other devices
-air_console.onMessage = function(from, message) {
-	// handle message
-	var type = message[0].type;
-	console.log('handling ' + type + ' message.');
-
-	switch( type ){
-		case 'startGame':
-			// start the game
-			start();
-		break;
-		case 'nextSong':
-			// reset guess areas
-			$(".resetme").each(function(){
-				$(this).html("");
-			});
-			play_random_song();
-		break;
-		case 'debug':
-			if( debug ){
-				// turn it off
-				debug = false;
-				$(".debug").hide();
-			} else {
-				// turn it on
-				debug = true;
-				$(".debug").show();
-			}
-		break;
-		case 'correctGuess':
-			$("#player").stop();
-			//$("#player").prop("volume", "0");
-			document.getElementById("sound-effect-correct").play();
-			//$("#player").animate({volume: document.musicVolume}, 2400);
-			handle_guess( message, from );
-			break;
-		case 'wrongGuess':	
-			$("#player").stop();
-			//$("#player").prop("volume", "0");
-			document.getElementById("sound-effect-wrong").play();
-			//$("#player").animate({volume: document.musicVolume}, 1200);
-			handle_guess( message, from );
-		break;
-		case 'next_playlist':
-			switch_playlist('next');
-		break;
-		case 'previous_playlist':
-			switch_playlist('previous');
-		break;
-		case 'decrease_rounds':
-			document.maxRound = document.maxRound - 1;
-			update_selected_rounds_on_controllers();
-		break;
-		case 'increase_rounds':
-			// check if the maximum amount of rounds for this playlist has been reached or not
-			if( (document.maxRound) == playlists[document.selectedPlaylist]['amount_of_tracks']){
-				// dont increase
-			} else {
-				document.maxRound = document.maxRound + 1;
-				update_selected_rounds_on_controllers();
-			}
-		break;
-		case 'back_to_main':
-			document.game_in_progress = false;
-			$(".instruction").html('<span id="game_logo" >MusicGuess</span>');
-			$("#playlist-selector").show();
-			// reset the results area and the round status
-			$("#results-scrollable").html("");
-			$("#status").html("");
-			back_to_main = [];
-			back_to_main.push({ type: "back_to_main"});
-			air_console.broadcast( back_to_main );
-		break;
-	}
-};
-
-function switch_playlist( type ){
-	console.log("Handling switch of playlist to " + type );
-	console.log("all playlists:");
-	console.log(playlists);
-	
-	document.getElementById("sound-effect-switch").play();
-	
-	if( type === "next" ){
-		if( document.selectedPlaylist === playlists.length-1 ){
-			document.selectedPlaylist = 0;
-		} else {
-			document.selectedPlaylist += 1;
-		}
-	} else {
-		// previous
-		if( document.selectedPlaylist === 0 ){
-			document.selectedPlaylist = playlists.length-1;
-		} else {
-			document.selectedPlaylist -= 1;
-		}
-	} 
-	
-	// move the contents of the playlist containers 
-	first_content = $("[data-html-id=" + 0 + "]").html();
-	last_content = $("[data-html-id=" + 10 + "]").html();
-	
-	stored_content = new Array();
-	
-	$("#playlist-selector .album_art").each(function(){
-		// determine id of current_div
-		current_id = parseInt( $(this).attr("data-html-id") );
-		
-		next_id = current_id + 1;
-		previous_id = current_id - 1;
-		
-		next_content = $("[data-html-id=" + next_id + "]").html();
-		
-		if( type === "next" ){
-			// replace current content with next content 
-			if( current_id === playlists.length-1 ){
-				$(this).html(first_content);
-			}else {
-				$(this).html(next_content);
-			}
-		} else if ( type === "previous" ) {
-			// store current content for use in next loop
-			stored_content[current_id] = $(this).html();
-			if( current_id === 0){
-				$(this).html(last_content);
-			} else {
-				$(this).html(stored_content[current_id-1]);
-			}
-		}
-		
-	});
-	
-	if( document.maxRound > playlists[document.selectedPlaylist]['amount_of_tracks'] ){
-		document.maxRound = playlists[document.selectedPlaylist]['amount_of_tracks'];
-	}
-	
-	update_max_rounds_on_controllers();
-	
-	console.log("newly selected playlist" + document.selectedPlaylist);
-	
-}
-function update_selected_rounds_on_controllers(){
-	round_change = [];
-	round_change.push({ type: "round_change", maxRound: document.maxRound });
-	// send round change message to the controllers
-	air_console.broadcast( round_change );
-}
-
-function update_max_rounds_on_controllers(){
-	// also send the current playlist max rounds to the controllers, so it knows when not to increase the count locally
-	if( typeof playlists !== 'undefined' ){
-		// only attempt this is playlists is already initialized (takes some time because the json needs to be fetched first)
-		playlist_rounds = [];
-		playlist_rounds.push({ type: "playlist_rounds" , playlist_rounds: playlists[document.selectedPlaylist]['amount_of_tracks']});
-		air_console.broadcast(playlist_rounds);
-	}
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
-air_console.onAdShow = function() {
-	document.ad_showing = true;
-};
-
-air_console.onAdComplete = function(ad_was_shown) {
-    if (ad_was_shown) {
-      document.ad_showing = false;
-	  round_end();
-    }
-  };
-
-function round_end(){
-
-	
-
-	if(document.ad_showing){
-		return;
-	}
-	
-	// determine fastest player
-	// clone array for sorting differently
-	fastestPlayers = document.playerScores.slice();
-	
-	fastestPlayers.sort(function(a,b) {
-		if(a.currentGuessTime < b.currentGuessTime){
-			if(a.correct){
-				// place a higher than b
-				return -1;
-			} else if (b.correct){
-				// place b higher than a
-				return 1;
-			} else {
-				// place a higher than b
-				return -1;
-			}
-		}
-		if(a.currentGuessTime > b.currentGuessTime){
-			if(b.correct){
-				// place b higher than a
-				return 1;
-			} else if (a.correct){
-				// place a higher than b
-				return -1;
-			} else {
-				// place b higher than a
-				return 1;
-			}
-		}                      
-		// place and b "equally"
-		if(a.correct && b.correct){
-			return 0;
-		}
-		if(!a.correct && !b.correct){
-			return 0;
-		}
-		if(a.correct){
-			// place a higher than b
-			return -1;	
-		} else {
-			// place b higher than a
-			return 1;
-		}
-		
-	});
-	
-	if(typeof fastestPlayers !== 'undefined' && typeof fastestPlayers[0] !== 'undefined' && fastestPlayers[0].correct){
-		fastestString = "Fastest player: " + air_console.getNickname(fastestPlayers[0].player) + " with " + fastestPlayers[0].currentGuessTime + " seconds.";
-	} else {
-		fastestString = "Nobody guessed correctly!";
-	}
-	// output fastest player to screen
-	$("#status").html(fastestString);
-	console.log(fastestString);
-
-	// stop animations in progress
-	// $("#player").stop();
-	
-	// reset the roundTime so time cant run out in the time between matches
-	document.RoundTime = document.RoundTimeSetting;
-	$("#roundTime").hide();
-
-	$("#current_song_service").hide();
-	
-	debug = true;
-	$(".debug").show();
-	
-	$("#playanimation").hide();
-	$("#player").animate({volume: 0}, 4000);
-	$(".instruction").html("Round is over!");
-	
-
-	
-	sleep(4000).then(() =>{
-	
-
-	
+		// store amount of correct full guesses
 		document.amount_of_finished_players = 0;
-		debug = false;
-		$(".debug").hide();
-		
-		// remove correct/wrong classes - we wait for the timer to pass because otherwise the last players result wont get highlighted on the screen
-		$(".darken_image").removeClass("avatar_wrong");
-		$(".darken_image").removeClass("avatar_correct");
-		
-		if( document.round === document.maxRound ){
-			// handle end of game
-			$(".instruction").html("Game Over!");
-			// set roundTime extra high so the end doesnt happen more than once
-			document.RoundTime = -10;
-			console.log("game over");
+
+		document.round = 0;
+		// the setting that is used to count downwards. could potentially be modified by settings
+		document.RoundTimeSetting = 30;
+		document.RoundTime = document.RoundTimeSetting;
+		document.maxRound = 25;
+
+		// store current scores of players
+		document.playerScores = [];
+
+		document.inactiveClients = 0;
+
+		document.game_in_progress = false;
+		document.ad_showing = false;
+
+		$(document).ready(function () {
+
+			// get the playlists info
+			$.ajax({ method: "GET", url: "playlists/playlist_info.json", data: {}, dataType: "json" })
+				.done(function (msg) {
+					playlists = msg;
+
+					// display info for the first playlist
+
+					html = '';
+					counter = 0;
+
+					middle_id = Math.floor(playlists.length / 2);
+
+					playlists.forEach(function (playlist) {
+						if (counter === middle_id) {
+							// defaults to popular stuff
+							document.selectedPlaylist = middle_id;
+							update_max_rounds_on_controllers();
+							html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art active">';
+						} else {
+							html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art">';
+						}
+						playlist.album_art.forEach(function (element) {
+							html = html + '<img width="100px" height="100px" src="' + element + '" />';
+						});
+						html += '<div class="playlist-text"><b>' + playlist.name + '</b></br>';
+						html += playlist.amount_of_tracks + ' Tracks</br>';
+						html += '<i>' + playlist.description + '</i>';
+						html += '</div>';
+						html += '</div>';
+						counter++;
+					});
+
+					$("#playlist-selector").html(html);
+
+
+
+					$("#playlist-selector").css("display", "flex");
+
+				});
+		});
+
+		document.roundEndInitiated = false;
+
+		function calculateRoundTime() {
+
+			// calculate the difference between the start of the round and now
+			currentTime = new Date().getTime();
+			timePassed = Math.floor((currentTime - document.RoundStartTime) / 1000);
+			// substract the time passed from the roundtime setting (30 secs unless set otherwise)
+			document.RoundTime = document.RoundTimeSetting - timePassed;
+			// display the current time on the UI
+			$("#roundTime").html(document.RoundTime);
+
+			if (document.RoundTime === 6) {
+				$("#player").animate({ volume: 0 }, 6000);
+			}
+
+			// if in an active round, since a disconnect isnt registered instantly, keep checking if the round is actually already over
+			if (document.round > 0 && !document.roundEndInitiated) {
+				check_if_all_players_have_guessed();
+			}
+
+			if (document.RoundTime > 0) {
+				setTimeout(calculateRoundTime, 0);
+			} else if (document.roundEndInitiated == false) {
+				// time has run out, tell the remaining controllers to also switch to the round over state
+				out_of_time = [];
+				out_of_time.push({ type: "out_of_time" });
+				air_console.broadcast(out_of_time);
+				document.roundEndInitiated = true;
+				air_console.showAd();
+				round_end();
+			}
+		}
+
+		function initiateScrollingCheck() {
+			// check if the guessing area needs to scroll
+			determine_result_area_size();
+			// call the function itself again
+			if (document.game_in_progress) {
+				setTimeout(initiateScrollingCheck, 475);
+			}
+		}
+
+		document.scroll_in_progress = false;
+		document.last_scroll_direction = "left";
+		document.last_scroll_ended = new Date().getTime();
+
+		function scroll() {
+			currentTime = new Date().getTime();
+			timePassed = Math.floor((currentTime - document.last_scroll_ended) / 1000);
+
+			if (document.scroll_results && !document.scroll_in_progress && timePassed >= 1) {
+				document.scroll_in_progress = true;
+				scrollTime = 1000 * document.overlapping_result_areas;
+				scrollDistance = $(".single-result").first().outerWidth(true) * -1 * document.overlapping_result_areas;
+
+
+				if (document.last_scroll_direction == 'right') {
+					$("#results-scrollable").animate({ left: scrollDistance + 'px' }, scrollTime, function () {
+						document.last_scroll_direction = "left";
+						document.scroll_in_progress = false;
+						document.last_scroll_ended = new Date().getTime();
+					});
+				} else {
+					$("#results-scrollable").animate({ left: '0px' }, scrollTime, function () {
+						document.last_scroll_direction = "right";
+						document.scroll_in_progress = false;
+						document.last_scroll_ended = new Date().getTime();
+					});
+				}
+				// console.log("scrolling " + scrollDistance + "px for " + scrollTime + " milliseconds.");
+			}
+		}
+
+		function determine_result_area_size() {
+			// this function checks whether or not we need to make the result area scrollable
+
+			full_window_width = $(window).width();
+			// substract the size of the timer
+			available_area_width = full_window_width - $("#roundTime").outerWidth(true);
+
+			single_result_area_width = $(".single-result").first().outerWidth(true);
+			// console.log("size of one result area: " + single_result_area_width);
+			number_of_possible_result_areas = Math.floor(available_area_width / single_result_area_width);
+			// console.log("amount of result areas that fit onto the screen before scrolling: " + number_of_possible_result_areas);
+
+			// set the size of the result area so there are no cut off result areas (unless scrolling of course)
+			$("#player-results").width(number_of_possible_result_areas * single_result_area_width);
+			// also set the margins of the result area, so it is centered on the available space
+			results_margin_left = (available_area_width - $("#player-results").width()) / 2;
+			$("#player-results").css('margin-left', results_margin_left + 'px')
+			// console.log("margin: " + results_margin_left);
+
+			number_of_actual_result_areas = $(".single-result").length;
+			// console.log("amount of result areas: " +  number_of_actual_result_areas);
+
+			document.overlapping_result_areas = number_of_actual_result_areas - number_of_possible_result_areas;
+
+			// check if a line break is happening
+			if (number_of_actual_result_areas > number_of_possible_result_areas) {
+				// console.log("line break is happening!");
+				// store last amount of overlapping areas for reset purposes
+				document.last_overlap_amount = document.overlapping_result_areas;
+				if (!document.scroll_in_progress) {
+					document.scroll_results = true;
+					scroll();
+				}
+			} else {
+				// disable the scrolling
+				if (!document.scroll_in_progress && document.last_scroll_direction == "left") {
+					document.scroll_in_progress = true;
+					// scroll back to initial position
+					scrollTime = 1000 * document.last_overlap_amount;
+					$("#results-scrollable").animate({ left: '0px' }, scrollTime, function () {
+						document.last_scroll_direction = "right";
+						document.scroll_in_progress = false;
+						document.last_scroll_ended = new Date().getTime();
+					});
+				}
+				document.scroll_results = false;
+			}
+			// console.log("size of full window: " + full_window_width);	
+		}
+
+		function start() {
+
+			document.game_in_progress = true;
+
+			// start the function that keeps initiating the check for the result areas
+			initiateScrollingCheck();
+
+			// reset scores of players
+			document.playerScores = [];
+
+			// reset guessing areas
+			$("#results-scrollable").html("");
+
+			// reset the roundTime again, at the actual start of the round
+			document.RoundTime = document.RoundTimeSetting;
+			// also reset the startTime of the current Round so we can keep track of how many seconds have passed
+			document.RoundStartTime = new Date().getTime();
+
+			// initiate round time keeptracker
+			calculateRoundTime();
+
+			document.round = 0;
+			$("#roundTime").html(document.RoundTime);
+			$("#roundTime").css("display", "flex");
+
+			// hide playlist selector
+			$("#playlist-selector").hide();
+
+			// override screen with play area
+			$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div><img id="playanimation" src="audio.svg" /></div><div id="current_song_service"></div>');
+			$(".debug").hide();
+
+			// get list of songs, choose one at random
+			$.ajax(
+				{ method: "GET", url: "playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {}, dataType: "json" })
+				.done(function (msg) {
+					library = msg;
+					library_copy_for_wrong_answers = library.slice();
+					console.log(library);
+					console.log("playing random song for the first time");
+					play_random_song();
+				});
+
+			// stores the current solution
+			document.solution = [];
+		}
+
+		// Array Remove - By John Resig (MIT Licensed)
+		Array.prototype.remove = function (from, to) {
+			var rest = this.slice((to || from) + 1 || this.length);
+			this.length = from < 0 ? this.length + from : from;
+			return this.push.apply(this, rest);
+		};
+
+		function randomIntFromInterval(min, max) {
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		}
+
+		function play_random_song() {
+			console.log("play random song was called");
+			document.round++;
+
+			$(".instruction").append(" Round " + document.round + " of " + document.maxRound);
+
+			randomSongIndex = randomIntFromInterval(0, library.length - 1);
+			randomSong = library[randomSongIndex];
+			// remove song from the library so it will not get played more than once
+			library.remove(randomSongIndex);
+
+			// get wrong answers for multiple choice
+			wrong_answers = 0;
+			wrong_answers_array = [];
+			artist_or_title = randomIntFromInterval(0, 1);
+			while (wrong_answers < 3) {
+				// 50:50 chance that wrong answer is either artist or title
+
+				suitable_wrong_answer = true;
+				wrongSongIndex = randomIntFromInterval(0, library_copy_for_wrong_answers.length - 1);
+
+				console.log("wrong song index " + wrongSongIndex);
+
+				wrongSong = library_copy_for_wrong_answers[wrongSongIndex];
+				if (artist_or_title === 0) {
+					// artist
+					// check if the wrongSong has the same artist as the actual song
+					if (wrongSong.artist === randomSong.artist) {
+						suitable_wrong_answer = false;
+					}
+					// check if wrong contains right, or vice versa
+					if (wrongSong.artist.indexOf(randomSong.artist) !== -1 && randomSong.artist.indexOf(wrongSong.artist)) {
+						suitable_wrong_answer = false;
+					}
+					// check if the selection is already in the array
+					if ($.inArray(wrongSong.artist, wrong_answers_array) !== -1) {
+						suitable_wrong_answer = false;
+					}
+					if (suitable_wrong_answer) {
+						wrong_answers_array.push(wrongSong.artist);
+					}
+				} else {
+					// title
+					// check if the wrongSong has the same title as the actual song
+					if (wrongSong.title === randomSong.title) {
+						suitable_wrong_answer = false;
+					}
+					// check if wrong contains right, or vice versa
+					if (wrongSong.title.indexOf(randomSong.title) !== -1 && randomSong.title.indexOf(wrongSong.title) !== -1) {
+						suitable_wrong_answer = false;
+					}
+					// check if the selection is already in the array
+					if ($.inArray(wrongSong.title, wrong_answers_array) !== -1) {
+						suitable_wrong_answer = false;
+					}
+					if (suitable_wrong_answer) {
+						wrong_answers_array.push(wrongSong.title);
+					}
+				}
+				if (suitable_wrong_answer) {
+					wrong_answers++;
+				}
+			}
+
+			console.log("array of wrong answers" + wrong_answers_array);
+
+			console.log("playing song " + randomSongIndex + " in library");
+			console.log(randomSong);
+
+			// remove previous player
+			$("#player").remove();
+
+			player = '<audio id="player" autoplay> <source src="' + randomSong.preview_url + '" type="audio/mpeg"></audio>';
+
+			$("body").append(player);
+
+			// record start time
+			document.startTime = new Date().getTime();
+
+			// turn volume back up
+			$("#player").prop("volume", document.musicVolume);
+			// $('#player').get(0).currentTime = 5;
+			$("#playanimation").show();
+
+			$("#current_song_service").html("<div id='disclaimer'>This song is provided by the Itunes Search API Preview</div><div id='get_it_link'><img src='images/itunes.svg' class='itunes' /></div>");
+
+			artist = randomSong.artist;
+			title = randomSong.title;
+			album = randomSong.album;
+			album_art = randomSong.album_art;
+			buy_link = randomSong.buy_link;
+
+			document.solution = [];
+			document.solution.push({
+				type: "solution",
+				artist: artist,
+				title: title,
+				album: album,
+				album_art: album_art,
+				wrongAnswers: wrong_answers_array,
+				answerType: artist_or_title,
+				buy_link: buy_link
+			});
+			// send the solution to all clients
+			air_console.broadcast(document.solution);
+		}
+
+		// watch for new controllers connecting
+		air_console.onConnect = function (device_id) {
+			// let the new controller know how many rounds are currently selected
+			update_selected_rounds_on_controllers();
+			// also inform the new controller of the current limit for the selected playlist
+			update_max_rounds_on_controllers();
+
+			// check if there is currently a round in progress
+			if (document.round > 0 && !document.roundEndInitiated) {
+				// if there is, let the new client know to display the please wait message instead of the menu
+				message = [];
+				message.push({
+					type: "inactive"
+				});
+				// send the score to the specific client
+				air_console.message(device_id, message);
+
+				// store the fact that we have an inactive client in this round
+				document.inactiveClients += 1;
+			}
+
+		};
+
+		// Listen for messages from other devices
+		air_console.onMessage = function (from, message) {
+			// handle message
+			var type = message[0].type;
+			console.log('handling ' + type + ' message.');
+
+			switch (type) {
+				case 'startGame':
+					// start the game
+					start();
+					break;
+				/* 
+				this appears to be unreachable code currently
+				case 'nextSong':
+					console.log("received message next song");
+					// reset guess areas
+					$(".resetme").each(function () {
+						$(this).html("");
+					});
+					play_random_song();
+					break;
+				*/
+				case 'debug':
+					if (debug) {
+						// turn it off
+						debug = false;
+						$(".debug").hide();
+					} else {
+						// turn it on
+						debug = true;
+						$(".debug").show();
+					}
+					break;
+				case 'correctGuess':
+					$("#player").stop();
+					//$("#player").prop("volume", "0");
+					document.getElementById("sound-effect-correct").play();
+					//$("#player").animate({volume: document.musicVolume}, 2400);
+					handle_guess(message, from);
+					break;
+				case 'wrongGuess':
+					$("#player").stop();
+					//$("#player").prop("volume", "0");
+					document.getElementById("sound-effect-wrong").play();
+					//$("#player").animate({volume: document.musicVolume}, 1200);
+					handle_guess(message, from);
+					break;
+				case 'next_playlist':
+					switch_playlist('next');
+					break;
+				case 'previous_playlist':
+					switch_playlist('previous');
+					break;
+				case 'decrease_rounds':
+					document.maxRound = document.maxRound - 1;
+					update_selected_rounds_on_controllers();
+					break;
+				case 'increase_rounds':
+					// check if the maximum amount of rounds for this playlist has been reached or not
+					if ((document.maxRound) == playlists[document.selectedPlaylist]['amount_of_tracks']) {
+						// dont increase
+					} else {
+						document.maxRound = document.maxRound + 1;
+						update_selected_rounds_on_controllers();
+					}
+					break;
+				case 'back_to_main':
+					document.game_in_progress = false;
+					$(".instruction").html('<span id="game_logo" >MusicGuess</span>');
+					$("#playlist-selector").show();
+					// reset the results area and the round status
+					$("#results-scrollable").html("");
+					$("#status").html("");
+					back_to_main = [];
+					back_to_main.push({ type: "back_to_main" });
+					air_console.broadcast(back_to_main);
+					break;
+			}
+		};
+
+		function switch_playlist(type) {
+			console.log("Handling switch of playlist to " + type);
+			console.log("all playlists:");
+			console.log(playlists);
+
+			document.getElementById("sound-effect-switch").play();
+
+			if (type === "next") {
+				if (document.selectedPlaylist === playlists.length - 1) {
+					document.selectedPlaylist = 0;
+				} else {
+					document.selectedPlaylist += 1;
+				}
+			} else {
+				// previous
+				if (document.selectedPlaylist === 0) {
+					document.selectedPlaylist = playlists.length - 1;
+				} else {
+					document.selectedPlaylist -= 1;
+				}
+			}
+
+			// move the contents of the playlist containers 
+			first_content = $("[data-html-id=" + 0 + "]").html();
+			last_content = $("[data-html-id=" + 10 + "]").html();
+
+			stored_content = new Array();
+
+			$("#playlist-selector .album_art").each(function () {
+				// determine id of current_div
+				current_id = parseInt($(this).attr("data-html-id"));
+
+				next_id = current_id + 1;
+				previous_id = current_id - 1;
+
+				next_content = $("[data-html-id=" + next_id + "]").html();
+
+				if (type === "next") {
+					// replace current content with next content 
+					if (current_id === playlists.length - 1) {
+						$(this).html(first_content);
+					} else {
+						$(this).html(next_content);
+					}
+				} else if (type === "previous") {
+					// store current content for use in next loop
+					stored_content[current_id] = $(this).html();
+					if (current_id === 0) {
+						$(this).html(last_content);
+					} else {
+						$(this).html(stored_content[current_id - 1]);
+					}
+				}
+
+			});
+
+			if (document.maxRound > playlists[document.selectedPlaylist]['amount_of_tracks']) {
+				document.maxRound = playlists[document.selectedPlaylist]['amount_of_tracks'];
+			}
+
+			update_max_rounds_on_controllers();
+
+			console.log("newly selected playlist" + document.selectedPlaylist);
+
+		}
+		function update_selected_rounds_on_controllers() {
+			round_change = [];
+			round_change.push({ type: "round_change", maxRound: document.maxRound });
+			// send round change message to the controllers
+			air_console.broadcast(round_change);
+		}
+
+		function update_max_rounds_on_controllers() {
+			// also send the current playlist max rounds to the controllers, so it knows when not to increase the count locally
+			if (typeof playlists !== 'undefined') {
+				// only attempt this is playlists is already initialized (takes some time because the json needs to be fetched first)
+				playlist_rounds = [];
+				playlist_rounds.push({ type: "playlist_rounds", playlist_rounds: playlists[document.selectedPlaylist]['amount_of_tracks'] });
+				air_console.broadcast(playlist_rounds);
+			}
+		}
+
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+
+
+		air_console.onAdShow = function () {
+			console.log("ad has started showing");
+			document.ad_showing = true;
+		};
+
+		air_console.onAdComplete = function (ad_was_shown) {
+			if (ad_was_shown) {
+				console.log("ad was completed, initiate round end");
+				document.ad_showing = false;
+				round_end();
+			}
+		};
+
+		function round_end() {
+
+
+
+			if (document.ad_showing) {
+				console.log("there is already an ad showing, quitting out of round_end");
+				return;
+			}
+
+			// determine fastest player
+			// clone array for sorting differently
+			fastestPlayers = document.playerScores.slice();
+
+			fastestPlayers.sort(function (a, b) {
+				if (a.currentGuessTime < b.currentGuessTime) {
+					if (a.correct) {
+						// place a higher than b
+						return -1;
+					} else if (b.correct) {
+						// place b higher than a
+						return 1;
+					} else {
+						// place a higher than b
+						return -1;
+					}
+				}
+				if (a.currentGuessTime > b.currentGuessTime) {
+					if (b.correct) {
+						// place b higher than a
+						return 1;
+					} else if (a.correct) {
+						// place a higher than b
+						return -1;
+					} else {
+						// place b higher than a
+						return 1;
+					}
+				}
+				// place and b "equally"
+				if (a.correct && b.correct) {
+					return 0;
+				}
+				if (!a.correct && !b.correct) {
+					return 0;
+				}
+				if (a.correct) {
+					// place a higher than b
+					return -1;
+				} else {
+					// place b higher than a
+					return 1;
+				}
+
+			});
+
+			if (typeof fastestPlayers !== 'undefined' && typeof fastestPlayers[0] !== 'undefined' && fastestPlayers[0].correct) {
+				fastestString = "Fastest player: " + air_console.getNickname(fastestPlayers[0].player) + " with " + fastestPlayers[0].currentGuessTime + " seconds.";
+			} else {
+				fastestString = "Nobody guessed correctly!";
+			}
+			// output fastest player to screen
+			$("#status").html(fastestString);
+			console.log(fastestString);
+
+			// stop animations in progress
+			// $("#player").stop();
+
+			// reset the roundTime so time cant run out in the time between matches
+			document.RoundTime = document.RoundTimeSetting;
+			$("#roundTime").hide();
 
 			$("#current_song_service").hide();
-			
-			game_end = [];
-			game_end.push({ type: "game_end" });
-			// send game end message to the controllers
-			air_console.broadcast( game_end );
-		} else {
-			// initiate next round
-			// reset the number of inactive clients (clients that connect in this time can play the next round)
-			document.inactiveClients = 0;
-			$(".instruction").html("Get ready for the next round!");
-			$("#status").html("3");
-			sleep(1000).then(() =>{
-			document.getElementById("sound-effect-clock").play();
-				document.getElementById("sound-effect-clock").play();
-				$("#status").html("2");
-				sleep(1000).then(() =>{
-					document.getElementById("sound-effect-clock").play();
-					$("#status").html("1");
-					sleep(1000).then(() =>{
-						$("#current_song_service").show();
-						$("#status").html("");
-						$(".instruction").html("Guess the artist or title that is currently playing!");
-					
-						// reset the roundTime again, at the actual start of the round
-						document.RoundTime = document.RoundTimeSetting;
-						// also reset the startTime of the current Round so we can keep track of how many seconds have passed
-						document.RoundStartTime = new Date().getTime();
-						
-						// reset the guessTime and correct/false for every player in case they dont answer
-						document.playerScores.forEach(function(element){
-							element.correct = false;
-							element.currentGuessTime = 0;
-						});
-						
-						// initiate round time keeptracker
-						document.roundEndInitiated = false;
-						calculateRoundTime();
 
-						$("#roundTime").css("display","flex");
-						play_random_song();
+			debug = true;
+			$(".debug").show();
+
+			$("#playanimation").hide();
+			$("#player").animate({ volume: 0 }, 4000);
+			$(".instruction").html("Round is over!");
+
+
+
+			sleep(4000).then(() => {
+
+
+
+				document.amount_of_finished_players = 0;
+				debug = false;
+				$(".debug").hide();
+
+				// remove correct/wrong classes - we wait for the timer to pass because otherwise the last players result wont get highlighted on the screen
+				$(".darken_image").removeClass("avatar_wrong");
+				$(".darken_image").removeClass("avatar_correct");
+
+				if (document.round === document.maxRound) {
+					// handle end of game
+					$(".instruction").html("Game Over!");
+					// set roundTime extra high so the end doesnt happen more than once
+					document.RoundTime = -10;
+					console.log("game over");
+
+					$("#current_song_service").hide();
+
+					game_end = [];
+					game_end.push({ type: "game_end" });
+					// send game end message to the controllers
+					air_console.broadcast(game_end);
+				} else {
+					// initiate next round
+					// reset the number of inactive clients (clients that connect in this time can play the next round)
+					document.inactiveClients = 0;
+					$(".instruction").html("Get ready for the next round!");
+					$("#status").html("3");
+					sleep(1000).then(() => {
+						document.getElementById("sound-effect-clock").play();
+						document.getElementById("sound-effect-clock").play();
+						$("#status").html("2");
+						sleep(1000).then(() => {
+							document.getElementById("sound-effect-clock").play();
+							$("#status").html("1");
+							sleep(1000).then(() => {
+								$("#current_song_service").show();
+								$("#status").html("");
+								$(".instruction").html("Guess the artist or title that is currently playing!");
+
+								// reset the roundTime again, at the actual start of the round
+								document.RoundTime = document.RoundTimeSetting;
+								// also reset the startTime of the current Round so we can keep track of how many seconds have passed
+								document.RoundStartTime = new Date().getTime();
+
+								// reset the guessTime and correct/false for every player in case they dont answer
+								document.playerScores.forEach(function (element) {
+									element.correct = false;
+									element.currentGuessTime = 0;
+								});
+
+								// initiate round time keeptracker
+								document.roundEndInitiated = false;
+								calculateRoundTime();
+
+								$("#roundTime").css("display", "flex");
+								console.log("calling play random song for next round");
+								play_random_song();
+							});
+						});
 					});
-				});
+				}
 			});
 		}
-	});
-}
 
-function handle_guess( message, from ){
+		function handle_guess(message, from) {
 
-	console.log("Player " + from + " made a guess!");
-	
-	// initialize the array that stores the general progress of the players
-	if( ! document.player ){
-		document.player = [];
-	}
-	
-	// initialize the array for the current device
-	if( ! document.player[from] ){
-		// initialize array if not already present
-		document.player[from] = [];
-	}
+			console.log("Player " + from + " made a guess!");
 
-	// check if the player already has a guess area
-	guessArea = false;
-	$("#player_" + from + "_result").each(function(){
-		guessArea = true;
-	});
-	if( ! guessArea ){
-		// determine nickname of player
-		nickname = air_console.getNickname( from );
-		// add empty guessArea
-		$("#results-scrollable").append('<div class="single-result" id="player_' + from +'_result"><div class="position_display">1</div><div class="darken_image"></div><img src=""><div class="player_name">' + nickname + '</div></div>');
-	}
-	guessTime = (new Date().getTime() - document.startTime);
-	negative_points = Math.round(0.01 * guessTime);
-	
-	actual_points = 300 - negative_points;
-	if(actual_points < 0) actual_points = 0;
-	guessTime = guessTime / 1000;
-	
-	correct = true;
-	if( message[0].type !== "correctGuess" ){
-		actual_points = 0;
-		correct = false;
-	}
-	
-	newScore = actual_points;
-	
-	// try selecting current score
-	playerScore = document.playerScores.filter(function(obj){
-		return obj.player === from; 
-	});
-	
-	if( playerScore[0] ){
-		newScore = playerScore[0].score + actual_points;
-		playerScore[0].score = newScore;
-		playerScore[0].currentGuessTime = guessTime;
-		playerScore[0].correct = correct;
-	} else {
-		document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, correct: correct });
-	}
-	
-	// send the score to the controller
-	document.score = [];
-	document.score.push({ 
-		type: "score",
-		score: newScore,
-		increase: actual_points,
-	});
-	// send the score to the specific client
-	air_console.message( from, document.score );
-	
-	console.log(document.playerScores);
-	
-	document.playerScores.sort(function(a,b) {
-		if(a.score > b.score){
-			return -1;
+			// initialize the array that stores the general progress of the players
+			if (!document.player) {
+				document.player = [];
+			}
+
+			// initialize the array for the current device
+			if (!document.player[from]) {
+				// initialize array if not already present
+				document.player[from] = [];
+			}
+
+			// check if the player already has a guess area
+			guessArea = false;
+			$("#player_" + from + "_result").each(function () {
+				guessArea = true;
+			});
+			if (!guessArea) {
+				// determine nickname of player
+				nickname = air_console.getNickname(from);
+				// add empty guessArea
+				$("#results-scrollable").append('<div class="single-result" id="player_' + from + '_result"><div class="position_display">1</div><div class="darken_image"></div><img src=""><div class="player_name">' + nickname + '</div></div>');
+			}
+			guessTime = (new Date().getTime() - document.startTime);
+			negative_points = Math.round(0.01 * guessTime);
+
+			actual_points = 300 - negative_points;
+			if (actual_points < 0) actual_points = 0;
+			guessTime = guessTime / 1000;
+
+			correct = true;
+			if (message[0].type !== "correctGuess") {
+				actual_points = 0;
+				correct = false;
+			}
+
+			newScore = actual_points;
+
+			// try selecting current score
+			playerScore = document.playerScores.filter(function (obj) {
+				return obj.player === from;
+			});
+
+			if (playerScore[0]) {
+				newScore = playerScore[0].score + actual_points;
+				playerScore[0].score = newScore;
+				playerScore[0].currentGuessTime = guessTime;
+				playerScore[0].correct = correct;
+			} else {
+				document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, correct: correct });
+			}
+
+			// send the score to the controller
+			document.score = [];
+			document.score.push({
+				type: "score",
+				score: newScore,
+				increase: actual_points,
+			});
+			// send the score to the specific client
+			air_console.message(from, document.score);
+
+			console.log(document.playerScores);
+
+			document.playerScores.sort(function (a, b) {
+				if (a.score > b.score) {
+					return -1;
+				}
+				if (a.score < b.score) {
+					return 1;
+				}
+				return 0;
+			});
+
+			console.log(document.playerScores);
+
+			url = air_console.getProfilePicture(from, 120);
+			resultArea = $("#player_" + from + "_result");
+			resultArea.find("img").attr("src", url);
+
+			position = 1;
+			document.playerScores.forEach(function (element) {
+				$("#player_" + element.player + "_result").find(".position_display").html(position + ".");
+
+				if (position === 1) {
+					$("#player_" + element.player + "_result").prependTo("#results-scrollable");
+				} else {
+					// insert after previous element
+					$("#player_" + element.player + "_result").insertAfter("#player_" + previous_element.player + "_result");
+				}
+				previous_element = element;
+				position++;
+			});
+
+			if (message[0].type === "correctGuess") {
+				resultArea.find(".current_score").html(newScore);
+				resultArea.find(".score_change").html("+ " + actual_points + " Points");
+				resultArea.find(".current_time").html(guessTime + " seconds");
+				resultArea.find(".darken_image").addClass("avatar_correct");
+			} else {
+				resultArea.find(".score_change").html("No Points");
+				resultArea.find(".current_time").html(guessTime + " seconds");
+				resultArea.find(".darken_image").addClass("avatar_wrong");
+				actual_points = 0;
+			}
+
+			// increase the amount of finished players
+			document.amount_of_finished_players++;
+
+			check_if_all_players_have_guessed();
 		}
-		if(a.score < b.score){
-			return 1;
-		}
-		return 0;
-	});
-	
-	console.log(document.playerScores);
-	
-	url = air_console.getProfilePicture(from, 120);
-	resultArea = $("#player_" + from + "_result");
-	resultArea.find("img").attr("src",url);
-	
-	position = 1;
-	document.playerScores.forEach(function(element){
-		$("#player_" + element.player + "_result").find(".position_display").html(position + ".");
-		
-		if( position === 1) {
-			$("#player_" + element.player + "_result").prependTo("#results-scrollable");
-		} else {
-			// insert after previous element
-			$("#player_" + element.player + "_result").insertAfter( "#player_" + previous_element.player + "_result" );
-		}
-		previous_element = element;
-		position++;
-	});
-	
-	if( message[0].type === "correctGuess" ){
-		resultArea.find(".current_score").html(newScore);
-		resultArea.find(".score_change").html("+ " + actual_points + " Points");
-		resultArea.find(".current_time").html(guessTime + " seconds");
-		resultArea.find(".darken_image").addClass("avatar_correct");
-	} else {
-		resultArea.find(".score_change").html("No Points");
-		resultArea.find(".current_time").html(guessTime + " seconds");
-		resultArea.find(".darken_image").addClass("avatar_wrong");
-		actual_points = 0;
-	}
-	
-	// increase the amount of finished players
-	document.amount_of_finished_players++;
 
-	check_if_all_players_have_guessed();	
-}
+		function check_if_all_players_have_guessed() {
+			// console.log("Currently Connected: " + air_console.getControllerDeviceIds().length);
+			// console.log("Amount of finished players: " + document.amount_of_finished_players);
+			// console.log("Amount of inactive clients: " + document.inactiveClients);
+			// in theory this should play the next song when all connected devices have finished
+			// since a controller can join after the round has started, this is probably a blocker we need to handle
+			if (document.amount_of_finished_players === air_console.getControllerDeviceIds().length) {
+				document.roundEndInitiated = true;
+				console.log("triggering show ad");
+				air_console.showAd();
+				// only initiate round end if no ad is showing (wait a second to give show ad a chance to be called)
+				sleep(1000).then(() => {
+					if(!document.ad_showing){
+						console.log("no ad is showing, ending round");
+						round_end();
+					}
+				});
+				
+			}
+			// check if the total is correct when considering inactive players
+			else if (air_console.getControllerDeviceIds().length === document.amount_of_finished_players + document.inactiveClients) {
+				document.roundEndInitiated = true;
+				air_console.showAd();
+				round_end();
+			}
+		}
+	</script>
 
-function check_if_all_players_have_guessed(){
-	// console.log("Currently Connected: " + air_console.getControllerDeviceIds().length);
-	// console.log("Amount of finished players: " + document.amount_of_finished_players);
-	// console.log("Amount of inactive clients: " + document.inactiveClients);
-	// in theory this should play the next song when all connected devices have finished
-	// since a controller can join after the round has started, this is probably a blocker we need to handle
-	if( document.amount_of_finished_players === air_console.getControllerDeviceIds().length ){
-		document.roundEndInitiated = true;
-		air_console.showAd();
-		round_end();
-	} 
-	// check if the total is correct when considering inactive players
-	else if ( air_console.getControllerDeviceIds().length === document.amount_of_finished_players + document.inactiveClients )  {
-		document.roundEndInitiated = true;
-		air_console.showAd();
-		round_end();
-	}
-}
-</script>
-	
 </body>
