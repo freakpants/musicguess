@@ -51,14 +51,6 @@ body{
     position: absolute;
 }
 
-.icon-container.plus{
-	background-color: #1210c5;
-}
-
-.icon-container.minus{
-	background-color: #025d16;
-}
-
 #next_playlist .icon-container{
 	left: unset;
 	right: 1vw;
@@ -102,16 +94,18 @@ body{
 	line-height: 1;
 }
 
-#start_game{
-	background-color: #cd1c24;
+#start_game, .plus{
+	background-color: rgb(181 29 5);
 }
 
-#next_playlist{
-	background-color: #025d16;
+#next_playlist, .icon-container.minus{
+	background-color: rgb(232 130 45);
+    color: rgb(255 220 64);
 }
 
-#previous_playlist{
-	background-color: #1210c5;
+#previous_playlist, .vertical-container{
+	background-color: rgb(255 220 64);
+    color: rgb(232 130 45);
 }
 
 
@@ -125,9 +119,7 @@ body{
 	box-sizing:border-box;
 	width:100%;
 	font-size:1.4em;
-	color:white;
 	float:left;
-	font-family: Georama;
     text-transform: uppercase;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -139,26 +131,35 @@ body{
 
 
 #guessing_buttons_full .choice_1, #guessing_buttons_full #choice_1{
-	background-color: #1210c5;
+	background-color: rgb(255 220 64);
+    color:  rgb(232 130 45);
 }
 
 #guessing_buttons_full .choice_2, #guessing_buttons_full #choice_2{
-	background-color: #c8b29f;
-	color:black;
+	background-color: rgb(232 130 45);
+    color: rgb(255 220 64);
 }
 
 #guessing_buttons_full .choice_3, #guessing_buttons_full #choice_3{
-	background-color: #1210c5;
+	background-color: rgb(255 220 64);
+    color:  rgb(232 130 45);
 }
 
 #guessing_buttons_full .choice_4, #guessing_buttons_full #choice_4{
-	background-color: #c8b29f;
-	color:black;
+	background-color: rgb(232 130 45);
+    color: rgb(255 220 64);
 }
 
 #menu, #waiting_for_start{
 	display: none;
 }
+
+#menu{
+	/* for easier styling/debug */
+	display:flex;
+}
+
+
 
 #menu .instruction{
 	color:white;
@@ -187,7 +188,7 @@ body{
 #game_over{
 	width: 100vw;
     height: 100vh;
-	background-color: #cd1c24;
+	background-color: #b51d05;
 	display:flex;
 	flex-direction:column;
 }

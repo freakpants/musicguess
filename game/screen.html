@@ -786,7 +786,7 @@
 				// determine nickname of player
 				nickname = air_console.getNickname(from);
 				// add empty guessArea
-				$("#results-scrollable").append('<div class="single-result" id="player_' + from + '_result"><div class="position_display">1</div><div class="darken_image"></div><img src=""><div class="player_name">' + nickname + '</div></div>');
+				$("#results-scrollable").append('<div class="single-result" id="player_' + from + '_result"><div class="position_display">1</div><div class="darken_image"></div><img src=""><div class="player_name">' + nickname + '</div><div class="player_score"></div>');
 			}
 			guessTime = (new Date().getTime() - document.startTime);
 			negative_points = Math.round(0.01 * guessTime);
@@ -816,6 +816,8 @@
 			} else {
 				document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, correct: correct });
 			}
+
+			$("#player_" + from + "_result .player_score").html(newScore);
 
 			// send the score to the controller
 			document.score = [];
