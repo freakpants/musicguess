@@ -146,13 +146,7 @@
 				out_of_time.push({ type: "out_of_time" });
 				air_console.broadcast(out_of_time);
 				document.roundEndInitiated = true;
-				air_console.showAd();
-				sleep(1000).then(() => {
-					if(!document.ad_showing){
-						console.log("no ad is showing, ending round");
-						round_end();
-					}
-				});
+				round_end();
 			}
 		}
 
@@ -603,29 +597,23 @@
 
 		air_console.onAdShow = function () {
 			console.log("ad has started showing");
-			// turn volume down
-			$("#player").prop("volume", 0);
 			document.ad_showing = true;
 		};
 
 		air_console.onAdComplete = function (ad_was_shown) {
-			if (ad_was_shown) {
-				// turn volume back up
-				$("#player").prop("volume", document.musicVolume);
-				console.log("ad was completed, initiate round end");
-				document.ad_showing = false;
-				round_end();
-			}
+			console.log("onAdComplete is triggered");
+			document.ad_showing = false;
+			document.roundEndInitiated = true;
+			next_round();
 		};
 
 		function round_end() {
-
-
-			console.log("round end function was called");
-			if (document.ad_showing) {
-				console.log("there is already an ad showing, quitting out of round_end");
+			if(document.ad_showing){
+				document.roundEndInitiated = false;
 				return;
 			}
+
+			console.log("round end function was called");
 
 			// determine fastest player
 			// clone array for sorting differently
@@ -726,45 +714,49 @@
 					// send game end message to the controllers
 					air_console.broadcast(game_end);
 				} else {
-					// initiate next round
-					// reset the number of inactive clients (clients that connect in this time can play the next round)
-					document.inactiveClients = 0;
-					$(".instruction").html("Get ready for the next round!");
-					$("#status").html("3");
-					sleep(1000).then(() => {
-						document.getElementById("sound-effect-clock").play();
-						document.getElementById("sound-effect-clock").play();
-						$("#status").html("2");
-						sleep(1000).then(() => {
-							document.getElementById("sound-effect-clock").play();
-							$("#status").html("1");
-							sleep(1000).then(() => {
-								$("#current_song_service").show();
-								$("#status").html("");
-								$(".instruction").html("Guess the artist or title that is currently playing!");
-
-								// reset the roundTime again, at the actual start of the round
-								document.RoundTime = document.RoundTimeSetting;
-								// also reset the startTime of the current Round so we can keep track of how many seconds have passed
-								document.RoundStartTime = new Date().getTime();
-
-								// reset the guessTime and correct/false for every player in case they dont answer
-								document.playerScores.forEach(function (element) {
-									element.correct = false;
-									element.currentGuessTime = 0;
-								});
-
-								// initiate round time keeptracker
-								document.roundEndInitiated = false;
-								calculateRoundTime();
-
-								$("#roundTime").css("display", "flex");
-								console.log("calling play random song for next round");
-								play_random_song();
-							});
-						});
-					});
+					air_console.showAd();
 				}
+			});
+		}
+
+		function next_round(){
+			// initiate next round
+			// reset the number of inactive clients (clients that connect in this time can play the next round)
+			document.inactiveClients = 0;
+			$(".instruction").html("Get ready for the next round!");
+			$("#status").html("3");
+			sleep(1000).then(() => {
+				document.getElementById("sound-effect-clock").play();
+				document.getElementById("sound-effect-clock").play();
+				$("#status").html("2");
+				sleep(1000).then(() => {
+					document.getElementById("sound-effect-clock").play();
+					$("#status").html("1");
+					sleep(1000).then(() => {
+						$("#current_song_service").show();
+						$("#status").html("");
+						$(".instruction").html("Guess the artist or title that is currently playing!");
+
+						// reset the roundTime again, at the actual start of the round
+						document.RoundTime = document.RoundTimeSetting;
+						// also reset the startTime of the current Round so we can keep track of how many seconds have passed
+						document.RoundStartTime = new Date().getTime();
+
+						// reset the guessTime and correct/false for every player in case they dont answer
+						document.playerScores.forEach(function (element) {
+							element.correct = false;
+							element.currentGuessTime = 0;
+						});
+
+						// initiate round time keeptracker
+						document.roundEndInitiated = false;
+						calculateRoundTime();
+
+						$("#roundTime").css("display", "flex");
+						console.log("calling play random song for next round");
+						play_random_song();
+					});
+				});
 			});
 		}
 
@@ -880,6 +872,7 @@
 			// increase the amount of finished players
 			document.amount_of_finished_players++;
 
+			console.log("handle_guess is calling check if all players have guessed");
 			check_if_all_players_have_guessed();
 		}
 
@@ -891,28 +884,13 @@
 			// since a controller can join after the round has started, this is probably a blocker we need to handle
 			if (document.amount_of_finished_players === air_console.getControllerDeviceIds().length) {
 				document.roundEndInitiated = true;
-				console.log("triggering show ad");
-				air_console.showAd();
-				// only initiate round end if no ad is showing (wait a second to give show ad a chance to be called)
-				sleep(1000).then(() => {
-					if(!document.ad_showing){
-						console.log("no ad is showing, ending round");
-						round_end();
-					}
-				});
+				round_end();
 				
 			}
 			// check if the total is correct when considering inactive players
 			else if (air_console.getControllerDeviceIds().length === document.amount_of_finished_players + document.inactiveClients) {
 				document.roundEndInitiated = true;
-				air_console.showAd();
-				// only initiate round end if no ad is showing (wait a second to give show ad a chance to be called)
-				sleep(1000).then(() => {
-					if(!document.ad_showing){
-						console.log("no ad is showing, ending round");
-						round_end();
-					}
-				});
+				round_end();
 			}
 		}
 	</script>
