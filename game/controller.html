@@ -293,7 +293,7 @@ air_console.onMessage = function(from, data) {
 	if ( data[0].type === "out_of_time" ){
 		if(! document.showing_result_screen){
 			$(".player_score").html(document.currentScore + " Points (+" + 0 + ")");
-			show_result_screen("Out of time");
+			show_result_screen("out_of_time");
 		}
 	}
 	
@@ -521,10 +521,14 @@ function show_result_screen( type ){
 	//inform player of result
 	$(".result_banner").removeClass("wrong");
 	$(".result_banner").removeClass("correct");
+	if(type === "out_of_time"){
+		$(".result_banner").addClass("wrong");
+		$(".player_round_result").html("Out of time!");	
+	} else {
+		$(".result_banner").addClass(type);
+		$(".player_round_result").html(type + "!");	
+	}
 
-	$(".result_banner").addClass(type);
-
-	$(".player_round_result").html(type + "!");	
 }
 
 function disable_guessing_buttons_event_handlers(){
