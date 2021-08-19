@@ -255,8 +255,18 @@ function decrease_check(){
 
 function check_for_master(){
 	// determine if we are the Master Controller
-	// console.log("master id:" + air_console.getMasterControllerDeviceId());
-	// console.log("controller id:" + air_console.getDeviceId());
+	if(document.inProgress){
+		console.log("controller " + air_console.getDeviceId() + ": round is in progress, aborting master check");
+		return;
+	}
+	console.log("controller " + air_console.getDeviceId() + ":no round in progress, proceeding with master check");
+
+	console.log("master id:" + air_console.getMasterControllerDeviceId());
+	console.log("controller id:" + air_console.getDeviceId());
+	/* if(document.activeGame){
+		// if we are in an active game, the master is irrelevant
+		return;
+	} */
 	if( air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId()){
 		// console.log("master controller! ");
 		$("#menu").css("display", "flex");
@@ -273,8 +283,10 @@ air_console.onDisconnect = function(device_id){
 }
 
 air_console.onConnect = function(device_id){
-	// console.log("disconnect triggered on controller");
+	const myDeviceId = air_console.getDeviceId();
+	console.log("connect triggered on controller" +  air_console.getDeviceId(myDeviceId));
 	check_for_master();
+	
 	// nothing
 }
 
@@ -285,9 +297,18 @@ air_console.onMessage = function(from, data) {
 	// console.log("received message " + data[0].type);
 	
 	if ( data[0].type === "inactive" ){
-		// if there is a round in progress, hide the menu and display the wait message instead
+		// if there is a round in progress, and the client is inactive hide the menu and display the wait message instead
+		console.log("controller " + air_console.getDeviceId() + " has received message inactive");
 		$("#menu").hide();
 		$("#waiting_for_next_round").show();
+		$("#waiting_for_start").hide();
+	}
+
+	if ( data[0].type === "in_progress" ){
+		// if there is a game in progress, store that info for check_master
+		console.log("controller " + air_console.getDeviceId() + " has received message in progress");
+		document.inProgress = true;
+		$("#menu").hide();
 	}
 	
 	if ( data[0].type === "out_of_time" ){
@@ -348,6 +369,7 @@ air_console.onMessage = function(from, data) {
 		$("#previous_playlist").hide();	
 		$("#round_change_buttons").hide();
 		$("#game_over").css("display","flex");
+
 		check_for_master();
 
 		// unnattach all event handlers so we dont start triggering multiple messages 

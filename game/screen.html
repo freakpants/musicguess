@@ -414,9 +414,24 @@
 			// also inform the new controller of the current limit for the selected playlist
 			update_max_rounds_on_controllers();
 
+
+			if (document.round > 0){
+				// let the existing controllers know the game is running
+				message = [];
+				message.push({
+					type: "in_progress"
+				});
+				air_console.broadcast(message);
+
+			}
+
+
+
 			// check if there is currently a round in progress
 			if (document.round > 0 && !document.roundEndInitiated) {
-				// if there is, let the new client know to display the please wait message instead of the menu
+
+
+				// let the new client know to display the please wait message (instead of waiting for master controller)
 				message = [];
 				message.push({
 					type: "inactive"
