@@ -207,8 +207,8 @@
 			// set the size of the result area so there are no cut off result areas (unless scrolling of course)
 			$("#player-results").width(number_of_possible_result_areas * single_result_area_width);
 			// also set the margins of the result area, so it is centered on the available space
-			results_margin_left = (available_area_width - $("#player-results").width()) / 2;
-			$("#player-results").css('margin-left', results_margin_left + 'px')
+			// results_margin_left = (available_area_width - $("#player-results").width()) / 2;
+			// $("#player-results").css('margin-left', results_margin_left + 'px')
 			// console.log("margin: " + results_margin_left);
 
 			number_of_actual_result_areas = $(".single-result").length;

@@ -44,7 +44,7 @@ div .position_display{
 #player-results{
 	position:absolute;
 	bottom: 2vh;
-	left: 22vh;
+	left: 24vh;
 	height: 20vh;
 	overflow:hidden;
 }
