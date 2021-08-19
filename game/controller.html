@@ -519,6 +519,11 @@ function show_result_screen( type ){
 	// unhide player result area
 	$("#round_over_song_details").css("display", "flex");
 	//inform player of result
+	$(".result_banner").removeClass("wrong");
+	$(".result_banner").removeClass("correct");
+
+	$(".result_banner").addClass(type);
+
 	$(".player_round_result").html(type + "!");	
 }
 
