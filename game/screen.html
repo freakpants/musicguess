@@ -5,20 +5,36 @@
 	<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
 <body>
 
-	<!-- Video von <a href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav Jakupec</a> / <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a>
--->
+	<!-- -->
 
 
 	<div id="screen-wrapper">
-		<div class="instruction logo"><span id="game_logo">MusicGuess</span></div>
+		<div class="instruction logo">
+			<span id="game_logo">MusicGuess</span>
+			<span id="message"></span>
+		</div>
 	</div>
 	<div id="playlist-selector"></div>
 	<div id="roundTime"></div>
+	<div id="credits-container">
+		<div id="credits">
+			Developed by Christian Nyffenegger, <a target="_blank"
+				href="https://twitter.com/freakpants">freakpants</a></br>
+			Background video by <a target="_blank"
+				href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav
+				Jakupec</a> / <a target="_blank"
+				href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a></br>
+			Music provided by the <a target="_blank"
+				href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html">Itunes
+				Search API Preview</a>
+		</div>
+	</div>
+
 	<div id="player-results">
 		<div id="results-scrollable"></div>
 	</div>
@@ -244,49 +260,57 @@
 
 		function start() {
 
-			document.game_in_progress = true;
+			// fade logo and playlist selector
+			$("#game_logo").hide("fade", {}, 1500);
+			$("#playlist-selector").hide("fade", {}, 1500);
+			sleep(1500).then(() => {
 
-			// start the function that keeps initiating the check for the result areas
-			initiateScrollingCheck();
+				document.game_in_progress = true;
 
-			// reset scores of players
-			document.playerScores = [];
+				// start the function that keeps initiating the check for the result areas
+				initiateScrollingCheck();
 
-			// reset guessing areas
-			$("#results-scrollable").html("");
+				// reset scores of players
+				document.playerScores = [];
 
-			// reset the roundTime again, at the actual start of the round
-			document.RoundTime = document.RoundTimeSetting;
-			// also reset the startTime of the current Round so we can keep track of how many seconds have passed
-			document.RoundStartTime = new Date().getTime();
+				// reset guessing areas
+				$("#results-scrollable").html("");
 
-			// initiate round time keeptracker
-			calculateRoundTime();
+				// reset the roundTime again, at the actual start of the round
+				document.RoundTime = document.RoundTimeSetting;
+				// also reset the startTime of the current Round so we can keep track of how many seconds have passed
+				document.RoundStartTime = new Date().getTime();
 
-			document.round = 0;
-			$("#roundTime").html(document.RoundTime);
-			$("#roundTime").css("display", "flex");
+				// initiate round time keeptracker
+				calculateRoundTime();
 
-			// hide playlist selector
-			$("#playlist-selector").hide();
+				document.round = 0;
+				$("#roundTime").html(document.RoundTime);
+				$("#roundTime").css("display", "flex");
 
-			// override screen with play area
-			$("#screen-wrapper").html('<div class="instruction">Guess the artist or title that is currently playing!</div><div id="status"></div><div><img id="playanimation" src="audio.svg" /></div><div id="current_song_service"></div>');
-			$(".debug").hide();
 
-			// get list of songs, choose one at random
-			$.ajax(
-				{ method: "GET", url: "playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {}, dataType: "json" })
-				.done(function (msg) {
-					library = msg;
-					library_copy_for_wrong_answers = library.slice();
-					// console.log(library);
-					console.log("playing random song for the first time");
-					play_random_song();
-				});
+				// override screen with play area
+				$(".instruction .message").html("Guess the artist or title that is currently playing!");
+				$("#screen-wrapper").append('<div id="status"></div><img id="playanimation" src="audio.svg" /></div><div id="current_song_service"></div>');
 
-			// stores the current solution
-			document.solution = [];
+
+				
+				$(".debug").hide();
+
+				// get list of songs, choose one at random
+				$.ajax(
+					{ method: "GET", url: "playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {}, dataType: "json" })
+					.done(function (msg) {
+						library = msg;
+						library_copy_for_wrong_answers = library.slice();
+						// console.log(library);
+						console.log("playing random song for the first time");
+						play_random_song();
+					});
+
+				// stores the current solution
+				document.solution = [];
+			});
 		}
 
 		// Array Remove - By John Resig (MIT Licensed)
@@ -304,7 +328,7 @@
 			console.log("play random song was called");
 			document.round++;
 
-			$(".instruction").append(" Round " + document.round + " of " + document.maxRound);
+			$(".instruction .message").append(" Round " + document.round + " of " + document.maxRound);
 
 			randomSongIndex = randomIntFromInterval(0, library.length - 1);
 			randomSong = library[randomSongIndex];
@@ -415,7 +439,7 @@
 			update_max_rounds_on_controllers();
 
 
-			if (document.round > 0 && document.round !== document.maxRound){
+			if (document.round > 0 && document.round !== document.maxRound) {
 				// let the existing controllers know the game is running
 				message = [];
 				message.push({
@@ -452,6 +476,14 @@
 			// console.log('handling ' + type + ' message.');
 
 			switch (type) {
+				case 'credits':
+					$("#game_logo").animate({ fontSize: "80px" }, 1500);
+					$("#playlist-selector").hide("fade", {}, 1500);
+					$("#credits-container").show();
+					sleep(1500).then(() => {
+						$("#credits").animate({ opacity: 1 }, 1500);
+					});
+					break;
 				case 'startGame':
 					// start the game
 					start();
@@ -512,9 +544,19 @@
 					}
 					break;
 				case 'back_to_main':
+
+					$(".instruction .message").hide("fade", {}, 1500);
+					$("#credits").animate({ opacity: 0 }, 1500);
+					sleep(1500).then(() => {
+						$("#credits-container").hide();
+						$("#game_logo").animate({ fontSize: "115px" }, 1500);
+						$("#game_logo").show("fade", {}, 1500);
+						$("#playlist-selector").show("fade", {}, 1500);
+					});
+
 					document.game_in_progress = false;
-					$(".instruction").html('<span id="game_logo" >MusicGuess</span>');
-					$("#playlist-selector").show();
+					
+					// $("#playlist-selector").show();
 					// reset the results area and the round status
 					$("#results-scrollable").html("");
 					$("#status").html("");
@@ -625,7 +667,7 @@
 		};
 
 		function round_end() {
-			if(document.ad_showing){
+			if (document.ad_showing) {
 				document.roundEndInitiated = false;
 				return;
 			}
@@ -701,7 +743,7 @@
 
 			$("#playanimation").hide();
 			$("#player").animate({ volume: 0 }, 4000);
-			$(".instruction").html("Round is over!");
+			$(".instruction .message").html("Round is over!");
 
 
 
@@ -719,7 +761,7 @@
 
 				if (document.round === document.maxRound) {
 					// handle end of game
-					$(".instruction").html("Game Over!");
+					$(".instruction .message").html("Game Over!");
 					// set roundTime extra high so the end doesnt happen more than once
 					document.RoundTime = -10;
 					// console.log("game over");
@@ -736,11 +778,11 @@
 			});
 		}
 
-		function next_round(){
+		function next_round() {
 			// initiate next round
 			// reset the number of inactive clients (clients that connect in this time can play the next round)
 			document.inactiveClients = 0;
-			$(".instruction").html("Get ready for the next round!");
+			$(".instruction .message").html("Get ready for the next round!");
 			$("#status").html("3");
 			sleep(1000).then(() => {
 				document.getElementById("sound-effect-clock").play();
@@ -752,7 +794,7 @@
 					sleep(1000).then(() => {
 						$("#current_song_service").show();
 						$("#status").html("");
-						$(".instruction").html("Guess the artist or title that is currently playing!");
+						$(".instruction .message").html("Guess the artist or title that is currently playing!");
 
 						// reset the roundTime again, at the actual start of the round
 						document.RoundTime = document.RoundTimeSetting;
@@ -904,7 +946,7 @@
 			if (document.amount_of_finished_players === air_console.getControllerDeviceIds().length) {
 				document.roundEndInitiated = true;
 				round_end();
-				
+
 			}
 			// check if the total is correct when considering inactive players
 			else if (air_console.getControllerDeviceIds().length === document.amount_of_finished_players + document.inactiveClients) {

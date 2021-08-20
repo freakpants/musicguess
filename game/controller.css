@@ -51,6 +51,12 @@ body{
     position: absolute;
 }
 
+.icon-container.info-circle{
+    font-size: 1em;
+    margin-bottom: -20px;
+    padding-top: 20px;
+}
+
 #next_playlist .icon-container{
 	left: unset;
 	right: 1vw;
@@ -192,7 +198,6 @@ body{
 	display:flex;
 	flex-direction:column;
 }
-
 
 #round_over_song_details .result_banner{
 	font-size: 1em;

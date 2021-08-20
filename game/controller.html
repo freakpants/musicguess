@@ -50,6 +50,9 @@
 		<div class="vertical-container" >
 			<span id="round_amount">25</span>
 			<span>rounds</span>
+			<span class="fa-lg icon-container info-circle">
+				<i class="fa fa-info-circle"></i>
+			</span>
 		</div>
 				
 		<span class="fa-lg icon-container plus increase_rounds">
@@ -64,6 +67,7 @@
 		
 			<div class="button_text">Return to main menu</div>
 	</div>
+	
 </div>
 
 
@@ -165,6 +169,20 @@ function shuffle(a) {
         a[j] = x;
     }
 }
+
+
+$("#round_change_buttons .vertical-container").click(function( event ){
+	// instruct the game to show the credits
+	var command = [];
+	command.push({ type: "credits" });
+	air_console.message( 0 , command );
+	// show the go back command, but hide the other menu buttons
+	$("#start_game").hide();
+	$("#next_playlist").hide();	
+	$("#previous_playlist").hide();	
+	$("#round_change_buttons").hide();
+	$("#game_over").css("display","flex");
+});
 
 
 $("#start_game").click(function( event ){

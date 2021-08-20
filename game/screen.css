@@ -1,11 +1,32 @@
 /*
-cardinal pink #cd1c24
-pale red #e49191
-rodeo dust light gray #c8b29f
-dark green #365e3f
-#1210c5
-#10e6a7
+primary red: #b51d05;
+
+text yellow: #ffdc40;
 */
+
+#credits-container{
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	display: flex;
+	position: absolute;
+	top: 160px;
+}
+#credits{
+	background-color: #b51d05;
+	line-height: 3;
+	min-width: 22vw;
+	padding: 2em;
+	box-shadow: 1px 1px 10px black;
+	opacity: 0;
+	font-size: 2em;
+
+}
+
+#credits a{
+	color: rgb(255 220 64);
+}
 
 @font-face {
   font-family: 'DiscoFont';
@@ -150,8 +171,8 @@ div .avatar_wrong{
 	min-width: 11vw;
 	background:rgb(232 130 45);
 	margin-left:10px;
-	height:100%;
 	min-height: 33vh;
+	max-height: 33vh;
 	font-size: 0.5em;
 	box-shadow: 1px 1px 10px black;
 }
@@ -166,6 +187,7 @@ div .avatar_wrong{
 	min-width: 22vw;
 	height: 100%;
 	font-size: 1.1em;
+	max-height: unset;
 }
 
 #playlist-selector .album_art.active img{
