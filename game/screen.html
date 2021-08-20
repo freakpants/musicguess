@@ -415,7 +415,7 @@
 			update_max_rounds_on_controllers();
 
 
-			if (document.round > 0){
+			if (document.round > 0 && document.round !== document.maxRound){
 				// let the existing controllers know the game is running
 				message = [];
 				message.push({
