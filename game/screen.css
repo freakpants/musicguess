@@ -126,6 +126,13 @@ div .avatar_wrong{
 	font-weight:bold;
 }
 
+#screen-wrapper{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #current_album_art img {
 	width:200px;
 }
@@ -155,6 +162,7 @@ div .avatar_wrong{
 #playanimation{
 	margin-top:50px;
 	width:200px;
+	display: none;
 }
 
 #playlist-selector{

@@ -18,6 +18,9 @@
 			<span id="game_logo">MusicGuess</span>
 			<span id="message"></span>
 		</div>
+		<div id="status"></div>
+		<img id="playanimation" src="audio.svg" />
+		<div id="current_song_service"></div>
 	</div>
 	<div id="playlist-selector"></div>
 	<div id="roundTime"></div>
@@ -263,6 +266,7 @@
 			// fade logo and playlist selector
 			$("#game_logo").hide("fade", {}, 1500);
 			$("#playlist-selector").hide("fade", {}, 1500);
+			
 			sleep(1500).then(() => {
 
 				document.game_in_progress = true;
@@ -285,14 +289,14 @@
 				calculateRoundTime();
 
 				document.round = 0;
+				$("#message").show();
 				$("#roundTime").html(document.RoundTime);
 				$("#roundTime").css("display", "flex");
 
 
 				// override screen with play area
-				$(".instruction .message").html("Guess the artist or title that is currently playing!");
-				$("#screen-wrapper").append('<div id="status"></div><img id="playanimation" src="audio.svg" /></div><div id="current_song_service"></div>');
-
+				$("#message").html("Guess the artist or title that is currently playing!");
+				$("#playanimation").show();
 
 				
 				$(".debug").hide();
@@ -328,7 +332,7 @@
 			console.log("play random song was called");
 			document.round++;
 
-			$(".instruction .message").append(" Round " + document.round + " of " + document.maxRound);
+			$("#message").append(" Round " + document.round + " of " + document.maxRound);
 
 			randomSongIndex = randomIntFromInterval(0, library.length - 1);
 			randomSong = library[randomSongIndex];
@@ -544,13 +548,13 @@
 					}
 					break;
 				case 'back_to_main':
-
-					$(".instruction .message").hide("fade", {}, 1500);
+					$("#message").html("");
+					$("#message").hide("fade", {}, 1500);
 					$("#credits").animate({ opacity: 0 }, 1500);
 					sleep(1500).then(() => {
 						$("#credits-container").hide();
-						$("#game_logo").animate({ fontSize: "115px" }, 1500);
 						$("#game_logo").show("fade", {}, 1500);
+						$("#game_logo").animate({ fontSize: "115px" }, 1500);
 						$("#playlist-selector").show("fade", {}, 1500);
 					});
 
@@ -719,7 +723,6 @@
 				}
 
 			});
-
 			if (typeof fastestPlayers !== 'undefined' && typeof fastestPlayers[0] !== 'undefined' && fastestPlayers[0].correct) {
 				fastestString = "Fastest player: " + air_console.getNickname(fastestPlayers[0].player) + " with " + fastestPlayers[0].currentGuessTime + " seconds.";
 			} else {
@@ -743,7 +746,7 @@
 
 			$("#playanimation").hide();
 			$("#player").animate({ volume: 0 }, 4000);
-			$(".instruction .message").html("Round is over!");
+			$("#message").html("Round is over!");
 
 
 
@@ -761,7 +764,8 @@
 
 				if (document.round === document.maxRound) {
 					// handle end of game
-					$(".instruction .message").html("Game Over!");
+					$("#status").html("");
+					$("#message").html("Game Over!");
 					// set roundTime extra high so the end doesnt happen more than once
 					document.RoundTime = -10;
 					// console.log("game over");
@@ -782,7 +786,7 @@
 			// initiate next round
 			// reset the number of inactive clients (clients that connect in this time can play the next round)
 			document.inactiveClients = 0;
-			$(".instruction .message").html("Get ready for the next round!");
+			$("#message").html("Get ready for the next round!");
 			$("#status").html("3");
 			sleep(1000).then(() => {
 				document.getElementById("sound-effect-clock").play();
@@ -794,7 +798,7 @@
 					sleep(1000).then(() => {
 						$("#current_song_service").show();
 						$("#status").html("");
-						$(".instruction .message").html("Guess the artist or title that is currently playing!");
+						$("#message").html("Guess the artist or title that is currently playing!");
 
 						// reset the roundTime again, at the actual start of the round
 						document.RoundTime = document.RoundTimeSetting;
