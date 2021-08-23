@@ -766,10 +766,13 @@
 				if (document.round === document.maxRound) {
 					// handle end of game
 					$("#status").html("");
-					const winner = air_console.getNickname(document.playerScores[0].player);
-					const winner_correct = document.playerScores[0].correctGuesses;
+					const winner_object = document.playerScores[0];
+					const winner = air_console.getNickname(winner_object.player);
+					const winner_correct = winner_object.correctGuesses;
 					let message = "Game Over!</br> Winner: " + winner + "</br>";
-					message += "Correct Guesses: " + winner_correct + "/" + document.maxRound + " (" + Math.round(100/document.maxRound * winner_correct) + "%)";
+					message += "Correct Guesses: " + winner_correct + "/" + document.maxRound + " (" + Math.round(100/document.maxRound * winner_correct) + "%)</br>";
+					message += "Total Time for guesses: " + Math.round(winner_object.totalGuessTime * 10)/10 + " seconds</br>";
+					message += "Average GuessTime: " + Math.round(winner_object.totalGuessTime / document.maxRound * 10)/10 + " seconds</br>";
 					$("#message").html(message);
 					// set roundTime extra high so the end doesnt happen more than once
 					document.RoundTime = -10;
@@ -879,14 +882,15 @@
 				playerScore[0].score = newScore;
 				playerScore[0].currentGuessTime = guessTime;
 				playerScore[0].correct = correct;
+				playerScore[0].totalGuessTime += guessTime;
 				if(correct) {
 					playerScore[0].correctGuesses++;
 				}
 			} else {
 				if(correct) {
-					document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, correct: correct, correctGuesses: 1 });
+					document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, totalGuessTime: guessTime, correct: correct, correctGuesses: 1 });
 				} else {
-					document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, correct: correct, correctGuesses: 0 });
+					document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, totalGuessTime: guessTime, correct: correct, correctGuesses: 0 });
 				}
 			}
 
