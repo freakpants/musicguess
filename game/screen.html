@@ -58,6 +58,12 @@
 	<audio id="sound-effect-cheers">
 		<source src="sounds/cheers.mp3" type="audio/mpeg">
 	</audio>
+	<audio id="sound-effect-click">
+		<source src="sounds/click.mp3" type="audio/mpeg">
+	</audio>
+	<audio id="sound-effect-start">
+		<source src="sounds/start.mp3" type="audio/mpeg">
+	</audio>
 
 	<video playsinline autoplay muted loop id="bgvid">
 		<source src="videos/disco_loop.mp4" type="video/mp4">
@@ -499,6 +505,7 @@
 					break;
 				case 'startGame':
 					// start the game
+					document.getElementById("sound-effect-start").play();
 					start();
 					break;
 				/* 
@@ -544,6 +551,7 @@
 					switch_playlist('previous');
 					break;
 				case 'decrease_rounds':
+					document.getElementById("sound-effect-click").play();
 					document.maxRound = document.maxRound - 1;
 					update_selected_rounds_on_controllers();
 					break;
@@ -552,6 +560,7 @@
 					if ((document.maxRound) == playlists[document.selectedPlaylist]['amount_of_tracks']) {
 						// dont increase
 					} else {
+						document.getElementById("sound-effect-click").play();
 						document.maxRound = document.maxRound + 1;
 						update_selected_rounds_on_controllers();
 					}
