@@ -766,7 +766,11 @@
 				if (document.round === document.maxRound) {
 					// handle end of game
 					$("#status").html("");
-					$("#message").html("Game Over!");
+					const winner = air_console.getNickname(document.playerScores[0].player);
+					const winner_correct = document.playerScores[0].correctGuesses;
+					let message = "Game Over!</br> Winner: " + winner + "</br>";
+					message += "Correct Guesses: " + winner_correct + "/" + document.maxRound + " (" + Math.round(100/document.maxRound * winner_correct) + "%)";
+					$("#message").html(message);
 					// set roundTime extra high so the end doesnt happen more than once
 					document.RoundTime = -10;
 					// console.log("game over");
@@ -875,8 +879,15 @@
 				playerScore[0].score = newScore;
 				playerScore[0].currentGuessTime = guessTime;
 				playerScore[0].correct = correct;
+				if(correct) {
+					playerScore[0].correctGuesses++;
+				}
 			} else {
-				document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, correct: correct });
+				if(correct) {
+					document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, correct: correct, correctGuesses: 1 });
+				} else {
+					document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, correct: correct, correctGuesses: 0 });
+				}
 			}
 
 			$("#player_" + from + "_result .player_score").html(newScore);
