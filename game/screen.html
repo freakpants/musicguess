@@ -283,52 +283,68 @@
 			
 			sleep(1500).then(() => {
 
-				document.game_in_progress = true;
+				$("#message").html("Get ready for the first round!");
+				$("#status").html("3");
+				document.getElementById("sound-effect-clock").play();
+				sleep(1000).then(() => {
+					document.getElementById("sound-effect-clock").play();
+					$("#status").html("2");
+					sleep(1000).then(() => {
+						document.getElementById("sound-effect-clock").play();
+						$("#status").html("1");
+						sleep(1000).then(() => {
 
-				// start the function that keeps initiating the check for the result areas
-				initiateScrollingCheck();
+							$("#status").html("");
+							
+							document.game_in_progress = true;
 
-				// reset scores of players
-				document.playerScores = [];
+							// start the function that keeps initiating the check for the result areas
+							initiateScrollingCheck();
 
-				// reset guessing areas
-				$("#results-scrollable").html("");
+							// reset scores of players
+							document.playerScores = [];
 
-				// reset the roundTime again, at the actual start of the round
-				document.RoundTime = document.RoundTimeSetting;
-				// also reset the startTime of the current Round so we can keep track of how many seconds have passed
-				document.RoundStartTime = new Date().getTime();
+							// reset guessing areas
+							$("#results-scrollable").html("");
 
-				// initiate round time keeptracker
-				calculateRoundTime();
+							// reset the roundTime again, at the actual start of the round
+							document.RoundTime = document.RoundTimeSetting;
+							// also reset the startTime of the current Round so we can keep track of how many seconds have passed
+							document.RoundStartTime = new Date().getTime();
 
-				document.round = 0;
-				$("#message").show();
-				$("#roundTime").html(document.RoundTime);
-				$("#roundTime").css("display", "flex");
+							// initiate round time keeptracker
+							calculateRoundTime();
+
+							document.round = 0;
+							$("#message").show();
+							$("#roundTime").html(document.RoundTime);
+							$("#roundTime").css("display", "flex");
 
 
-				// override screen with play area
-				$("#message").html("Guess the artist or title that is currently playing!");
-				$("#playanimation").show();
-				$("#current_song_service").show();
+							// override screen with play area
+							$("#message").html("Guess the artist or title that is currently playing!");
+							$("#playanimation").show();
+							$("#current_song_service").show();
 
-				
-				$(".debug").hide();
+							
+							$(".debug").hide();
 
-				// get list of songs, choose one at random
-				$.ajax(
-					{ method: "GET", url: "playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {}, dataType: "json" })
-					.done(function (msg) {
-						library = msg;
-						library_copy_for_wrong_answers = library.slice();
-						// console.log(library);
-						console.log("playing random song for the first time");
-						play_random_song();
+							// get list of songs, choose one at random
+							$.ajax(
+								{ method: "GET", url: "playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {}, dataType: "json" })
+								.done(function (msg) {
+									library = msg;
+									library_copy_for_wrong_answers = library.slice();
+									// console.log(library);
+									console.log("playing random song for the first time");
+									play_random_song();
+								});
+
+							// stores the current solution
+							document.solution = [];
+						});
 					});
-
-				// stores the current solution
-				document.solution = [];
+				});
 			});
 		}
 
