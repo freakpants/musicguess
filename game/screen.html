@@ -34,7 +34,9 @@
 				href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a></br>
 			Music provided by the <a target="_blank"
 				href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html">Itunes
-				Search API Preview</a>
+				Search API Preview</a></br>
+			Sound effects by <a target="_blank"
+				href="https://www.zapsplat.com“">Zapsplat</a>
 		</div>
 	</div>
 
@@ -42,16 +44,16 @@
 		<div id="results-scrollable"></div>
 	</div>
 	<audio id="sound-effect-switch">
-		<source src="sounds/rollover3.wav" type="audio/wav">
+		<source src="sounds/switch.mp3" type="audio/mpeg">
 	</audio>
 	<audio id="sound-effect-clock">
-		<source src="sounds/beep-shinymetal.wav" type="audio/wav">
+		<source src="sounds/clock.mp3" type="audio/mpeg">
 	</audio>
 	<audio id="sound-effect-correct">
-		<source src="sounds/xylophone_affirm1.wav" type="audio/wav">
+		<source src="sounds/correct.mp3" type="audio/mpeg">
 	</audio>
 	<audio id="sound-effect-wrong">
-		<source src="sounds/zap_digi_down.wav" type="audio/wav">
+		<source src="sounds/error.mp3" type="audio/mpeg">
 	</audio>
 
 	<video playsinline autoplay muted loop id="bgvid">
@@ -796,8 +798,8 @@
 			document.inactiveClients = 0;
 			$("#message").html("Get ready for the next round!");
 			$("#status").html("3");
+			document.getElementById("sound-effect-clock").play();
 			sleep(1000).then(() => {
-				document.getElementById("sound-effect-clock").play();
 				document.getElementById("sound-effect-clock").play();
 				$("#status").html("2");
 				sleep(1000).then(() => {
