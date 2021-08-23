@@ -166,7 +166,7 @@
 
 			console.log("roundendinitiated: " + document.roundEndInitiated);
 			if (document.RoundTime > 0) {
-				console.log("checking if we are out of time");
+				// console.log("checking if we are out of time");
 				setTimeout(calculateRoundTime, 0);
 			} else if (document.roundEndInitiated == false) {
 				console.log("out of time");
@@ -775,16 +775,17 @@
 					// handle end of game
 					$("#status").html("");
 					const winner_object = document.playerScores[0];
+					let message = '';
 					if(winner_object !== undefined){
 						const winner = air_console.getNickname(winner_object.player);
 						const winner_correct = winner_object.correctGuesses;
-						let message = "Game Over!</br> Winner: " + winner + "</br>";
+						message = "Game Over!</br> Winner: " + winner + "</br>";
 						message += "Correct Guesses: " + winner_correct + "/" + document.maxRound + " (" + Math.round(100/document.maxRound * winner_correct) + "%)</br>";
 						message += "Total Time for guesses: " + Math.round(winner_object.totalGuessTime * 10)/10 + " seconds</br>";
 						message += "Average GuessTime: " + Math.round(winner_object.totalGuessTime / document.maxRound * 10)/10 + " seconds</br>";
 						document.getElementById("sound-effect-cheers").play();
 					} else {
-						let message = "Game Over!</br> You have managed to never even guess. Either you're away from the game or you're testing an edge case ;)</br>";
+						message = "Game Over!</br> You have managed to never even guess. Either you're away from the game or you're testing an edge case ;)</br>";
 					}
 
 					$("#message").html(message);
