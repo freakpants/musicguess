@@ -27,17 +27,20 @@
 	<div id="roundTime"></div>
 	<div id="credits-container">
 		<div id="credits">
-			Developed by Christian Nyffenegger, <a target="_blank"
-				href="https://twitter.com/freakpants">freakpants</a></br>
-			Background video by <a target="_blank"
-				href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav
-				Jakupec</a> / <a target="_blank"
-				href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a></br>
-			Music provided by the <a target="_blank"
-				href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html">Itunes
-				Search API Preview</a></br>
-			Sound effects by <a target="_blank"
-				href="https://www.zapsplat.com">Zapsplat</a>
+			<span class="category">Developed by:</span>
+			<span class="content">Christian Nyffenegger, <a target="_blank"
+					href="https://twitter.com/freakpants">freakpants</a></span></br>
+			<span class="category">Background video by:</span>
+			<span class="content"><a target="_blank"
+					href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav
+					Jakupec</a> / <a target="_blank"
+					href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a></span></br>
+			<span class="category">Music provided by:</span>
+			<span class="content"><a target="_blank"
+					href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html">Itunes
+					Search API Preview</a></span></br>
+			<span class="category">Sound effects by:</span>
+			<span class="content"><a target="_blank" href="https://www.zapsplat.com">Zapsplat</a></span></br>
 		</div>
 	</div>
 
@@ -282,7 +285,7 @@
 			$("#game_logo,#playlist-selector").hide("fade", {}, 1500);
 			// fade message back in (may have been hidden by end of game)
 			$("#message").show("fade", {}, 1500);
-			
+
 			sleep(1500).then(() => {
 
 				$("#message").html("Get ready for the first round!");
@@ -328,7 +331,7 @@
 							$("#playanimation").show();
 							$("#current_song_service").show();
 
-							
+
 							$(".debug").hide();
 
 							// get list of songs, choose one at random
@@ -517,6 +520,7 @@
 					$("#game_logo").animate({ fontSize: "80px" }, 1500);
 					$("#playlist-selector").hide("fade", {}, 1500);
 					$("#credits-container").show();
+					$("#credits").css({display: "flex"});
 					sleep(1500).then(() => {
 						$("#credits").animate({ opacity: 1 }, 1500);
 					});
@@ -586,6 +590,7 @@
 				case 'back_from_credits':
 
 					$("#credits").animate({ opacity: 0 }, 1500);
+					$("#credits").hide();
 
 					back_to_main = [];
 					back_to_main.push({ type: "back_to_main" });
@@ -819,10 +824,10 @@
 					$("#status").html("");
 					const winner_object = document.playerScores[0];
 					let message = '';
-					if(winner_object !== undefined){
+					if (winner_object !== undefined) {
 						const winner = air_console.getNickname(winner_object.player);
 						const winner_correct = winner_object.correctGuesses;
-						
+
 						const winner_html = $("#results-scrollable .single-result").first();
 						$("#victory_screen").append("<span class='game_over'> Game Over! Winner:</span>");
 
@@ -834,22 +839,22 @@
 						$("#victory_screen .darken_image").hide();
 						$("#victory_screen .player_score").append(" points");
 
-						
+
 						message += "<span class='result_category'>Correct guesses:</span>";
-						message += "<span class='result'>" + winner_correct + "/" + document.maxRound + " (" + Math.round(100/document.maxRound * winner_correct) + "%)</span></br>";
-						message += "<span class='result_category'>Total time taken for guesses:</span>"; 
-						message += "<span class='result'>" + Math.round(winner_object.totalGuessTime * 10)/10 + " seconds</span></br>";
+						message += "<span class='result'>" + winner_correct + "/" + document.maxRound + " (" + Math.round(100 / document.maxRound * winner_correct) + "%)</span></br>";
+						message += "<span class='result_category'>Total time taken for guesses:</span>";
+						message += "<span class='result'>" + Math.round(winner_object.totalGuessTime * 10) / 10 + " seconds</span></br>";
 						message += "<span class='result_category'>Average time guessing:</span>";
-						message += "<span class='result'>" + + Math.round(winner_object.totalGuessTime / document.maxRound * 10)/10 + " seconds</span></br>";
+						message += "<span class='result'>" + + Math.round(winner_object.totalGuessTime / document.maxRound * 10) / 10 + " seconds</span></br>";
 
 						$("#victory_screen").append(message);
-						
+
 						$("#message").html("");
 						$("#victory_screen").css({ display: "flex" });
 						$("#victory_screen").animate({ opacity: 0.9 }, 1500);
 						$("#player-results").hide();
 
-						
+
 
 						document.getElementById("sound-effect-cheers").play();
 					} else {
@@ -857,7 +862,7 @@
 						$("#message").html(message);
 					}
 
-					
+
 					// set roundTime extra high so the end doesnt happen more than once
 					document.RoundTime = -10;
 					// console.log("game over");
@@ -970,11 +975,11 @@
 				playerScore[0].currentGuessTime = guessTime;
 				playerScore[0].correct = correct;
 				playerScore[0].totalGuessTime += guessTime;
-				if(correct) {
+				if (correct) {
 					playerScore[0].correctGuesses++;
 				}
 			} else {
-				if(correct) {
+				if (correct) {
 					document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, totalGuessTime: guessTime, correct: correct, correctGuesses: 1 });
 				} else {
 					document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, totalGuessTime: guessTime, correct: correct, correctGuesses: 0 });
@@ -992,8 +997,8 @@
 			});
 
 			let position = 0;
-			document.playerScores.forEach(function(score, index){
-				if(score.player === from){
+			document.playerScores.forEach(function (score, index) {
+				if (score.player === from) {
 					position = index + 1;
 				}
 			});
