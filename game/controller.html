@@ -345,6 +345,12 @@ air_console.onMessage = function(from, data) {
 		document.inProgress = true;
 		$("#menu").hide();
 	}
+
+	if ( data[0].type === "not_in_progress" ){
+		// if there is no game in progress, store that info for check_master
+		console.log("controller " + air_console.getDeviceId() + " has received message NOT in progress");
+		document.inProgress = false;
+	}
 	
 	if ( data[0].type === "out_of_time" ){
 		if(! document.showing_result_screen){
@@ -386,7 +392,8 @@ air_console.onMessage = function(from, data) {
 	}
 	
 	if( data[0].type === "game_end" ){
-		// console.log("handling game end");
+		document.inProgress = false;
+		console.log("handling game end");
 		$("#guessing_buttons_full #choice_1").css('opacity', '1');
 		$("#guessing_buttons_full #choice_2").css('opacity', '1');
 		$("#guessing_buttons_full #choice_3").css('opacity', '1');

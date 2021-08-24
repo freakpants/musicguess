@@ -176,7 +176,7 @@
 
 			// console.log("roundendinitiated: " + document.roundEndInitiated);
 			if (document.RoundTime > 0 && document.roundEndInitiated === false) {
-				console.log("checking if we are out of time");
+				// console.log("checking if we are out of time");
 				setTimeout(calculateRoundTime, 0);
 			} else if (document.roundEndInitiated === false) {
 				console.log("out of time");
@@ -364,6 +364,24 @@
 			return Math.floor(Math.random() * (max - min + 1) + min);
 		}
 
+		function update_controllers_about_game_status(){
+			message = [];
+			if (document.game_in_progress) {
+				// let the existing controllers know the game is running
+				
+				message.push({
+					type: "in_progress"
+				});
+				
+			} else {
+				// let the existing controllers know the game is not running
+				message.push({
+					type: "not_in_progress"
+				});
+			}
+			air_console.broadcast(message);
+		}
+
 		function play_random_song() {
 			console.log("play random song was called");
 			document.round++;
@@ -478,22 +496,10 @@
 			// also inform the new controller of the current limit for the selected playlist
 			update_max_rounds_on_controllers();
 
-
-			if (document.round > 0 && document.round !== document.maxRound) {
-				// let the existing controllers know the game is running
-				message = [];
-				message.push({
-					type: "in_progress"
-				});
-				air_console.broadcast(message);
-
-			}
-
-
+			update_controllers_about_game_status();
 
 			// check if there is currently a round in progress
 			if (document.round > 0 && !document.roundEndInitiated) {
-
 
 				// let the new client know to display the please wait message (instead of waiting for master controller)
 				message = [];
@@ -506,8 +512,11 @@
 				// store the fact that we have an inactive client in this round
 				document.inactiveClients += 1;
 			}
-
 		};
+
+		air_console.onDisconnect = function (device_id) {
+			update_controllers_about_game_status();
+		}
 
 		// Listen for messages from other devices
 		air_console.onMessage = function (from, message) {
@@ -821,6 +830,7 @@
 
 				if (document.round === document.maxRound) {
 					// handle end of game
+					document.game_in_progress = false;
 					$("#status").html("");
 					const winner_object = document.playerScores[0];
 					let message = '';
