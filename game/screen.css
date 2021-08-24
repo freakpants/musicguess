@@ -99,6 +99,7 @@ div .position_display{
 	left: 24vh;
 	height: 20vh;
 	overflow:hidden;
+	display: none;
 }
 
 #results-scrollable{

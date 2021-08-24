@@ -180,6 +180,21 @@
 				setTimeout(calculateRoundTime, 0);
 			} else if (document.roundEndInitiated === false) {
 				console.log("out of time");
+				// give 30 seconds to everyone who did not guess
+				air_console.getControllerDeviceIds().forEach(function(id){
+					// try selecting current score
+					playerScore = document.playerScores.filter(function (obj) {
+						return obj.player === id;
+					});
+
+					if (playerScore[0]) {
+						playerScore[0].currentGuessTime = 30;
+						playerScore[0].totalGuessTime += 30;
+					} else {
+						initialize_player_score(id, 0, 30, 30, false);
+					}
+				});
+
 				// time has run out, tell the remaining controllers to also switch to the round over state
 				out_of_time = [];
 				out_of_time.push({ type: "out_of_time" });
@@ -281,6 +296,15 @@
 
 		function start() {
 
+			// reset guessing areas
+			$("#results-scrollable").html("");
+
+			// create guessing areas for all controllers
+			const device_ids = air_console.getControllerDeviceIds();
+			device_ids.forEach(function (id) {
+				initiate_guessing_area(id);
+			});
+
 			// fade logo and playlist selector
 			$("#game_logo,#playlist-selector").hide("fade", {}, 1500);
 			// fade message back in (may have been hidden by end of game)
@@ -309,9 +333,6 @@
 							// reset scores of players
 							document.playerScores = [];
 
-							// reset guessing areas
-							$("#results-scrollable").html("");
-
 							// reset the roundTime again, at the actual start of the round
 							document.RoundTime = document.RoundTimeSetting;
 							// also reset the startTime of the current Round so we can keep track of how many seconds have passed
@@ -322,6 +343,7 @@
 
 							document.round = 0;
 							$("#message").show();
+							$("#player-results").show();
 							$("#roundTime").html(document.RoundTime);
 							$("#roundTime").css("display", "flex");
 
@@ -497,6 +519,9 @@
 			update_max_rounds_on_controllers();
 
 			update_controllers_about_game_status();
+
+			// we actually need to do this on game start as well, for every client, since we delete the areas after the game
+			initiate_guessing_area(device_id);
 
 			// check if there is currently a round in progress
 			if (document.round > 0 && !document.roundEndInitiated) {
@@ -933,6 +958,30 @@
 			});
 		}
 
+		function initiate_guessing_area(player_id){
+			// check if the player already has a guess area
+			guessArea = false;
+			$("#player_" + player_id + "_result").each(function () {
+				guessArea = true;
+			});
+			if (!guessArea) {
+				// determine nickname of player
+				nickname = air_console.getNickname(player_id);
+				// add empty guessArea
+				url = air_console.getProfilePicture(player_id, 120);
+				$("#results-scrollable").append('<div class="single-result" id="player_' + player_id + '_result"><div class="position_display"></div><div class="darken_image"></div><img src="' + url + '"><div class="player_name">' + nickname + '</div><div class="player_score"></div>');
+				
+			}
+		}
+
+		function initialize_player_score(from, newScore, guessTime, guessTime, correct){
+			if (correct) {
+				document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, totalGuessTime: guessTime, correct: correct, correctGuesses: 1 });
+			} else {
+				document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, totalGuessTime: guessTime, correct: correct, correctGuesses: 0 });
+			}
+		}
+
 		function handle_guess(message, from) {
 
 			// console.log("Player " + from + " made a guess!");
@@ -948,17 +997,8 @@
 				document.player[from] = [];
 			}
 
-			// check if the player already has a guess area
-			guessArea = false;
-			$("#player_" + from + "_result").each(function () {
-				guessArea = true;
-			});
-			if (!guessArea) {
-				// determine nickname of player
-				nickname = air_console.getNickname(from);
-				// add empty guessArea
-				$("#results-scrollable").append('<div class="single-result" id="player_' + from + '_result"><div class="position_display">1</div><div class="darken_image"></div><img src=""><div class="player_name">' + nickname + '</div><div class="player_score"></div>');
-			}
+			initiate_guessing_area(from);
+
 			guessTime = (new Date().getTime() - document.startTime);
 			negative_points = Math.round(0.01 * guessTime);
 
@@ -989,11 +1029,7 @@
 					playerScore[0].correctGuesses++;
 				}
 			} else {
-				if (correct) {
-					document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, totalGuessTime: guessTime, correct: correct, correctGuesses: 1 });
-				} else {
-					document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, totalGuessTime: guessTime, correct: correct, correctGuesses: 0 });
-				}
+				initialize_player_score(from, newScore, guessTime, guessTime, correct);
 			}
 
 			document.playerScores.sort(function (a, b) {
