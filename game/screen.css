@@ -1,7 +1,8 @@
 /*
 primary red: #b51d05;
-
+secondary orange: #e8822d;
 text yellow: #ffdc40;
+text white: white;
 */
 
 #credits-container{
@@ -25,6 +26,40 @@ text yellow: #ffdc40;
 
 }
 
+#victory_screen{
+	width: 50vw;
+	background-color: #b51d05;
+	box-shadow: 1px 1px 10px black;
+	opacity: 0;
+	font-size: 2em;
+	display:none;
+	flex-direction: column;
+    align-items: center;
+	text-transform:none;
+}
+
+#victory_screen .single-result{
+	height: unset;
+	background-color: #e8822d;
+	font-size: 0.5em;
+	margin-bottom: 2em;
+}
+
+#victory_screen .game_over{
+	font-size: 2em;
+	text-transform: uppercase;
+	margin-bottom: 0.5em;
+}
+
+#victory_screen .result_category{
+	color: #ffdc40;
+	text-transform: uppercase;
+}
+
+#victory_screen .result{
+	text-transform: none;
+}
+
 #credits a{
 	color: rgb(255 220 64);
 }
@@ -35,7 +70,6 @@ text yellow: #ffdc40;
 }
 
 body{
-	background: url("background.svg");
 	overflow:hidden;
 }
 
@@ -118,7 +152,7 @@ div .avatar_wrong{
 	line-height:30px;
 }
 
-#screen-wrapper div{
+#screen-wrapper .instruction, #status{
 	width:100%;
 	display: flex;
 	justify-content: center;
@@ -261,16 +295,16 @@ video#bgvid {
 	-8px 8px 5px rgb(181 29 5), 
 	-9px 9px 5px rgb(181 29 5), 
 	-10px 10px 5px rgb(181 29 5), 
-	-11px 11px 5px rgb(232 130 45), 
-	-12px 12px 5px rgb(232 130 45), 
-	-13px 13px 5px rgb(232 130 45), 
-	-14px 14px 5px rgb(232 130 45), 
-	-15px 15px 5px rgb(232 130 45), 
-	-16px 16px 5px rgb(232 130 45), 
-	-17px 17px 5px rgb(232 130 45), 
-	-18px 18px 5px rgb(232 130 45), 
-	-19px 19px 5px rgb(232 130 45), 
-	-20px 20px 5px rgb(232 130 45), 
+	-11px 11px 5px #e8822d, 
+	-12px 12px 5px #e8822d, 
+	-13px 13px 5px #e8822d, 
+	-14px 14px 5px #e8822d, 
+	-15px 15px 5px #e8822d, 
+	-16px 16px 5px #e8822d, 
+	-17px 17px 5px #e8822d, 
+	-18px 18px 5px #e8822d, 
+	-19px 19px 5px #e8822d, 
+	-20px 20px 5px #e8822d, 
 	-21px 21px 5px rgb(255 220 64), 
 	-22px 22px 5px rgb(255 220 64), 
 	-23px 23px 5px rgb(255 220 64), 
@@ -290,7 +324,10 @@ div#current_song_service #disclaimer, div#current_song_service #get_it_link{
 div#current_song_service{
 	display:block;
 	padding-top:20px;
-	} 
+	text-align: center;
+	font-size: 40px;
+    font-weight: bold;
+} 
 
 div#current_song_service #get_it_link a{
 	cursor:pointer;
