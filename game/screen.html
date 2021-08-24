@@ -295,7 +295,7 @@
 						sleep(1000).then(() => {
 
 							$("#status").html("");
-							
+
 							document.game_in_progress = true;
 
 							// start the function that keeps initiating the check for the result areas
@@ -936,20 +936,6 @@
 				}
 			}
 
-			$("#player_" + from + "_result .player_score").html(newScore);
-
-			// send the score to the controller
-			document.score = [];
-			document.score.push({
-				type: "score",
-				score: newScore,
-				increase: actual_points,
-			});
-			// send the score to the specific client
-			air_console.message(from, document.score);
-
-			// console.log(document.playerScores);
-
 			document.playerScores.sort(function (a, b) {
 				if (a.score > b.score) {
 					return -1;
@@ -959,6 +945,30 @@
 				}
 				return 0;
 			});
+
+			let position = 0;
+			document.playerScores.forEach(function(score, index){
+				if(score.player === from){
+					position = index + 1;
+				}
+			});
+
+			$("#player_" + from + "_result .player_score").html(newScore);
+
+			// send the score to the controller
+			document.score = [];
+			document.score.push({
+				type: "score",
+				score: newScore,
+				increase: actual_points,
+				position: position
+			});
+			// send the score to the specific client
+			air_console.message(from, document.score);
+
+			// console.log(document.playerScores);
+
+
 
 			// console.log(document.playerScores);
 

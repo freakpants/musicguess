@@ -363,7 +363,9 @@ air_console.onMessage = function(from, data) {
 		// console.log("received score");
 		// also store the current score for display when out of time 
 		document.currentScore = data[0].score;
+		document.position = data[0].position;
 		$(".player_score").html(data[0].score + " Points (+" + data[0].increase + ")");
+		// </br>You are on Position " + document.position
 	}
 	
 	if( data[0].type === "game_end" ){
@@ -499,7 +501,7 @@ air_console.onMessage = function(from, data) {
 			$("#guessing_buttons_full #" + id).css('opacity', '1');
 			$("#guessing_buttons_full #" + id).addClass('correct-selected');
 			
-			// what does this do?
+			// this is the scrolling effect for the title, currently not needed, left in just in case
 			animatethis($('.song_title'), 3000);
 			
 			// already switch to true, so that we dont get two different result types if we answer in the last 2 seconds
