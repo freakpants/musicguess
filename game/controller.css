@@ -180,18 +180,17 @@ body{
     height: 100vh;
 }
 
-#game_over .icon-container{
+#game_over .icon-container, #back_from_credits .icon-container{
 	display: contents;
-	width: 100%;
 }
 
-#game_over .button_text{
+#game_over .button_text, #back_from_credits .button_text{
 	width: 100%;
 	position: relative;
 	margin-top: 30px;
 }
 
-#game_over{
+#game_over, #back_from_credits{
 	width: 100vw;
     height: 100vh;
 	background-color: #b51d05;

@@ -64,9 +64,14 @@
 			<span class="fa-lg icon-container">
 				<i class="fa fa-undo  undo"></i>
 			</span>
-		
 			<div class="button_text">Return to main menu</div>
 	</div>
+	<div class="flexbox" id="back_from_credits">
+		<span class="fa-lg icon-container">
+			<i class="fa fa-undo  undo"></i>
+		</span>
+		<div class="button_text">Return to main menu</div>
+</div>
 	
 </div>
 
@@ -181,7 +186,9 @@ $("#round_change_buttons .vertical-container").click(function( event ){
 	$("#next_playlist").hide();	
 	$("#previous_playlist").hide();	
 	$("#round_change_buttons").hide();
-	$("#game_over").css("display","flex");
+	sleep(2000).then(() =>{
+		$("#back_from_credits").css("display","flex");
+	});
 });
 
 
@@ -219,18 +226,28 @@ $(".decrease_rounds").click(function( event ){
 });
 
 function back_to_main(){
-	$("#start_game").show();
-	$("#next_playlist").show();	
-	$("#previous_playlist").show();	
-	$("#round_change_buttons").show();
 	$("#game_over").hide();
-	check_for_master();
+	$("#back_from_credits").hide();
+	sleep(1500).then(() =>{
+		$("#start_game").show();
+		$("#next_playlist").show();	
+		$("#previous_playlist").show();	
+		$("#round_change_buttons").show();
+		check_for_master();
+	});
 }
 
 $("#game_over").click(function( event ){
 	back_to_main();	
 	var command = [];
 	command.push({ type: "back_to_main" });
+	air_console.message( 0 , command );
+});
+
+$("#back_from_credits").click(function( event ){
+	back_to_main();	
+	var command = [];
+	command.push({ type: "back_from_credits" });
 	air_console.message( 0 , command );
 });
 

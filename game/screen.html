@@ -170,11 +170,11 @@
 				check_if_all_players_have_guessed();
 			}
 
-			console.log("roundendinitiated: " + document.roundEndInitiated);
-			if (document.RoundTime > 0) {
-				// console.log("checking if we are out of time");
+			// console.log("roundendinitiated: " + document.roundEndInitiated);
+			if (document.RoundTime > 0 && document.roundEndInitiated === false) {
+				console.log("checking if we are out of time");
 				setTimeout(calculateRoundTime, 0);
-			} else if (document.roundEndInitiated == false) {
+			} else if (document.roundEndInitiated === false) {
 				console.log("out of time");
 				// time has run out, tell the remaining controllers to also switch to the round over state
 				out_of_time = [];
@@ -278,8 +278,9 @@
 		function start() {
 
 			// fade logo and playlist selector
-			$("#game_logo").hide("fade", {}, 1500);
-			$("#playlist-selector").hide("fade", {}, 1500);
+			$("#game_logo,#playlist-selector").hide("fade", {}, 1500);
+			// fade message back in (may have been hidden by end of game)
+			$("#message").show("fade", {}, 1500);
 			
 			sleep(1500).then(() => {
 
@@ -508,7 +509,7 @@
 		air_console.onMessage = function (from, message) {
 			// handle message
 			var type = message[0].type;
-			// console.log('handling ' + type + ' message.');
+			console.log('handling ' + type + ' message on screen.');
 
 			switch (type) {
 				case 'credits':
@@ -581,26 +582,38 @@
 						update_selected_rounds_on_controllers();
 					}
 					break;
-				case 'back_to_main':
-					$("#message").html("");
-					$("#message").hide("fade", {}, 1500);
+				case 'back_from_credits':
+
 					$("#credits").animate({ opacity: 0 }, 1500);
+
+					back_to_main = [];
+					back_to_main.push({ type: "back_to_main" });
+					air_console.broadcast(back_to_main);
+
 					sleep(1500).then(() => {
 						$("#credits-container").hide();
 						$("#game_logo").show("fade", {}, 1500);
 						$("#game_logo").animate({ fontSize: "115px" }, 1500);
 						$("#playlist-selector").show("fade", {}, 1500);
 					});
+					break;
+				case 'back_to_main':
+					$("#message").html("");
+					// $("#message").hide("fade", {}, 1500);
 
 					document.game_in_progress = false;
-					
 					// $("#playlist-selector").show();
 					// reset the results area and the round status
 					$("#results-scrollable").html("");
 					$("#status").html("");
 					back_to_main = [];
 					back_to_main.push({ type: "back_to_main" });
+
+					$("#game_logo").show("fade", {}, 1500);
+					$("#playlist-selector").show("fade", {}, 1500);
+
 					air_console.broadcast(back_to_main);
+
 					break;
 			}
 		};
@@ -863,6 +876,7 @@
 
 						// initiate round time keeptracker
 						document.roundEndInitiated = false;
+						console.log("start keeping track of roundtime");
 						calculateRoundTime();
 
 						$("#roundTime").css("display", "flex");
