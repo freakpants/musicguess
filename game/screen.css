@@ -60,11 +60,6 @@ text white: white;
 	color: rgb(255 220 64);
 }
 
-@font-face {
-  font-family: 'DiscoFont';
-  src: url('Monoton-Regular.ttf')  format('truetype');
-}
-
 body{
 	overflow:hidden;
 }

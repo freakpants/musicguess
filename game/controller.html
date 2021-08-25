@@ -11,6 +11,10 @@
 </head>
 
 <body>
+	<div id="position">
+		<span class="number"></span>
+		<span class="letters"></span>
+	</div>
 	<div id="menu">
 		<div class="flexbox" id="start_game">
 			<span class="fa-lg icon-container">
@@ -76,27 +80,27 @@
 	</div>
 	<div id="guessing_buttons_full">
 		<div id="choice_1" class="choice_container unselected">
-			<span class="fa-stack fa-lg">
+			<!-- <span class="fa-stack fa-lg">
 				<i class="fa fa-bars "></i>
-			</span>
+			</span> -->
 			<div class="choice_1 unselected">Text Text Text Text Text Text Text Text Text</div>
 		</div>
 		<div id="choice_2" class="choice_container unselected">
-			<span class="fa-stack fa-lg">
+			<!-- <span class="fa-stack fa-lg">
 				<i class="fa fa-bars "></i>
-			</span>
+			</span> -->
 			<div class="choice_2 unselected"></div>
 		</div>
 		<div id="choice_3" class="choice_container unselected">
-			<span class="fa-stack fa-lg">
+			<!-- <span class="fa-stack fa-lg">
 				<i class="fa fa-bars "></i>
-			</span>
+			</span> -->
 			<div class="choice_3 unselected"></div>
 		</div>
 		<div id="choice_4" class="choice_container unselected">
-			<span class="fa-stack fa-lg">
+			<!-- <span class="fa-stack fa-lg">
 				<i class="fa fa-bars "></i>
-			</span>
+			</span> -->
 			<div class="choice_4 unselected"></div>
 		</div>
 
@@ -430,10 +434,32 @@
 			if (data[0].type === "score") {
 				// console.log("received score");
 				// also store the current score for display when out of time 
-				document.currentScore = data[0].score;
-				document.position = data[0].position;
-				$(".player_score").html(data[0].score + " Points (+" + data[0].increase + ")");
+				const score = data[0].score;
+				document.currentScore = score.score;
+				document.position = score.position;
+				if(score.increase !== undefined){
+					// there are two types of score report. only report the increase if it actually was sent
+					$(".player_score").html(score.score + " Points (+" + score.increase + ")");
+				} 
+				
 				// </br>You are on Position " + document.position
+
+				// assign score for the permanent display
+				$("#position .number").html(score.position);
+				switch(score.position){
+					case 1:
+						$("#position .letters").html("st");
+					break;
+					case 2:
+						$("#position .letters").html("nd");
+					break;
+					case 3:
+						$("#position .letters").html("rd");
+					break;
+					default:
+						$("#position .letters").html("th");
+					break;
+				}
 			}
 
 			if(data[0].type === "score_report"){
@@ -442,10 +468,11 @@
 				const maxRound = data[0].maxRound;
 				const correctGuesses = score.correctGuesses;
 				const totalGuessTime = score.totalGuessTime;
+				
 				let message = '<span class="score_report_title">';
 				switch(score.position){
 					case 1:
-						message += "You have won the game!";
+						message += "You have won the game!";						
 					break;
 					case 2:
 						message += "You came in second!";
@@ -486,12 +513,18 @@
 				//  hide the menu
 				$("#menu").hide();
 
+				// reset the live score
+				$("#position .number").html("");
+				$("#position .letters").html("");
+
 				// unnattach all event handlers so we dont start triggering multiple messages 
 				$(".correct").off();
 				$(".wrong").off();
 
 				sleep(14000).then(() => {
 					$("#score_report").hide();
+					$("#position").hide();
+
 					if(am_i_master()){
 						$("#game_over").css("display", "flex");
 					} else {
@@ -509,6 +542,9 @@
 
 				// hide the waiting_for_next_round message if it was showing
 				$("#waiting_for_next_round").hide();
+
+				// show the position
+				$("#position").show();
 
 				// hide the get ready message
 				$("#get_ready").hide();

@@ -861,6 +861,16 @@
 			next_round();
 		};
 
+		function send_score(){
+			document.playerScores.forEach(function (score) {
+				console.log("sending score to player " + score.player);
+				console.log(score);
+				score_message = [];
+				score_message.push({ type: "score", score: score, maxRound: document.maxRound });
+				air_console.message(score.player, score_message);
+			});
+		}
+
 		function round_end() {
 			/* if (document.ad_showing) {
 				document.roundEndInitiated = false;
@@ -1175,9 +1185,7 @@
 			document.score = [];
 			document.score.push({
 				type: "score",
-				score: newScore,
-				increase: actual_points,
-				position: position,
+				score: { score: newScore, increase: actual_points, position: position }
 			});
 			// send the score to the specific client
 			air_console.message(from, document.score);
@@ -1223,6 +1231,7 @@
 
 			console.log("handle_guess is calling check if all players have guessed");
 			check_if_all_players_have_guessed();
+			send_score();
 		}
 
 		function check_if_all_players_have_guessed() {

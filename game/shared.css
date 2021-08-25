@@ -1,5 +1,11 @@
+@font-face {
+	font-family: 'DiscoFont';
+	src: url('Monoton-Regular.ttf')  format('truetype');
+}
+
 body{
 	font-family: Oswald;
 	color:white;
 	text-transform: uppercase;
 }
+
