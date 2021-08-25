@@ -588,6 +588,7 @@
 				console.log("There is no round in progress, and we are not showing credits");
 				// if there is no round in progress, check if the connected device is the master
 				if(air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id){
+					console.log("device " + device_id + " is the master");
 					// let the new client know to display the menu)
 					air_console.message(device_id, show_menu);
 					// also let all other clients know NOT to display the menu anymore
@@ -596,6 +597,7 @@
 						air_console.message(id, hide_menu);
 					});
 				} else {
+					console.log("device " + device_id + " is not a master");
 					air_console.message(device_id, hide_menu);
 				}
 				

@@ -257,6 +257,7 @@
 			$("#loading").css({ display: "flex" });
 			// wait for the animation on the screen to finish
 			sleep(3100).then(() => {
+				$("#loading").hide();
 				// check if we are the master controller
 				if (am_i_master()) {
 					$("#menu").css({ display: "flex" });
@@ -368,6 +369,7 @@
 			if (data[0].type === "show_menu") {
 				$("#waiting_for_next_round").hide();
 				$("#waiting_for_start").hide();
+				$("#game_over").hide();
 				$("#menu").css({ display: "flex" });
 			}
 
@@ -387,6 +389,7 @@
 				$("#waiting_for_next_round").hide();
 				$("#menu").hide();
 				$("#back_from_credits").hide();
+				$("#game_over").hide();
 				$("#waiting_for_start").css({ display: "flex" });
 			}
 
