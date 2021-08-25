@@ -170,11 +170,23 @@ div .avatar_wrong{
 }
 
 #roundTime{
-    font-size: 8em;
+	bottom: 2vh;
+	font-size: 8em;
+	background: rgba(181,29,5, 1);
+}
+
+#roundCounter{
+	bottom: 24vh;
+	font-size: 2em;
+	background:#e8822d;
+	color: white;
+}
+
+#roundTime, #roundCounter{
+	text-align: center;
     position: absolute;
     /* margin-left: 25px; */
     left: 2vh;
-    bottom: 2vh;
     /* border: 5px solid; */
     /* border-radius: 25px; */
     justify-content: center;
@@ -182,7 +194,6 @@ div .avatar_wrong{
     display: none;
     width: 20vh;
     height: 20vh;
-    background: rgba(181,29,5, 1);
     box-shadow: 1px 1px 10px black;
 	display:none;
 }

@@ -24,6 +24,7 @@
 		<div id="victory_screen"></div>
 	</div>
 	<div id="playlist-selector"></div>
+	<div id="roundCounter"></div>
 	<div id="roundTime"></div>
 	<div id="credits-container">
 		<div id="credits">
@@ -332,6 +333,8 @@
 						$("#status").html("1");
 						sleep(1000).then(() => {
 
+							$("#roundCounter").html("Round</br>1/" + document.maxRound);
+							$("#roundCounter").css({display: "flex"});
 							$("#status").html("");
 
 							document.game_in_progress = true;
@@ -415,9 +418,11 @@
 
 		function play_random_song() {
 			console.log("play random song was called");
-			document.round++;
 
-			$("#message").append(" Round " + document.round + " of " + document.maxRound);
+			
+
+			document.round++;
+			$("#roundCounter").html("Round</br>" + document.round + "/" + document.maxRound);
 
 			randomSongIndex = randomIntFromInterval(0, library.length - 1);
 			randomSong = library[randomSongIndex];
@@ -981,6 +986,9 @@
 						score_message.push({ type: "score_report", score: score, maxRound: document.maxRound });
 						air_console.message(score.player, score_message);
 					});
+
+					$("#roundCounter").hide();
+					$("#roundCounter").html("");
 
 					$("#status").html("");
 					const winner_object = document.playerScores[0];
