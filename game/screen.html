@@ -497,13 +497,16 @@
 			// $('#player').get(0).currentTime = 5;
 			$("#playanimation").show();
 
-			$("#current_song_service").html("<div id='disclaimer'>This song is provided by the Itunes Search API Preview</div><div id='get_it_link'><img src='images/itunes.svg' class='itunes' /></div>");
 
 			artist = randomSong.artist;
 			title = randomSong.title;
 			album = randomSong.album;
 			album_art = randomSong.album_art;
 			buy_link = randomSong.buy_link;
+
+			$("#current_song_service").html("<div id='disclaimer'>This song is provided by the Itunes Search API Preview</div><div id='get_it_link'><a href='" + buy_link + "'' target='_blank'><img src='images/itunes.svg' class='itunes' /></a></div>");
+
+
 
 			document.solution = [];
 			document.solution.push({
