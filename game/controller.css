@@ -15,6 +15,34 @@ body{
 	background-color: #b51d05;
 }
 
+.score_report_title{
+	font-size:1.5em;
+	margin-bottom: 1em;
+}
+
+#score_report .result_category{
+	color: #ffdc40;
+	text-transform: uppercase;
+}
+
+#score_report .result{
+	text-transform: none;
+	color: white;
+}
+
+#score_report {
+	font-size: 1.8em;
+	display:none;
+	flex-direction: column;
+	align-items: center;
+	text-transform:none;
+}
+
+#score_report .button_text{
+	font-size: 1em;
+	flex-direction: column;
+}
+
 #loading{
 	display: none;
 	background-color: #e8822d;
@@ -32,7 +60,7 @@ body{
 	display:none;
 }
 
-#waiting_for_next_round, #waiting_for_start, #get_ready{
+#waiting_for_next_round, #waiting_for_start, #get_ready, #score_report{
 	padding:4em;
 }
 
@@ -169,7 +197,7 @@ body{
     color: #ffdc40;
 }
 
-#menu, #waiting_for_start, #get_ready{
+#menu, #waiting_for_start, #get_ready, #score_report{
 	display: none;
 }
 
@@ -203,7 +231,7 @@ body{
 	margin-top: 30px;
 }
 
-#game_over, #back_from_credits, #waiting_for_next_round, #waiting_for_start, #get_ready{
+#game_over, #back_from_credits, #waiting_for_next_round, #waiting_for_start, #get_ready, #score_report{
 	width: 100vw;
     height: 100vh;
 	background-color: #b51d05;
@@ -211,7 +239,7 @@ body{
 	flex-direction:column;
 }
 
-#waiting_for_next_round, #waiting_for_start, #get_ready{
+#waiting_for_next_round, #waiting_for_start, #get_ready, #score_report{
 	justify-content: center;
     text-align: center;
     font-size: 1.5em;

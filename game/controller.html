@@ -67,6 +67,10 @@
 		<div class="button_text">Get ready to guess!</div>
 	</div>
 
+	<div class="flexbox" id="score_report">
+		<div class="button_text"></div>
+	</div>
+
 	<div class="flexbox" id="loading">
 		<img id="loading_animation" src="three-dots.svg" />
 	</div>
@@ -430,6 +434,37 @@
 				document.position = data[0].position;
 				$(".player_score").html(data[0].score + " Points (+" + data[0].increase + ")");
 				// </br>You are on Position " + document.position
+			}
+
+			if(data[0].type === "score_report"){
+				console.log("controller received score report");
+				const score = data[0].score;
+				const maxRound = data[0].maxRound;
+				const correctGuesses = score.correctGuesses;
+				const totalGuessTime = score.totalGuessTime;
+				let message = '<span class="score_report_title">';
+				switch(score.position){
+					case 1:
+						message += "You have won the game!";
+					break;
+					case 2:
+						message += "You came in second!";
+					break;
+					case 3:
+						message += "You placed third!";
+					break;
+					default:
+						message += "You are on the " + score.position + "th place";
+					break;
+				}
+				message += "</span><span class='result_category'>Correct guesses:</span>";
+				message += "<span class='result'>" + correctGuesses + "/" + maxRound + " (" + Math.round(100 / maxRound * correctGuesses) + "%)</span></br>";
+				message += "<span class='result_category'>Total time taken for guesses:</span>";
+				message += "<span class='result'>" + Math.round(totalGuessTime * 10) / 10 + " seconds</span></br>";
+				message += "<span class='result_category'>Average time guessing:</span>";
+				message += "<span class='result'>" + + Math.round(totalGuessTime / maxRound * 10) / 10 + " seconds</span></br>";
+				$("#score_report .button_text").html(message);
+				$("#score_report").css({display: "flex"});
 			}
 
 			if (data[0].type === "game_end") {

@@ -957,6 +957,16 @@
 					// handle end of game
 					document.game_in_progress = false;
 					document.game_over_screen = true;
+
+					// let every player know their score for their after game report
+					document.playerScores.forEach(function (score) {
+						console.log("sending score to player " + score.player);
+						console.log(score);
+						score_message = [];
+						score_message.push({ type: "score_report", score: score, maxRound: document.maxRound });
+						air_console.message(score.player, score_message);
+					});
+
 					$("#status").html("");
 					const winner_object = document.playerScores[0];
 					let message = '';
@@ -966,9 +976,6 @@
 
 						const winner_html = $("#results-scrollable .single-result").first();
 						$("#victory_screen").append("<span class='game_over'> Game Over! Winner:</span>");
-
-
-
 						$("#victory_screen").append(winner_html);
 
 						$("#victory_screen .position_display").hide();
@@ -1120,16 +1127,24 @@
 				return obj.player === from;
 			});
 
+			let correctGuesses = 0;
+			let totalGuessTime = 0;
 			if (playerScore[0]) {
 				newScore = playerScore[0].score + actual_points;
 				playerScore[0].score = newScore;
 				playerScore[0].currentGuessTime = guessTime;
 				playerScore[0].correct = correct;
 				playerScore[0].totalGuessTime += guessTime;
+				totalGuessTime = playerScore[0].totalGuessTime;
 				if (correct) {
 					playerScore[0].correctGuesses++;
+					correctGuesses = playerScore[0].correctGuesses;
 				}
 			} else {
+				totalGuessTime = guessTime;
+				if (correct) {
+					correctGuesses = 1;
+				} 
 				initialize_player_score(from, newScore, guessTime, guessTime, correct);
 			}
 
@@ -1148,6 +1163,7 @@
 				if (score.player === from) {
 					position = index + 1;
 				}
+				score.position = index + 1;
 			});
 
 			$("#player_" + from + "_result .player_score").html(newScore);
@@ -1158,7 +1174,7 @@
 				type: "score",
 				score: newScore,
 				increase: actual_points,
-				position: position
+				position: position,
 			});
 			// send the score to the specific client
 			air_console.message(from, document.score);
