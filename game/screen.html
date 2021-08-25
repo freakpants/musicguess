@@ -735,9 +735,9 @@
 					$("#credits").animate({ opacity: 0 }, 1500);
 					$("#game_logo").animate({ fontSize: "115px" }, 1500);
 
-					back_to_main = [];
+					/* back_to_main = [];
 					back_to_main.push({ type: "back_to_main" });
-					air_console.broadcast(back_to_main);
+					air_console.broadcast(back_to_main); */
 
 					sleep(1500).then(() => {
 						document.showing_credits = false;
@@ -763,13 +763,13 @@
 					$("#victory_screen").hide();
 					$("#victory_screen").html("");
 
-					back_to_main = [];
-					back_to_main.push({ type: "back_to_main" });
+					/* back_to_main = [];
+					back_to_main.push({ type: "back_to_main" }); */
 
 					$("#game_logo").show("fade", {}, 1500);
 					$("#playlist-selector").show("fade", {}, 1500);
 
-					air_console.broadcast(back_to_main);
+					// air_console.broadcast(back_to_main);
 
 					break;
 			}
