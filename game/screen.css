@@ -80,14 +80,6 @@ div .position_display{
 	font-weight:600;
 }
 
-.instruction {
-	background-color: rgba(0, 0, 0, 0.2);
-	padding:20px;
-}
-.instruction.logo{
-	background-color: unset;
-}
-
 #player-results{
 	position:absolute;
 	bottom: 2vh;
@@ -189,6 +181,7 @@ div .avatar_wrong{
     justify-content: center;
 	margin-left: 0.5em;
 	margin-right: 0.5em;
+	margin-top: 0.5em;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
 	opacity: 0.9;
@@ -242,7 +235,7 @@ div .avatar_wrong{
 #playlist-selector .album_art{
 	float:left;
 	min-width: 11vw;
-	background:rgb(232 130 45);
+	background: #e8822d;
 	margin-left:10px;
 	min-height: 33vh;
 	max-height: 33vh;
@@ -256,7 +249,7 @@ div .avatar_wrong{
 }
 
 #playlist-selector .album_art.active{
-	background:rgb(181 29 5);
+	background: #b51d05;
 	min-width: 22vw;
 	height: 100%;
 	font-size: 1.1em;
@@ -303,18 +296,8 @@ video#bgvid {
     font-family: 'DiscoFont';
     font-weight: 500;
     font-size: 115px;
-    /* background: -webkit-linear-gradient( #1D808B, #B51D05); */
-    /* background: -webkit-linear-gradient( #ED7627, #81217C ); */
-    /* background: -webkit-linear-gradient( #81217C, #ED7627 ); */
-    /* -webkit-background-clip: text; */
-    /* -webkit-text-fill-color: #ED7627; */
-    /* -webkit-text-fill-color: #fc3756; */
-    /* outline: aqua; */
-    /* -webkit-text-emphasis: #e8e823; */
-    /* -webkit-text-stroke: blanchedalmond; */
     line-height: 115px;
     -webkit-text-stroke: 2px #fc3756;
-    /* color: white; */
     text-shadow: -1px 1px 5px rgb(181 29 5), 
 	-2px 2px 5px rgb(181 29 5), 
 	-3px 3px 5px rgb(181 29 5), 

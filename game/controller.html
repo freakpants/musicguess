@@ -242,9 +242,9 @@
 				$("#loading").hide();
 				$("#menu").css({display: "flex"});
 			});
-			// var command = [];
-			// command.push({ type: "back_to_main" });
-			// air_console.message(0, command);
+			var command = [];
+			command.push({ type: "back_to_main" });
+			air_console.message(0, command);
 		});
 
 		$("#back_from_credits").click(function (event) {
@@ -415,11 +415,6 @@
 				}
 				decrease_check();
 				increase_check();
-			}
-
-			if (data[0].type === "back_to_main") {
-				// also reset this controllers menu
-				back_to_main();
 			}
 
 			if (data[0].type === "round_change") {
