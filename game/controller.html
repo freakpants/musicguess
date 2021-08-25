@@ -491,6 +491,7 @@
 				$(".wrong").off();
 
 				sleep(14000).then(() => {
+					$("#score_report").hide();
 					if(am_i_master()){
 						$("#game_over").css("display", "flex");
 					} else {
