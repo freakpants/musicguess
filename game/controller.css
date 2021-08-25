@@ -1,8 +1,8 @@
 /*
-red #cd1c24
-dark green #025d16
-dark blue #1210c5
-gray #c8b29f
+primary red: #b51d05;
+secondary orange: #e8822d;
+text yellow: #ffdc40;
+text white: white;
 */
 
 @font-face {
@@ -12,14 +12,27 @@ gray #c8b29f
 
 body{
 	margin:0px;
-	background-color:#282828;
+	background-color: #b51d05;
+}
+
+#loading{
+	display: none;
+	background-color: #e8822d;
+	width: 100vw;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+}
+
+#loading-animation{
+	width: 35vw;
 }
 
 #guessing_buttons_full, #waiting_for_next_round{
 	display:none;
 }
 
-#waiting_for_next_round, #waiting_for_start{
+#waiting_for_next_round, #waiting_for_start, #get_ready{
 	padding:4em;
 }
 
@@ -101,17 +114,17 @@ body{
 }
 
 #start_game, .plus{
-	background-color: rgb(181 29 5);
+	background-color:  #b51d05;
 }
 
 #next_playlist, .icon-container.minus{
-	background-color: rgb(232 130 45);
-    color: rgb(255 220 64);
+	background-color: #e8822d;
+    color: #ffdc40;
 }
 
 #previous_playlist, .vertical-container{
-	background-color: rgb(255 220 64);
-    color: rgb(232 130 45);
+	background-color:  #ffdc40;
+    color: #e8822d;
 }
 
 
@@ -137,26 +150,26 @@ body{
 
 
 #guessing_buttons_full .choice_1, #guessing_buttons_full #choice_1{
-	background-color: rgb(255 220 64);
-    color:  rgb(232 130 45);
+	background-color: #ffdc40;
+    color:  #e8822d;
 }
 
 #guessing_buttons_full .choice_2, #guessing_buttons_full #choice_2{
-	background-color: rgb(232 130 45);
-    color: rgb(255 220 64);
+	background-color: #e8822d;
+    color: #ffdc40;
 }
 
 #guessing_buttons_full .choice_3, #guessing_buttons_full #choice_3{
-	background-color: rgb(255 220 64);
-    color:  rgb(232 130 45);
+	background-color: #ffdc40;
+    color:  #e8822d;
 }
 
 #guessing_buttons_full .choice_4, #guessing_buttons_full #choice_4{
-	background-color: rgb(232 130 45);
-    color: rgb(255 220 64);
+	background-color: #e8822d;
+    color: #ffdc40;
 }
 
-#menu, #waiting_for_start{
+#menu, #waiting_for_start, #get_ready{
 	display: none;
 }
 
@@ -190,7 +203,7 @@ body{
 	margin-top: 30px;
 }
 
-#game_over, #back_from_credits, #waiting_for_next_round, #waiting_for_start{
+#game_over, #back_from_credits, #waiting_for_next_round, #waiting_for_start, #get_ready{
 	width: 100vw;
     height: 100vh;
 	background-color: #b51d05;
@@ -198,7 +211,7 @@ body{
 	flex-direction:column;
 }
 
-#waiting_for_next_round, #waiting_for_start{
+#waiting_for_next_round, #waiting_for_start, #get_ready{
 	justify-content: center;
     text-align: center;
     font-size: 1.5em;
