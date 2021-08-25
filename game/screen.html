@@ -18,7 +18,9 @@
 			<span id="game_logo">MusicGuess</span>
 			<span id="message"></span>
 		</div>
-		<div id="status"></div>
+		<div id="status-wrapper">
+			<span id="status"></span>
+		</div>
 		<img id="playanimation" src="audio.svg" />
 		<div id="current_song_service"></div>
 		<div id="victory_screen"></div>
@@ -317,10 +319,13 @@
 
 			// fade logo and playlist selector
 			$("#game_logo,#playlist-selector").hide("fade", {}, 1500);
-			// fade message back in (may have been hidden by end of game)
-			$("#message").show("fade", {}, 1500);
+
 
 			sleep(1500).then(() => {
+
+				// show message again (may have been hidden by end of game)
+				$("#message").css({display: "flex"});
+				$("#status").css({display: "flex"});
 
 				$("#message").html("Get ready for the first round!");
 				$("#status").html("3");
@@ -335,6 +340,7 @@
 
 							$("#roundCounter").html("Round</br>1/" + document.maxRound);
 							$("#roundCounter").css({display: "flex"});
+							$("#status").hide();
 							$("#status").html("");
 
 							document.game_in_progress = true;
@@ -354,7 +360,6 @@
 							calculateRoundTime();
 
 							document.round = 0;
-							$("#message").show();
 							$("#player-results").show();
 							$("#roundTime").html(document.RoundTime);
 							$("#roundTime").css("display", "flex");
@@ -752,6 +757,7 @@
 					// $("#playlist-selector").show();
 					// reset the results area and the round status
 					$("#results-scrollable").html("");
+					$("#status").hide();
 					$("#status").html("");
 
 					$("#victory_screen").hide();
@@ -937,6 +943,7 @@
 				fastestString = "Nobody guessed correctly!";
 			}
 			// output fastest player to screen
+			$("#status").css({display: "flex"});
 			$("#status").html(fastestString);
 			// console.log(fastestString);
 
@@ -991,6 +998,7 @@
 					$("#roundCounter").html("");
 
 					$("#status").html("");
+					$("#status").hide();
 					const winner_object = document.playerScores[0];
 					let message = '';
 					if (winner_object !== undefined) {
@@ -1016,6 +1024,9 @@
 						$("#victory_screen").append(message);
 
 						$("#message").html("");
+						$("#message").hide();
+						$("#status").hide();
+
 						$("#victory_screen").css({ display: "flex" });
 						$("#victory_screen").animate({ opacity: 0.9 }, 1500);
 						$("#player-results").hide();
@@ -1052,6 +1063,7 @@
 			// reset the number of inactive clients (clients that connect in this time can play the next round)
 			document.inactiveClients = 0;
 			$("#message").html("Get ready for the next round!");
+			$("#status").css({display:"flex"});
 			$("#status").html("3");
 			document.getElementById("sound-effect-clock").play();
 			sleep(1000).then(() => {
@@ -1063,6 +1075,7 @@
 					sleep(1000).then(() => {
 						$("#current_song_service").show();
 						$("#status").html("");
+						$("#status").hide();
 						$("#message").html("Guess the artist or title that is currently playing!");
 
 						// reset the roundTime again, at the actual start of the round
