@@ -423,22 +423,28 @@
 
 		function play_random_song() {
 			console.log("play random song was called");
-
-			
-
 			document.round++;
+			console.log("increased round counter");
 			$("#roundCounter").html("Round</br>" + document.round + "/" + document.maxRound);
+			console.log("set round counter display");
 
 			randomSongIndex = randomIntFromInterval(0, library.length - 1);
+			console.log("got id of random song");
 			randomSong = library[randomSongIndex];
+			console.log("got the random song object");
 			// remove song from the library so it will not get played more than once
 			library.remove(randomSongIndex);
+			console.log("removed the random song from the library");
 
 			// get wrong answers for multiple choice
 			wrong_answers = 0;
 			wrong_answers_array = [];
 			artist_or_title = randomIntFromInterval(0, 1);
+			console.log("determined whether to let the user guess artist or title");
+
+			console.log("entering while loop");
 			while (wrong_answers < 3) {
+				
 				// 50:50 chance that wrong answer is either artist or title
 
 				suitable_wrong_answer = true;
@@ -506,6 +512,7 @@
 			$("#player").prop("volume", document.musicVolume);
 			// $('#player').get(0).currentTime = 5;
 			$("#playanimation").show();
+			console.log("triggered the bars animation");
 
 
 			artist = randomSong.artist;
