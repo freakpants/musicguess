@@ -71,8 +71,12 @@
 			<i class="fa fa-undo  undo"></i>
 		</span>
 		<div class="button_text">Return to main menu</div>
-</div>
-	
+	</div>
+	<div class="flexbox" id="loading">
+		<span class="fa-lg icon-container">
+			<i class="fa fa-undo  undo"></i>
+		</span>
+	</div>
 </div>
 
 
@@ -308,7 +312,7 @@ function check_for_master(){
 		$("#waiting_for_start").hide();
 	} else {
 		$("#menu").hide();
-		$("#waiting_for_start").show();
+		$("#waiting_for_start").css({display: "flex"});
 	}
 }
 
@@ -335,7 +339,7 @@ air_console.onMessage = function(from, data) {
 		// if there is a round in progress, and the client is inactive hide the menu and display the wait message instead
 		console.log("controller " + air_console.getDeviceId() + " has received message inactive");
 		$("#menu").hide();
-		$("#waiting_for_next_round").show();
+		$("#waiting_for_next_round").css({display: "flex"});
 		$("#waiting_for_start").hide();
 	}
 

@@ -190,12 +190,20 @@ body{
 	margin-top: 30px;
 }
 
-#game_over, #back_from_credits{
+#game_over, #back_from_credits, #waiting_for_next_round, #waiting_for_start{
 	width: 100vw;
     height: 100vh;
 	background-color: #b51d05;
 	display: none;
 	flex-direction:column;
+}
+
+#waiting_for_next_round, #waiting_for_start{
+	justify-content: center;
+    text-align: center;
+    font-size: 1.5em;
+	flex-direction: column;
+    box-sizing: border-box;
 }
 
 #round_over_song_details .result_banner{
