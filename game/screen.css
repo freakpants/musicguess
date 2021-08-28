@@ -230,6 +230,7 @@ div .avatar_wrong{
 	margin-top:20px;
 	position:relative;
 	justify-content:center;
+	align-items: start;
 }
 
 #playlist-selector .album_art{
@@ -238,7 +239,6 @@ div .avatar_wrong{
 	background: #e8822d;
 	margin-left:10px;
 	min-height: 33vh;
-	max-height: 33vh;
 	font-size: 0.5em;
 	box-shadow: 1px 1px 10px black;
 }

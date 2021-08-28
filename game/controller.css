@@ -12,7 +12,6 @@ text white: white;
 
 body{
 	margin:0px;
-	background-color: #b51d05;
 }
 
 
@@ -355,7 +354,7 @@ body{
 
 #round_over_song_details .player_score, #round_over_song_details .player_round_result{
 	display:inline;
-	padding: 0.5em;
+	padding: 1em;
 }
 
 .result_banner.wrong{

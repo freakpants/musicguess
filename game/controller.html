@@ -233,8 +233,6 @@
 			}
 		});
 
-
-
 		$("#game_over").click(function (event) {
 			$("#game_over").hide();
 			$("#loading").css({display: "flex"});
@@ -553,7 +551,7 @@
 				$(".wrong").off();
 
 				// hide the song area from previous rounds
-				$("#round_over_song_details").hide();
+				// $("#round_over_song_details").hide();
 
 				// push the correct information from the song to the round over screen
 				$(".song_artist").html(data[0].artist);
@@ -623,10 +621,10 @@
 					air_console.message(0, correctGuess);
 
 					// grey out the other answers
-					$("#guessing_buttons_full #choice_1").css('opacity', '0.2');
-					$("#guessing_buttons_full #choice_2").css('opacity', '0.2');
-					$("#guessing_buttons_full #choice_3").css('opacity', '0.2');
-					$("#guessing_buttons_full #choice_4").css('opacity', '0.2');
+					$("#guessing_buttons_full #choice_1").css('opacity', '0.5');
+					$("#guessing_buttons_full #choice_2").css('opacity', '0.5');
+					$("#guessing_buttons_full #choice_3").css('opacity', '0.5');
+					$("#guessing_buttons_full #choice_4").css('opacity', '0.5');
 
 					// highlight the correct answer
 					id = $(this).attr("id");
