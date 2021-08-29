@@ -5,6 +5,16 @@ text yellow: #ffdc40;
 text white: white;
 */
 
+@media (max-width: 320px) {
+	#credits#credits{
+		font-size: 0.8em;
+	}
+	.button_text, .vertical-container {
+		font-size: 1em;
+	}
+}
+
+
 @font-face {
   font-family: 'DiscoFont';
   src: url('Monoton-Regular.ttf')  format('truetype');
