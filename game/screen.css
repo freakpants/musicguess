@@ -293,10 +293,12 @@ video#bgvid {
 }
 
 #game_logo {
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
     font-family: 'DiscoFont';
     font-weight: 500;
-    font-size: 115px;
-    line-height: 115px;
+    font-size: 3em;
+    line-height: 1em;
     -webkit-text-stroke: 2px #fc3756;
     text-shadow: -1px 1px 5px rgb(181 29 5), 
 	-2px 2px 5px rgb(181 29 5), 
