@@ -354,7 +354,7 @@ body{
 
 #round_over_song_details .player_score, #round_over_song_details .player_round_result{
 	display:inline;
-	padding: 1em;
+	padding: 1.4em;
 }
 
 .result_banner.wrong{
