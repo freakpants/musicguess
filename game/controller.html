@@ -60,11 +60,31 @@
 		<div class="button_text">Return to main menu</div>
 	</div>
 
-	<div class="flexbox" id="back_from_credits">
+	<div id="back_from_credits_area" class="flexbox">
+		<div id="credits">
+				<span class="category">Developed by:</span>
+				<span class="content">Christian Nyffenegger, <a onclick="air_console.openExternalUrl('https://twitter.com/freakpants')" target="_blank"
+						href="https://twitter.com/freakpants">freakpants</a></span></br>
+				<span class="category">Background video by:</span>
+				<span class="content"><a onclick="air_console.openExternalUrl('https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154')" target="_blank"
+						href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav
+						Jakupec</a> / Pixabay</span></br>
+				<span class="category">Music provided by:</span>
+				<span class="content"><a onclick="air_console.openExternalUrl('https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html')" target="_blank"
+						href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html">Itunes
+						Search API Preview</a></span></br>
+				<span class="category">Sound effects by:</span>
+				<span class="content"><a onclick="air_console.openExternalUrl('https://www.zapsplat.com')" target="_blank" href="https://www.zapsplat.com">Zapsplat</a></span></br>
+				<span class="category">SVG Loaders by:</span>
+				<span class="content">
+					<a onclick="air_console.openExternalUrl('https://twitter.com/sherb')" target="_blank" href="https://twitter.com/sherb">Sam Herbert</a> 
+					(<a onclick="air_console.openExternalUrl('https://github.com/SamHerbert/SVG-Loaders')" target="_blank" href="https://github.com/SamHerbert/SVG-Loaders">Github</a>)
+				</span></br>
+		</div>
 		<span class="fa-lg icon-container">
 			<i class="fa fa-undo  undo"></i>
 		</span>
-		<div class="button_text">Return to main menu</div>
+		<div id="back_from_credits" class="button_text">Return to main menu</div>
 	</div>
 
 	<div class="flexbox" id="get_ready">
@@ -189,7 +209,7 @@
 			sleep(3100).then(() => {
 				// when the animation on the screen is finished, display the go back to menu button
 				$("#loading").hide();
-				$("#back_from_credits").css("display", "flex");
+				$("#back_from_credits_area").css("display", "flex");
 			});
 		});
 
@@ -251,7 +271,7 @@
 			command.push({ type: "back_from_credits" });
 			air_console.message(0, command);
 
-			$("#back_from_credits").hide();
+			$("#back_from_credits_area").hide();
 			$("#loading").css({ display: "flex" });
 			// wait for the animation on the screen to finish
 			sleep(3100).then(() => {
@@ -374,7 +394,7 @@
 			if (data[0].type === "show_back_from_credits") {
 				$("#waiting_for_next_round").hide();
 				$("#waiting_for_start").hide();
-				$("#back_from_credits").css({ display: "flex" });
+				$("#back_from_credits_area").css({ display: "flex" });
 			}
 
 			if (data[0].type === "show_back_to_main") {
@@ -386,7 +406,7 @@
 			if (data[0].type === "hide_menu") {
 				$("#waiting_for_next_round").hide();
 				$("#menu").hide();
-				$("#back_from_credits").hide();
+				$("#back_from_credits_area").hide();
 				$("#game_over").hide();
 				$("#waiting_for_start").css({ display: "flex" });
 			}

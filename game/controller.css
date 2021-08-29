@@ -14,7 +14,6 @@ body{
 	margin:0px;
 }
 
-
 #position{
 	display: none;
 	right: 0.25em;
@@ -50,22 +49,38 @@ body{
 	margin-bottom: 1em;
 }
 
-#score_report .result_category{
+#score_report .result_category, #credits .category{
 	color: #ffdc40;
 	text-transform: uppercase;
 }
 
-#score_report .result{
+#score_report .result, #credits .result{
 	text-transform: none;
 	color: white;
 }
 
+#credits .content a{
+	color:white;
+}
+
+#credits a{
+	color: rgb(255 220 64);
+}
+
 #score_report {
-	font-size: 1.8em;
+	
 	display:none;
+}
+
+#score_report, #credits {
+	font-size: 1.2em;
 	flex-direction: column;
 	align-items: center;
 	text-transform:none;
+}
+
+#credits {
+	display: flex;
 }
 
 #score_report .button_text{
@@ -253,17 +268,22 @@ body{
     height: 100vh;
 }
 
-#game_over .icon-container, #back_from_credits .icon-container{
+#game_over .icon-container, #back_from_credits_area .icon-container{
 	display: contents;
 }
 
-#game_over .button_text, #back_from_credits .button_text{
+#game_over .button_text{
 	width: 100%;
 	position: relative;
 	margin-top: 30px;
 }
 
-#game_over, #back_from_credits, #waiting_for_next_round, #waiting_for_start, #get_ready, #score_report{
+#back_from_credits_area .button_text{
+	width: 100%;
+	position: relative;
+}
+
+#game_over, #back_from_credits_area, #waiting_for_next_round, #waiting_for_start, #get_ready, #score_report{
 	width: 100vw;
     height: 100vh;
 	background-color: #b51d05;
