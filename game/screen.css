@@ -5,6 +5,68 @@ text yellow: #ffdc40;
 text white: white;
 */
 
+@media (max-width: 960px) {
+	#playlist-selector#playlist-selector .playlist-text{
+		font-size: 1.5em;
+	}
+	#game_logo#game_logo{
+		font-size: 2em;
+		margin-bottom: 0.1em;
+		margin-top: 0.1em;
+	}
+	#playlist-selector#playlist-selector .album_art.active{
+		font-size: 0.6em;
+	}
+	#roundTime#roundTime{
+		font-size: 5em;
+	}
+	.single-result.single-result img{
+		width: 60px;
+		height: 60px;
+	}
+	.single-result.single-result{
+		width: 60px;
+		font-size: 0.8em;
+	}
+	#playanimation#playanimation{
+		width: unset;
+	}
+	img.itunes.itunes{
+		width: 120px;
+	}
+	div#current_song_service #disclaimer#disclaimer{
+		font-size: 0.5em;
+	}
+	#message#message{
+		font-size: 0.8em;
+	}
+	#status#status{
+		font-size: 2em;
+	}
+	div .darken_image.darken_image {
+		width: 60px;
+		height: 60px;
+		font-size: 0.8em;
+	}
+	.player_score.player_score, .player_name.player_name{
+		font-size: 0.8em;
+		width: 60px;
+	}
+	.position_display.position_display{
+		width: 60px;
+		font-size: 2em;
+	}
+	#victory_screen .game_over.game_over{
+		font-size: 1em;
+	}
+	#credits#credits, #victory_screen#victory_screen{
+		font-size: 1em;
+	}
+	#victory_screen#victory_screen .player_score, #victory_screen#victory_screen .player_name{
+		font-size: 1.5em;
+	}	
+}
+
 #credits-container{
 	flex-direction: column;
 	justify-content: center;
@@ -231,6 +293,7 @@ div .avatar_wrong{
 	position:relative;
 	justify-content:center;
 	align-items: start;
+	letter-spacing: 1px;
 }
 
 #playlist-selector .album_art{

@@ -12,6 +12,23 @@ text white: white;
 	.button_text, .vertical-container {
 		font-size: 1em;
 	}
+	#position#position{
+		font-size: 2em;
+	}
+	#score_report#score_report .result_category{
+		font-size: 0.5em;
+	}
+	.score_report_title.score_report_title{
+		font-size: 0.5em;
+	}
+	#score_report#score_report .button_text {
+		font-size: 0.5em;
+	}
+}
+@media (min-width: 576px) {
+	#credits{
+		margin-bottom: 1em;
+	}
 }
 
 
