@@ -428,6 +428,14 @@
 				}
 			}
 
+			if (data[0].type === "skipping") {
+				// we do not check if the player is already viewing the result screen, because at this point he probably still is from last round
+				if (!document.showing_result_screen) {
+					$(".player_score").html(document.currentScore + " Points (+" + 0 + ")");
+					show_result_screen("skipping");
+				}
+			}
+
 			if (data[0].type === "playlist_rounds") {
 				document.maxPlaylistRounds = data[0].playlist_rounds;
 				// when switching playlists, the round amount can be too high, fix this
@@ -713,6 +721,7 @@
 		}
 
 		function show_result_screen(type) {
+			console.log("showing result screen");
 			document.showing_result_screen = true;
 
 			// hide all guessing buttons
@@ -725,11 +734,13 @@
 			if (type === "out_of_time") {
 				$(".result_banner").addClass("wrong");
 				$(".player_round_result").html("Out of time!");
+			} else if (type === "skipping") { 
+				$(".result_banner").addClass("wrong");
+				$(".player_round_result").html("Skipped broken song.");
 			} else {
 				$(".result_banner").addClass(type);
 				$(".player_round_result").html(type + "!");
 			}
-
 		}
 
 		function disable_guessing_buttons_event_handlers() {

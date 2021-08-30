@@ -74,6 +74,8 @@
 		<source src="sounds/start.mp3" type="audio/mpeg">
 	</audio>
 
+	<audio id="player" autoplay> <source src="" type="audio/mpeg"></audio>
+
 	<video playsinline autoplay muted loop id="bgvid">
 		<source src="videos/disco_loop.mp4" type="video/mp4">
 	</video>
@@ -116,8 +118,28 @@
 		document.ad_showing = false;
 		document.showing_credits = false;
 		document.game_over_screen = false;
+		document.playerFailed = false;
 
 		$(document).ready(function () {
+
+			document.getElementById("player").addEventListener('error', function failed(e) {
+				// audio playback failed - show a message saying why
+				// to get the source of the audio element use $(this).src
+				switch (e.target.error.code) {
+					case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+						console.log('The video audio not be loaded, either because the server or network failed or because the format is not supported.');
+					case e.target.error.MEDIA_ERR_ABORTED:
+						console.log('You aborted the video playback.');
+					case e.target.error.MEDIA_ERR_NETWORK:
+						console.log('A network error caused the audio download to fail.');
+					case e.target.error.MEDIA_ERR_DECODE:
+						console.log('The audio playback was aborted due to a corruption problem or because the video used features your browser did not support.');
+					default:
+						console.log('An unknown error occurred.');
+						document.playerFailed = true;
+					break;
+				}
+				}, true);
 
 			// get the playlists info
 			$.ajax({ method: "GET", url: "playlists/playlist_info.json", data: {}, dataType: "json" })
@@ -132,6 +154,8 @@
 					middle_id = Math.floor(playlists.length / 2);
 
 					playlists.forEach(function (playlist) {
+						console.log("loading playlist");
+						console.log(playlist);
 						if (counter === middle_id) {
 							// defaults to popular stuff
 							document.selectedPlaylist = middle_id;
@@ -179,6 +203,18 @@
 			// if in an active round, since a disconnect isnt registered instantly, keep checking if the round is actually already over
 			if (document.round > 0 && !document.roundEndInitiated) {
 				check_if_all_players_have_guessed();
+			}
+
+			if(document.playerFailed){
+				console.log("player failed, skipping song");
+				$("#roundTime").hide();
+				$("#message").html("Broken song, skipping!");
+
+				skipping = [];
+				skipping.push({ type: "skipping" });
+				air_console.broadcast(skipping);
+				document.roundEndInitiated = true;
+				round_end();
 			}
 
 			// console.log("roundendinitiated: " + document.roundEndInitiated);
@@ -371,7 +407,8 @@
 							$("#current_song_service").show();
 
 
-							$(".debug").hide();
+							// $(".debug").hide();
+							document.playerFailed = false;
 
 							// get list of songs, choose one at random
 							$.ajax(
@@ -381,6 +418,7 @@
 									library_copy_for_wrong_answers = library.slice();
 									// console.log(library);
 									console.log("playing random song for the first time");
+									
 									play_random_song();
 								});
 
@@ -498,18 +536,17 @@
 			// console.log("playing song " + randomSongIndex + " in library");
 			// console.log(randomSong);
 
-			// remove previous player
-			$("#player").remove();
+			// change song id in player
+			$("#player").attr("src", randomSong.preview_url);
+			// turn volume back up
+			console.log("resetting player volume");
+			$("#player").prop("volume", document.musicVolume);
 
-			player = '<audio id="player" autoplay> <source src="' + randomSong.preview_url + '" type="audio/mpeg"></audio>';
-
-			$("body").append(player);
 
 			// record start time
 			document.startTime = new Date().getTime();
 
-			// turn volume back up
-			$("#player").prop("volume", document.musicVolume);
+
 			// $('#player').get(0).currentTime = 5;
 			$("#playanimation").show();
 			console.log("triggered the bars animation");
@@ -536,6 +573,7 @@
 				answerType: artist_or_title,
 				buy_link: buy_link
 			});
+
 			// send the solution to all clients
 			air_console.broadcast(document.solution);
 		}
@@ -703,14 +741,14 @@
 					}
 					break;
 				case 'correctGuess':
-					$("#player").stop();
+					// $("#player").stop();
 					//$("#player").prop("volume", "0");
 					document.getElementById("sound-effect-correct").play();
 					//$("#player").animate({volume: document.musicVolume}, 2400);
 					handle_guess(message, from);
 					break;
 				case 'wrongGuess':
-					$("#player").stop();
+					// $("#player").stop();
 					//$("#player").prop("volume", "0");
 					document.getElementById("sound-effect-wrong").play();
 					//$("#player").animate({volume: document.musicVolume}, 1200);
@@ -945,6 +983,8 @@
 			});
 			if (typeof fastestPlayers !== 'undefined' && typeof fastestPlayers[0] !== 'undefined' && fastestPlayers[0].correct) {
 				fastestString = "Fastest player: " + air_console.getNickname(fastestPlayers[0].player) + " with " + fastestPlayers[0].currentGuessTime + " seconds.";
+			} else if (document.playerFailed){
+				fastestString = "We apologize for the inconvenience.";
 			} else {
 				fastestString = "Nobody guessed correctly!";
 			}
@@ -962,14 +1002,20 @@
 
 			$("#current_song_service").hide();
 
-			debug = true;
-			$(".debug").show();
+			// debug = true;
+			// $(".debug").show();
 
 			$("#playanimation").hide();
-			$("#player").animate({ volume: 0 }, 4000);
-			$("#message").html("Round is over!");
-
-
+			
+			if(document.playerFailed){
+				document.playerFailed = false;
+				$("#message").html("Skipped a broken song.");
+				$("#roundTime").hide();
+				$("#playanimation").hide();
+			} else {
+				$("#player").animate({ volume: 0 }, 4000);
+				$("#message").html("Round is over!");
+			}
 
 			sleep(4000).then(() => {
 
