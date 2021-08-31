@@ -84,18 +84,13 @@
 		var air_console = new AirConsole();
 
 		// whether or not to display all information
-		var debug = false;
+		const DEBUG = false;
 
 		// scroll the result areas or not
 		document.scroll_results = false;
 
 		// variable to store the library in after an initial query
 		var library;
-
-		// initially hide the debug section (unless var is set to true)
-		if (debug === false) {
-			$(".debug").hide();
-		}
 
 		// relative to the sound effects
 		document.musicVolume = 0.4;
@@ -127,15 +122,15 @@
 				// to get the source of the audio element use $(this).src
 				switch (e.target.error.code) {
 					case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
-						console.log('The video audio not be loaded, either because the server or network failed or because the format is not supported.');
+						DEBUG && console.log('The video audio not be loaded, either because the server or network failed or because the format is not supported.');
 					case e.target.error.MEDIA_ERR_ABORTED:
-						console.log('You aborted the video playback.');
+						DEBUG && console.log('You aborted the video playback.');
 					case e.target.error.MEDIA_ERR_NETWORK:
-						console.log('A network error caused the audio download to fail.');
+						DEBUG && console.log('A network error caused the audio download to fail.');
 					case e.target.error.MEDIA_ERR_DECODE:
-						console.log('The audio playback was aborted due to a corruption problem or because the video used features your browser did not support.');
+						DEBUG && console.log('The audio playback was aborted due to a corruption problem or because the video used features your browser did not support.');
 					default:
-						console.log('An unknown error occurred.');
+						DEBUG && console.log('An unknown error occurred.');
 						document.playerFailed = true;
 					break;
 				}
@@ -154,8 +149,8 @@
 					middle_id = Math.floor(playlists.length / 2);
 
 					playlists.forEach(function (playlist) {
-						console.log("loading playlist");
-						console.log(playlist);
+						DEBUG && console.log("loading playlist");
+						DEBUG && console.log(playlist);
 						if (counter === middle_id) {
 							// defaults to popular stuff
 							document.selectedPlaylist = middle_id;
@@ -206,7 +201,7 @@
 			}
 
 			if(document.playerFailed){
-				console.log("player failed, skipping song");
+				DEBUG && console.log("player failed, skipping song");
 				$("#roundTime").hide();
 				$("#message").html("Broken song, skipping!");
 
@@ -217,9 +212,10 @@
 				round_end();
 			}
 
-			// console.log("roundendinitiated: " + document.roundEndInitiated);
+			DEBUG && console.log("roundendinitiated: " + document.roundEndInitiated);
 			if (document.RoundTime > 0 && document.roundEndInitiated === false) {
-				// console.log("checking if we are out of time");
+				// this generates a whole lot of log lines, because it is calling itself permanently
+				// DEBUG && console.log("checking if we are out of time");
 				setTimeout(calculateRoundTime, 0);
 			} else if (document.roundEndInitiated === false) {
 				console.log("out of time");
@@ -400,14 +396,11 @@
 							$("#roundTime").html(document.RoundTime);
 							$("#roundTime").css("display", "flex");
 
-
 							// override screen with play area
 							$("#message").html("Guess the artist or title that is currently playing!");
 							$("#playanimation").show();
 							$("#current_song_service").show();
 
-
-							// $(".debug").hide();
 							document.playerFailed = false;
 
 							// get list of songs, choose one at random
@@ -718,40 +711,16 @@
 					document.getElementById("sound-effect-start").play();
 					start();
 					break;
-				/* 
-				this appears to be unreachable code currently
-				case 'nextSong':
-					console.log("received message next song");
-					// reset guess areas
-					$(".resetme").each(function () {
-						$(this).html("");
-					});
-					play_random_song();
-					break;
-				*/
-				case 'debug':
-					if (debug) {
-						// turn it off
-						debug = false;
-						$(".debug").hide();
-					} else {
-						// turn it on
-						debug = true;
-						$(".debug").show();
-					}
-					break;
 				case 'correctGuess':
-					// $("#player").stop();
-					//$("#player").prop("volume", "0");
+					// play the correct guess sound
 					document.getElementById("sound-effect-correct").play();
-					//$("#player").animate({volume: document.musicVolume}, 2400);
+					// deal with the score changes etc
 					handle_guess(message, from);
 					break;
 				case 'wrongGuess':
-					// $("#player").stop();
-					//$("#player").prop("volume", "0");
+					// play the wrong guess sound
 					document.getElementById("sound-effect-wrong").play();
-					//$("#player").animate({volume: document.musicVolume}, 1200);
+					// deal with the score changes etc
 					handle_guess(message, from);
 					break;
 				case 'next_playlist':
@@ -1002,9 +971,6 @@
 
 			$("#current_song_service").hide();
 
-			// debug = true;
-			// $(".debug").show();
-
 			$("#playanimation").hide();
 			
 			if(document.playerFailed){
@@ -1022,8 +988,6 @@
 
 
 				document.amount_of_finished_players = 0;
-				debug = false;
-				$(".debug").hide();
 
 				// remove correct/wrong classes - we wait for the timer to pass because otherwise the last players result wont get highlighted on the screen
 				$(".darken_image").removeClass("avatar_wrong");
