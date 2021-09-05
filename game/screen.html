@@ -191,7 +191,8 @@
 			// display the current time on the UI
 			$("#roundTime").html(document.RoundTime);
 
-			if (document.RoundTime === 6) {
+			if (document.RoundTime === 6 && !document.animatingVolume) {
+				document.animatingVolume = true;
 				$("#player").animate({ volume: 0 }, 6000);
 			}
 
@@ -453,27 +454,27 @@
 		} */
 
 		function play_random_song() {
-			console.log("play random song was called");
+			DEBUG && console.log("play random song was called");
 			document.round++;
-			console.log("increased round counter");
+			DEBUG && console.log("increased round counter");
 			$("#roundCounter").html("Round</br>" + document.round + "/" + document.maxRound);
-			console.log("set round counter display");
+			DEBUG && console.log("set round counter display");
 
 			randomSongIndex = randomIntFromInterval(0, library.length - 1);
-			console.log("got id of random song");
+			DEBUG && console.log("got id of random song");
 			randomSong = library[randomSongIndex];
-			console.log("got the random song object");
+			DEBUG && console.log("got the random song object");
 			// remove song from the library so it will not get played more than once
 			library.remove(randomSongIndex);
-			console.log("removed the random song from the library");
+			DEBUG && console.log("removed the random song from the library");
 
 			// get wrong answers for multiple choice
 			wrong_answers = 0;
 			wrong_answers_array = [];
 			artist_or_title = randomIntFromInterval(0, 1);
-			console.log("determined whether to let the user guess artist or title");
+			DEBUG && console.log("determined whether to let the user guess artist or title");
 
-			console.log("entering while loop");
+			DEBUG && console.log("entering while loop");
 			while (wrong_answers < 3) {
 				
 				// 50:50 chance that wrong answer is either artist or title
@@ -531,9 +532,10 @@
 
 			// change song id in player
 			$("#player").attr("src", randomSong.preview_url);
+			
 			// turn volume back up
 			DEBUG && console.log("resetting player volume");
-			
+			document.animatingVolume = false;
 			player = document.getElementById("player");
 			player.volume = 0.4;
 			
@@ -886,7 +888,7 @@
 		};
 
 		air_console.onAdComplete = function (ad_was_shown) {
-			console.log("onAdComplete is triggered");
+			DEBUG && console.log("onAdComplete is triggered");
 			document.ad_showing = false;
 			document.roundEndInitiated = true;
 			next_round();
@@ -894,8 +896,8 @@
 
 		function send_score(){
 			document.playerScores.forEach(function (score) {
-				console.log("sending score to player " + score.player);
-				console.log(score);
+				DEBUG && console.log("sending score to player " + score.player);
+				DEBUG && console.log(score);
 				score_message = [];
 				score_message.push({ type: "score", score: score, maxRound: document.maxRound });
 				air_console.message(score.player, score_message);
@@ -908,7 +910,7 @@
 				return;
 			} */
 
-			console.log("round end function was called");
+			DEBUG && console.log("round end function was called");
 
 			// determine fastest player
 			// clone array for sorting differently
@@ -984,6 +986,11 @@
 				$("#roundTime").hide();
 				$("#playanimation").hide();
 			} else {
+				if(!document.animatingVolume){
+					$("#player").animate({ volume: 0 }, 4000);
+					document.animatingVolume = true;
+				}
+				
 				$("#message").html("Round is over!");
 			}
 
