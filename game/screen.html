@@ -218,7 +218,7 @@
 				// DEBUG && console.log("checking if we are out of time");
 				setTimeout(calculateRoundTime, 0);
 			} else if (document.roundEndInitiated === false) {
-				console.log("out of time");
+				DEBUG && console.log("out of time");
 				// give 30 seconds to everyone who did not guess
 				air_console.getControllerDeviceIds().forEach(function(id){
 					// try selecting current score
@@ -532,8 +532,13 @@
 			// change song id in player
 			$("#player").attr("src", randomSong.preview_url);
 			// turn volume back up
-			console.log("resetting player volume");
-			$("#player").prop("volume", document.musicVolume);
+			DEBUG && console.log("resetting player volume");
+			
+			player = document.getElementById("player");
+			player.volume = 0.4;
+			
+			// apparently this is broken?
+			// $("#player").prop("volume", 0.4);
 
 
 			// record start time
@@ -542,7 +547,7 @@
 
 			// $('#player').get(0).currentTime = 5;
 			$("#playanimation").show();
-			console.log("triggered the bars animation");
+			DEBUG && console.log("triggered the bars animation");
 
 
 			artist = randomSong.artist;
@@ -608,13 +613,13 @@
 
 			// check if there is currently a round in progress
 			if (document.round > 0 && !document.roundEndInitiated && !document.game_over_screen) {
-				console.log("we a currently in a game");
+				DEBUG && console.log("we a currently in a game");
 				// let the new client know to display the please wait message (instead of waiting for master controller)
 				air_console.message(device_id, inactive);
 				// store the fact that we have an inactive client in this round
 				document.inactiveClients += 1;
 			} else if(document.game_over_screen){
-				console.log("we are currently showing the game over screen");
+				DEBUG && console.log("we are currently showing the game over screen");
 				// if the client is master, direct him to show the back to main
 				if(air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id){
 					air_console.message(device_id, show_back_to_main);
@@ -623,7 +628,7 @@
 					air_console.message(device_id, hide_menu);
 				}
 			} else if(document.showing_credits){
-				console.log("we are currently showing credits");
+				DEBUG && console.log("we are currently showing credits");
 				// if we are currently showing credits, let the client know what to display
 				// if the client is master, direct him to show the back from credits
 				if(air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id){
@@ -633,10 +638,10 @@
 					air_console.message(device_id, hide_menu);
 				}
 			} else {
-				console.log("There is no round in progress, and we are not showing credits");
+				DEBUG && console.log("There is no round in progress, and we are not showing credits");
 				// if there is no round in progress, check if the connected device is the master
 				if(air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id){
-					console.log("device " + device_id + " is the master");
+					DEBUG && console.log("device " + device_id + " is the master");
 					// let the new client know to display the menu)
 					air_console.message(device_id, show_menu);
 					// also let all other clients know NOT to display the menu anymore
@@ -645,7 +650,7 @@
 						air_console.message(id, hide_menu);
 					});
 				} else {
-					console.log("device " + device_id + " is not a master");
+					DEBUG && console.log("device " + device_id + " is not a master");
 					air_console.message(device_id, hide_menu);
 				}
 				
@@ -660,7 +665,7 @@
 			} else if(document.game_over_screen){
 				// let the new master know to display the back to main
 				if(air_console.getMasterControllerDeviceId() !== undefined){
-					console.log("informing new master to show the back to main button");
+					DEBUG && console.log("informing new master to show the back to main button");
 					message = [];
 					message.push({
 						type: "show_back_to_main"
@@ -670,7 +675,7 @@
 			} else if(document.showing_credits){
 				// let the new master know to display the back from credits
 				if(air_console.getMasterControllerDeviceId() !== undefined){
-					console.log("informing new master to show the back to credits button");
+					DEBUG && console.log("informing new master to show the back to credits button");
 					message = [];
 					message.push({
 						type: "show_back_from_credits"
@@ -693,7 +698,7 @@
 		air_console.onMessage = function (from, message) {
 			// handle message
 			var type = message[0].type;
-			console.log('handling ' + type + ' message on screen.');
+			DEBUG && console.log('handling ' + type + ' message on screen.');
 
 			switch (type) {
 				case 'credits':
@@ -876,7 +881,7 @@
 
 
 		air_console.onAdShow = function () {
-			console.log("ad has started showing");
+			DEBUG && console.log("ad has started showing");
 			document.ad_showing = true;
 		};
 
@@ -979,7 +984,6 @@
 				$("#roundTime").hide();
 				$("#playanimation").hide();
 			} else {
-				$("#player").animate({ volume: 0 }, 4000);
 				$("#message").html("Round is over!");
 			}
 
@@ -1003,8 +1007,8 @@
 
 					// let every player know their score for their after game report
 					document.playerScores.forEach(function (score) {
-						console.log("sending score to player " + score.player);
-						console.log(score);
+						DEBUG && console.log("sending score to player " + score.player);
+						DEBUG && console.log(score);
 						score_message = [];
 						score_message.push({ type: "score_report", score: score, maxRound: document.maxRound });
 						air_console.message(score.player, score_message);
@@ -1074,6 +1078,9 @@
 		}
 
 		function next_round() {
+			// stop the volume from going down
+			// $("#player").stop();
+
 			document.roundEndInitiated = false;
 			// initiate next round
 			// reset the number of inactive clients (clients that connect in this time can play the next round)
@@ -1107,11 +1114,11 @@
 
 						// initiate round time keeptracker
 						document.roundEndInitiated = false;
-						console.log("start keeping track of roundtime");
+						DEBUG && console.log("start keeping track of roundtime");
 						calculateRoundTime();
 
 						$("#roundTime").css("display", "flex");
-						console.log("calling play random song for next round");
+						DEBUG && console.log("calling play random song for next round");
 						play_random_song();
 					});
 				});
@@ -1268,7 +1275,7 @@
 			// increase the amount of finished players
 			document.amount_of_finished_players++;
 
-			console.log("handle_guess is calling check if all players have guessed");
+			DEBUG && console.log("handle_guess is calling check if all players have guessed");
 			check_if_all_players_have_guessed();
 			send_score();
 		}
