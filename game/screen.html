@@ -21,7 +21,6 @@
 		<div id="status-wrapper">
 			<span id="status"></span>
 		</div>
-		<img id="playanimation" src="audio.svg" />
 		<div id="current_song_service"></div>
 		<div id="victory_screen"></div>
 	</div>
@@ -76,10 +75,6 @@
 
 	<audio id="player" autoplay> <source src="" type="audio/mpeg"></audio>
 
-	<video playsinline autoplay muted loop id="bgvid">
-		<source src="videos/disco_loop.mp4" type="video/mp4">
-	</video>
-
 	<script type="text/javascript">
 		var air_console = new AirConsole();
 
@@ -114,6 +109,8 @@
 		document.showing_credits = false;
 		document.game_over_screen = false;
 		document.playerFailed = false;
+
+		document.low_performance = false;
 
 		$(document).ready(function () {
 
@@ -159,9 +156,26 @@
 						} else {
 							html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art">';
 						}
-						playlist.album_art.forEach(function (element) {
-							html = html + '<img src="' + element + '" />';
+
+						air_console.devices.forEach( (device) => {
+							if(device.client && device.client.low_performance){
+								document.low_performance = true;
+							}
 						});
+						
+						// dont even add the images on the gamehub app
+						if(!document.low_performance){
+							playlist.album_art.forEach(function (element) {
+								html = html + '<img src="' + element + '" />';
+							});
+							$("#screen-wrapper").append('<img id="playanimation" src="audio.svg" />');
+							$("body").append('<video playsinline autoplay muted loop id="bgvid"><source src="videos/disco_loop.mp4" type="video/mp4"></video>');
+							// hardcoded, to be replaced with field from db
+							if(playlist.id === "15"){
+								html = html + '<span class="new-sticker">NEW!</span>';
+							}
+						}
+
 						html += '<div class="playlist-text"><b>' + playlist.name + '</b>';
 						html += playlist.amount_of_tracks + ' Tracks</br>';
 						html += '<span class="playlist-description">' + playlist.description + '</span>';
