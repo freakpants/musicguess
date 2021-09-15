@@ -430,6 +430,10 @@
 				$("#game_over").css({ display: "flex" });
 			}
 
+			if (data[0].type === "hide_cancel") {
+				$("#cancel_round").hide();
+			}
+
 			if (data[0].type === "hide_menu") {
 				if(!am_i_master()){
 					$("#guessing_buttons_full").hide();

@@ -975,6 +975,10 @@
 				return;
 			} */
 
+			hide_cancel = [];
+			hide_cancel.push({ type: "hide_cancel" });
+			air_console.broadcast(hide_cancel);
+
 			DEBUG && console.log("round end function was called");
 
 			// determine fastest player
