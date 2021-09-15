@@ -14,6 +14,7 @@ Simulator:
 * Result Screen is formatted correctly
 * Game Over Screen is formatted correctly on controllers and screen
 * Can Continue to Main Menu after Game Over is done
+* Cancel out of game, start new round, check if timer is working and everthiny else
 
 Preview Version with Physical Phone:
 * Navigate to Credits and back, then start a round
@@ -36,5 +37,6 @@ Preview Version on Mi TV with Physical Phone:
 * Result Screen is formatted correctly
 * Game Over Screen is formatted correctly on controllers and screen
 * Can Continue to Main Menu after Game Over is done
+* Cancel out of game, start new round, check if timer is working and everthiny else
 
 
