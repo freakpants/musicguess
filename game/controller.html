@@ -143,6 +143,7 @@
 
 			</div>
 			<div class="text_info">
+				<span id="cancel_round">X</span>
 				<div class="song_title"></div>
 				<div class="song_album"></div>
 				<div class="song_artist"></div>
@@ -257,6 +258,18 @@
 			}
 		});
 
+		$("#cancel_round").click(function (event) {
+			$("#round_over_song_details").hide();
+			$("#loading").css({display: "flex"});
+			sleep(1500).then(() => {
+				$("#loading").hide();
+				$("#menu").css({display: "flex"});
+			});
+			var command = [];
+			command.push({ type: "cancel" });
+			air_console.message(0, command);
+		});
+
 		$("#game_over").click(function (event) {
 			$("#game_over").hide();
 			$("#loading").css({display: "flex"});
@@ -316,6 +329,14 @@
 			// if the new value is higher than 1, show the decrease button again
 			if (document.maxRound > 1) {
 				$(".decrease_rounds").children().show();
+			}
+		}
+
+		function show_or_hide_round_cancel_button(){
+			if(am_i_master()){
+				$("#cancel_round").show();
+			} else {
+				$("#cancel_round").hide();
 			}
 		}
 
@@ -408,6 +429,8 @@
 			}
 
 			if (data[0].type === "hide_menu") {
+				$("#guessing_buttons_full").hide();
+				$("#round_over_song_details").hide();
 				$("#waiting_for_next_round").hide();
 				$("#menu").hide();
 				$("#back_from_credits_area").hide();
@@ -568,6 +591,8 @@
 				// switch state back to not displaying the result so we know if we can switch to it or not
 				document.showing_result_screen = false;
 
+				show_or_hide_round_cancel_button();
+
 				// hide the waiting_for_next_round message if it was showing
 				$("#waiting_for_next_round").hide();
 
@@ -646,6 +671,8 @@
 					// disable all buttons
 					disable_guessing_buttons_event_handlers();
 
+					show_or_hide_round_cancel_button();
+
 					// let the screen know somebody got it right
 					// console.log("handling correct guess on controller");
 					var correctGuess = [];
@@ -680,6 +707,8 @@
 				$(".wrong").click(function () {
 					// disable all buttons
 					disable_guessing_buttons_event_handlers();
+
+					show_or_hide_round_cancel_button();
 
 					// let the screen know somebody got it wrong
 					// console.log("handling wrong guess on controller");

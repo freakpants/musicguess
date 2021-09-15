@@ -226,7 +226,8 @@
 				round_end();
 			}
 
-			DEBUG && console.log("roundendinitiated: " + document.roundEndInitiated);
+			// this generates a whole lot of log lines, because it is calling itself permanently
+			// DEBUG && console.log("roundendinitiated: " + document.roundEndInitiated);
 			if (document.RoundTime > 0 && document.roundEndInitiated === false) {
 				// this generates a whole lot of log lines, because it is calling itself permanently
 				// DEBUG && console.log("checking if we are out of time");
@@ -424,7 +425,7 @@
 									library = msg;
 									library_copy_for_wrong_answers = library.slice();
 									// console.log(library);
-									console.log("playing random song for the first time");
+									DEBUG && console.log("playing random song for the first time");
 									
 									play_random_song();
 								});
@@ -781,6 +782,44 @@
 						$("#playlist-selector").show("fade", {}, 1500);
 					});
 					break;
+				case 'cancel':
+					$("#message").html("");
+					$("#message").hide();
+					$("#roundCounter").hide();
+
+					// inform other controllers
+					hide_menu = [];
+					hide_menu.push({
+						type: "hide_menu"
+					});
+					air_console.broadcast(hide_menu);
+
+					// document.round = document.maxRound;
+					document.roundEndInitiated = true;
+
+					document.amount_of_finished_players = 0;
+
+					document.game_in_progress = false;
+					document.game_over_screen = false;
+
+					player = document.getElementById("player");
+					player.volume = 0;
+
+					$("#roundTime").hide();
+					$("#current_song_service").hide();
+					$("#playanimation").hide();
+					
+					// reset the results area and the round status
+					$("#results-scrollable").html("");
+					$("#status").hide();
+					$("#status").html("");
+
+					$("#victory_screen").hide();
+					$("#victory_screen").html("");
+
+					$("#game_logo").show("fade", {}, 1500);
+					$("#playlist-selector").show("fade", {}, 1500);
+				break;
 				case 'back_to_main':
 					$("#message").html("");
 					// $("#message").hide("fade", {}, 1500);
@@ -1307,12 +1346,15 @@
 			// in theory this should play the next song when all connected devices have finished
 			// since a controller can join after the round has started, this is probably a blocker we need to handle
 			if (document.amount_of_finished_players === air_console.getControllerDeviceIds().length) {
+				DEBUG && console.log("currently connected player amount: " + air_console.getControllerDeviceIds().length);
+				DEBUG && console.log("all connected controllers have finished their guess");
 				document.roundEndInitiated = true;
 				round_end();
 
 			}
 			// check if the total is correct when considering inactive players
 			else if (air_console.getControllerDeviceIds().length === document.amount_of_finished_players + document.inactiveClients) {
+				DEBUG && console.log("all connected controllers have finished their guess, considering inactive controllers");
 				document.roundEndInitiated = true;
 				round_end();
 			}

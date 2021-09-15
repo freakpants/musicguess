@@ -31,10 +31,17 @@ text white: white;
 	}
 }
 
-
 @font-face {
   font-family: 'DiscoFont';
   src: url('Monoton-Regular.ttf')  format('truetype');
+}
+
+#cancel_round{
+	display: none;
+	position: absolute;
+	left: 0.5em;
+	bottom: 0.5em;
+	font-size: 2em;
 }
 
 body{
