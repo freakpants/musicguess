@@ -5,7 +5,7 @@ requires airconsole
 Integration Checklist:
 
 Simulator:
-* Navigate to Credits and back
+* Navigate to Credits and back, then start a round
 * No player guesses - does the music continue next round?
 * Disconnect and reconnect Master Controller in Main Menu
 * Disconnect Master Controller during round
@@ -16,7 +16,7 @@ Simulator:
 * Can Continue to Main Menu after Game Over is done
 
 Preview Version with Physical Phone:
-* Navigate to Credits and back
+* Navigate to Credits and back, then start a round
 * No player guesses - does the music continue next round?
 * Disconnect and reconnect Master Controller in Main Menu
 * Disconnect Master Controller during round
@@ -27,7 +27,7 @@ Preview Version with Physical Phone:
 * Can Continue to Main Menu after Game Over is done
 
 Preview Version on Mi TV with Physical Phone:
-* Navigate to Credits and back
+* Navigate to Credits and back, then start a round
 * No player guesses - does the music continue next round?
 * Disconnect and reconnect Master Controller in Main Menu
 * Disconnect Master Controller during round
