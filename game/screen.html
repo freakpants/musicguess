@@ -170,8 +170,7 @@
 							});
 							$("#screen-wrapper").append('<img id="playanimation" src="audio.svg" />');
 							$("body").append('<video playsinline autoplay muted loop id="bgvid"><source src="videos/disco_loop.mp4" type="video/mp4"></video>');
-							// hardcoded, to be replaced with field from db
-							if(playlist.id === "15"){
+							if(playlist.new === "1"){
 								html = html + '<span class="new-sticker">NEW!</span>';
 							}
 						}

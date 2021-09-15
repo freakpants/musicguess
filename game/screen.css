@@ -69,6 +69,7 @@ text white: white;
 
 span.new-sticker{
 	position: absolute;
+	left: 0;
     top: 0.5em;
     margin-left: 0.5em;
     height: 2em;
@@ -319,6 +320,7 @@ div .avatar_wrong{
 	min-height: 33vh;
 	font-size: 0.5em;
 	box-shadow: 1px 1px 10px black;
+	position: relative;
 }
 
 #playlist-selector .album_art img{
