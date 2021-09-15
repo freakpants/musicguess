@@ -168,6 +168,8 @@
 		document.maxRound = 25;
 		document.showing_result_screen = false;
 		document.currentScore = 0;
+		// whether or not to display all information
+		const DEBUG = true;
 
 		function animatethis(targetElement, speed) {
 			var scrollWidth = $(targetElement).get(0).scrollWidth;
@@ -429,13 +431,16 @@
 			}
 
 			if (data[0].type === "hide_menu") {
-				$("#guessing_buttons_full").hide();
-				$("#round_over_song_details").hide();
-				$("#waiting_for_next_round").hide();
-				$("#menu").hide();
-				$("#back_from_credits_area").hide();
-				$("#game_over").hide();
-				$("#waiting_for_start").css({ display: "flex" });
+				if(!am_i_master()){
+					$("#guessing_buttons_full").hide();
+					$("#position").hide();
+					$("#round_over_song_details").hide();
+					$("#waiting_for_next_round").hide();
+					$("#menu").hide();
+					$("#back_from_credits_area").hide();
+					$("#game_over").hide();
+					$("#waiting_for_start").css({ display: "flex" });
+				}
 			}
 
 			if (data[0].type === "not_in_progress") {
@@ -445,8 +450,11 @@
 			}
 
 			if (data[0].type === "out_of_time") {
+				// canceling with timers going on is a bad idea
+				$("#cancel_round").hide();
 				if (!document.showing_result_screen) {
 					$(".player_score").html(document.currentScore + " Points (+" + 0 + ")");
+					DEBUG && console.log("received out of time message");
 					show_result_screen("out_of_time");
 				}
 			}
@@ -455,6 +463,7 @@
 				// we do not check if the player is already viewing the result screen, because at this point he probably still is from last round
 				if (!document.showing_result_screen) {
 					$(".player_score").html(document.currentScore + " Points (+" + 0 + ")");
+					DEBUG && console.log("received skipping message");
 					show_result_screen("skipping");
 				}
 			}
@@ -699,6 +708,7 @@
 
 					// wait 2 seconds, then display the correct result including link to buy the song
 					sleep(2000).then(() => {
+						DEBUG && console.log("2 seconds after a correct guess have passed, we are showing the result screen");
 						show_result_screen("correct");
 					});
 				});
@@ -740,6 +750,7 @@
 					document.showing_result_screen = true;
 					// wait 2 seconds, then display the correct result including link to buy the song
 					sleep(2000).then(() => {
+						DEBUG && console.log("2 seconds after a wrong guess have passed, we are showing the result screen");
 						show_result_screen("wrong");
 					});
 				});
@@ -750,7 +761,7 @@
 		}
 
 		function show_result_screen(type) {
-			console.log("showing result screen");
+			DEBUG && console.log("showing result screen");
 			document.showing_result_screen = true;
 
 			// hide all guessing buttons
