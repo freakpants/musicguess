@@ -1,5 +1,5 @@
 <head>
-	<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.6.0.js"></script>
+	<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
 	<link rel="stylesheet" href="controller.css">
 	<link rel="stylesheet" href="shared.css">
 	<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
@@ -10,7 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Georama:wght@800&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onload="init()">
 	<div id="position">
 		<span class="number"></span>
 		<span class="letters"></span>
@@ -169,234 +169,16 @@
 	</div>
 
 	<script type="text/javascript">
+		var air_console;
+		var buy_link = "https://www.apple.com/lae/music/";
+		document.maxRound = 25;
+		document.showing_result_screen = false;
+		document.currentScore = 0;
+		// whether or not to display all information
+		const DEBUG = false;
 
-		$(document).ready(function () {
-			var air_console = new AirConsole();
-			var buy_link = "https://www.apple.com/lae/music/";
-			document.maxRound = 25;
-			document.showing_result_screen = false;
-			document.currentScore = 0;
-			// whether or not to display all information
-			const DEBUG = true;
-
-			function animatethis(targetElement, speed) {
-				var scrollWidth = $(targetElement).get(0).scrollWidth;
-				var clientWidth = $(targetElement).get(0).clientWidth;
-				$(targetElement).animate({ scrollLeft: scrollWidth - clientWidth },
-					{
-						duration: speed,
-						complete: function () {
-							targetElement.animate({ scrollLeft: 0 },
-								{
-									duration: speed,
-									complete: function () {
-										animatethis(targetElement, speed);
-									}
-								});
-						}
-					});
-			};
-			/**
-			 * Shuffles array in place.
-			 * @param {Array} a items The array containing the items.
-			 */
-			function shuffle(a) {
-				var j, x, i;
-				for (i = a.length; i; i--) {
-					j = Math.floor(Math.random() * i);
-					x = a[i - 1];
-					a[i - 1] = a[j];
-					a[j] = x;
-				}
-			}
-
-			$("#round_change_buttons .vertical-container").click(function (event) {
-				// instruct the game to show the credits
-				var command = [];
-				command.push({ type: "credits" });
-				air_console.message(0, command);
-				// display loading animation
-				$("#loading").css("display", "flex");
-				// hide the menu
-				$("#menu").hide();
-				sleep(3100).then(() => {
-					// when the animation on the screen is finished, display the go back to menu button
-					$("#loading").hide();
-					$("#back_from_credits_area").css("display", "flex");
-				});
-			});
-
-
-			$("#start_game").click(function (event) {
-				// hide menu 
-				$("#menu").hide();
-
-				// show loading
-				$("#get_ready").css({ display: "flex" });
-
-				// instruct the screen to start the game in full word mode
-				var command = [];
-				command.push({ type: "startGame" });
-				air_console.message(0, command);
-			});
-
-			$("#next_playlist").click(function (event) {
-				var command = [];
-				command.push({ type: "next_playlist" });
-				air_console.message(0, command);
-			});
-
-			$("#previous_playlist").click(function (event) {
-				var command = [];
-				command.push({ type: "previous_playlist" });
-				air_console.message(0, command);
-			});
-
-			$(".decrease_rounds").click(function (event) {
-				if (document.maxRound == 1) {
-					// dont decrease rounds below 1
-				} else {
-					document.maxRound = document.maxRound - 1;
-					decrease_check();
-
-					$("#round_amount").html(document.maxRound);
-					var command = [];
-					command.push({ type: "decrease_rounds" });
-					air_console.message(0, command);
-				}
-			});
-
-			$("#cancel_round").click(function (event) {
-				$("#round_over_song_details").hide();
-				$("#loading").css({ display: "flex" });
-				sleep(1500).then(() => {
-					$("#loading").hide();
-					$("#menu").css({ display: "flex" });
-				});
-				var command = [];
-				command.push({ type: "cancel" });
-				air_console.message(0, command);
-			});
-
-			$("#game_over").click(function (event) {
-				$("#game_over").hide();
-				$("#loading").css({ display: "flex" });
-				sleep(1500).then(() => {
-					$("#loading").hide();
-					$("#menu").css({ display: "flex" });
-				});
-				var command = [];
-				command.push({ type: "back_to_main" });
-				air_console.message(0, command);
-			});
-
-			$("#back_from_credits").click(function (event) {
-				// inform the screen to display the animation
-				var command = [];
-				command.push({ type: "back_from_credits" });
-				air_console.message(0, command);
-
-				$("#back_from_credits_area").hide();
-				$("#loading").css({ display: "flex" });
-				// wait for the animation on the screen to finish
-				sleep(3100).then(() => {
-					$("#loading").hide();
-					// check if we are the master controller
-					if (am_i_master()) {
-						$("#menu").css({ display: "flex" });
-					} else {
-						$("#waiting_for_start").css({ display: "flex" });
-					}
-				});
-			});
-
-			$(".increase_rounds").click(function (event) {
-				if (document.maxRound === document.maxPlaylistRounds) {
-					// cant increase further
-				} else {
-					document.maxRound = document.maxRound + 1;
-					increase_check();
-
-					$("#round_amount").html(document.maxRound);
-					var command = [];
-					command.push({ type: "increase_rounds" });
-					air_console.message(0, command);
-				}
-			});
-
-			function am_i_master() {
-				return (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId());
-			}
-
-			/* these functions check for the boundaries of the amonut of rounds */
-			function increase_check() {
-				// if the max number of rounds is reached, hide the increase button
-				if (document.maxRound === document.maxPlaylistRounds) {
-					$(".increase_rounds").children().hide();
-				}
-				// if the new value is higher than 1, show the decrease button again
-				if (document.maxRound > 1) {
-					$(".decrease_rounds").children().show();
-				}
-			}
-
-			function show_or_hide_round_cancel_button() {
-				if (am_i_master()) {
-					$("#cancel_round").show();
-				} else {
-					$("#cancel_round").hide();
-				}
-			}
-
-			function decrease_check() {
-				// if the new value is below the limit, show the increase button again
-				if (document.maxRound < document.maxPlaylistRounds) {
-					$(".increase_rounds").children().show();
-				}
-				// if the new value is exactly 1, hide the decrease button so we dont get 0 rounds
-				if (document.maxRound === 1) {
-					$(".decrease_rounds").children().hide();
-				}
-			}
-
-			/* function check_for_master(){
-				// determine if we are the Master Controller
-				if(document.inProgress){
-					console.log("controller " + air_console.getDeviceId() + ": round is in progress, aborting master check");
-					return;
-				}
-				console.log("controller " + air_console.getDeviceId() + ":no round in progress, proceeding with master check");
-			
-				console.log("master id:" + air_console.getMasterControllerDeviceId());
-				console.log("controller id:" + air_console.getDeviceId());
-				/* if(document.activeGame){
-					// if we are in an active game, the master is irrelevant
-					return;
-				} 
-				if( air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId()){
-					// console.log("master controller! ");
-					$("#menu").css("display", "flex");
-					$("#waiting_for_start").hide();
-				} else {
-					$("#menu").hide();
-					$("#waiting_for_start").css({display: "flex"});
-				}
-			} */
-
-			/* air_console.onDisconnect = function(device_id){
-				// console.log("disconnect triggered on controller");
-				//  check_for_master();
-			}
-			
-			air_console.onConnect = function(device_id){
-				const myDeviceId = air_console.getDeviceId();
-				console.log("connect triggered on controller" +  air_console.getDeviceId(myDeviceId));
-				// check_for_master();
-				
-				// nothing
-			} */
-
-
+		function init() {
+			air_console = new AirConsole();
 			// Listen for messages from other devices
 			air_console.onMessage = function (from, data) {
 
@@ -769,41 +551,225 @@
 					$("#guessing_buttons_full").show();
 				}
 			}
+		}
 
-			function show_result_screen(type) {
-				DEBUG && console.log("showing result screen");
-				document.showing_result_screen = true;
-
-				// hide all guessing buttons
-				$("#guessing_buttons_full").hide();
-				// unhide player result area
-				$("#round_over_song_details").css("display", "flex");
-				//inform player of result
-				$(".result_banner").removeClass("wrong");
-				$(".result_banner").removeClass("correct");
-				if (type === "out_of_time") {
-					$(".result_banner").addClass("wrong");
-					$(".player_round_result").html("Out of time!");
-				} else if (type === "skipping") {
-					$(".result_banner").addClass("wrong");
-					$(".player_round_result").html("Skipped broken song.");
-				} else {
-					$(".result_banner").addClass(type);
-					$(".player_round_result").html(type + "!");
-				}
-			}
-
-			function disable_guessing_buttons_event_handlers() {
-				// unnattach all event handlers so we dont start triggering multiple messages
-				// console.log("disabling all buttons on controller, because the player guessed.");
-				$(".correct").off();
-				$(".wrong").off();
-			}
-
-			function sleep(ms) {
-				return new Promise(resolve => setTimeout(resolve, ms));
-			}
+		$("#round_change_buttons .vertical-container").click(function (event) {
+			// instruct the game to show the credits
+			var command = [];
+			command.push({ type: "credits" });
+			air_console.message(0, command);
+			// display loading animation
+			$("#loading").css("display", "flex");
+			// hide the menu
+			$("#menu").hide();
+			sleep(3100).then(() => {
+				// when the animation on the screen is finished, display the go back to menu button
+				$("#loading").hide();
+				$("#back_from_credits_area").css("display", "flex");
+			});
 		});
+
+		$(document).ready(function () {
+
+			$("#start_game").click(function (event) {
+				// hide menu 
+				$("#menu").hide();
+
+				// show loading
+				$("#get_ready").css({ display: "flex" });
+
+				// instruct the screen to start the game in full word mode
+				var command = [];
+				command.push({ type: "startGame" });
+				air_console.message(0, command);
+			});
+
+			$("#next_playlist").click(function (event) {
+				var command = [];
+				command.push({ type: "next_playlist" });
+				air_console.message(0, command);
+			});
+
+			$("#previous_playlist").click(function (event) {
+				var command = [];
+				command.push({ type: "previous_playlist" });
+				air_console.message(0, command);
+			});
+
+			$(".decrease_rounds").click(function (event) {
+				if (document.maxRound == 1) {
+					// dont decrease rounds below 1
+				} else {
+					document.maxRound = document.maxRound - 1;
+					decrease_check();
+
+					$("#round_amount").html(document.maxRound);
+					var command = [];
+					command.push({ type: "decrease_rounds" });
+					air_console.message(0, command);
+				}
+			});
+
+			$("#cancel_round").click(function (event) {
+				$("#round_over_song_details").hide();
+				$("#loading").css({ display: "flex" });
+				sleep(1500).then(() => {
+					$("#loading").hide();
+					$("#menu").css({ display: "flex" });
+				});
+				var command = [];
+				command.push({ type: "cancel" });
+				air_console.message(0, command);
+			});
+
+			$("#game_over").click(function (event) {
+				$("#game_over").hide();
+				$("#loading").css({ display: "flex" });
+				sleep(1500).then(() => {
+					$("#loading").hide();
+					$("#menu").css({ display: "flex" });
+				});
+				var command = [];
+				command.push({ type: "back_to_main" });
+				air_console.message(0, command);
+			});
+
+			$("#back_from_credits").click(function (event) {
+				// inform the screen to display the animation
+				var command = [];
+				command.push({ type: "back_from_credits" });
+				air_console.message(0, command);
+
+				$("#back_from_credits_area").hide();
+				$("#loading").css({ display: "flex" });
+				// wait for the animation on the screen to finish
+				sleep(3100).then(() => {
+					$("#loading").hide();
+					// check if we are the master controller
+					if (am_i_master()) {
+						$("#menu").css({ display: "flex" });
+					} else {
+						$("#waiting_for_start").css({ display: "flex" });
+					}
+				});
+			});
+
+			$(".increase_rounds").click(function (event) {
+				if (document.maxRound === document.maxPlaylistRounds) {
+					// cant increase further
+				} else {
+					document.maxRound = document.maxRound + 1;
+					increase_check();
+
+					$("#round_amount").html(document.maxRound);
+					var command = [];
+					command.push({ type: "increase_rounds" });
+					air_console.message(0, command);
+				}
+			});
+
+		});
+
+		function am_i_master() {
+			return (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId());
+		}
+
+		/* these functions check for the boundaries of the amonut of rounds */
+		function increase_check() {
+			// if the max number of rounds is reached, hide the increase button
+			if (document.maxRound === document.maxPlaylistRounds) {
+				$(".increase_rounds").children().hide();
+			}
+			// if the new value is higher than 1, show the decrease button again
+			if (document.maxRound > 1) {
+				$(".decrease_rounds").children().show();
+			}
+		}
+
+		function show_or_hide_round_cancel_button() {
+			if (am_i_master()) {
+				$("#cancel_round").show();
+			} else {
+				$("#cancel_round").hide();
+			}
+		}
+
+		function decrease_check() {
+			// if the new value is below the limit, show the increase button again
+			if (document.maxRound < document.maxPlaylistRounds) {
+				$(".increase_rounds").children().show();
+			}
+			// if the new value is exactly 1, hide the decrease button so we dont get 0 rounds
+			if (document.maxRound === 1) {
+				$(".decrease_rounds").children().hide();
+			}
+		}
+
+		function show_result_screen(type) {
+			DEBUG && console.log("showing result screen");
+			document.showing_result_screen = true;
+
+			// hide all guessing buttons
+			$("#guessing_buttons_full").hide();
+			// unhide player result area
+			$("#round_over_song_details").css("display", "flex");
+			//inform player of result
+			$(".result_banner").removeClass("wrong");
+			$(".result_banner").removeClass("correct");
+			if (type === "out_of_time") {
+				$(".result_banner").addClass("wrong");
+				$(".player_round_result").html("Out of time!");
+			} else if (type === "skipping") {
+				$(".result_banner").addClass("wrong");
+				$(".player_round_result").html("Skipped broken song.");
+			} else {
+				$(".result_banner").addClass(type);
+				$(".player_round_result").html(type + "!");
+			}
+		}
+
+		function disable_guessing_buttons_event_handlers() {
+			// unnattach all event handlers so we dont start triggering multiple messages
+			// console.log("disabling all buttons on controller, because the player guessed.");
+			$(".correct").off();
+			$(".wrong").off();
+		}
+
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+
+		function animatethis(targetElement, speed) {
+			var scrollWidth = $(targetElement).get(0).scrollWidth;
+			var clientWidth = $(targetElement).get(0).clientWidth;
+			$(targetElement).animate({ scrollLeft: scrollWidth - clientWidth },
+				{
+					duration: speed,
+					complete: function () {
+						targetElement.animate({ scrollLeft: 0 },
+							{
+								duration: speed,
+								complete: function () {
+									animatethis(targetElement, speed);
+								}
+							});
+					}
+				});
+		};
+		/**
+		 * Shuffles array in place.
+		 * @param {Array} a items The array containing the items.
+		 */
+		function shuffle(a) {
+			var j, x, i;
+			for (i = a.length; i; i--) {
+				j = Math.floor(Math.random() * i);
+				x = a[i - 1];
+				a[i - 1] = a[j];
+				a[j] = x;
+			}
+		}
+
 	</script>
 
 </body>

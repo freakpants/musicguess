@@ -6,73 +6,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-</head>
-
-<body onload="init()">
-	<div id="screen-wrapper">
-		<div class="instruction logo">
-			<span id="game_logo">MusicGuess</span>
-			<span id="message"></span>
-		</div>
-		<div id="status-wrapper">
-			<span id="status"></span>
-		</div>
-		<div id="current_song_service"></div>
-		<div id="victory_screen"></div>
-	</div>
-	<div id="playlist-selector"></div>
-	<div id="roundCounter"></div>
-	<div id="roundTime"></div>
-	<div id="credits-container">
-		<div id="credits">
-			<span class="category">Developed by:</span>
-			<span class="content">Christian Nyffenegger, <a
-					onclick="air_console.openExternalUrl('https://twitter.com/freakpants')" target="_blank"
-					href="https://twitter.com/freakpants">freakpants</a></span></br>
-			<span class="category">Background video by:</span>
-			<span class="content"><a target="_blank"
-					href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav
-					Jakupec</a> / <a target="_blank"
-					href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a></span></br>
-			<span class="category">Music provided by:</span>
-			<span class="content"><a target="_blank"
-					href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html">Itunes
-					Search API Preview</a></span></br>
-			<span class="category">Sound effects by:</span>
-			<span class="content"><a target="_blank" href="https://www.zapsplat.com">Zapsplat</a></span></br>
-			<span class="category">SVG Loaders by:</span>
-			<span class="content"><a target="_blank" href="https://twitter.com/sherb">Sam Herbert</a> (<a
-					target="_blank" href="https://github.com/SamHerbert/SVG-Loaders">Github</a>)</span></br>
-		</div>
-	</div>
-	<div id="player-results">
-		<div id="results-scrollable"></div>
-	</div>
-	<audio id="sound-effect-switch">
-		<source src="sounds/switch.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-clock">
-		<source src="sounds/clock.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-correct">
-		<source src="sounds/correct.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-wrong">
-		<source src="sounds/error.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-cheers">
-		<source src="sounds/cheers.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-click">
-		<source src="sounds/click.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-start">
-		<source src="sounds/start.mp3" type="audio/mpeg">
-	</audio>
-
-	<audio id="player" autoplay>
-		<source src="" type="audio/mpeg">
-	</audio>
 
 	<script type="text/javascript">
 
@@ -113,6 +46,29 @@
 		document.roundEndInitiated = false;
 
 		var air_console;
+
+		$(document).ready(function () {
+			document.getElementById("player").addEventListener('error', function failed(e) {
+				// audio playback failed - show a message saying why
+				// to get the source of the audio element use $(this).src
+				if (e.target.error !== undefined) {
+					switch (e.target.error.code) {
+						case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+							DEBUG && console.log('The video audio not be loaded, either because the server or network failed or because the format is not supported.');
+						case e.target.error.MEDIA_ERR_ABORTED:
+							DEBUG && console.log('You aborted the video playback.');
+						case e.target.error.MEDIA_ERR_NETWORK:
+							DEBUG && console.log('A network error caused the audio download to fail.');
+						case e.target.error.MEDIA_ERR_DECODE:
+							DEBUG && console.log('The audio playback was aborted due to a corruption problem or because the video used features your browser did not support.');
+						default:
+							DEBUG && console.log('An unknown error occurred.');
+							document.playerFailed = true;
+							break;
+					}
+				}
+			}, true);
+		});
 
 		function init() {
 			air_console = new AirConsole();
@@ -286,7 +242,8 @@
 						break;
 					case 'increase_rounds':
 						// check if the maximum amount of rounds for this playlist has been reached or not
-						if ((document.maxRound) == playlists[document.selectedPlaylist]['amount_of_tracks']) {
+						if (playlists[document.selectedPlaylist] !== undefined &&
+							((document.maxRound) == playlists[document.selectedPlaylist]['amount_of_tracks'])) {
 							// dont increase
 						} else {
 							document.getElementById("sound-effect-click").play();
@@ -380,25 +337,17 @@
 				}
 			};
 
+			air_console.onAdShow = function () {
+				DEBUG && console.log("ad has started showing");
+				document.ad_showing = true;
+			};
 
-			document.getElementById("player").addEventListener('error', function failed(e) {
-				// audio playback failed - show a message saying why
-				// to get the source of the audio element use $(this).src
-				switch (e.target.error.code) {
-					case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
-						DEBUG && console.log('The video audio not be loaded, either because the server or network failed or because the format is not supported.');
-					case e.target.error.MEDIA_ERR_ABORTED:
-						DEBUG && console.log('You aborted the video playback.');
-					case e.target.error.MEDIA_ERR_NETWORK:
-						DEBUG && console.log('A network error caused the audio download to fail.');
-					case e.target.error.MEDIA_ERR_DECODE:
-						DEBUG && console.log('The audio playback was aborted due to a corruption problem or because the video used features your browser did not support.');
-					default:
-						DEBUG && console.log('An unknown error occurred.');
-						document.playerFailed = true;
-						break;
-				}
-			}, true);
+			air_console.onAdComplete = function (ad_was_shown) {
+				DEBUG && console.log("onAdComplete is triggered");
+				document.ad_showing = false;
+				document.roundEndInitiated = true;
+				next_round();
+			};
 
 			// get the playlists info
 			$.ajax({ method: "GET", url: "playlists/playlist_info.json", data: {}, dataType: "json" })
@@ -424,11 +373,13 @@
 							html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art">';
 						}
 
-						air_console.devices.forEach((device) => {
-							if (device.client && device.client.low_performance) {
-								document.low_performance = true;
-							}
-						});
+						if (air_console !== undefined) {
+							air_console.devices.forEach((device) => {
+								if (device !== null && device.client && device.client.low_performance) {
+									document.low_performance = true;
+								}
+							});
+						}
 
 						// dont even add the images on the gamehub app
 						if (!document.low_performance) {
@@ -948,19 +899,6 @@
 			return new Promise(resolve => setTimeout(resolve, ms));
 		}
 
-
-		air_console.onAdShow = function () {
-			DEBUG && console.log("ad has started showing");
-			document.ad_showing = true;
-		};
-
-		air_console.onAdComplete = function (ad_was_shown) {
-			DEBUG && console.log("onAdComplete is triggered");
-			document.ad_showing = false;
-			document.roundEndInitiated = true;
-			next_round();
-		};
-
 		function send_score() {
 			document.playerScores.forEach(function (score) {
 				DEBUG && console.log("sending score to player " + score.player);
@@ -1381,5 +1319,75 @@
 
 
 	</script>
+
+</head>
+
+<body onload="init()">
+	<div id="screen-wrapper">
+		<div class="instruction logo">
+			<span id="game_logo">MusicGuess</span>
+			<span id="message"></span>
+		</div>
+		<div id="status-wrapper">
+			<span id="status"></span>
+		</div>
+		<div id="current_song_service"></div>
+		<div id="victory_screen"></div>
+	</div>
+	<div id="playlist-selector"></div>
+	<div id="roundCounter"></div>
+	<div id="roundTime"></div>
+	<div id="credits-container">
+		<div id="credits">
+			<span class="category">Developed by:</span>
+			<span class="content">Christian Nyffenegger, <a
+					onclick="air_console.openExternalUrl('https://twitter.com/freakpants')" target="_blank"
+					href="https://twitter.com/freakpants">freakpants</a></span></br>
+			<span class="category">Background video by:</span>
+			<span class="content"><a target="_blank"
+					href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav
+					Jakupec</a> / <a target="_blank"
+					href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a></span></br>
+			<span class="category">Music provided by:</span>
+			<span class="content"><a target="_blank"
+					href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html">Itunes
+					Search API Preview</a></span></br>
+			<span class="category">Sound effects by:</span>
+			<span class="content"><a target="_blank" href="https://www.zapsplat.com">Zapsplat</a></span></br>
+			<span class="category">SVG Loaders by:</span>
+			<span class="content"><a target="_blank" href="https://twitter.com/sherb">Sam Herbert</a> (<a
+					target="_blank" href="https://github.com/SamHerbert/SVG-Loaders">Github</a>)</span></br>
+		</div>
+	</div>
+	<div id="player-results">
+		<div id="results-scrollable"></div>
+	</div>
+	<audio id="sound-effect-switch">
+		<source src="sounds/switch.mp3" type="audio/mpeg">
+	</audio>
+	<audio id="sound-effect-clock">
+		<source src="sounds/clock.mp3" type="audio/mpeg">
+	</audio>
+	<audio id="sound-effect-correct">
+		<source src="sounds/correct.mp3" type="audio/mpeg">
+	</audio>
+	<audio id="sound-effect-wrong">
+		<source src="sounds/error.mp3" type="audio/mpeg">
+	</audio>
+	<audio id="sound-effect-cheers">
+		<source src="sounds/cheers.mp3" type="audio/mpeg">
+	</audio>
+	<audio id="sound-effect-click">
+		<source src="sounds/click.mp3" type="audio/mpeg">
+	</audio>
+	<audio id="sound-effect-start">
+		<source src="sounds/start.mp3" type="audio/mpeg">
+	</audio>
+
+	<audio id="player" autoplay>
+		<source src="" type="audio/mpeg">
+	</audio>
+
+
 
 </body>
