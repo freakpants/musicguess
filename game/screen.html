@@ -8,11 +8,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
 
-<body>
-
-	<!-- -->
-
-
+<body onload="init()">
 	<div id="screen-wrapper">
 		<div class="instruction logo">
 			<span id="game_logo">MusicGuess</span>
@@ -30,7 +26,8 @@
 	<div id="credits-container">
 		<div id="credits">
 			<span class="category">Developed by:</span>
-			<span class="content">Christian Nyffenegger, <a onclick="air_console.openExternalUrl('https://twitter.com/freakpants')" target="_blank"
+			<span class="content">Christian Nyffenegger, <a
+					onclick="air_console.openExternalUrl('https://twitter.com/freakpants')" target="_blank"
 					href="https://twitter.com/freakpants">freakpants</a></span></br>
 			<span class="category">Background video by:</span>
 			<span class="content"><a target="_blank"
@@ -44,10 +41,10 @@
 			<span class="category">Sound effects by:</span>
 			<span class="content"><a target="_blank" href="https://www.zapsplat.com">Zapsplat</a></span></br>
 			<span class="category">SVG Loaders by:</span>
-			<span class="content"><a target="_blank" href="https://twitter.com/sherb">Sam Herbert</a> (<a target="_blank" href="https://github.com/SamHerbert/SVG-Loaders">Github</a>)</span></br>
+			<span class="content"><a target="_blank" href="https://twitter.com/sherb">Sam Herbert</a> (<a
+					target="_blank" href="https://github.com/SamHerbert/SVG-Loaders">Github</a>)</span></br>
 		</div>
 	</div>
-
 	<div id="player-results">
 		<div id="results-scrollable"></div>
 	</div>
@@ -73,10 +70,11 @@
 		<source src="sounds/start.mp3" type="audio/mpeg">
 	</audio>
 
-	<audio id="player" autoplay> <source src="" type="audio/mpeg"></audio>
+	<audio id="player" autoplay>
+		<source src="" type="audio/mpeg">
+	</audio>
 
 	<script type="text/javascript">
-		var air_console = new AirConsole();
 
 		// whether or not to display all information
 		const DEBUG = false;
@@ -112,7 +110,276 @@
 
 		document.low_performance = false;
 
-		$(document).ready(function () {
+		document.roundEndInitiated = false;
+
+		var air_console;
+
+		function init() {
+			air_console = new AirConsole();
+
+			// watch for new controllers connecting
+			air_console.onConnect = function (device_id) {
+				// let the new controller know how many rounds are currently selected
+				update_selected_rounds_on_controllers();
+				// also inform the new controller of the current limit for the selected playlist
+				update_max_rounds_on_controllers();
+
+				// update_controllers_about_game_status();
+
+				// we actually need to do this on game start as well, for every client, since we delete the areas after the game
+				initiate_guessing_area(device_id);
+
+
+				/* prepare messages for clients */
+				show_menu = [];
+				show_menu.push({
+					type: "show_menu"
+				});
+				hide_menu = [];
+				hide_menu.push({
+					type: "hide_menu"
+				});
+				inactive = [];
+				inactive.push({
+					type: "inactive"
+				});
+				show_back_from_credits = [];
+				show_back_from_credits.push({
+					type: "show_back_from_credits"
+				});
+				show_back_to_main = [];
+				show_back_to_main.push({
+					type: "show_back_to_main"
+				});
+
+				// check if there is currently a round in progress
+				if (document.round > 0 && !document.roundEndInitiated && !document.game_over_screen) {
+					DEBUG && console.log("we a currently in a game");
+					// let the new client know to display the please wait message (instead of waiting for master controller)
+					air_console.message(device_id, inactive);
+					// store the fact that we have an inactive client in this round
+					document.inactiveClients += 1;
+				} else if (document.game_over_screen) {
+					DEBUG && console.log("we are currently showing the game over screen");
+					// if the client is master, direct him to show the back to main
+					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
+						air_console.message(device_id, show_back_to_main);
+					} else {
+						// otherwise, just show the regular waiting for start
+						air_console.message(device_id, hide_menu);
+					}
+				} else if (document.showing_credits) {
+					DEBUG && console.log("we are currently showing credits");
+					// if we are currently showing credits, let the client know what to display
+					// if the client is master, direct him to show the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
+						air_console.message(device_id, show_back_from_credits);
+					} else {
+						// otherwise, just show the regular waiting for start
+						air_console.message(device_id, hide_menu);
+					}
+				} else {
+					DEBUG && console.log("There is no round in progress, and we are not showing credits");
+					// if there is no round in progress, check if the connected device is the master
+					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
+						DEBUG && console.log("device " + device_id + " is the master");
+						// let the new client know to display the menu)
+						air_console.message(device_id, show_menu);
+						// also let all other clients know NOT to display the menu anymore
+						air_console.getControllerDeviceIds().forEach(function (id) {
+							if (id === device_id) return;
+							air_console.message(id, hide_menu);
+						});
+					} else {
+						DEBUG && console.log("device " + device_id + " is not a master");
+						air_console.message(device_id, hide_menu);
+					}
+
+				}
+			};
+
+			air_console.onDisconnect = function (device_id) {
+				// update_controllers_about_game_status();
+				// check if there is currently a round in progress
+				if (document.round > 0 && !document.roundEndInitiated && !document.game_over_screen) {
+					// do nothing?
+				} else if (document.game_over_screen) {
+					// let the new master know to display the back to main
+					if (air_console.getMasterControllerDeviceId() !== undefined) {
+						DEBUG && console.log("informing new master to show the back to main button");
+						message = [];
+						message.push({
+							type: "show_back_to_main"
+						});
+						air_console.message(air_console.getMasterControllerDeviceId(), message);
+					}
+				} else if (document.showing_credits) {
+					// let the new master know to display the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined) {
+						DEBUG && console.log("informing new master to show the back to credits button");
+						message = [];
+						message.push({
+							type: "show_back_from_credits"
+						});
+						air_console.message(air_console.getMasterControllerDeviceId(), message);
+					}
+				} else {
+					// let the new master know to display the menu
+					if (air_console.getMasterControllerDeviceId() !== undefined) {
+						message = [];
+						message.push({
+							type: "show_menu"
+						});
+						air_console.message(air_console.getMasterControllerDeviceId(), message);
+					}
+				}
+			}
+
+			// Listen for messages from other devices
+			air_console.onMessage = function (from, message) {
+				// handle message
+				var type = message[0].type;
+				DEBUG && console.log('handling ' + type + ' message on screen.');
+
+				switch (type) {
+					case 'credits':
+						$("#game_logo").animate({ fontSize: "80px" }, 1500);
+						$("#playlist-selector").hide("fade", {}, 1500);
+						$("#credits-container").show();
+						$("#credits").css({ display: "flex" });
+						sleep(1500).then(() => {
+							document.showing_credits = true;
+							$("#credits").animate({ opacity: 1 }, 1500);
+						});
+						break;
+					case 'startGame':
+						// start the game
+						document.getElementById("sound-effect-start").play();
+						start();
+						break;
+					case 'correctGuess':
+						// play the correct guess sound
+						document.getElementById("sound-effect-correct").play();
+						// deal with the score changes etc
+						if (!document.cancelled) {
+							handle_guess(message, from);
+						}
+						break;
+					case 'wrongGuess':
+						// play the wrong guess sound
+						document.getElementById("sound-effect-wrong").play();
+						// deal with the score changes etc
+						if (!document.cancelled) {
+							handle_guess(message, from);
+						}
+						break;
+					case 'next_playlist':
+						switch_playlist('next');
+						break;
+					case 'previous_playlist':
+						switch_playlist('previous');
+						break;
+					case 'decrease_rounds':
+						document.getElementById("sound-effect-click").play();
+						document.maxRound = document.maxRound - 1;
+						update_selected_rounds_on_controllers();
+						break;
+					case 'increase_rounds':
+						// check if the maximum amount of rounds for this playlist has been reached or not
+						if ((document.maxRound) == playlists[document.selectedPlaylist]['amount_of_tracks']) {
+							// dont increase
+						} else {
+							document.getElementById("sound-effect-click").play();
+							document.maxRound = document.maxRound + 1;
+							update_selected_rounds_on_controllers();
+						}
+						break;
+					case 'back_from_credits':
+
+						$("#credits").animate({ opacity: 0 }, 1500);
+						$("#game_logo").animate({ fontSize: "115px" }, 1500);
+
+						/* back_to_main = [];
+						back_to_main.push({ type: "back_to_main" });
+						air_console.broadcast(back_to_main); */
+
+						sleep(1500).then(() => {
+							document.showing_credits = false;
+							$("#credits").hide();
+							$("#credits-container").hide();
+
+							$("#playlist-selector").show("fade", {}, 1500);
+						});
+						break;
+					case 'cancel':
+						$("#message").html("");
+						$("#message").hide();
+						$("#roundCounter").hide();
+
+						// inform other controllers
+						hide_menu = [];
+						hide_menu.push({
+							type: "hide_menu"
+						});
+
+						// in case some controllers were still waiting
+						sleep(2000).then(() => {
+							air_console.broadcast(hide_menu);
+						});
+
+						document.cancelled = true;
+						document.roundEndInitiated = true;
+
+						document.amount_of_finished_players = 0;
+
+						document.game_in_progress = false;
+						document.game_over_screen = false;
+
+						player = document.getElementById("player");
+						player.volume = 0;
+
+						$("#roundTime").hide();
+						$("#current_song_service").hide();
+						$("#playanimation").hide();
+
+						// reset the results area and the round status
+						$("#results-scrollable").html("");
+						$("#status").hide();
+						$("#status").html("");
+
+						$("#victory_screen").hide();
+						$("#victory_screen").html("");
+
+						$("#game_logo").show("fade", {}, 1500);
+						$("#playlist-selector").show("fade", {}, 1500);
+						break;
+					case 'back_to_main':
+						$("#message").html("");
+						// $("#message").hide("fade", {}, 1500);
+
+						document.game_in_progress = false;
+						document.game_over_screen = false;
+
+						// reset the results area and the round status
+						$("#results-scrollable").html("");
+						$("#status").hide();
+						$("#status").html("");
+
+						$("#victory_screen").hide();
+						$("#victory_screen").html("");
+
+						/* back_to_main = [];
+						back_to_main.push({ type: "back_to_main" }); */
+
+						$("#game_logo").show("fade", {}, 1500);
+						$("#playlist-selector").show("fade", {}, 1500);
+
+						// air_console.broadcast(back_to_main);
+
+						break;
+				}
+			};
+
 
 			document.getElementById("player").addEventListener('error', function failed(e) {
 				// audio playback failed - show a message saying why
@@ -129,9 +396,9 @@
 					default:
 						DEBUG && console.log('An unknown error occurred.');
 						document.playerFailed = true;
-					break;
+						break;
 				}
-				}, true);
+			}, true);
 
 			// get the playlists info
 			$.ajax({ method: "GET", url: "playlists/playlist_info.json", data: {}, dataType: "json" })
@@ -157,20 +424,20 @@
 							html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art">';
 						}
 
-						air_console.devices.forEach( (device) => {
-							if(device.client && device.client.low_performance){
+						air_console.devices.forEach((device) => {
+							if (device.client && device.client.low_performance) {
 								document.low_performance = true;
 							}
 						});
-						
+
 						// dont even add the images on the gamehub app
-						if(!document.low_performance){
+						if (!document.low_performance) {
 							playlist.album_art.forEach(function (element) {
 								html = html + '<img src="' + element + '" />';
 							});
 							$("#screen-wrapper").append('<img id="playanimation" src="audio.svg" />');
 							$("body").append('<video playsinline autoplay muted loop id="bgvid"><source src="videos/disco_loop.mp4" type="video/mp4"></video>');
-							if(playlist.new === "1"){
+							if (playlist.new === "1") {
 								html = html + '<span class="new-sticker">NEW!</span>';
 							}
 						}
@@ -190,9 +457,7 @@
 					$("#playlist-selector").css("display", "flex");
 
 				});
-		});
-
-		document.roundEndInitiated = false;
+		}
 
 		function calculateRoundTime() {
 
@@ -214,7 +479,7 @@
 				check_if_all_players_have_guessed();
 			}
 
-			if(document.playerFailed){
+			if (document.playerFailed) {
 				DEBUG && console.log("player failed, skipping song");
 				$("#roundTime").hide();
 				$("#message").html("Broken song, skipping!");
@@ -235,7 +500,7 @@
 			} else if (document.roundEndInitiated === false) {
 				DEBUG && console.log("out of time");
 				// give 30 seconds to everyone who did not guess
-				air_console.getControllerDeviceIds().forEach(function(id){
+				air_console.getControllerDeviceIds().forEach(function (id) {
 					// try selecting current score
 					playerScore = document.playerScores.filter(function (obj) {
 						return obj.player === id;
@@ -376,8 +641,8 @@
 			sleep(1500).then(() => {
 
 				// show message again (may have been hidden by end of game)
-				$("#message").css({display: "flex"});
-				$("#status").css({display: "flex"});
+				$("#message").css({ display: "flex" });
+				$("#status").css({ display: "flex" });
 
 				$("#message").html("Get ready for the first round!");
 				$("#status").html("3");
@@ -391,7 +656,7 @@
 						sleep(1000).then(() => {
 
 							$("#roundCounter").html("Round</br>1/" + document.maxRound);
-							$("#roundCounter").css({display: "flex"});
+							$("#roundCounter").css({ display: "flex" });
 							$("#status").hide();
 							$("#status").html("");
 
@@ -431,7 +696,7 @@
 									library_copy_for_wrong_answers = library.slice();
 									// console.log(library);
 									DEBUG && console.log("playing random song for the first time");
-									
+
 									play_random_song();
 								});
 
@@ -455,21 +720,21 @@
 		}
 
 		/* function update_controllers_about_game_status(){
-			message = [];
-			if (document.game_in_progress) {
-				// let the existing controllers know the game is running
-				
-				message.push({
-					type: "in_progress"
-				});
-				
-			} else {
-				// let the existing controllers know the game is not running
-				message.push({
-					type: "not_in_progress"
-				});
-			}
-			air_console.broadcast(message);
+		message = [];
+		if (document.game_in_progress) {
+			// let the existing controllers know the game is running
+			
+			message.push({
+				type: "in_progress"
+			});
+			
+		} else {
+			// let the existing controllers know the game is not running
+			message.push({
+				type: "not_in_progress"
+			});
+		}
+		air_console.broadcast(message);
 		} */
 
 		function play_random_song() {
@@ -495,7 +760,7 @@
 
 			DEBUG && console.log("entering while loop");
 			while (wrong_answers < 3) {
-				
+
 				// 50:50 chance that wrong answer is either artist or title
 
 				suitable_wrong_answer = true;
@@ -551,13 +816,13 @@
 
 			// change song id in player
 			$("#player").attr("src", randomSong.preview_url);
-			
+
 			// turn volume back up
 			DEBUG && console.log("resetting player volume");
 			document.animatingVolume = false;
 			player = document.getElementById("player");
 			player.volume = 0.4;
-			
+
 			// apparently this is broken?
 			// $("#player").prop("volume", 0.4);
 
@@ -596,269 +861,6 @@
 			// send the solution to all clients
 			air_console.broadcast(document.solution);
 		}
-
-		// watch for new controllers connecting
-		air_console.onConnect = function (device_id) {
-			// let the new controller know how many rounds are currently selected
-			update_selected_rounds_on_controllers();
-			// also inform the new controller of the current limit for the selected playlist
-			update_max_rounds_on_controllers();
-
-			// update_controllers_about_game_status();
-
-			// we actually need to do this on game start as well, for every client, since we delete the areas after the game
-			initiate_guessing_area(device_id);
-
-
-			/* prepare messages for clients */
-			show_menu = [];
-			show_menu.push({
-				type: "show_menu"
-			});
-			hide_menu = [];
-			hide_menu.push({
-				type: "hide_menu"
-			});
-			inactive = [];
-			inactive.push({
-				type: "inactive"
-			});
-			show_back_from_credits = [];
-			show_back_from_credits.push({
-				type: "show_back_from_credits"
-			});
-			show_back_to_main= [];
-			show_back_to_main.push({
-				type: "show_back_to_main"
-			});
-
-			// check if there is currently a round in progress
-			if (document.round > 0 && !document.roundEndInitiated && !document.game_over_screen) {
-				DEBUG && console.log("we a currently in a game");
-				// let the new client know to display the please wait message (instead of waiting for master controller)
-				air_console.message(device_id, inactive);
-				// store the fact that we have an inactive client in this round
-				document.inactiveClients += 1;
-			} else if(document.game_over_screen){
-				DEBUG && console.log("we are currently showing the game over screen");
-				// if the client is master, direct him to show the back to main
-				if(air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id){
-					air_console.message(device_id, show_back_to_main);
-				} else {
-					// otherwise, just show the regular waiting for start
-					air_console.message(device_id, hide_menu);
-				}
-			} else if(document.showing_credits){
-				DEBUG && console.log("we are currently showing credits");
-				// if we are currently showing credits, let the client know what to display
-				// if the client is master, direct him to show the back from credits
-				if(air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id){
-					air_console.message(device_id, show_back_from_credits);
-				} else {
-					// otherwise, just show the regular waiting for start
-					air_console.message(device_id, hide_menu);
-				}
-			} else {
-				DEBUG && console.log("There is no round in progress, and we are not showing credits");
-				// if there is no round in progress, check if the connected device is the master
-				if(air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id){
-					DEBUG && console.log("device " + device_id + " is the master");
-					// let the new client know to display the menu)
-					air_console.message(device_id, show_menu);
-					// also let all other clients know NOT to display the menu anymore
-					air_console.getControllerDeviceIds().forEach(function(id){
-						if(id === device_id) return;
-						air_console.message(id, hide_menu);
-					});
-				} else {
-					DEBUG && console.log("device " + device_id + " is not a master");
-					air_console.message(device_id, hide_menu);
-				}
-				
-			}
-		};
-
-		air_console.onDisconnect = function (device_id) {
-			// update_controllers_about_game_status();
-			// check if there is currently a round in progress
-			if (document.round > 0 && !document.roundEndInitiated && !document.game_over_screen) {
-				// do nothing?
-			} else if(document.game_over_screen){
-				// let the new master know to display the back to main
-				if(air_console.getMasterControllerDeviceId() !== undefined){
-					DEBUG && console.log("informing new master to show the back to main button");
-					message = [];
-					message.push({
-						type: "show_back_to_main"
-					});
-					air_console.message(air_console.getMasterControllerDeviceId(), message);
-				}
-			} else if(document.showing_credits){
-				// let the new master know to display the back from credits
-				if(air_console.getMasterControllerDeviceId() !== undefined){
-					DEBUG && console.log("informing new master to show the back to credits button");
-					message = [];
-					message.push({
-						type: "show_back_from_credits"
-					});
-					air_console.message(air_console.getMasterControllerDeviceId(), message);
-				}
-			} else {
-				// let the new master know to display the menu
-				if(air_console.getMasterControllerDeviceId() !== undefined){
-					message = [];
-					message.push({
-						type: "show_menu"
-					});
-					air_console.message(air_console.getMasterControllerDeviceId(), message);
-				}
-			}
-		}
-
-		// Listen for messages from other devices
-		air_console.onMessage = function (from, message) {
-			// handle message
-			var type = message[0].type;
-			DEBUG && console.log('handling ' + type + ' message on screen.');
-
-			switch (type) {
-				case 'credits':
-					$("#game_logo").animate({ fontSize: "80px" }, 1500);
-					$("#playlist-selector").hide("fade", {}, 1500);
-					$("#credits-container").show();
-					$("#credits").css({display: "flex"});
-					sleep(1500).then(() => {
-						document.showing_credits = true;
-						$("#credits").animate({ opacity: 1 }, 1500);
-					});
-					break;
-				case 'startGame':
-					// start the game
-					document.getElementById("sound-effect-start").play();
-					start();
-					break;
-				case 'correctGuess':
-					// play the correct guess sound
-					document.getElementById("sound-effect-correct").play();
-					// deal with the score changes etc
-					if(!document.cancelled){
-						handle_guess(message, from);
-					}
-					break;
-				case 'wrongGuess':
-					// play the wrong guess sound
-					document.getElementById("sound-effect-wrong").play();
-					// deal with the score changes etc
-					if(!document.cancelled){
-						handle_guess(message, from);
-					}
-					break;
-				case 'next_playlist':
-					switch_playlist('next');
-					break;
-				case 'previous_playlist':
-					switch_playlist('previous');
-					break;
-				case 'decrease_rounds':
-					document.getElementById("sound-effect-click").play();
-					document.maxRound = document.maxRound - 1;
-					update_selected_rounds_on_controllers();
-					break;
-				case 'increase_rounds':
-					// check if the maximum amount of rounds for this playlist has been reached or not
-					if ((document.maxRound) == playlists[document.selectedPlaylist]['amount_of_tracks']) {
-						// dont increase
-					} else {
-						document.getElementById("sound-effect-click").play();
-						document.maxRound = document.maxRound + 1;
-						update_selected_rounds_on_controllers();
-					}
-					break;
-				case 'back_from_credits':
-
-					$("#credits").animate({ opacity: 0 }, 1500);
-					$("#game_logo").animate({ fontSize: "115px" }, 1500);
-
-					/* back_to_main = [];
-					back_to_main.push({ type: "back_to_main" });
-					air_console.broadcast(back_to_main); */
-
-					sleep(1500).then(() => {
-						document.showing_credits = false;
-						$("#credits").hide();
-						$("#credits-container").hide();
-
-						$("#playlist-selector").show("fade", {}, 1500);
-					});
-					break;
-				case 'cancel':
-					$("#message").html("");
-					$("#message").hide();
-					$("#roundCounter").hide();
-
-					// inform other controllers
-					hide_menu = [];
-					hide_menu.push({
-						type: "hide_menu"
-					});
-
-					// in case some controllers were still waiting
-					sleep(2000).then(() => {
-						air_console.broadcast(hide_menu);
-					});
-
-					document.cancelled = true;
-					document.roundEndInitiated = true;
-
-					document.amount_of_finished_players = 0;
-
-					document.game_in_progress = false;
-					document.game_over_screen = false;
-
-					player = document.getElementById("player");
-					player.volume = 0;
-
-					$("#roundTime").hide();
-					$("#current_song_service").hide();
-					$("#playanimation").hide();
-					
-					// reset the results area and the round status
-					$("#results-scrollable").html("");
-					$("#status").hide();
-					$("#status").html("");
-
-					$("#victory_screen").hide();
-					$("#victory_screen").html("");
-
-					$("#game_logo").show("fade", {}, 1500);
-					$("#playlist-selector").show("fade", {}, 1500);
-				break;
-				case 'back_to_main':
-					$("#message").html("");
-					// $("#message").hide("fade", {}, 1500);
-
-					document.game_in_progress = false;
-					document.game_over_screen = false;
-
-					// reset the results area and the round status
-					$("#results-scrollable").html("");
-					$("#status").hide();
-					$("#status").html("");
-
-					$("#victory_screen").hide();
-					$("#victory_screen").html("");
-
-					/* back_to_main = [];
-					back_to_main.push({ type: "back_to_main" }); */
-
-					$("#game_logo").show("fade", {}, 1500);
-					$("#playlist-selector").show("fade", {}, 1500);
-
-					// air_console.broadcast(back_to_main);
-
-					break;
-			}
-		};
 
 		function switch_playlist(type) {
 			// console.log("Handling switch of playlist to " + type);
@@ -959,7 +961,7 @@
 			next_round();
 		};
 
-		function send_score(){
+		function send_score() {
 			document.playerScores.forEach(function (score) {
 				DEBUG && console.log("sending score to player " + score.player);
 				DEBUG && console.log(score);
@@ -1028,13 +1030,13 @@
 			});
 			if (typeof fastestPlayers !== 'undefined' && typeof fastestPlayers[0] !== 'undefined' && fastestPlayers[0].correct) {
 				fastestString = "Fastest player: " + air_console.getNickname(fastestPlayers[0].player) + " with " + fastestPlayers[0].currentGuessTime + " seconds.";
-			} else if (document.playerFailed){
+			} else if (document.playerFailed) {
 				fastestString = "We apologize for the inconvenience.";
 			} else {
 				fastestString = "Nobody guessed correctly!";
 			}
 			// output fastest player to screen
-			$("#status").css({display: "flex"});
+			$("#status").css({ display: "flex" });
 			$("#status").html(fastestString);
 			// console.log(fastestString);
 
@@ -1048,18 +1050,18 @@
 			$("#current_song_service").hide();
 
 			$("#playanimation").hide();
-			
-			if(document.playerFailed){
+
+			if (document.playerFailed) {
 				document.playerFailed = false;
 				$("#message").html("Skipped a broken song.");
 				$("#roundTime").hide();
 				$("#playanimation").hide();
 			} else {
-				if(!document.animatingVolume){
+				if (!document.animatingVolume) {
 					$("#player").animate({ volume: 0 }, 4000);
 					document.animatingVolume = true;
 				}
-				
+
 				$("#message").html("Round is over!");
 			}
 
@@ -1147,7 +1149,7 @@
 					document.roundEndInitiated = false;
 					// send game end message to the controllers
 					air_console.broadcast(game_end);
-				} else if(!document.cancelled) {
+				} else if (!document.cancelled) {
 					air_console.showAd();
 				}
 			});
@@ -1162,7 +1164,7 @@
 			// reset the number of inactive clients (clients that connect in this time can play the next round)
 			document.inactiveClients = 0;
 			$("#message").html("Get ready for the next round!");
-			$("#status").css({display:"flex"});
+			$("#status").css({ display: "flex" });
 			$("#status").html("3");
 			document.getElementById("sound-effect-clock").play();
 			sleep(1000).then(() => {
@@ -1201,7 +1203,7 @@
 			});
 		}
 
-		function initiate_guessing_area(player_id){
+		function initiate_guessing_area(player_id) {
 			// check if the player already has a guess area
 			guessArea = false;
 			$("#player_" + player_id + "_result").each(function () {
@@ -1213,11 +1215,11 @@
 				// add empty guessArea
 				url = air_console.getProfilePicture(player_id, 120);
 				$("#results-scrollable").append('<div class="single-result" id="player_' + player_id + '_result"><div class="position_display"></div><div class="darken_image"></div><img src="' + url + '"><div class="player_name">' + nickname + '</div><div class="player_score"></div>');
-				
+
 			}
 		}
 
-		function initialize_player_score(from, newScore, guessTime, guessTime, correct){
+		function initialize_player_score(from, newScore, guessTime, guessTime, correct) {
 			if (correct) {
 				document.playerScores.push({ player: from, score: newScore, currentGuessTime: guessTime, totalGuessTime: guessTime, correct: correct, correctGuesses: 1 });
 			} else {
@@ -1279,7 +1281,7 @@
 				totalGuessTime = guessTime;
 				if (correct) {
 					correctGuesses = 1;
-				} 
+				}
 				initialize_player_score(from, newScore, guessTime, guessTime, correct);
 			}
 
@@ -1376,6 +1378,8 @@
 				round_end();
 			}
 		}
+
+
 	</script>
 
 </body>

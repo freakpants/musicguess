@@ -62,27 +62,33 @@
 
 	<div id="back_from_credits_area" class="flexbox">
 		<div id="credits">
-				<span class="category">Developed by:</span>
-				<span class="content">Christian Nyffenegger, <span class="link" onclick="air_console.openExternalUrl('https://twitter.com/freakpants')" >freakpants</span></span> </br>
-				<span class="category">Background video by:</span>
-				<span class="content">
-					<span class="link" onclick="air_console.openExternalUrl('https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154')" >
-						Tomislav Jakupec
-					</span> / Pixabay
-				</span></br>
-				<span class="category">Music provided by:</span>
-				<span class="content">
-					<span class="link" onclick="air_console.openExternalUrl('https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html')" >
-						Itunes Search API Preview
-					</span>
+			<span class="category">Developed by:</span>
+			<span class="content">Christian Nyffenegger, <span class="link"
+					onclick="air_console.openExternalUrl('https://twitter.com/freakpants')">freakpants</span></span>
+			</br>
+			<span class="category">Background video by:</span>
+			<span class="content">
+				<span class="link"
+					onclick="air_console.openExternalUrl('https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154')">
+					Tomislav Jakupec
+				</span> / Pixabay
+			</span></br>
+			<span class="category">Music provided by:</span>
+			<span class="content">
+				<span class="link"
+					onclick="air_console.openExternalUrl('https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html')">
+					Itunes Search API Preview
 				</span>
-				</br>
-				<span class="category">Sound effects by:</span>
-				<span class="content"><span class="link" onclick="air_console.openExternalUrl('https://www.zapsplat.com')">Zapsplat</span></span></br>
-				<span class="category">SVG Loaders by:</span>
-				<span class="content">
-					<span class="link" onclick="air_console.openExternalUrl('https://twitter.com/sherb')">Sam Herbert</span> 
-					(<span class="link" onclick="air_console.openExternalUrl('https://github.com/SamHerbert/SVG-Loaders')">Github</a>)
+			</span>
+			</br>
+			<span class="category">Sound effects by:</span>
+			<span class="content"><span class="link"
+					onclick="air_console.openExternalUrl('https://www.zapsplat.com')">Zapsplat</span></span></br>
+			<span class="category">SVG Loaders by:</span>
+			<span class="content">
+				<span class="link" onclick="air_console.openExternalUrl('https://twitter.com/sherb')">Sam Herbert</span>
+				(<span class="link"
+					onclick="air_console.openExternalUrl('https://github.com/SamHerbert/SVG-Loaders')">Github</a>)
 				</span></br>
 		</div>
 		<span class="fa-lg icon-container">
@@ -163,640 +169,641 @@
 	</div>
 
 	<script type="text/javascript">
-		var air_console = new AirConsole();
-		var buy_link = "https://www.apple.com/lae/music/";
-		document.maxRound = 25;
-		document.showing_result_screen = false;
-		document.currentScore = 0;
-		// whether or not to display all information
-		const DEBUG = true;
 
-		function animatethis(targetElement, speed) {
-			var scrollWidth = $(targetElement).get(0).scrollWidth;
-			var clientWidth = $(targetElement).get(0).clientWidth;
-			$(targetElement).animate({ scrollLeft: scrollWidth - clientWidth },
-				{
-					duration: speed,
-					complete: function () {
-						targetElement.animate({ scrollLeft: 0 },
-							{
-								duration: speed,
-								complete: function () {
-									animatethis(targetElement, speed);
-								}
-							});
-					}
+		$(document).ready(function () {
+			var air_console = new AirConsole();
+			var buy_link = "https://www.apple.com/lae/music/";
+			document.maxRound = 25;
+			document.showing_result_screen = false;
+			document.currentScore = 0;
+			// whether or not to display all information
+			const DEBUG = true;
+
+			function animatethis(targetElement, speed) {
+				var scrollWidth = $(targetElement).get(0).scrollWidth;
+				var clientWidth = $(targetElement).get(0).clientWidth;
+				$(targetElement).animate({ scrollLeft: scrollWidth - clientWidth },
+					{
+						duration: speed,
+						complete: function () {
+							targetElement.animate({ scrollLeft: 0 },
+								{
+									duration: speed,
+									complete: function () {
+										animatethis(targetElement, speed);
+									}
+								});
+						}
+					});
+			};
+			/**
+			 * Shuffles array in place.
+			 * @param {Array} a items The array containing the items.
+			 */
+			function shuffle(a) {
+				var j, x, i;
+				for (i = a.length; i; i--) {
+					j = Math.floor(Math.random() * i);
+					x = a[i - 1];
+					a[i - 1] = a[j];
+					a[j] = x;
+				}
+			}
+
+			$("#round_change_buttons .vertical-container").click(function (event) {
+				// instruct the game to show the credits
+				var command = [];
+				command.push({ type: "credits" });
+				air_console.message(0, command);
+				// display loading animation
+				$("#loading").css("display", "flex");
+				// hide the menu
+				$("#menu").hide();
+				sleep(3100).then(() => {
+					// when the animation on the screen is finished, display the go back to menu button
+					$("#loading").hide();
+					$("#back_from_credits_area").css("display", "flex");
 				});
-		};
-
-		/**
-		 * Shuffles array in place.
-		 * @param {Array} a items The array containing the items.
-		 */
-		function shuffle(a) {
-			var j, x, i;
-			for (i = a.length; i; i--) {
-				j = Math.floor(Math.random() * i);
-				x = a[i - 1];
-				a[i - 1] = a[j];
-				a[j] = x;
-			}
-		}
-
-
-		$("#round_change_buttons .vertical-container").click(function (event) {
-			// instruct the game to show the credits
-			var command = [];
-			command.push({ type: "credits" });
-			air_console.message(0, command);
-			// display loading animation
-			$("#loading").css("display", "flex");
-			// hide the menu
-			$("#menu").hide();
-			sleep(3100).then(() => {
-				// when the animation on the screen is finished, display the go back to menu button
-				$("#loading").hide();
-				$("#back_from_credits_area").css("display", "flex");
 			});
-		});
 
 
-		$("#start_game").click(function (event) {
-			// hide menu 
-			$("#menu").hide();
-
-			// show loading
-			$("#get_ready").css({ display: "flex" });
-
-			// instruct the screen to start the game in full word mode
-			var command = [];
-			command.push({ type: "startGame" });
-			air_console.message(0, command);
-		});
-
-		$("#next_playlist").click(function (event) {
-			var command = [];
-			command.push({ type: "next_playlist" });
-			air_console.message(0, command);
-		});
-
-		$("#previous_playlist").click(function (event) {
-			var command = [];
-			command.push({ type: "previous_playlist" });
-			air_console.message(0, command);
-		});
-
-		$(".decrease_rounds").click(function (event) {
-			if (document.maxRound == 1) {
-				// dont decrease rounds below 1
-			} else {
-				document.maxRound = document.maxRound - 1;
-				decrease_check();
-
-				$("#round_amount").html(document.maxRound);
-				var command = [];
-				command.push({ type: "decrease_rounds" });
-				air_console.message(0, command);
-			}
-		});
-
-		$("#cancel_round").click(function (event) {
-			$("#round_over_song_details").hide();
-			$("#loading").css({display: "flex"});
-			sleep(1500).then(() => {
-				$("#loading").hide();
-				$("#menu").css({display: "flex"});
-			});
-			var command = [];
-			command.push({ type: "cancel" });
-			air_console.message(0, command);
-		});
-
-		$("#game_over").click(function (event) {
-			$("#game_over").hide();
-			$("#loading").css({display: "flex"});
-			sleep(1500).then(() => {
-				$("#loading").hide();
-				$("#menu").css({display: "flex"});
-			});
-			var command = [];
-			command.push({ type: "back_to_main" });
-			air_console.message(0, command);
-		});
-
-		$("#back_from_credits").click(function (event) {
-			// inform the screen to display the animation
-			var command = [];
-			command.push({ type: "back_from_credits" });
-			air_console.message(0, command);
-
-			$("#back_from_credits_area").hide();
-			$("#loading").css({ display: "flex" });
-			// wait for the animation on the screen to finish
-			sleep(3100).then(() => {
-				$("#loading").hide();
-				// check if we are the master controller
-				if (am_i_master()) {
-					$("#menu").css({ display: "flex" });
-				} else {
-					$("#waiting_for_start").css({ display: "flex" });
-				}
-			});
-		});
-
-		$(".increase_rounds").click(function (event) {
-			if (document.maxRound === document.maxPlaylistRounds) {
-				// cant increase further
-			} else {
-				document.maxRound = document.maxRound + 1;
-				increase_check();
-
-				$("#round_amount").html(document.maxRound);
-				var command = [];
-				command.push({ type: "increase_rounds" });
-				air_console.message(0, command);
-			}
-		});
-
-		function am_i_master() {
-			return (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId());
-		}
-
-		/* these functions check for the boundaries of the amonut of rounds */
-		function increase_check() {
-			// if the max number of rounds is reached, hide the increase button
-			if (document.maxRound === document.maxPlaylistRounds) {
-				$(".increase_rounds").children().hide();
-			}
-			// if the new value is higher than 1, show the decrease button again
-			if (document.maxRound > 1) {
-				$(".decrease_rounds").children().show();
-			}
-		}
-
-		function show_or_hide_round_cancel_button(){
-			if(am_i_master()){
-				$("#cancel_round").show();
-			} else {
-				$("#cancel_round").hide();
-			}
-		}
-
-		function decrease_check() {
-			// if the new value is below the limit, show the increase button again
-			if (document.maxRound < document.maxPlaylistRounds) {
-				$(".increase_rounds").children().show();
-			}
-			// if the new value is exactly 1, hide the decrease button so we dont get 0 rounds
-			if (document.maxRound === 1) {
-				$(".decrease_rounds").children().hide();
-			}
-		}
-
-		/* function check_for_master(){
-			// determine if we are the Master Controller
-			if(document.inProgress){
-				console.log("controller " + air_console.getDeviceId() + ": round is in progress, aborting master check");
-				return;
-			}
-			console.log("controller " + air_console.getDeviceId() + ":no round in progress, proceeding with master check");
-		
-			console.log("master id:" + air_console.getMasterControllerDeviceId());
-			console.log("controller id:" + air_console.getDeviceId());
-			/* if(document.activeGame){
-				// if we are in an active game, the master is irrelevant
-				return;
-			} 
-			if( air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId()){
-				// console.log("master controller! ");
-				$("#menu").css("display", "flex");
-				$("#waiting_for_start").hide();
-			} else {
+			$("#start_game").click(function (event) {
+				// hide menu 
 				$("#menu").hide();
-				$("#waiting_for_start").css({display: "flex"});
-			}
-		} */
 
-		/* air_console.onDisconnect = function(device_id){
-			// console.log("disconnect triggered on controller");
-			//  check_for_master();
-		}
-		
-		air_console.onConnect = function(device_id){
-			const myDeviceId = air_console.getDeviceId();
-			console.log("connect triggered on controller" +  air_console.getDeviceId(myDeviceId));
-			// check_for_master();
-			
-			// nothing
-		} */
-
-
-		// Listen for messages from other devices
-		air_console.onMessage = function (from, data) {
-
-			// console.log("received message " + data[0].type);
-
-			if (data[0].type === "inactive") {
-				// if there is a round in progress, and the client is inactive hide the menu and display the wait message instead
-				console.log("controller " + air_console.getDeviceId() + " has received message inactive");
-				$("#menu").hide();
-				$("#waiting_for_next_round").css({ display: "flex" });
-				$("#waiting_for_start").hide();
-			}
-
-			if (data[0].type === "in_progress") {
-				// if there is a game in progress, store that info for check_master
-				console.log("controller " + air_console.getDeviceId() + " has received message in progress");
-				document.inProgress = true;
-				$("#menu").hide();
-			}
-
-			if (data[0].type === "show_menu") {
-				$("#waiting_for_next_round").hide();
-				$("#waiting_for_start").hide();
-				$("#game_over").hide();
-				$("#menu").css({ display: "flex" });
-			}
-
-			if (data[0].type === "show_back_from_credits") {
-				$("#waiting_for_next_round").hide();
-				$("#waiting_for_start").hide();
-				$("#back_from_credits_area").css({ display: "flex" });
-			}
-
-			if (data[0].type === "show_back_to_main") {
-				$("#waiting_for_next_round").hide();
-				$("#waiting_for_start").hide();
-				$("#game_over").css({ display: "flex" });
-			}
-
-			if (data[0].type === "hide_cancel") {
-				$("#cancel_round").hide();
-			}
-
-			if (data[0].type === "hide_menu") {
-				if(!am_i_master()){
-					$("#guessing_buttons_full").hide();
-					$("#position").hide();
-					$("#round_over_song_details").hide();
-					$("#waiting_for_next_round").hide();
-					$("#menu").hide();
-					$("#back_from_credits_area").hide();
-					$("#game_over").hide();
-					$("#waiting_for_start").css({ display: "flex" });
-				}
-			}
-
-			if (data[0].type === "not_in_progress") {
-				// if there is no game in progress, store that info for check_master
-				console.log("controller " + air_console.getDeviceId() + " has received message NOT in progress");
-				document.inProgress = false;
-			}
-
-			if (data[0].type === "out_of_time") {
-				// canceling with timers going on is a bad idea
-				$("#cancel_round").hide();
-				if (!document.showing_result_screen) {
-					$(".player_score").html(document.currentScore + " Points (+" + 0 + ")");
-					DEBUG && console.log("received out of time message");
-					show_result_screen("out_of_time");
-				}
-			}
-
-			if (data[0].type === "skipping") {
-				// we do not check if the player is already viewing the result screen, because at this point he probably still is from last round
-				if (!document.showing_result_screen) {
-					$(".player_score").html(document.currentScore + " Points (+" + 0 + ")");
-					DEBUG && console.log("received skipping message");
-					show_result_screen("skipping");
-				}
-			}
-
-			if (data[0].type === "playlist_rounds") {
-				document.maxPlaylistRounds = data[0].playlist_rounds;
-				// when switching playlists, the round amount can be too high, fix this
-				if (document.maxRound > document.maxPlaylistRounds) {
-					document.maxRound = document.maxPlaylistRounds;
-					$("#round_amount").html(document.maxRound);
-				}
-				decrease_check();
-				increase_check();
-			}
-
-			if (data[0].type === "round_change") {
-				document.maxRound = data[0].maxRound;
-				$("#round_amount").html(document.maxRound);
-				decrease_check();
-				increase_check();
-			}
-
-			if (data[0].type === "get_ready") {
-				$("#waiting_for_start").hide();
+				// show loading
 				$("#get_ready").css({ display: "flex" });
-			}
 
-			if (data[0].type === "score") {
-				// console.log("received score");
-				// also store the current score for display when out of time 
-				const score = data[0].score;
-				document.currentScore = score.score;
-				document.position = score.position;
-				if(score.increase !== undefined){
-					// there are two types of score report. only report the increase if it actually was sent
-					$(".player_score").html(score.score + " Points (+" + score.increase + ")");
-				} 
-				
-				// </br>You are on Position " + document.position
+				// instruct the screen to start the game in full word mode
+				var command = [];
+				command.push({ type: "startGame" });
+				air_console.message(0, command);
+			});
 
-				// assign score for the permanent display
-				$("#position .number").html(score.position);
-				switch(score.position){
-					case 1:
-						$("#position .letters").html("st");
-					break;
-					case 2:
-						$("#position .letters").html("nd");
-					break;
-					case 3:
-						$("#position .letters").html("rd");
-					break;
-					default:
-						$("#position .letters").html("th");
-					break;
-				}
-			}
+			$("#next_playlist").click(function (event) {
+				var command = [];
+				command.push({ type: "next_playlist" });
+				air_console.message(0, command);
+			});
 
-			if(data[0].type === "score_report"){
-				console.log("controller received score report");
-				const score = data[0].score;
-				const maxRound = data[0].maxRound;
-				const correctGuesses = score.correctGuesses;
-				const totalGuessTime = score.totalGuessTime;
-				
-				let message = '<span class="score_report_title">';
-				switch(score.position){
-					case 1:
-						message += "You have won the game!";						
-					break;
-					case 2:
-						message += "You came in second!";
-					break;
-					case 3:
-						message += "You placed third!";
-					break;
-					default:
-						message += "You are on the " + score.position + "th place";
-					break;
-				}
-				message += "</span><span class='result_category'>Correct guesses:</span>";
-				message += "<span class='result'>" + correctGuesses + "/" + maxRound + " (" + Math.round(100 / maxRound * correctGuesses) + "%)</span></br>";
-				message += "<span class='result_category'>Total time taken for guesses:</span>";
-				message += "<span class='result'>" + Math.round(totalGuessTime * 10) / 10 + " seconds</span></br>";
-				message += "<span class='result_category'>Average time guessing:</span>";
-				message += "<span class='result'>" + + Math.round(totalGuessTime / maxRound * 10) / 10 + " seconds</span></br>";
-				$("#score_report .button_text").html(message);
-				$("#score_report").css({display: "flex"});
-			}
+			$("#previous_playlist").click(function (event) {
+				var command = [];
+				command.push({ type: "previous_playlist" });
+				air_console.message(0, command);
+			});
 
-			if (data[0].type === "game_end") {
-				document.inProgress = false;
-				console.log("handling game end");
-				$("#guessing_buttons_full #choice_1").css('opacity', '1');
-				$("#guessing_buttons_full #choice_2").css('opacity', '1');
-				$("#guessing_buttons_full #choice_3").css('opacity', '1');
-				$("#guessing_buttons_full #choice_4").css('opacity', '1');
-
-				$("#guessing_buttons_full #choice_1").removeClass("correct-selected wrong-selected");
-				$("#guessing_buttons_full #choice_2").removeClass("correct-selected wrong-selected");
-				$("#guessing_buttons_full #choice_3").removeClass("correct-selected wrong-selected");
-				$("#guessing_buttons_full #choice_4").removeClass("correct-selected wrong-selected");
-
-				$("#guessing_buttons_full").hide();
-				$("#round_over_song_details").hide();
-
-				//  hide the menu
-				$("#menu").hide();
-
-				// reset the live score
-				$("#position .number").html("");
-				$("#position .letters").html("");
-
-				// unnattach all event handlers so we dont start triggering multiple messages 
-				$(".correct").off();
-				$(".wrong").off();
-
-				sleep(14000).then(() => {
-					$("#score_report").hide();
-					$("#position").hide();
-
-					if(am_i_master()){
-						$("#game_over").css("display", "flex");
-					} else {
-						$("#waiting_for_start").css("display", "flex");
-					}
-					
-				});
-
-			}
-
-			// analyze data
-			if (data[0].type === "solution") {
-				// switch state back to not displaying the result so we know if we can switch to it or not
-				document.showing_result_screen = false;
-
-				show_or_hide_round_cancel_button();
-
-				// hide the waiting_for_next_round message if it was showing
-				$("#waiting_for_next_round").hide();
-
-				// show the position
-				$("#position").show();
-
-				// hide the get ready message
-				$("#get_ready").hide();
-
-				// console.log('received solution');
-				// unnattach all event handlers so we dont start triggering multiple messages 		
-				$(".correct").off();
-				$(".wrong").off();
-
-				// hide the song area from previous rounds
-				// $("#round_over_song_details").hide();
-
-				// push the correct information from the song to the round over screen
-				$(".song_artist").html(data[0].artist);
-				$(".song_title").html(data[0].title);
-				$(".song_album").html(data[0].album);
-				$(".song_albumart").css('background-image', 'url(' + data[0].album_art + ')');
-
-				buy_link = data[0].buy_link;
-
-				// reset css on buttons
-				$("#guessing_buttons_full #choice_1").css('opacity', '1');
-				$("#guessing_buttons_full #choice_2").css('opacity', '1');
-				$("#guessing_buttons_full #choice_3").css('opacity', '1');
-				$("#guessing_buttons_full #choice_4").css('opacity', '1');
-
-				$("#guessing_buttons_full #choice_1").removeClass("correct-selected wrong-selected");
-				$("#guessing_buttons_full #choice_2").removeClass("correct-selected wrong-selected");
-				$("#guessing_buttons_full #choice_3").removeClass("correct-selected wrong-selected");
-				$("#guessing_buttons_full #choice_4").removeClass("correct-selected wrong-selected");
-
-				artist_or_title = data[0].answerType;
-				choices = data[0].wrongAnswers;
-				// console.log(choices);
-				if (artist_or_title === 0) {
-					// add artist to array of choices
-					choices.push(data[0].artist);
+			$(".decrease_rounds").click(function (event) {
+				if (document.maxRound == 1) {
+					// dont decrease rounds below 1
 				} else {
-					// add title to array of choices
-					choices.push(data[0].title);
+					document.maxRound = document.maxRound - 1;
+					decrease_check();
+
+					$("#round_amount").html(document.maxRound);
+					var command = [];
+					command.push({ type: "decrease_rounds" });
+					air_console.message(0, command);
 				}
+			});
 
-				shuffle(choices);
-				// console.log( "choices: " + choices );
+			$("#cancel_round").click(function (event) {
+				$("#round_over_song_details").hide();
+				$("#loading").css({ display: "flex" });
+				sleep(1500).then(() => {
+					$("#loading").hide();
+					$("#menu").css({ display: "flex" });
+				});
+				var command = [];
+				command.push({ type: "cancel" });
+				air_console.message(0, command);
+			});
 
-				for (var counter = 1; counter < 5; counter++) {
-					current_choice = choices[counter - 1];
-					targetElement = $("#guessing_buttons_full #choice_" + counter);
-					targetElement.removeClass("wrong");
-					targetElement.removeClass("correct");
-					if (artist_or_title === 0) {
-						// check artist against current choice
-						if (current_choice === data[0].artist) {
-							targetElement.addClass("correct");
-						} else {
-							targetElement.addClass("wrong");
-						}
+			$("#game_over").click(function (event) {
+				$("#game_over").hide();
+				$("#loading").css({ display: "flex" });
+				sleep(1500).then(() => {
+					$("#loading").hide();
+					$("#menu").css({ display: "flex" });
+				});
+				var command = [];
+				command.push({ type: "back_to_main" });
+				air_console.message(0, command);
+			});
+
+			$("#back_from_credits").click(function (event) {
+				// inform the screen to display the animation
+				var command = [];
+				command.push({ type: "back_from_credits" });
+				air_console.message(0, command);
+
+				$("#back_from_credits_area").hide();
+				$("#loading").css({ display: "flex" });
+				// wait for the animation on the screen to finish
+				sleep(3100).then(() => {
+					$("#loading").hide();
+					// check if we are the master controller
+					if (am_i_master()) {
+						$("#menu").css({ display: "flex" });
 					} else {
-						// check title against current choice
-						if (current_choice === data[0].title) {
-							targetElement.addClass("correct");
-						} else {
-							targetElement.addClass("wrong");
-						}
+						$("#waiting_for_start").css({ display: "flex" });
 					}
-					$(targetElement).find(".unselected").html(current_choice);
+				});
+			});
+
+			$(".increase_rounds").click(function (event) {
+				if (document.maxRound === document.maxPlaylistRounds) {
+					// cant increase further
+				} else {
+					document.maxRound = document.maxRound + 1;
+					increase_check();
+
+					$("#round_amount").html(document.maxRound);
+					var command = [];
+					command.push({ type: "increase_rounds" });
+					air_console.message(0, command);
+				}
+			});
+
+			function am_i_master() {
+				return (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId());
+			}
+
+			/* these functions check for the boundaries of the amonut of rounds */
+			function increase_check() {
+				// if the max number of rounds is reached, hide the increase button
+				if (document.maxRound === document.maxPlaylistRounds) {
+					$(".increase_rounds").children().hide();
+				}
+				// if the new value is higher than 1, show the decrease button again
+				if (document.maxRound > 1) {
+					$(".decrease_rounds").children().show();
+				}
+			}
+
+			function show_or_hide_round_cancel_button() {
+				if (am_i_master()) {
+					$("#cancel_round").show();
+				} else {
+					$("#cancel_round").hide();
+				}
+			}
+
+			function decrease_check() {
+				// if the new value is below the limit, show the increase button again
+				if (document.maxRound < document.maxPlaylistRounds) {
+					$(".increase_rounds").children().show();
+				}
+				// if the new value is exactly 1, hide the decrease button so we dont get 0 rounds
+				if (document.maxRound === 1) {
+					$(".decrease_rounds").children().hide();
+				}
+			}
+
+			/* function check_for_master(){
+				// determine if we are the Master Controller
+				if(document.inProgress){
+					console.log("controller " + air_console.getDeviceId() + ": round is in progress, aborting master check");
+					return;
+				}
+				console.log("controller " + air_console.getDeviceId() + ":no round in progress, proceeding with master check");
+			
+				console.log("master id:" + air_console.getMasterControllerDeviceId());
+				console.log("controller id:" + air_console.getDeviceId());
+				/* if(document.activeGame){
+					// if we are in an active game, the master is irrelevant
+					return;
+				} 
+				if( air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === air_console.getDeviceId()){
+					// console.log("master controller! ");
+					$("#menu").css("display", "flex");
+					$("#waiting_for_start").hide();
+				} else {
+					$("#menu").hide();
+					$("#waiting_for_start").css({display: "flex"});
+				}
+			} */
+
+			/* air_console.onDisconnect = function(device_id){
+				// console.log("disconnect triggered on controller");
+				//  check_for_master();
+			}
+			
+			air_console.onConnect = function(device_id){
+				const myDeviceId = air_console.getDeviceId();
+				console.log("connect triggered on controller" +  air_console.getDeviceId(myDeviceId));
+				// check_for_master();
+				
+				// nothing
+			} */
+
+
+			// Listen for messages from other devices
+			air_console.onMessage = function (from, data) {
+
+				// console.log("received message " + data[0].type);
+
+				if (data[0].type === "inactive") {
+					// if there is a round in progress, and the client is inactive hide the menu and display the wait message instead
+					console.log("controller " + air_console.getDeviceId() + " has received message inactive");
+					$("#menu").hide();
+					$("#waiting_for_next_round").css({ display: "flex" });
+					$("#waiting_for_start").hide();
 				}
 
-				// handle correct multiple choice answer
-				$(".correct").click(function () {
-					// disable all buttons
-					disable_guessing_buttons_event_handlers();
+				if (data[0].type === "in_progress") {
+					// if there is a game in progress, store that info for check_master
+					console.log("controller " + air_console.getDeviceId() + " has received message in progress");
+					document.inProgress = true;
+					$("#menu").hide();
+				}
+
+				if (data[0].type === "show_menu") {
+					$("#waiting_for_next_round").hide();
+					$("#waiting_for_start").hide();
+					$("#game_over").hide();
+					$("#menu").css({ display: "flex" });
+				}
+
+				if (data[0].type === "show_back_from_credits") {
+					$("#waiting_for_next_round").hide();
+					$("#waiting_for_start").hide();
+					$("#back_from_credits_area").css({ display: "flex" });
+				}
+
+				if (data[0].type === "show_back_to_main") {
+					$("#waiting_for_next_round").hide();
+					$("#waiting_for_start").hide();
+					$("#game_over").css({ display: "flex" });
+				}
+
+				if (data[0].type === "hide_cancel") {
+					$("#cancel_round").hide();
+				}
+
+				if (data[0].type === "hide_menu") {
+					if (!am_i_master()) {
+						$("#guessing_buttons_full").hide();
+						$("#position").hide();
+						$("#round_over_song_details").hide();
+						$("#waiting_for_next_round").hide();
+						$("#menu").hide();
+						$("#back_from_credits_area").hide();
+						$("#game_over").hide();
+						$("#waiting_for_start").css({ display: "flex" });
+					}
+				}
+
+				if (data[0].type === "not_in_progress") {
+					// if there is no game in progress, store that info for check_master
+					console.log("controller " + air_console.getDeviceId() + " has received message NOT in progress");
+					document.inProgress = false;
+				}
+
+				if (data[0].type === "out_of_time") {
+					// canceling with timers going on is a bad idea
+					$("#cancel_round").hide();
+					if (!document.showing_result_screen) {
+						$(".player_score").html(document.currentScore + " Points (+" + 0 + ")");
+						DEBUG && console.log("received out of time message");
+						show_result_screen("out_of_time");
+					}
+				}
+
+				if (data[0].type === "skipping") {
+					// we do not check if the player is already viewing the result screen, because at this point he probably still is from last round
+					if (!document.showing_result_screen) {
+						$(".player_score").html(document.currentScore + " Points (+" + 0 + ")");
+						DEBUG && console.log("received skipping message");
+						show_result_screen("skipping");
+					}
+				}
+
+				if (data[0].type === "playlist_rounds") {
+					document.maxPlaylistRounds = data[0].playlist_rounds;
+					// when switching playlists, the round amount can be too high, fix this
+					if (document.maxRound > document.maxPlaylistRounds) {
+						document.maxRound = document.maxPlaylistRounds;
+						$("#round_amount").html(document.maxRound);
+					}
+					decrease_check();
+					increase_check();
+				}
+
+				if (data[0].type === "round_change") {
+					document.maxRound = data[0].maxRound;
+					$("#round_amount").html(document.maxRound);
+					decrease_check();
+					increase_check();
+				}
+
+				if (data[0].type === "get_ready") {
+					$("#waiting_for_start").hide();
+					$("#get_ready").css({ display: "flex" });
+				}
+
+				if (data[0].type === "score") {
+					// console.log("received score");
+					// also store the current score for display when out of time 
+					const score = data[0].score;
+					document.currentScore = score.score;
+					document.position = score.position;
+					if (score.increase !== undefined) {
+						// there are two types of score report. only report the increase if it actually was sent
+						$(".player_score").html(score.score + " Points (+" + score.increase + ")");
+					}
+
+					// </br>You are on Position " + document.position
+
+					// assign score for the permanent display
+					$("#position .number").html(score.position);
+					switch (score.position) {
+						case 1:
+							$("#position .letters").html("st");
+							break;
+						case 2:
+							$("#position .letters").html("nd");
+							break;
+						case 3:
+							$("#position .letters").html("rd");
+							break;
+						default:
+							$("#position .letters").html("th");
+							break;
+					}
+				}
+
+				if (data[0].type === "score_report") {
+					console.log("controller received score report");
+					const score = data[0].score;
+					const maxRound = data[0].maxRound;
+					const correctGuesses = score.correctGuesses;
+					const totalGuessTime = score.totalGuessTime;
+
+					let message = '<span class="score_report_title">';
+					switch (score.position) {
+						case 1:
+							message += "You have won the game!";
+							break;
+						case 2:
+							message += "You came in second!";
+							break;
+						case 3:
+							message += "You placed third!";
+							break;
+						default:
+							message += "You are on the " + score.position + "th place";
+							break;
+					}
+					message += "</span><span class='result_category'>Correct guesses:</span>";
+					message += "<span class='result'>" + correctGuesses + "/" + maxRound + " (" + Math.round(100 / maxRound * correctGuesses) + "%)</span></br>";
+					message += "<span class='result_category'>Total time taken for guesses:</span>";
+					message += "<span class='result'>" + Math.round(totalGuessTime * 10) / 10 + " seconds</span></br>";
+					message += "<span class='result_category'>Average time guessing:</span>";
+					message += "<span class='result'>" + + Math.round(totalGuessTime / maxRound * 10) / 10 + " seconds</span></br>";
+					$("#score_report .button_text").html(message);
+					$("#score_report").css({ display: "flex" });
+				}
+
+				if (data[0].type === "game_end") {
+					document.inProgress = false;
+					console.log("handling game end");
+					$("#guessing_buttons_full #choice_1").css('opacity', '1');
+					$("#guessing_buttons_full #choice_2").css('opacity', '1');
+					$("#guessing_buttons_full #choice_3").css('opacity', '1');
+					$("#guessing_buttons_full #choice_4").css('opacity', '1');
+
+					$("#guessing_buttons_full #choice_1").removeClass("correct-selected wrong-selected");
+					$("#guessing_buttons_full #choice_2").removeClass("correct-selected wrong-selected");
+					$("#guessing_buttons_full #choice_3").removeClass("correct-selected wrong-selected");
+					$("#guessing_buttons_full #choice_4").removeClass("correct-selected wrong-selected");
+
+					$("#guessing_buttons_full").hide();
+					$("#round_over_song_details").hide();
+
+					//  hide the menu
+					$("#menu").hide();
+
+					// reset the live score
+					$("#position .number").html("");
+					$("#position .letters").html("");
+
+					// unnattach all event handlers so we dont start triggering multiple messages 
+					$(".correct").off();
+					$(".wrong").off();
+
+					sleep(14000).then(() => {
+						$("#score_report").hide();
+						$("#position").hide();
+
+						if (am_i_master()) {
+							$("#game_over").css("display", "flex");
+						} else {
+							$("#waiting_for_start").css("display", "flex");
+						}
+
+					});
+
+				}
+
+				// analyze data
+				if (data[0].type === "solution") {
+					// switch state back to not displaying the result so we know if we can switch to it or not
+					document.showing_result_screen = false;
 
 					show_or_hide_round_cancel_button();
 
-					// let the screen know somebody got it right
-					// console.log("handling correct guess on controller");
-					var correctGuess = [];
-					correctGuess.push({ type: "correctGuess", type_of_guess: 'full' });
-					air_console.message(0, correctGuess);
+					// hide the waiting_for_next_round message if it was showing
+					$("#waiting_for_next_round").hide();
 
-					// grey out the other answers
-					$("#guessing_buttons_full #choice_1").css('opacity', '0.5');
-					$("#guessing_buttons_full #choice_2").css('opacity', '0.5');
-					$("#guessing_buttons_full #choice_3").css('opacity', '0.5');
-					$("#guessing_buttons_full #choice_4").css('opacity', '0.5');
+					// show the position
+					$("#position").show();
 
-					// highlight the correct answer
-					id = $(this).attr("id");
-					// console.log("id of element is " + id);
-					$("#guessing_buttons_full #" + id).css('opacity', '1');
-					$("#guessing_buttons_full #" + id).addClass('correct-selected');
+					// hide the get ready message
+					$("#get_ready").hide();
 
-					// this is the scrolling effect for the title, currently not needed, left in just in case
-					animatethis($('.song_title'), 3000);
+					// console.log('received solution');
+					// unnattach all event handlers so we dont start triggering multiple messages 		
+					$(".correct").off();
+					$(".wrong").off();
 
-					// already switch to true, so that we dont get two different result types if we answer in the last 2 seconds
-					document.showing_result_screen = true;
+					// hide the song area from previous rounds
+					// $("#round_over_song_details").hide();
 
-					// wait 2 seconds, then display the correct result including link to buy the song
-					sleep(2000).then(() => {
-						DEBUG && console.log("2 seconds after a correct guess have passed, we are showing the result screen");
-						show_result_screen("correct");
+					// push the correct information from the song to the round over screen
+					$(".song_artist").html(data[0].artist);
+					$(".song_title").html(data[0].title);
+					$(".song_album").html(data[0].album);
+					$(".song_albumart").css('background-image', 'url(' + data[0].album_art + ')');
+
+					buy_link = data[0].buy_link;
+
+					// reset css on buttons
+					$("#guessing_buttons_full #choice_1").css('opacity', '1');
+					$("#guessing_buttons_full #choice_2").css('opacity', '1');
+					$("#guessing_buttons_full #choice_3").css('opacity', '1');
+					$("#guessing_buttons_full #choice_4").css('opacity', '1');
+
+					$("#guessing_buttons_full #choice_1").removeClass("correct-selected wrong-selected");
+					$("#guessing_buttons_full #choice_2").removeClass("correct-selected wrong-selected");
+					$("#guessing_buttons_full #choice_3").removeClass("correct-selected wrong-selected");
+					$("#guessing_buttons_full #choice_4").removeClass("correct-selected wrong-selected");
+
+					artist_or_title = data[0].answerType;
+					choices = data[0].wrongAnswers;
+					// console.log(choices);
+					if (artist_or_title === 0) {
+						// add artist to array of choices
+						choices.push(data[0].artist);
+					} else {
+						// add title to array of choices
+						choices.push(data[0].title);
+					}
+
+					shuffle(choices);
+					// console.log( "choices: " + choices );
+
+					for (var counter = 1; counter < 5; counter++) {
+						current_choice = choices[counter - 1];
+						targetElement = $("#guessing_buttons_full #choice_" + counter);
+						targetElement.removeClass("wrong");
+						targetElement.removeClass("correct");
+						if (artist_or_title === 0) {
+							// check artist against current choice
+							if (current_choice === data[0].artist) {
+								targetElement.addClass("correct");
+							} else {
+								targetElement.addClass("wrong");
+							}
+						} else {
+							// check title against current choice
+							if (current_choice === data[0].title) {
+								targetElement.addClass("correct");
+							} else {
+								targetElement.addClass("wrong");
+							}
+						}
+						$(targetElement).find(".unselected").html(current_choice);
+					}
+
+					// handle correct multiple choice answer
+					$(".correct").click(function () {
+						// disable all buttons
+						disable_guessing_buttons_event_handlers();
+
+						show_or_hide_round_cancel_button();
+
+						// let the screen know somebody got it right
+						// console.log("handling correct guess on controller");
+						var correctGuess = [];
+						correctGuess.push({ type: "correctGuess", type_of_guess: 'full' });
+						air_console.message(0, correctGuess);
+
+						// grey out the other answers
+						$("#guessing_buttons_full #choice_1").css('opacity', '0.5');
+						$("#guessing_buttons_full #choice_2").css('opacity', '0.5');
+						$("#guessing_buttons_full #choice_3").css('opacity', '0.5');
+						$("#guessing_buttons_full #choice_4").css('opacity', '0.5');
+
+						// highlight the correct answer
+						id = $(this).attr("id");
+						// console.log("id of element is " + id);
+						$("#guessing_buttons_full #" + id).css('opacity', '1');
+						$("#guessing_buttons_full #" + id).addClass('correct-selected');
+
+						// this is the scrolling effect for the title, currently not needed, left in just in case
+						animatethis($('.song_title'), 3000);
+
+						// already switch to true, so that we dont get two different result types if we answer in the last 2 seconds
+						document.showing_result_screen = true;
+
+						// wait 2 seconds, then display the correct result including link to buy the song
+						sleep(2000).then(() => {
+							DEBUG && console.log("2 seconds after a correct guess have passed, we are showing the result screen");
+							show_result_screen("correct");
+						});
 					});
-				});
 
-				// handle wrong multiple choice answer
-				$(".wrong").click(function () {
-					// disable all buttons
-					disable_guessing_buttons_event_handlers();
+					// handle wrong multiple choice answer
+					$(".wrong").click(function () {
+						// disable all buttons
+						disable_guessing_buttons_event_handlers();
 
-					show_or_hide_round_cancel_button();
+						show_or_hide_round_cancel_button();
 
-					// let the screen know somebody got it wrong
-					// console.log("handling wrong guess on controller");
-					var wrongGuess = [];
-					wrongGuess.push({ type: "wrongGuess" });
-					air_console.message(0, wrongGuess);
+						// let the screen know somebody got it wrong
+						// console.log("handling wrong guess on controller");
+						var wrongGuess = [];
+						wrongGuess.push({ type: "wrongGuess" });
+						air_console.message(0, wrongGuess);
 
-					// grey out the other answers
-					$("#guessing_buttons_full #choice_1").css('opacity', '0.2');
-					$("#guessing_buttons_full #choice_2").css('opacity', '0.2');
-					$("#guessing_buttons_full #choice_3").css('opacity', '0.2');
-					$("#guessing_buttons_full #choice_4").css('opacity', '0.2');
+						// grey out the other answers
+						$("#guessing_buttons_full #choice_1").css('opacity', '0.2');
+						$("#guessing_buttons_full #choice_2").css('opacity', '0.2');
+						$("#guessing_buttons_full #choice_3").css('opacity', '0.2');
+						$("#guessing_buttons_full #choice_4").css('opacity', '0.2');
 
-					// highlight the wrong answer
-					id = $(this).attr("id");
-					// console.log("id of element is " + id);
-					$("#guessing_buttons_full #" + id).css('opacity', '1');
-					$("#guessing_buttons_full #" + id).addClass('wrong-selected');
+						// highlight the wrong answer
+						id = $(this).attr("id");
+						// console.log("id of element is " + id);
+						$("#guessing_buttons_full #" + id).css('opacity', '1');
+						$("#guessing_buttons_full #" + id).addClass('wrong-selected');
 
-					// flash the correct answer 
-					// console.log("flashing correct answer");
-					$(".correct").addClass('correct-selected');
-					$(".correct").css('opacity', '1');
-					$(".correct").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+						// flash the correct answer 
+						// console.log("flashing correct answer");
+						$(".correct").addClass('correct-selected');
+						$(".correct").css('opacity', '1');
+						$(".correct").fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
 
-					animatethis($('.song_title'), 3000);
+						animatethis($('.song_title'), 3000);
 
-					// already switch to true, so that we dont get two different result types if we answer in the last 2 seconds
-					document.showing_result_screen = true;
-					// wait 2 seconds, then display the correct result including link to buy the song
-					sleep(2000).then(() => {
-						DEBUG && console.log("2 seconds after a wrong guess have passed, we are showing the result screen");
-						show_result_screen("wrong");
+						// already switch to true, so that we dont get two different result types if we answer in the last 2 seconds
+						document.showing_result_screen = true;
+						// wait 2 seconds, then display the correct result including link to buy the song
+						sleep(2000).then(() => {
+							DEBUG && console.log("2 seconds after a wrong guess have passed, we are showing the result screen");
+							show_result_screen("wrong");
+						});
 					});
-				});
 
-				// display the guessing buttons
-				$("#guessing_buttons_full").show();
+					// display the guessing buttons
+					$("#guessing_buttons_full").show();
+				}
 			}
-		}
 
-		function show_result_screen(type) {
-			DEBUG && console.log("showing result screen");
-			document.showing_result_screen = true;
+			function show_result_screen(type) {
+				DEBUG && console.log("showing result screen");
+				document.showing_result_screen = true;
 
-			// hide all guessing buttons
-			$("#guessing_buttons_full").hide();
-			// unhide player result area
-			$("#round_over_song_details").css("display", "flex");
-			//inform player of result
-			$(".result_banner").removeClass("wrong");
-			$(".result_banner").removeClass("correct");
-			if (type === "out_of_time") {
-				$(".result_banner").addClass("wrong");
-				$(".player_round_result").html("Out of time!");
-			} else if (type === "skipping") { 
-				$(".result_banner").addClass("wrong");
-				$(".player_round_result").html("Skipped broken song.");
-			} else {
-				$(".result_banner").addClass(type);
-				$(".player_round_result").html(type + "!");
+				// hide all guessing buttons
+				$("#guessing_buttons_full").hide();
+				// unhide player result area
+				$("#round_over_song_details").css("display", "flex");
+				//inform player of result
+				$(".result_banner").removeClass("wrong");
+				$(".result_banner").removeClass("correct");
+				if (type === "out_of_time") {
+					$(".result_banner").addClass("wrong");
+					$(".player_round_result").html("Out of time!");
+				} else if (type === "skipping") {
+					$(".result_banner").addClass("wrong");
+					$(".player_round_result").html("Skipped broken song.");
+				} else {
+					$(".result_banner").addClass(type);
+					$(".player_round_result").html(type + "!");
+				}
 			}
-		}
 
-		function disable_guessing_buttons_event_handlers() {
-			// unnattach all event handlers so we dont start triggering multiple messages
-			// console.log("disabling all buttons on controller, because the player guessed.");
-			$(".correct").off();
-			$(".wrong").off();
-		}
+			function disable_guessing_buttons_event_handlers() {
+				// unnattach all event handlers so we dont start triggering multiple messages
+				// console.log("disabling all buttons on controller, because the player guessed.");
+				$(".correct").off();
+				$(".wrong").off();
+			}
 
-		function sleep(ms) {
-			return new Promise(resolve => setTimeout(resolve, ms));
-		}
+			function sleep(ms) {
+				return new Promise(resolve => setTimeout(resolve, ms));
+			}
+		});
 	</script>
 
 </body>
