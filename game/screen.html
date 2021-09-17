@@ -45,6 +45,9 @@
 
 		document.roundEndInitiated = false;
 
+		document.selectedPlaylist;
+
+		var playlists = [{name:"2000's",id:"11",description:"The best and the worst decade.",new:"0",amount_of_tracks:128,album_art:["album_art/927229903.jpg","album_art/278674439.jpg","album_art/155658405.jpg","album_art/735211459.jpg"]},{name:"70's",id:"9",description:"Rock'n Roll & Funk is born",new:"0",amount_of_tracks:86,album_art:["album_art/965314509.jpg","album_art/1144910639.jpg","album_art/1111743430.jpg","album_art/220385910.jpg"]},{name:"80's",id:"10",description:"The age of MTV",new:"0",amount_of_tracks:98,album_art:["album_art/269572838.jpg","album_art/891461604.jpg","album_art/1065975633.jpg","album_art/115531447.jpg"]},{name:"90's",id:"2",description:"Only kids will get this",new:"0",amount_of_tracks:126,album_art:["album_art/1177856806.jpg","album_art/286006487.jpg","album_art/1317980726.jpg","album_art/631865054.jpg"]},{name:"Dance Music",id:"3",description:"Electronic Dance Music, mostly Trance.",new:"0",amount_of_tracks:186,album_art:["album_art/318390146.jpg","album_art/600009963.jpg","album_art/473722172.jpg","album_art/968874522.jpg"]},{name:"Deutschland",id:"7",description:"Songs in German or from Germany",new:"0",amount_of_tracks:103,album_art:["album_art/368317231.jpg","album_art/250216026.jpg","album_art/589881403.jpg","album_art/712245449.jpg"]},{name:"freakpants' list of disaster",id:"0",description:"A list of music enjoyed by the creator of MusicGuess.",new:"0",amount_of_tracks:621,album_art:["album_art/930166513.jpg","album_art/273399881.jpg","album_art/1112530388.jpg","album_art/513700005.jpg"]},{name:"Global Hits 2021",id:"15",description:"",new:"0",amount_of_tracks:103,album_art:["album_art/1573304187.jpg","album_art/1582465050.jpg","album_art/1569625228.jpg","album_art/1581886982.jpg"]},{name:"Popular Stuff",id:"1",description:"Music that a lot of people like",new:"0",amount_of_tracks:512,album_art:["album_art/42281617.jpg","album_art/407593152.jpg","album_art/690928033.jpg","album_art/265143164.jpg"]},{name:"Rock & Metal",id:"5",description:"Mostly of the softer persuasion though",new:"0",amount_of_tracks:98,album_art:["album_art/207192731.jpg","album_art/273714443.jpg","album_art/254328852.jpg","album_art/1440713819.jpg"]},{name:"Swiss",id:"12",description:"Songs from Switzerland. mostly in Swiss German",new:"0",amount_of_tracks:102,album_art:["album_art/195793944.jpg","album_art/286242398.jpg","album_art/292746615.jpg","album_art/1069371302.jpg"]},{name:"Trance",id:"4",description:"Beats & Vocals",new:"0",amount_of_tracks:100,album_art:["album_art/727652190.jpg","album_art/871733033.jpg","album_art/534019644.jpg","album_art/129938048.jpg"]}];
 		var air_console;
 
 		$(document).ready(function () {
@@ -350,64 +353,59 @@
 			};
 
 			// get the playlists info
-			$.ajax({ method: "GET", url: "playlists/playlist_info.json", data: {}, dataType: "json" })
-				.done(function (msg) {
-					playlists = msg;
-
+			// $.ajax({ method: "GET", url: "playlists/playlist_info.json", data: {}, dataType: "json" })
+				// .done(function (msg) {
+					// playlists = msg;
 					// display info for the first playlist
 
-					html = '';
-					counter = 0;
+			html = '';
+			counter = 0;
+			middle_id = Math.floor(playlists.length / 2);
 
-					middle_id = Math.floor(playlists.length / 2);
+			playlists.forEach(function (playlist) {
+				DEBUG && console.log("loading playlist");
+				DEBUG && console.log(playlist);
+				if (counter === middle_id) {
+					// defaults to popular stuff
+					document.selectedPlaylist = middle_id;
+					update_max_rounds_on_controllers();
+					html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art active">';
+				} else {
+					html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art">';
+				}
 
-					playlists.forEach(function (playlist) {
-						DEBUG && console.log("loading playlist");
-						DEBUG && console.log(playlist);
-						if (counter === middle_id) {
-							// defaults to popular stuff
-							document.selectedPlaylist = middle_id;
-							update_max_rounds_on_controllers();
-							html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art active">';
-						} else {
-							html += '<div id="playlist_' + counter + '" data-html-id="' + counter + '" class="album_art">';
+				if (air_console !== undefined) {
+					air_console.devices.forEach(device_object => {
+						if (device_object !== undefined && device_object !== null && device_object.client !== null && device.client.low_performance) {
+							document.low_performance = true;
 						}
-
-						if (air_console !== undefined) {
-							air_console.devices.forEach((device) => {
-								if (device !== null && device.client && device.client.low_performance) {
-									document.low_performance = true;
-								}
-							});
-						}
-
-						// dont even add the images on the gamehub app
-						if (!document.low_performance) {
-							playlist.album_art.forEach(function (element) {
-								html = html + '<img src="' + element + '" />';
-							});
-							$("#screen-wrapper").append('<img id="playanimation" src="audio.svg" />');
-							$("body").append('<video playsinline autoplay muted loop id="bgvid"><source src="videos/disco_loop.mp4" type="video/mp4"></video>');
-							if (playlist.new === "1") {
-								html = html + '<span class="new-sticker">NEW!</span>';
-							}
-						}
-
-						html += '<div class="playlist-text"><b>' + playlist.name + '</b>';
-						html += playlist.amount_of_tracks + ' Tracks</br>';
-						html += '<span class="playlist-description">' + playlist.description + '</span>';
-						html += '</div>';
-						html += '</div>';
-						counter++;
 					});
+				}
 
-					$("#playlist-selector").html(html);
+				// dont even add the images on the gamehub app
+				if (!document.low_performance) {
+					playlist.album_art.forEach(function (element) {
+						html = html + '<img src="' + element + '" />';
+					});
+					$("#screen-wrapper").append('<img id="playanimation" src="audio.svg" />');
+					$("body").append('<video playsinline autoplay muted loop id="bgvid"><source src="videos/disco_loop.mp4" type="video/mp4"></video>');
+					if (playlist.new === "1") {
+						html = html + '<span class="new-sticker">NEW!</span>';
+					}
+				}
 
+				html += '<div class="playlist-text"><b>' + playlist.name + '</b>';
+				html += playlist.amount_of_tracks + ' Tracks</br>';
+				html += '<span class="playlist-description">' + playlist.description + '</span>';
+				html += '</div>';
+				html += '</div>';
+				counter++;
+			});
 
+			$("#playlist-selector").html(html);
+			$("#playlist-selector").css("display", "flex");
 
-					$("#playlist-selector").css("display", "flex");
-
-				});
+			//	});
 		}
 
 		function calculateRoundTime() {
@@ -887,7 +885,7 @@
 
 		function update_max_rounds_on_controllers() {
 			// also send the current playlist max rounds to the controllers, so it knows when not to increase the count locally
-			if (typeof playlists !== 'undefined') {
+			if (typeof playlists !== 'undefined' && document.selectedPlaylist !== undefined) {
 				// only attempt this is playlists is already initialized (takes some time because the json needs to be fetched first)
 				playlist_rounds = [];
 				playlist_rounds.push({ type: "playlist_rounds", playlist_rounds: playlists[document.selectedPlaylist]['amount_of_tracks'] });
@@ -1387,7 +1385,4 @@
 	<audio id="player" autoplay>
 		<source src="" type="audio/mpeg">
 	</audio>
-
-
-
 </body>

@@ -183,6 +183,9 @@
 			air_console.onMessage = function (from, data) {
 
 				// console.log("received message " + data[0].type);
+				if(data === undefined || data[0] === undefined || data[0].type === undefined){
+					return;
+				}
 
 				if (data[0].type === "inactive") {
 					// if there is a round in progress, and the client is inactive hide the menu and display the wait message instead
