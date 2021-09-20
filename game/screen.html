@@ -708,6 +708,7 @@
 			DEBUG && console.log("determined whether to let the user guess artist or title");
 
 			DEBUG && console.log("entering while loop");
+
 			while (wrong_answers < 3) {
 
 				// 50:50 chance that wrong answer is either artist or title
@@ -721,7 +722,9 @@
 				if (artist_or_title === 0) {
 					// artist
 					// check if the wrongSong has the same artist as the actual song
-					if (wrongSong.artist === randomSong.artist) {
+					if(wrongSong === undefined || randomSong === undefined){
+						suitable_wrong_answer = false;
+					} else if (wrongSong.artist === randomSong.artist) {
 						suitable_wrong_answer = false;
 					}
 					// check if wrong contains right, or vice versa
