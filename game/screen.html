@@ -703,6 +703,17 @@
 			randomSongIndex = randomIntFromInterval(0, library.length - 1);
 			DEBUG && console.log("got id of random song");
 			randomSong = library[randomSongIndex];
+			
+			// use this to select a specific song
+			/* library.forEach((track) => {
+				if(track.id === '1054438586'){
+					randomSong = track;
+				}
+			}); */
+
+			DEBUG && console.log("random song:");
+			DEBUG && console.log(randomSong);
+
 			DEBUG && console.log("got the random song object");
 			// remove song from the library so it will not get played more than once
 			library.remove(randomSongIndex);
