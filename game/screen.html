@@ -573,6 +573,7 @@
 
 		function start() {
 
+			DEBUG && console.log("start function initiated");
 			document.cancelled = false;
 
 			// reset in case we cancelled an earlier game
@@ -646,17 +647,24 @@
 
 							document.playerFailed = false;
 
+							DEBUG && console.log("getting ready to call ajax for playlist");
 							// get list of songs, choose one at random
 							$.ajax(
 								{ method: "GET", url: "playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {}, dataType: "json" })
 								.done(function (msg) {
+									DEBUG && console.log("ajax for playlist is done");
 									library = msg;
 									library_copy_for_wrong_answers = library.slice();
 									// console.log(library);
 									DEBUG && console.log("playing random song for the first time");
 
 									play_random_song();
-								});
+								})
+								.fail(function (msg) {
+									DEBUG && console.log("ajax for playlist failed");
+									start();
+								}
+							);
 
 							// stores the current solution
 							document.solution = [];
@@ -701,6 +709,24 @@
 			DEBUG && console.log("increased round counter");
 			$("#roundCounter").html("Round</br>" + document.round + "/" + document.maxRound);
 			DEBUG && console.log("set round counter display");
+
+			// test if the start function can be invoked in case of library not being loaded successfully from ajax
+			// it does, just not very nicely
+			/* randonum = randomIntFromInterval(0,1);
+			if(randonum === 0){
+				console.log("bugging out");
+				library = undefined;
+			} else {
+				console.log("working");
+			} */
+			DEBUG && console.log("library:");
+			DEBUG && console.log(library);
+			if(library === undefined){
+				// attempt to start over
+				DEBUG && console.log("starting over because library was not returned from ajax");
+				start();
+				return;
+			}
 
 			randomSongIndex = randomIntFromInterval(0, library.length - 1);
 			DEBUG && console.log("got id of random song");
