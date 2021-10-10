@@ -100,18 +100,27 @@ text white: white;
 
 span.new-sticker{
 	position: absolute;
-	left: 0;
-    top: 0.5em;
+	left: 3em;
+    top: 3em;
     margin-left: 0.5em;
-    height: 2em;
-    line-height: 2em;
-    font-size: 2em;
+    height: 2.5em;
+    line-height: 2.5em;
+    font-size: 2.5em;
     padding: 0.2em;
     color: white;
-    border-radius: 2em;
-    width: 2em;
+    border-radius: 2.5em;
+    width: 2.5em;
     font-family: 'Oswald';
     background-color: #b51d05;
+	text-align: center;
+}
+
+.active span.new-sticker{
+    height: 3em;
+    line-height: 3em;
+    font-size: 3em;
+    border-radius: 3em;
+    width: 3em;
 }
 
 #credits-container{
