@@ -275,7 +275,7 @@
 						$("#message").html("");
 						$("#message").hide();
 						$("#roundCounter").hide();
-
+						$("#playlist-display").hide();
 						// inform other controllers
 						hide_menu = [];
 						hide_menu.push({
@@ -615,6 +615,8 @@
 						sleep(1000).then(() => {
 
 							$("#roundCounter").html("Round</br>1/" + document.maxRound);
+							$("#playlist-display").html(playlists[document.selectedPlaylist].name);
+							$("#playlist-display").css({ display: "flex" });
 							$("#roundCounter").css({ display: "flex" });
 							$("#status").hide();
 							$("#status").html("");
@@ -1080,6 +1082,8 @@
 					$("#roundCounter").hide();
 					$("#roundCounter").html("");
 
+					$("#playlist-display").hide();
+
 					$("#status").html("");
 					$("#status").hide();
 					const winner_object = document.playerScores[0];
@@ -1382,6 +1386,7 @@
 		<div id="victory_screen"></div>
 	</div>
 	<div id="playlist-selector"></div>
+	<div id="playlist-display"></div>
 	<div id="roundCounter"></div>
 	<div id="roundTime"></div>
 	<div id="credits-container">

@@ -279,7 +279,14 @@ div .avatar_wrong{
 	color: white;
 }
 
-#roundTime, #roundCounter{
+#playlist-display{
+	bottom: 46vh;
+	font-size: 1.5em;
+	background:#ffdc40;
+	color: #e8822d;
+}
+
+#roundTime, #roundCounter, #playlist-display{
 	text-align: center;
     position: absolute;
     /* margin-left: 25px; */
