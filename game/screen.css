@@ -366,6 +366,7 @@ div .avatar_wrong{
 	overflow: hidden;
 	float:left;
 	min-width: 25vw;
+	min-height: 25vw;
 	width: 25vw;
 	font-size: 0.5em;
 	box-shadow: 1px 1px 10px black;
@@ -377,8 +378,17 @@ div .avatar_wrong{
 	height: 12.5vw;
 }
 
-#playlist-selector .album_art.active{
+#playlist-selector .album_art.previous{
+	background-color: #ffdc40;	
+}
+
+#playlist-selector .album_art.next{
 	background: #b51d05;
+	
+}
+
+#playlist-selector .album_art.active{
+	background-color: #e8822d;
     min-width: 34vw;
     width: 34vw;
     height: 34vw;
@@ -403,30 +413,32 @@ div .avatar_wrong{
 }
 
 #playlist-selector .album_art.active .playlist-text{
-	width: 34vw;
-	height: 34vw;
+	font-size: 3.8em;
 }
 
 #playlist-selector .playlist-text{
 	color:white;
-	font-size: 3.8em;
-	bottom: 0px;
-	position: absolute;
-	align-items: center;
-	justify-content: flex-end;
-	flex-direction: column;
-	height: 25vw;
-	width: 25vw;
-    display: flex;
-	padding-bottom: 1em;
+	font-size: 3em;
+	width: 20vw;
+	text-align:center;
 }
 
-#playlist-selector .playlist-text b{
-	text-align:center;
-	min-width: 26vw;
+#playlist-selector .playlist-text-wrapper{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 	background: rgb(0,0,0, 50%);
-	padding-left: 2em;
-    padding-right: 2em;
+	bottom: 3vw;
+	height: 6vw;
+	position: absolute;
+	width: 25vw;
+}
+
+#playlist-selector .album_art.active .playlist-text-wrapper{
+	width: 34vw;
+	height: 10em;
+	
 }
 
 #playlist-selector .playlist-description, #playlist-selector .playlist-track-count{
