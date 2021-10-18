@@ -389,10 +389,10 @@ div .avatar_wrong{
 
 #playlist-selector .album_art.active{
 	background-color: #e8822d;
-    min-width: 34vw;
-    width: 34vw;
-    height: 34vw;
-    border-radius: 34vw;
+    min-width: 32vw;
+    width: 32vw;
+    height: 32vw;
+    border-radius: 32vw;
 	max-height: unset;
 	margin-left: 2em;
 	margin-right: 2em;
@@ -408,8 +408,8 @@ div .avatar_wrong{
 
 
 #playlist-selector .album_art.active img{
-	width: 17vw;
-	height: 17vw;
+	width: 16vw;
+	height: 16vw;
 }
 
 #playlist-selector .album_art.active .playlist-text{
