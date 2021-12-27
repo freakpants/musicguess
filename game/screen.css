@@ -67,6 +67,17 @@ text white: white;
 	}	
 }
 
+#playlist-selector .album_art img#hero-image{
+	object-position: center;
+	max-width: 100%;
+	object-fit: contain;
+	width: unset;
+    height: unset;
+	position: absolute;
+    left: 0.8em;
+    top: 0.6em;
+}
+
 #playlist-details{
 	background-color: #e8822d;
 	font-size: 2em;
@@ -115,7 +126,24 @@ span.new-sticker{
 	text-align: center;
 }
 
-.active span.new-sticker{
+span.hero-sticker{
+	position: absolute;
+	right: 3em;
+    top: 3em;
+    margin-left: 0.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+    font-size: 2.5em;
+    padding: 0.2em;
+    color: white;
+    border-radius: 2.5em;
+    width: 2.5em;
+    font-family: 'Oswald';
+    background-color:  #2e2e2e;
+	text-align: center;
+}
+
+.active span.new-sticker, .active span.hero-sticker{
     height: 3em;
     line-height: 3em;
     font-size: 3em;

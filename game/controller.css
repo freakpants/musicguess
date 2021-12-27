@@ -36,6 +36,21 @@ text white: white;
   src: url('Monoton-Regular.ttf')  format('truetype');
 }
 
+#hero-image{
+	max-width: 80%;
+}
+
+#small-hero-image{
+	bottom: 1em;
+    position: absolute;
+    left: 4em;
+    width: 5em;
+}
+
+#hero-req, #hero-confirm{
+	display: none;
+}
+
 #cancel_round{
 	display: none;
 	position: absolute;
@@ -220,7 +235,14 @@ body{
 	position: absolute;
 }
 
-.minus, #confirm{
+#hero-confirm{
+	width: 50vw;
+	height: 50vh;
+	background-color: #cd1c24;
+	display: none;
+}
+
+.minus, #confirm, #hero-confirm{
 	background-color:  #b51d05;
 }
 
@@ -471,6 +493,7 @@ body{
 	width: 75%;
 	display: flex;
 	justify-content: center;
+	text-align: center;
 }
 
 .button_comment, .button_comment_reduced{

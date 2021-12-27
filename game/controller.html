@@ -53,6 +53,18 @@
 			<div class="button_text">Confirm/</br>Start</div>
 			<!-- <div class="button_comment">Play with current settings</div> -->
 		</div>
+		<div class="flexbox resizing-button" id="hero-confirm">
+			<span class="fa-lg icon-container">
+				<i class="fa fa-play play_icon"></i>
+			</span>
+			<div class="button_text">Select with Hero</div>
+			<img id="small-hero-image" src="https://game.airconsole.com/com.airconsole.store.cdn.airconsole.com/2021-12-23-17-05-19/img/hero.45eeb9be.gif" />
+			<!-- <div class="button_comment">Play with current settings</div> -->
+		</div>
+		<div class="flexbox resizing-button" id="hero-req">
+			<img id="hero-image" src="https://game.airconsole.com/com.airconsole.store.cdn.airconsole.com/2021-12-23-17-05-19/img/hero.45eeb9be.gif" />
+			<div class="button_text">Hero</br>required</div>
+		</div>
 	</div>
 	<div class="flexbox" id="game_over">
 		<span class="fa-lg icon-container">
@@ -186,6 +198,24 @@
 				// console.log("received message " + data[0].type);
 				if (data === undefined || data[0] === undefined || data[0].type === undefined) {
 					return;
+				}
+
+				if(data[0].type === "disable_start"){
+					$("#confirm").hide();
+					$("#hero-confirm").hide();
+					$("#hero-req").css("display", "flex");
+				}
+
+				if(data[0].type === "enable_start"){
+					$("#confirm").css("display", "flex");
+					$("#hero-confirm").hide();
+					$("#hero-req").hide();
+				}
+
+				if(data[0].type === "start_with_hero"){
+					$("#confirm").hide();
+					$("#hero-confirm").css("display", "flex");
+					$("#hero-req").hide();
 				}
 
 				if (data[0].type === "inactive") {
@@ -602,12 +632,15 @@
 				air_console.message(0, command);
 			}); */
 
-			$("#confirm").click(function (event) {
+			$("#confirm, #hero-confirm ").click(function (event) {
 
 				// in case the button was the only button, resize it to normal size
 				$("#confirm").css("width", "50vw");
 				$("#confirm").css("height", "50vh");
 				$("#confirm").css("position", "relative");
+
+				$("#hero-confirm").hide();
+				$("#confirm").css("display", "flex");
 
 				var command = [];
 				command.push({ type: "confirm" });
@@ -615,6 +648,8 @@
 			});
 
 			$("#cancel").click(function (event) {
+				$("#hero-confirm").hide();
+				$("#confirm").css("display", "flex");
 				var command = [];
 				command.push({ type: "back" });
 				air_console.message(0, command);

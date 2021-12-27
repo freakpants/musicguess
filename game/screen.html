@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 
 		// whether or not to display all information
-		const DEBUG = false;
+		const DEBUG = true;
 
 		// scroll the result areas or not
 		document.scroll_results = false;
@@ -54,18 +54,21 @@
 		document.setting = "round_amount";
 		document.changingSetting = false;
 
+		document.hero = false;
+
 		var playlists = [
 			{
 				name: "2000's",
 				id: "11",
 				description: "The best and the worst decade.",
 				new: "0",
+				hero: "1",
 				amount_of_tracks: 314,
 				album_art: [
-					"album_art/1440866782.jpg",
-					"album_art/291708656.jpg",
-					"album_art/409547.jpg",
-					"album_art/78985420.jpg"
+					"album_art/528436018.jpg",
+					"album_art/30565952.jpg",
+					"album_art/295931997.jpg",
+					"album_art/14146457.jpg"
 				]
 			},
 			{
@@ -73,12 +76,13 @@
 				id: "26",
 				description: "Music from 2010-2019",
 				new: "0",
-				amount_of_tracks: 191,
+				hero: "0",
+				amount_of_tracks: 187,
 				album_art: [
-					"album_art/487053599.jpg",
-					"album_art/561758043.jpg",
-					"album_art/720197924.jpg",
-					"album_art/545398133.jpg"
+					"album_art/1440829092.jpg",
+					"album_art/1440867448.jpg",
+					"album_art/1013027119.jpg",
+					"album_art/378423506.jpg"
 				]
 			},
 			{
@@ -86,12 +90,13 @@
 				id: "9",
 				description: "Rock'n Roll & Funk is born",
 				new: "0",
-				amount_of_tracks: 140,
+				hero: "0",
+				amount_of_tracks: 141,
 				album_art: [
-					"album_art/1423766994.jpg",
-					"album_art/1423191432.jpg",
-					"album_art/1245973052.jpg",
-					"album_art/355038498.jpg"
+					"album_art/324127933.jpg",
+					"album_art/452353360.jpg",
+					"album_art/1048174417.jpg",
+					"album_art/198226130.jpg"
 				]
 			},
 			{
@@ -99,12 +104,13 @@
 				id: "10",
 				description: "The age of MTV",
 				new: "0",
-				amount_of_tracks: 147,
+				hero: "0",
+				amount_of_tracks: 148,
 				album_art: [
-					"album_art/279020.jpg",
-					"album_art/724011185.jpg",
-					"album_art/853593032.jpg",
-					"album_art/79565550.jpg"
+					"album_art/1313940401.jpg",
+					"album_art/1320069103.jpg",
+					"album_art/1440800110.jpg",
+					"album_art/1019269187.jpg"
 				]
 			},
 			{
@@ -112,25 +118,41 @@
 				id: "2",
 				description: "Eurdance, Teen Pop, Hip Hop and Bravo Hits",
 				new: "0",
+				hero: "1",
 				amount_of_tracks: 221,
 				album_art: [
-					"album_art/693198382.jpg",
-					"album_art/930746388.jpg",
-					"album_art/78968947.jpg",
-					"album_art/253426154.jpg"
+					"album_art/724259722.jpg",
+					"album_art/585972750.jpg",
+					"album_art/309678856.jpg",
+					"album_art/603751537.jpg"
+				]
+			},
+			{
+				name: "Ballads",
+				id: "23",
+				description: "",
+				new: "1",
+				hero: "1",
+				amount_of_tracks: 107,
+				album_art: [
+					"album_art/1287003.jpg",
+					"album_art/850004323.jpg",
+					"album_art/1081573096.jpg",
+					"album_art/324127933.jpg"
 				]
 			},
 			{
 				name: "Christmas",
 				id: "60",
 				description: "",
-				new: "1",
+				new: "0",
+				hero: "0",
 				amount_of_tracks: 117,
 				album_art: [
-					"album_art/250589852.jpg",
-					"album_art/724401288.jpg",
-					"album_art/574914714.jpg",
-					"album_art/1434882633.jpg"
+					"album_art/1440098012.jpg",
+					"album_art/918377263.jpg",
+					"album_art/1596833512.jpg",
+					"album_art/738166403.jpg"
 				]
 			},
 			{
@@ -138,12 +160,13 @@
 				id: "3",
 				description: "Electronic Dance Music, mostly Trance.",
 				new: "0",
+				hero: "0",
 				amount_of_tracks: 266,
 				album_art: [
-					"album_art/853555448.jpg",
-					"album_art/1363084610.jpg",
-					"album_art/1460115839.jpg",
-					"album_art/1069373811.jpg"
+					"album_art/15229102.jpg",
+					"album_art/1440818588.jpg",
+					"album_art/1318004062.jpg",
+					"album_art/415628679.jpg"
 				]
 			},
 			{
@@ -151,12 +174,13 @@
 				id: "7",
 				description: "Songs in German or from Germany",
 				new: "0",
+				hero: "0",
 				amount_of_tracks: 168,
 				album_art: [
-					"album_art/14448703.jpg",
-					"album_art/871733033.jpg",
-					"album_art/1081942885.jpg",
-					"album_art/209420563.jpg"
+					"album_art/74382686.jpg",
+					"album_art/447816194.jpg",
+					"album_art/600009963.jpg",
+					"album_art/1318004062.jpg"
 				]
 			},
 			{
@@ -164,12 +188,13 @@
 				id: "35",
 				description: "Female artists & collaborations",
 				new: "0",
-				amount_of_tracks: 364,
+				hero: "0",
+				amount_of_tracks: 369,
 				album_art: [
-					"album_art/850004323.jpg",
-					"album_art/367377657.jpg",
-					"album_art/185861003.jpg",
-					"album_art/1363084610.jpg"
+					"album_art/697404588.jpg",
+					"album_art/1443097276.jpg",
+					"album_art/929825574.jpg",
+					"album_art/1092820336.jpg"
 				]
 			},
 			{
@@ -177,12 +202,13 @@
 				id: "0",
 				description: "A list of music enjoyed by the creator of MusicGuess.",
 				new: "0",
+				hero: "0",
 				amount_of_tracks: 647,
 				album_art: [
-					"album_art/690928033.jpg",
-					"album_art/190655957.jpg",
-					"album_art/992221994.jpg",
-					"album_art/357652252.jpg"
+					"album_art/679297685.jpg",
+					"album_art/69130956.jpg",
+					"album_art/468325818.jpg",
+					"album_art/1109250450.jpg"
 				]
 			},
 			{
@@ -190,12 +216,13 @@
 				id: "15",
 				description: "The most successful global hits of 2021",
 				new: "0",
-				amount_of_tracks: 108,
+				hero: "0",
+				amount_of_tracks: 107,
 				album_art: [
-					"album_art/1538646756.jpg",
-					"album_art/1560071303.jpg",
-					"album_art/1565442393.jpg",
-					"album_art/1581892464.jpg"
+					"album_art/1564514533.jpg",
+					"album_art/1571168930.jpg",
+					"album_art/1569625228.jpg",
+					"album_art/1579190422.jpg"
 				]
 			},
 			{
@@ -203,12 +230,13 @@
 				id: "43",
 				description: "The most successful global hits of all Time, From 1950 to today",
 				new: "0",
-				amount_of_tracks: 428,
+				hero: "1",
+				amount_of_tracks: 429,
 				album_art: [
-					"album_art/1475169095.jpg",
-					"album_art/1019269187.jpg",
-					"album_art/1384470408.jpg",
-					"album_art/656446479.jpg"
+					"album_art/1440774096.jpg",
+					"album_art/268284599.jpg",
+					"album_art/1551178998.jpg",
+					"album_art/1440550215.jpg"
 				]
 			},
 			{
@@ -216,12 +244,13 @@
 				id: "21",
 				description: "From Grandmaster Funk to Drake",
 				new: "0",
+				hero: "0",
 				amount_of_tracks: 136,
 				album_art: [
-					"album_art/79674983.jpg",
-					"album_art/14391311.jpg",
+					"album_art/1582660720.jpg",
 					"album_art/1476636939.jpg",
-					"album_art/6655669.jpg"
+					"album_art/1526746980.jpg",
+					"album_art/1509850659.jpg"
 				]
 			},
 			{
@@ -229,12 +258,13 @@
 				id: "1",
 				description: "Music that a lot of people like",
 				new: "0",
-				amount_of_tracks: 663,
+				hero: "1",
+				amount_of_tracks: 664,
 				album_art: [
+					"album_art/1125488753.jpg",
+					"album_art/424149647.jpg",
 					"album_art/713710434.jpg",
-					"album_art/295931997.jpg",
-					"album_art/105683.jpg",
-					"album_art/528435845.jpg"
+					"album_art/14391311.jpg"
 				]
 			},
 			{
@@ -242,12 +272,13 @@
 				id: "24",
 				description: "Poprock and indie stuff",
 				new: "0",
+				hero: "0",
 				amount_of_tracks: 211,
 				album_art: [
-					"album_art/1524841154.jpg",
-					"album_art/1140560324.jpg",
-					"album_art/716692336.jpg",
-					"album_art/635770200.jpg"
+					"album_art/797859771.jpg",
+					"album_art/256347754.jpg",
+					"album_art/255843292.jpg",
+					"album_art/207443884.jpg"
 				]
 			},
 			{
@@ -255,12 +286,13 @@
 				id: "5",
 				description: "Mostly of the softer persuasion though",
 				new: "0",
+				hero: "0",
 				amount_of_tracks: 100,
 				album_art: [
-					"album_art/2859605.jpg",
 					"album_art/217959525.jpg",
-					"album_art/214403406.jpg",
-					"album_art/930321179.jpg"
+					"album_art/927229903.jpg",
+					"album_art/322773587.jpg",
+					"album_art/528436018.jpg"
 				]
 			},
 			{
@@ -268,12 +300,13 @@
 				id: "12",
 				description: "Songs from Switzerland. mostly in Swiss German",
 				new: "0",
+				hero: "0",
 				amount_of_tracks: 105,
 				album_art: [
-					"album_art/1086133342.jpg",
-					"album_art/195775609.jpg",
-					"album_art/415659875.jpg",
-					"album_art/1342288612.jpg"
+					"album_art/1342359675.jpg",
+					"album_art/1069373811.jpg",
+					"album_art/285002476.jpg",
+					"album_art/414917353.jpg"
 				]
 			},
 			{
@@ -281,12 +314,13 @@
 				id: "4",
 				description: "Beats & Vocals",
 				new: "0",
+				hero: "0",
 				amount_of_tracks: 103,
 				album_art: [
-					"album_art/336152488.jpg",
-					"album_art/316789035.jpg",
+					"album_art/78991539.jpg",
 					"album_art/453207238.jpg",
-					"album_art/335774788.jpg"
+					"album_art/692877437.jpg",
+					"album_art/270572717.jpg"
 				]
 			},
 			{
@@ -294,12 +328,13 @@
 				id: "42",
 				description: "Artists from the Kingdom",
 				new: "0",
-				amount_of_tracks: 251,
+				hero: "0",
+				amount_of_tracks: 254,
 				album_art: [
-					"album_art/942753719.jpg",
-					"album_art/1440833098.jpg",
-					"album_art/415628679.jpg",
-					"album_art/947999961.jpg"
+					"album_art/205751300.jpg",
+					"album_art/1576349937.jpg",
+					"album_art/603751537.jpg",
+					"album_art/1440833098.jpg"
 				]
 			},
 			{
@@ -307,16 +342,16 @@
 				id: "30",
 				description: "US Hits of last year",
 				new: "0",
+				hero: "1",
 				amount_of_tracks: 100,
 				album_art: [
-					"album_art/1544797363.jpg",
-					"album_art/1490463311.jpg",
-					"album_art/1511037323.jpg",
-					"album_art/1481647240.jpg"
+					"album_art/1510409258.jpg",
+					"album_art/1436515209.jpg",
+					"album_art/1495267282.jpg",
+					"album_art/1498988850.jpg"
 				]
-			}
-		];
-		/* 			{
+			},
+			{
 				name: "Wildcard",
 				id: "666",
 				description: "Completely uncurated random selection of songs",
@@ -329,7 +364,7 @@
 					"images/question.svg"
 				]
 			}
-		*/
+		];
 		var air_console;
 
 		$(document).ready(function () {
@@ -357,6 +392,13 @@
 
 		function init() {
 			air_console = new AirConsole();
+
+
+			air_console.onPremium = function (device_id) {
+				DEBUG && console.log("Hero User connected!");
+				document.hero = true;
+				check_if_playlist_needs_hero();
+			}
 
 			// watch for new controllers connecting
 			air_console.onConnect = function (device_id) {
@@ -488,7 +530,7 @@
 						switch (document.screen) {
 							case "round-amount-selector":
 								// inform controller to hide increase/decrease buttons
-								hide_round_change_buttons= [];
+								hide_round_change_buttons = [];
 								hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
 								air_console.broadcast(hide_round_change_buttons);
 
@@ -496,7 +538,7 @@
 								$("#option-selector").show();
 								$(".dialogue").html("Choose the Setting you want to change.");
 								document.screen = "specific-options";
-							break;
+								break;
 							case "specific-options":
 								if (document.changingSetting === true) {
 								} else {
@@ -505,7 +547,7 @@
 									$("#specific-options").hide();
 									$("#default-options").css("display", "flex");
 								}
-							break;
+								break;
 							case "default-options":
 								// go back to playlist selection
 								document.screen = "playlist-selection";
@@ -555,6 +597,7 @@
 											$("#playlist-selector").css("display", "flex");
 										});
 										document.screen = "playlist-selection";
+										check_if_playlist_needs_hero();
 										break;
 									case "credits":
 										DEBUG && console.log("showing credits");
@@ -575,7 +618,7 @@
 								DEBUG && console.log("saving selected round amount and going back to specific options");
 
 								const active_option = $("#round-amount-selector .active");
-								if($(active_option).html() === "Custom Amount"){
+								if ($(active_option).html() === "Custom Amount") {
 									// just go back, since we have already set document.maxRound
 								} else {
 									document.maxRound = parseInt($(active_option).html());
@@ -585,21 +628,21 @@
 								document.screen = "specific-options";
 
 								// inform controller to hide increase/decrease buttons
-								hide_round_change_buttons= [];
+								hide_round_change_buttons = [];
 								hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
 								air_console.broadcast(hide_round_change_buttons);
-							break;
+								break;
 							case "specific-options":
 								DEBUG && console.log("handling confirm button on specific options");
 								if (document.changingSetting === true) {
 								} else {
-									switch(document.setting){
+									switch (document.setting) {
 										case "round_amount":
 											document.screen = "round-amount-selector";
 											$("#option-selector").hide();
 
-											let max_rounds = "Error: No playlist is selected. Please restart the game."; 
-											if (playlists[document.selectedPlaylist] !== undefined){
+											let max_rounds = "Error: No playlist is selected. Please restart the game.";
+											if (playlists[document.selectedPlaylist] !== undefined) {
 												max_rounds = playlists[document.selectedPlaylist]['amount_of_tracks'];
 											}
 
@@ -612,7 +655,7 @@
 											$(firstOption).addClass("active");
 											$("#roundCounter").html($(firstOption).html() + " Rounds");
 
-										break;
+											break;
 										case "start":
 											DEBUG && console.log("starting the game after specific options were chosen");
 											$(".dialogue").hide();
@@ -621,10 +664,10 @@
 											document.getElementById("sound-effect-start").play();
 											document.screen = "playing";
 											start();
-										break;
+											break;
 									}
 								}
-							break;
+								break;
 							case "default-options":
 								DEBUG && console.log("handling confirm button on default options");
 								$("#default-options").hide();
@@ -647,7 +690,7 @@
 								document.screen = "default-options";
 								$("#playlist-selector").hide();
 								$("#default-options").css("display", "flex");
-								
+
 								// display selected playlist
 								$("#playlist-display").html("Playlist:</br>" + playlists[document.selectedPlaylist].name);
 								$("#playlist-display").css({ display: "flex" });
@@ -655,7 +698,7 @@
 								// display round amount to play
 								$("#roundCounter").html(document.maxRound + " Rounds");
 								$("#roundCounter").css({ display: "flex" });
-								
+
 								break;
 						}
 						break;
@@ -683,7 +726,7 @@
 							case "round-amount-selector":
 								const active_option = $("#round-amount-selector .active");
 								let next_option;
-								if($(active_option).is(':last-child')){
+								if ($(active_option).is(':last-child')) {
 									next_option = $("#round-amount-selector li").first();
 								} else {
 									next_option = $(active_option).next();
@@ -691,22 +734,22 @@
 
 								$(active_option).removeClass("active");
 								$(next_option).addClass("active");
-								if($(next_option).html() === "Custom Amount"){
+								if ($(next_option).html() === "Custom Amount") {
 									document.maxRound = document.defaultMaxRound;
 									$("#roundCounter").html(document.defaultMaxRound + " Rounds");
 									// inform controller to display increase/decrease buttons
-									show_round_change_buttons= [];
+									show_round_change_buttons = [];
 									show_round_change_buttons.push({ type: "show_round_change_buttons" });
 									air_console.broadcast(show_round_change_buttons);
 								} else {
 									// inform controller to hide increase/decrease buttons
-									hide_round_change_buttons= [];
+									hide_round_change_buttons = [];
 									hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
 									air_console.broadcast(hide_round_change_buttons);
 									$("#roundCounter").html($(next_option).html() + " Rounds");
 								}
 
-							break;
+								break;
 							case "specific-options":
 								if (document.changingSetting === true) {
 
@@ -773,7 +816,7 @@
 							case "round-amount-selector":
 								const active_option = $("#round-amount-selector .active");
 								let previous_option;
-								if($(active_option).is(':first-child')){
+								if ($(active_option).is(':first-child')) {
 									previous_option = $("#round-amount-selector li").last();
 								} else {
 									previous_option = $(active_option).prev();
@@ -781,22 +824,22 @@
 
 								$(active_option).removeClass("active");
 								$(previous_option).addClass("active");
-								if($(previous_option).html() === "Custom Amount"){
+								if ($(previous_option).html() === "Custom Amount") {
 									document.maxRound = document.defaultMaxRound;
 									$("#roundCounter").html(document.defaultMaxRound + " Rounds");
 									// inform controller to display increase/decrease buttons
-									show_round_change_buttons= [];
+									show_round_change_buttons = [];
 									show_round_change_buttons.push({ type: "show_round_change_buttons" });
 									air_console.broadcast(show_round_change_buttons);
 								} else {
 									// inform controller to hide increase/decrease buttons
-									hide_round_change_buttons= [];
+									hide_round_change_buttons = [];
 									hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
 									air_console.broadcast(hide_round_change_buttons);
 									$("#roundCounter").html($(previous_option).html() + " Rounds");
 								}
 
-							break;
+								break;
 							case "specific-options":
 								if (document.changingSetting === true) {
 
@@ -1068,6 +1111,12 @@
 						}
 						playlist_html += '<span class="new-sticker">NEW!</span>';
 					}
+					if (playlist.hero === "1") {
+						if (!add_to_storage_only) {
+							html = html + '<span class="hero-sticker"><img id="hero-image" src="https://game.airconsole.com/com.airconsole.store.cdn.airconsole.com/2021-12-23-17-05-19/img/hero.45eeb9be.gif" /></span>';
+						}
+						playlist_html += '<span class="hero-sticker"><img id="hero-image" src="https://game.airconsole.com/com.airconsole.store.cdn.airconsole.com/2021-12-23-17-05-19/img/hero.45eeb9be.gif" /></span>';
+					}
 				}
 
 				if (!add_to_storage_only) {
@@ -1290,7 +1339,7 @@
 			$("#game_logo").hide("fade", {}, 1500);
 
 			sleep(1500).then(() => {
-				
+
 				// show message again (may have been hidden by end of game)
 				$("#message").css({ display: "flex" });
 				$("#status").css({ display: "flex" });
@@ -1299,7 +1348,7 @@
 
 				$("#message").html("Get ready for the first round!");
 				$("#status").html("3");
-				document.getElementById("sound-effect-clock").play(); 
+				document.getElementById("sound-effect-clock").play();
 
 
 				sleep(1000).then(() => {
@@ -1315,7 +1364,7 @@
 
 							$("#roundCounter").html("Round</br>1/" + document.maxRound);
 							$("#playlist-display").html(playlists[document.selectedPlaylist].name);
-							
+
 							$("#status").hide();
 							$("#status").html("");
 
@@ -1596,11 +1645,13 @@
 		}
 
 		function switch_playlist(type) {
+			DEBUG && console.log("switching playlist");
 			// console.log("Handling switch of playlist to " + type);
 			// console.log("all playlists:");
 			// console.log(playlists);
 
 			// $(".album_art.active").addClass("shrink");
+
 
 			document.getElementById("sound-effect-switch").play();
 
@@ -1652,6 +1703,8 @@
 				document.maxRound = playlists[document.selectedPlaylist]['amount_of_tracks'];
 			}
 
+			check_if_playlist_needs_hero();
+
 			update_max_rounds_on_controllers();
 
 			// console.log("newly selected playlist" + document.selectedPlaylist);
@@ -1676,6 +1729,31 @@
 
 		function sleep(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+
+		function check_if_playlist_needs_hero(){
+			if(document.screen !== "playlist-selection"){
+				return;
+			}
+			if(playlists[document.selectedPlaylist]['hero'] === "1"){
+				DEBUG && console.log("playlist requires hero");
+				if(document.hero){
+					DEBUG && console.log("user has hero, show start with hero");
+					start_with_hero = [];
+					start_with_hero.push({ type: "start_with_hero"});
+					air_console.broadcast(start_with_hero);
+				} else {
+					DEBUG && console.log("user does not hero, disabling start");
+					disable_start = [];
+					disable_start.push({ type: "disable_start"});
+					air_console.broadcast(disable_start);
+				}
+			} else {
+				DEBUG && console.log("playlist does not require hero, enabling start");
+				enable_start = [];
+				enable_start.push({ type: "enable_start"});
+				air_console.broadcast(enable_start);
+			}
 		}
 
 		function send_score() {
@@ -2191,7 +2269,7 @@
 		<div class="dialogue">
 			Choose the Setting you want to change.
 		</div>
-		<ul id="option-selector"> 
+		<ul id="option-selector">
 			<li id="round_amount_option" class="active">
 				Number of Rounds to play
 			</li>
