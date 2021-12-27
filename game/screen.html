@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 
 		// whether or not to display all information
-		const DEBUG = true;
+		const DEBUG = false;
 
 		// scroll the result areas or not
 		document.scroll_results = false;
@@ -918,6 +918,7 @@
 
 						break;
 					case 'back_to_main':
+						document.screen = "main-menu";
 						$("#message").html("");
 						// $("#message").hide("fade", {}, 1500);
 
