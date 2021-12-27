@@ -10,8 +10,8 @@
 	<script type="text/javascript">
 
 		// whether or not to display all information
-		const DEBUG = false;
-		
+		const DEBUG = true;
+
 		// scroll the result areas or not
 		document.scroll_results = false;
 
@@ -28,7 +28,8 @@
 		// the setting that is used to count downwards. could potentially be modified by settings
 		document.RoundTimeSetting = 30;
 		document.RoundTime = document.RoundTimeSetting;
-		document.maxRound = 35;
+		document.defaultMaxRound = 35;
+		document.maxRound = document.defaultMaxRound;
 
 		// store current scores of players
 		document.playerScores = [];
@@ -46,6 +47,12 @@
 		document.roundEndInitiated = false;
 
 		document.selectedPlaylist;
+
+		document.screen = "splash";
+		document.menu = "new-game";
+		document.default = true;
+		document.setting = "round_amount";
+		document.changingSetting = false;
 
 		var playlists = [
 			{
@@ -476,20 +483,181 @@
 				DEBUG && console.log('handling ' + type + ' message on screen.');
 
 				switch (type) {
-					case 'credits':
-						$("#game_logo").animate({ fontSize: "80px" }, 1500);
-						$("#playlist-selector").hide("fade", {}, 1500);
-						$("#credits-container").show();
-						$("#credits").css({ display: "flex" });
-						sleep(1500).then(() => {
-							document.showing_credits = true;
-							$("#credits").animate({ opacity: 1 }, 1500);
-						});
+					case 'back':
+						// determine what screen we are on
+						switch (document.screen) {
+							case "round-amount-selector":
+								// inform controller to hide increase/decrease buttons
+								hide_round_change_buttons= [];
+								hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
+								air_console.broadcast(hide_round_change_buttons);
+
+								$("#round-amount-selector").hide();
+								$("#option-selector").show();
+								$(".dialogue").html("Choose the Setting you want to change.");
+								document.screen = "specific-options";
+							break;
+							case "specific-options":
+								if (document.changingSetting === true) {
+								} else {
+									// go back to default selection
+									document.screen = "default-options";
+									$("#specific-options").hide();
+									$("#default-options").css("display", "flex");
+								}
+							break;
+							case "default-options":
+								// go back to playlist selection
+								document.screen = "playlist-selection";
+								$("#default-options").hide();
+								$("#playlist-display").hide();
+								$("#roundCounter").hide();
+								$("#playlist-selector").css("display", "flex");
+								break;
+							case "playlist-selection":
+								// go back to menu
+								$("#game_logo").animate({ fontSize: "115px" }, 1500);
+								document.screen = "main-menu";
+								$("#playlist-selector").hide();
+								$("#main-menu").show();
+								break;
+							case "credits":
+								document.screen = "main-menu";
+								$("#credits").animate({ opacity: 0 }, 1500);
+								$("#game_logo").animate({ fontSize: "115px" }, 1500);
+								sleep(1500).then(() => {
+									document.showing_credits = false;
+									$("#credits").hide();
+									$("#credits-container").hide();
+
+									$("#main-menu").show("fade", {}, 1500);
+								});
+								break;
+						}
 						break;
-					case 'startGame':
-						// start the game
-						document.getElementById("sound-effect-start").play();
-						start();
+					case 'confirm':
+						// determine what screen we are on
+						switch (document.screen) {
+							case "splash":
+								DEBUG && console.log("handling confirm button on splash screen");
+								$("#splash-screen").hide();
+								$("#main-menu").show();
+								document.screen = "main-menu";
+								break;
+							case "main-menu":
+								DEBUG && console.log("handling confirm button in main menu");
+								switch (document.menu) {
+									case "new-game":
+										DEBUG && console.log("showing playlist selector for new game");
+										$("#main-menu").hide();
+										$("#game_logo").animate({ fontSize: "80px" }, 1500);
+										sleep(1500).then(() => {
+											$("#playlist-selector").css("display", "flex");
+										});
+										document.screen = "playlist-selection";
+										break;
+									case "credits":
+										DEBUG && console.log("showing credits");
+										$("#main-menu").hide();
+										$("#game_logo").animate({ fontSize: "80px" }, 1500);
+										$("#playlist-selector").hide("fade", {}, 1500);
+										$("#credits-container").show();
+										$("#credits").css({ display: "flex" });
+										sleep(1500).then(() => {
+											document.showing_credits = true;
+											$("#credits").animate({ opacity: 1 }, 1500);
+										});
+										document.screen = "credits";
+										break;
+								}
+								break;
+							case "round-amount-selector":
+								DEBUG && console.log("saving selected round amount and going back to specific options");
+
+								const active_option = $("#round-amount-selector .active");
+								if($(active_option).html() === "Custom Amount"){
+									// just go back, since we have already set document.maxRound
+								} else {
+									document.maxRound = parseInt($(active_option).html());
+								}
+								$("#round-amount-selector").hide();
+								$("#option-selector").show();
+								document.screen = "specific-options";
+
+								// inform controller to hide increase/decrease buttons
+								hide_round_change_buttons= [];
+								hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
+								air_console.broadcast(hide_round_change_buttons);
+							break;
+							case "specific-options":
+								DEBUG && console.log("handling confirm button on specific options");
+								if (document.changingSetting === true) {
+								} else {
+									switch(document.setting){
+										case "round_amount":
+											document.screen = "round-amount-selector";
+											$("#option-selector").hide();
+
+											let max_rounds = "Error: No playlist is selected. Please restart the game."; 
+											if (playlists[document.selectedPlaylist] !== undefined){
+												max_rounds = playlists[document.selectedPlaylist]['amount_of_tracks'];
+											}
+
+											$(".dialogue").html("How many rounds do you want to play? (Max " + max_rounds + ")");
+											$("#round-amount-selector").css("display", "flex");
+
+											// reset the options to the first setting
+											$("#round-amount-selector li").removeClass("active");
+											const firstOption = $("#round-amount-selector li").first();
+											$(firstOption).addClass("active");
+											$("#roundCounter").html($(firstOption).html() + " Rounds");
+
+										break;
+										case "start":
+											DEBUG && console.log("starting the game after specific options were chosen");
+											$(".dialogue").hide();
+											$("#specific-options").hide();
+											// start the game
+											document.getElementById("sound-effect-start").play();
+											document.screen = "playing";
+											start();
+										break;
+									}
+								}
+							break;
+							case "default-options":
+								DEBUG && console.log("handling confirm button on default options");
+								$("#default-options").hide();
+								if (document.default) {
+									// start the game
+									DEBUG && console.log("starting the game with default options");
+									document.getElementById("sound-effect-start").play();
+									document.screen = "playing";
+									start();
+								} else {
+									// go to specific options
+									DEBUG && console.log("showing specific options");
+									document.screen = "specific-options";
+									$("#specific-options").css("display", "flex");
+								}
+								break;
+							case "playlist-selection":
+								DEBUG && console.log("going to default options");
+								// go to default option prompt
+								document.screen = "default-options";
+								$("#playlist-selector").hide();
+								$("#default-options").css("display", "flex");
+								
+								// display selected playlist
+								$("#playlist-display").html("Playlist:</br>" + playlists[document.selectedPlaylist].name);
+								$("#playlist-display").css({ display: "flex" });
+
+								// display round amount to play
+								$("#roundCounter").html(document.maxRound + " Rounds");
+								$("#roundCounter").css({ display: "flex" });
+								
+								break;
+						}
 						break;
 					case 'correctGuess':
 						// play the correct guess sound
@@ -507,15 +675,189 @@
 							handle_guess(message, from);
 						}
 						break;
-					case 'next_playlist':
-						switch_playlist('next');
+					case 'next':
+						// play switch sound effect
+						document.getElementById("sound-effect-switch").play();
+						// determine where we are
+						switch (document.screen) {
+							case "round-amount-selector":
+								const active_option = $("#round-amount-selector .active");
+								let next_option;
+								if($(active_option).is(':last-child')){
+									next_option = $("#round-amount-selector li").first();
+								} else {
+									next_option = $(active_option).next();
+								}
+
+								$(active_option).removeClass("active");
+								$(next_option).addClass("active");
+								if($(next_option).html() === "Custom Amount"){
+									document.maxRound = document.defaultMaxRound;
+									$("#roundCounter").html(document.defaultMaxRound + " Rounds");
+									// inform controller to display increase/decrease buttons
+									show_round_change_buttons= [];
+									show_round_change_buttons.push({ type: "show_round_change_buttons" });
+									air_console.broadcast(show_round_change_buttons);
+								} else {
+									// inform controller to hide increase/decrease buttons
+									hide_round_change_buttons= [];
+									hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
+									air_console.broadcast(hide_round_change_buttons);
+									$("#roundCounter").html($(next_option).html() + " Rounds");
+								}
+
+							break;
+							case "specific-options":
+								if (document.changingSetting === true) {
+
+								} else {
+									switch (document.setting) {
+										case "round_amount":
+											document.setting = "guessing_type";
+											$("#round_amount_option").removeClass("active");
+											$("#guessing_type").addClass("active");
+											break;
+										case "guessing_type":
+											document.setting = "start";
+											$("#guessing_type").removeClass("active");
+											$("#specific-start").addClass("active");
+											break;
+										case "start":
+											document.setting = "round_amount";
+											$("#specific-start").removeClass("active");
+											$("#round_amount_option").addClass("active");
+											break;
+									}
+								}
+								break;
+							case "default-options":
+								if (document.default) {
+									document.default = false;
+									$("#default-no").addClass("active");
+									$("#default-yes").removeClass("active");
+								} else {
+									document.default = true;
+									$("#default-yes").addClass("active");
+									$("#default-no").removeClass("active");
+								}
+								break;
+							case "playlist-selection":
+								switch_playlist('next');
+								break;
+							case "main-menu":
+								switch (document.menu) {
+									case "new-game":
+										document.menu = "credits";
+										$("#new-game-button").removeClass("active");
+										$("#credits-button").addClass("active");
+										break;
+									case "credits":
+										document.menu = "updates";
+										$("#credits-button").removeClass("active");
+										$("#updates-button").addClass("active");
+										break;
+									case "updates":
+										document.menu = "new-game";
+										$("#updates-button").removeClass("active");
+										$("#new-game-button").addClass("active");
+										break;
+								}
+								break;
+						}
 						break;
-					case 'previous_playlist':
-						switch_playlist('previous');
+					case 'previous':
+						// play switch sound effect
+						document.getElementById("sound-effect-switch").play();
+						// determine where we are
+						switch (document.screen) {
+							case "round-amount-selector":
+								const active_option = $("#round-amount-selector .active");
+								let previous_option;
+								if($(active_option).is(':first-child')){
+									previous_option = $("#round-amount-selector li").last();
+								} else {
+									previous_option = $(active_option).prev();
+								}
+
+								$(active_option).removeClass("active");
+								$(previous_option).addClass("active");
+								if($(previous_option).html() === "Custom Amount"){
+									document.maxRound = document.defaultMaxRound;
+									$("#roundCounter").html(document.defaultMaxRound + " Rounds");
+									// inform controller to display increase/decrease buttons
+									show_round_change_buttons= [];
+									show_round_change_buttons.push({ type: "show_round_change_buttons" });
+									air_console.broadcast(show_round_change_buttons);
+								} else {
+									// inform controller to hide increase/decrease buttons
+									hide_round_change_buttons= [];
+									hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
+									air_console.broadcast(hide_round_change_buttons);
+									$("#roundCounter").html($(previous_option).html() + " Rounds");
+								}
+
+							break;
+							case "specific-options":
+								if (document.changingSetting === true) {
+
+								} else {
+									switch (document.setting) {
+										case "round_amount":
+											document.setting = "start";
+											$("#round_amount_option").removeClass("active");
+											$("#specific-start").addClass("active");
+											break;
+										case "guessing_type":
+											document.setting = "round_amount";
+											$("#guessing_type").removeClass("active");
+											$("#round_amount_option").addClass("active");
+											break;
+										case "start":
+											document.setting = "guessing_type";
+											$("#specific-start").removeClass("active");
+											$("#guessing_type").addClass("active");
+											break;
+									}
+								}
+								break;
+							case "default-options":
+								if (document.default) {
+									document.default = false;
+									$("#default-no").addClass("active");
+									$("#default-yes").removeClass("active");
+								} else {
+									document.default = true;
+									$("#default-yes").addClass("active");
+									$("#default-no").removeClass("active");
+								}
+							case "playlist-selection":
+								switch_playlist('previous');
+								break;
+							case "main-menu":
+								switch (document.menu) {
+									case "new-game":
+										document.menu = "updates";
+										$("#new-game-button").removeClass("active");
+										$("#updates-button").addClass("active");
+										break;
+									case "credits":
+										document.menu = "new-game";
+										$("#credits-button").removeClass("active");
+										$("#new-game-button").addClass("active");
+										break;
+									case "updates":
+										document.menu = "credits";
+										$("#updates-button").removeClass("active");
+										$("#credits-button").addClass("active");
+										break;
+								}
+								break;
+						}
 						break;
 					case 'decrease_rounds':
 						document.getElementById("sound-effect-click").play();
 						document.maxRound = document.maxRound - 1;
+						$("#roundCounter").html(document.maxRound + " Rounds");
 						update_selected_rounds_on_controllers();
 						break;
 					case 'increase_rounds':
@@ -526,25 +868,9 @@
 						} else {
 							document.getElementById("sound-effect-click").play();
 							document.maxRound = document.maxRound + 1;
+							$("#roundCounter").html(document.maxRound + " Rounds");
 							update_selected_rounds_on_controllers();
 						}
-						break;
-					case 'back_from_credits':
-
-						$("#credits").animate({ opacity: 0 }, 1500);
-						$("#game_logo").animate({ fontSize: "115px" }, 1500);
-
-						/* back_to_main = [];
-						back_to_main.push({ type: "back_to_main" });
-						air_console.broadcast(back_to_main); */
-
-						sleep(1500).then(() => {
-							document.showing_credits = false;
-							$("#credits").hide();
-							$("#credits-container").hide();
-
-							$("#playlist-selector").show("fade", {}, 1500);
-						});
 						break;
 					case 'cancel':
 						$("#message").html("");
@@ -586,7 +912,10 @@
 						$("#victory_screen").html("");
 
 						$("#game_logo").show("fade", {}, 1500);
-						$("#playlist-selector").show("fade", {}, 1500);
+						// $("#playlist-selector").show("fade", {}, 1500);
+						$("#main-menu").show();
+						document.screen = "main-menu";
+
 						break;
 					case 'back_to_main':
 						$("#message").html("");
@@ -606,8 +935,11 @@
 						/* back_to_main = [];
 						back_to_main.push({ type: "back_to_main" }); */
 
+						$("#game_logo").css("fontSize", "115px");
 						$("#game_logo").show("fade", {}, 1500);
-						$("#playlist-selector").show("fade", {}, 1500);
+
+						$("#main-menu").show();
+						// $("#playlist-selector").show("fade", {}, 1500);
 
 						// air_console.broadcast(back_to_main);
 
@@ -763,9 +1095,9 @@
 
 			DEBUG && console.log(document.playlist_storage);
 
-			$("#playlist-selector").html(html);
+			$("#playlist-selector").append(html);
 			$("#playlist-selector").append(details);
-			$("#playlist-selector").css("display", "flex");
+			// $("#playlist-selector").css("display", "flex");
 
 			// go to a specific playlist (workaround until rewrite)
 			// switch_playlist("previous");
@@ -953,20 +1285,26 @@
 				initiate_guessing_area(id);
 			});
 
-			// fade logo and playlist selector
-			$("#game_logo,#playlist-selector").hide("fade", {}, 1500);
-
+			// fade logo
+			$("#game_logo").hide("fade", {}, 1500);
 
 			sleep(1500).then(() => {
-
+				
 				// show message again (may have been hidden by end of game)
 				$("#message").css({ display: "flex" });
 				$("#status").css({ display: "flex" });
 
+
+
 				$("#message").html("Get ready for the first round!");
 				$("#status").html("3");
-				document.getElementById("sound-effect-clock").play();
+				document.getElementById("sound-effect-clock").play(); 
+
+
 				sleep(1000).then(() => {
+
+
+
 					document.getElementById("sound-effect-clock").play();
 					$("#status").html("2");
 					sleep(1000).then(() => {
@@ -976,8 +1314,7 @@
 
 							$("#roundCounter").html("Round</br>1/" + document.maxRound);
 							$("#playlist-display").html(playlists[document.selectedPlaylist].name);
-							$("#playlist-display").css({ display: "flex" });
-							$("#roundCounter").css({ display: "flex" });
+							
 							$("#status").hide();
 							$("#status").html("");
 
@@ -1056,11 +1393,11 @@
 							var playlist_id = playlists[document.selectedPlaylist].id;
 							DEBUG && console.log("trying to send playlist selected event");
 							$.ajax(
-									{
-										method: "POST",
-										url: "https://zxxwemywpv.cyon.link/musicguess-data/php/playlist-selected.php",
-										data: { devices: air_console.devices, playlist_id: playlist_id, number_of_rounds: document.maxRound }, dataType: "json", crossDomain: true, "headers": {}
-									}); 
+								{
+									method: "POST",
+									url: "https://zxxwemywpv.cyon.link/musicguess-data/php/playlist-selected.php",
+									data: { devices: air_console.devices, playlist_id: playlist_id, number_of_rounds: document.maxRound }, dataType: "json", crossDomain: true, "headers": {}
+								});
 
 
 							// stores the current solution
@@ -1777,7 +2114,13 @@
 		<div id="current_song_service"></div>
 		<div id="victory_screen"></div>
 	</div>
-	<div id="playlist-selector"></div>
+	<div id="playlist-selector">
+		<div class="dialogue-wrapper">
+			<div class="dialogue">
+				Select your playlist
+			</div>
+		</div>
+	</div>
 	<div id="playlist-display"></div>
 	<div id="roundCounter"></div>
 	<div id="roundTime"></div>
@@ -1802,6 +2145,74 @@
 			<span class="content"><a target="_blank" href="https://twitter.com/sherb">Sam Herbert</a> (<a
 					target="_blank" href="https://github.com/SamHerbert/SVG-Loaders">Github</a>)</span></br>
 		</div>
+	</div>
+	<div id="splash-screen">
+		<div id="splash-text">
+			Welcome to MusicGuess! MusicGuess is a living game that is constantly being updated with new content and
+			features.
+			To see the latest update, select Updates in the menu. If you want to give feedback/report issues you can
+			follow the official Twitter account
+			@MusicGuess1 </br>
+			I would also love to see pictures of your parties (especially those really big ones with over 10 players and
+			more!).
+			</br></br>
+			Enjoy the game and have fun!</br>
+			@freakpants
+		</div>
+	</div>
+	<div id="main-menu">
+		<ul>
+			<li id="new-game-button" class="active">
+				New Game
+			</li>
+			<li id="credits-button">
+				Credits
+			</li>
+			<li id="updates-button">
+				Updates
+			</li>
+		</ul>
+	</div>
+	<div id="default-options">
+		<div class="dialogue">
+			Do you want to play the game with the default options? (35 rounds)
+		</div>
+		<ul>
+			<li id="default-yes" class="active">
+				Yes
+			</li>
+			<li id="default-no">
+				No
+			</li>
+		</ul>
+	</div>
+	<div id="specific-options">
+		<div class="dialogue">
+			Choose the Setting you want to change.
+		</div>
+		<ul id="option-selector"> 
+			<li id="round_amount_option" class="active">
+				Number of Rounds to play
+			</li>
+			<li id="guessing_type">
+				Guess either the artist or the title randomly each round.
+			</li>
+			<li id="specific-start">
+				Start
+			</li>
+		</ul>
+		<ul id="round-amount-selector">
+			<li>1</li>
+			<li>10</li>
+			<li>15</li>
+			<li>20</li>
+			<li>25</li>
+			<li>30</li>
+			<li>40</li>
+			<li>50</li>
+			<li>100</li>
+			<li>Custom Amount</li>
+		</ul>
 	</div>
 	<div id="player-results">
 		<div id="results-scrollable"></div>

@@ -123,7 +123,7 @@ span.new-sticker{
     width: 3em;
 }
 
-#credits-container{
+#credits-container, #splash-screen{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -134,16 +134,89 @@ span.new-sticker{
 	opacity: 0.9;
 }
 
-#credits, #victory_screen{
+#splash-screen{
+	top: 25vh;
+}
+
+#credits, #victory_screen, #splash-text, .dialogue{
 	background-color: #b51d05;
 	box-shadow: 1px 1px 10px black;
-	opacity: 0;
 	font-size: 1.8em;
-	display:none;
 	flex-direction: column;
     align-items: center;
 	text-transform:none;
 	width: 50vw;
+}
+
+#default-options, #specific-options{
+	flex-direction: column;
+    align-items: center;
+	width: 100vw;
+}
+
+#splash-text{
+	padding: 5vw;
+}
+
+.dialogue{
+	padding: 1vw;
+}
+
+#playlist-selector .dialogue-wrapper{
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+}
+
+#playlist-selector .dialogue{
+	margin-bottom: 1vw;
+	display: flex;
+}
+
+#credits, #victory_screen{
+	display:none;
+	opacity: 0;
+}
+
+#main-menu, #default-options, #specific-options, #round-amount-selector{
+	display:none;
+}
+
+#main-menu ul, #default-options ul, #specific-options ul{
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main-menu li, #default-options li, #specific-options li{
+	background: #e8822d;
+    list-style: none;
+    width: 25vw;
+    padding: 1vw;
+    box-shadow: 1px 1px 10px black;
+    justify-content: center;
+    display: flex;
+	margin: 1vw;
+	font-size: 2em;
+	color: #ffdc40;
+}
+
+ul#round-amount-selector{
+	width: 25vw;
+	display: none;
+	flex-wrap: wrap;
+	flex-direction: unset;
+}
+
+#round-amount-selector li{
+	width: unset;
+}
+
+
+#main-menu li.active, #default-options li.active, #specific-options li.active{
+	background: #b51d05;
+	color: white;
 }
 
 #victory_screen .single-result{

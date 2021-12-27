@@ -16,21 +16,15 @@
 		<span class="letters"></span>
 	</div>
 	<div id="menu">
-		<div class="flexbox" id="start_game">
-			<span class="fa-lg icon-container">
-				<i class="fa fa-play play_icon"></i>
-			</span>
-			<div class="button_text">Start</div>
-			<!-- <div class="button_comment">Play with current settings</div> -->
-		</div>
-		<div class="flexbox" id="previous_playlist">
+
+		<div class="flexbox resizing-button" id="previous-button">
 			<span class="fa-lg icon-container">
 				<i class="fa fa-backward backward"></i>
 			</span>
 			<div class="button_text">Last</div>
 			<!-- <div class="button_comment">Same, but different</div> -->
 		</div>
-		<div class="flexbox" id="next_playlist">
+		<div class="flexbox resizing-button" id="next-button">
 			<span class="fa-lg icon-container">
 				<i class="fa fa-forward forward"></i>
 			</span>
@@ -41,16 +35,23 @@
 			<span class="fa-lg icon-container minus decrease_rounds">
 				<i class="fa fa-minus minus"></i>
 			</span>
-			<div class="vertical-container">
-				<span id="round_amount">25</span>
-				<span>rounds</span>
-				<span class="fa-lg icon-container info-circle">
-					<i class="fa fa-info-circle"></i>
-				</span>
-			</div>
 			<span class="fa-lg icon-container plus increase_rounds">
 				<i class="fa fa-plus plus"></i>
 			</span>
+		</div>
+		<div class="flexbox resizing-button" id="cancel">
+			<span class="fa-lg icon-container">
+				<i class="fa fa-ban"></i>
+			</span>
+			<div class="button_text">Cancel/</br>Back</div>
+			<!-- <div class="button_comment">Play with current settings</div> -->
+		</div>
+		<div class="flexbox resizing-button" id="confirm">
+			<span class="fa-lg icon-container">
+				<i class="fa fa-play play_icon"></i>
+			</span>
+			<div class="button_text">Confirm/</br>Start</div>
+			<!-- <div class="button_comment">Play with current settings</div> -->
 		</div>
 	</div>
 	<div class="flexbox" id="game_over">
@@ -183,7 +184,7 @@
 			air_console.onMessage = function (from, data) {
 
 				// console.log("received message " + data[0].type);
-				if(data === undefined || data[0] === undefined || data[0].type === undefined){
+				if (data === undefined || data[0] === undefined || data[0].type === undefined) {
 					return;
 				}
 
@@ -238,6 +239,18 @@
 					}
 				}
 
+				if(data[0].type === "show_round_change_buttons"){
+					if (am_i_master()) {
+						$("#round_change_buttons").css("display", "flex");
+						$(".resizing-button").css("height", "33.333333vh");
+					}
+				}
+
+				if(data[0].type === "hide_round_change_buttons"){
+					$("#round_change_buttons").hide();
+					$(".resizing-button").css("height", "50vh");
+				}
+
 				if (data[0].type === "not_in_progress") {
 					// if there is no game in progress, store that info for check_master
 					console.log("controller " + air_console.getDeviceId() + " has received message NOT in progress");
@@ -282,6 +295,7 @@
 				}
 
 				if (data[0].type === "get_ready") {
+					$("#menu").hide();
 					$("#waiting_for_start").hide();
 					$("#get_ready").css({ display: "flex" });
 				}
@@ -376,7 +390,8 @@
 					$(".correct").off();
 					$(".wrong").off();
 
-					sleep(14000).then(() => {
+					// should be a custom setting so the players have time to analyze the results
+					sleep(140000).then(() => {
 						$("#score_report").hide();
 						$("#position").hide();
 
@@ -574,7 +589,7 @@
 
 		$(document).ready(function () {
 
-			$("#start_game").click(function (event) {
+			/* $("#start_game").click(function (event) {
 				// hide menu 
 				$("#menu").hide();
 
@@ -585,17 +600,35 @@
 				var command = [];
 				command.push({ type: "startGame" });
 				air_console.message(0, command);
-			});
+			}); */
 
-			$("#next_playlist").click(function (event) {
+			$("#confirm").click(function (event) {
+
+				// in case the button was the only button, resize it to normal size
+				$("#confirm").css("width", "50vw");
+				$("#confirm").css("height", "50vh");
+				$("#confirm").css("position", "relative");
+
 				var command = [];
-				command.push({ type: "next_playlist" });
+				command.push({ type: "confirm" });
 				air_console.message(0, command);
 			});
 
-			$("#previous_playlist").click(function (event) {
+			$("#cancel").click(function (event) {
 				var command = [];
-				command.push({ type: "previous_playlist" });
+				command.push({ type: "back" });
+				air_console.message(0, command);
+			});
+
+			$("#next-button").click(function (event) {
+				var command = [];
+				command.push({ type: "next" });
+				air_console.message(0, command);
+			});
+
+			$("#previous-button").click(function (event) {
+				var command = [];
+				command.push({ type: "previous" });
 				air_console.message(0, command);
 			});
 

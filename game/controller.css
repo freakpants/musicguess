@@ -168,28 +168,23 @@ body{
 	position: relative;
 }
 
-.icon-container{
-	left: 10vw;
-    position: absolute;
-}
-
 .icon-container.info-circle{
     font-size: 1em;
     margin-bottom: -20px;
     padding-top: 20px;
 }
 
-#next_playlist .icon-container{
+#next-button .icon-container{
 	left: unset;
 	right: 1vw;
 }
 
-#previous_playlist .icon-container{
+#previous-button .icon-container{
 	left: 1vw;
 }
 
 #round_change_buttons{
-	display: flex;
+	display: none;
 	height: 33.333333vh;
 }
 
@@ -202,12 +197,9 @@ body{
 	font-size: 2em;
 }
 
-#start_game,#round_change_buttons{
-	width: 100vw;
-}
-
 #round_change_buttons .icon-container, #round_change_buttons .vertical-container{
-	width: 33.33333%;
+	width: 50vw;
+	height: 33.333333vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -222,16 +214,22 @@ body{
 	line-height: 1;
 }
 
-#start_game, .plus{
+#confirm{
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+}
+
+.minus, #confirm{
 	background-color:  #b51d05;
 }
 
-#next_playlist, .icon-container.minus{
+#next-button, #cancel{
 	background-color: #e8822d;
     color: #ffdc40;
 }
 
-#previous_playlist, .vertical-container{
+#previous-button, .vertical-container, .plus{
 	background-color:  #ffdc40;
     color: #e8822d;
 }
@@ -326,12 +324,19 @@ body{
 	flex-direction:column;
 }
 
+#waiting_for_next_round, #waiting_for_start, #get_ready{
+	font-size: 1.5em;
+}
+
 #waiting_for_next_round, #waiting_for_start, #get_ready, #score_report{
 	justify-content: center;
     text-align: center;
-    font-size: 1.5em;
 	flex-direction: column;
     box-sizing: border-box;
+}
+
+#score_report{
+	font-size: 1em;
 }
 
 #round_over_song_details .result_banner{
@@ -442,11 +447,12 @@ body{
 
 .flexbox{
 	display: flex;
-	height: 33.3333333vh;
+	height: 50vh;
 	width: 50vw;
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	flex-direction: column;
 }
 
 .button_comment{
@@ -465,7 +471,6 @@ body{
 	width: 75%;
 	display: flex;
 	justify-content: center;
-	position: absolute;
 }
 
 .button_comment, .button_comment_reduced{
