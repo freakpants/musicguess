@@ -166,6 +166,10 @@ span.hero-sticker{
 	top: 25vh;
 }
 
+#credits, #victory_screen, #splash-text{
+	width: 50vw;
+}
+
 #credits, #victory_screen, #splash-text, .dialogue{
 	background-color: #b51d05;
 	box-shadow: 1px 1px 10px black;
@@ -173,7 +177,6 @@ span.hero-sticker{
 	flex-direction: column;
     align-items: center;
 	text-transform:none;
-	width: 50vw;
 }
 
 #default-options, #specific-options{
@@ -187,7 +190,8 @@ span.hero-sticker{
 }
 
 .dialogue{
-	padding: 1vw;
+	padding: 1vw 2vw 1vw 2vw;
+	opacity: 0.9;
 }
 
 #playlist-selector .dialogue-wrapper{
@@ -228,6 +232,7 @@ span.hero-sticker{
 	margin: 1vw;
 	font-size: 2em;
 	color: #ffdc40;
+	opacity: 0.9;
 }
 
 ul#round-amount-selector{
