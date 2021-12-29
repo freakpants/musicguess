@@ -57,7 +57,7 @@
 		document.hero = false;
 
 		var specific_options_dialogue = "Choose the Setting you want to change or hit start to play with the current settings.";
-		
+
 
 		var playlists = [
 			{
@@ -559,6 +559,15 @@
 					case 'back':
 						// determine what screen we are on
 						switch (document.screen) {
+							case "updates":
+								// go back to menu
+								$("#game_logo").animate({ fontSize: "115px" }, 1500);
+								$("#updates").animate({ opacity: 0 }, 1500);
+								sleep(1500).then(() => {
+									$("#main-menu").show("fade", {}, 1500);
+								});
+								document.screen = "main-menu";
+								break;
 							case "round-amount-selector":
 								// inform controller to hide increase/decrease buttons
 								hide_round_change_buttons = [];
@@ -643,6 +652,14 @@
 											$("#credits").animate({ opacity: 1 }, 1500);
 										});
 										document.screen = "credits";
+										break;
+									case "updates":
+										DEBUG && console.log("displaying latest updates");
+										$("#main-menu").hide();
+										$("#game_logo").animate({ fontSize: "80px" }, 1500);
+										$("#updates").css("display", "flex");
+										$("#updates").animate({ opacity: 0.9 }, 1500);
+										document.screen = "updates";
 										break;
 								}
 								break;
@@ -2257,6 +2274,21 @@
 			<span class="category">SVG Loaders by:</span>
 			<span class="content"><a target="_blank" href="https://twitter.com/sherb">Sam Herbert</a> (<a
 					target="_blank" href="https://github.com/SamHerbert/SVG-Loaders">Github</a>)</span></br>
+		</div>
+	</div>
+	<div id="updates-container">
+		<div id="updates">
+			<ul>
+				<li>15.12.2021 - Released new wildcard playlist. This dynamically selects from over 30'000 songs, but
+					with a lot of cover/live versions of songs or just plain unknown or weird songs.</li>
+				<li>16.12.2021 - Fixed an Issue with wildcard playlist not working.</li>
+				<li>20.12.2021 - Released a new christmas playlist</li>
+				<li>31.12.2012 - The game is now playable for free. Accordingly, some playlists are now exclusive with
+					AirConsole Hero.
+					There is a new menu system, with improved selection of round amount. Released 3 new playlists:
+					Ballads, Latin, Spain's Most Wanted Dec 2021.
+				</li>
+			</ul>
 		</div>
 	</div>
 	<div id="splash-screen">
