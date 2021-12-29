@@ -56,6 +56,9 @@
 
 		document.hero = false;
 
+		var specific_options_dialogue = "Choose the Setting you want to change or hit start to play with the current settings.";
+		
+
 		var playlists = [
 			{
 				name: "2000's",
@@ -564,7 +567,7 @@
 
 								$("#round-amount-selector").hide();
 								$("#option-selector").show();
-								$(".dialogue").html("Choose the Setting you want to change.");
+								$("#specific-options .dialogue").html(specific_options_dialogue);
 								document.screen = "specific-options";
 								break;
 							case "specific-options":
@@ -620,6 +623,7 @@
 									case "new-game":
 										DEBUG && console.log("showing playlist selector for new game");
 										$("#main-menu").hide();
+										$("#playlist-selector .dialogue").css("display", "flex");
 										$("#game_logo").animate({ fontSize: "80px" }, 1500);
 										sleep(1500).then(() => {
 											$("#playlist-selector").css("display", "flex");
@@ -652,6 +656,7 @@
 									document.maxRound = parseInt($(active_option).html());
 								}
 								$("#round-amount-selector").hide();
+								$("#specific-options .dialogue").html(specific_options_dialogue);
 								$("#option-selector").show();
 								document.screen = "specific-options";
 
@@ -674,7 +679,7 @@
 												max_rounds = playlists[document.selectedPlaylist]['amount_of_tracks'];
 											}
 
-											$(".dialogue").html("How many rounds do you want to play? (Max " + max_rounds + ")");
+											$("#specific-options .dialogue").html("How many rounds do you want to play? (Max " + max_rounds + ")");
 											$("#round-amount-selector").css("display", "flex");
 
 											// reset the options to the first setting
@@ -709,6 +714,7 @@
 									// go to specific options
 									DEBUG && console.log("showing specific options");
 									document.screen = "specific-options";
+									$("#specific-options .dialogue").html(specific_options_dialogue);
 									$("#specific-options").css("display", "flex");
 								}
 								break;
@@ -2295,7 +2301,7 @@
 	</div>
 	<div id="specific-options">
 		<div class="dialogue">
-			Choose the Setting you want to change.
+			<!-- dialogue is set by variable, as it gets changed and changed back again when going to a specific option -->
 		</div>
 		<ul id="option-selector">
 			<li id="round_amount_option" class="active">
