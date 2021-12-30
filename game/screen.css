@@ -213,8 +213,12 @@ span.hero-sticker{
 	opacity: 0;
 }
 
-#main-menu, #default-options, #specific-options, #round-amount-selector{
+#default-options, #specific-options, #round-amount-selector{
 	display:none;
+}
+
+#main-menu{
+	opacity: 0;
 }
 
 #main-menu ul, #default-options ul, #specific-options ul{

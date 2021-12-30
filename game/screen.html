@@ -421,6 +421,18 @@
 			}, true);
 		});
 
+		function display_loading() {
+			display_loading_object = [];
+			display_loading_object.push({ type: "display_loading" });
+			air_console.broadcast(display_loading_object);
+		}
+
+		function hide_loading() {
+			hide_loading_object = [];
+			hide_loading_object.push({ type: "hide_loading" });
+			air_console.broadcast(hide_loading_object);
+		}
+
 		function init() {
 			air_console = new AirConsole();
 
@@ -561,10 +573,14 @@
 						switch (document.screen) {
 							case "updates":
 								// go back to menu
+								display_loading();
 								$("#game_logo").animate({ fontSize: "115px" }, 1500);
 								$("#updates").animate({ opacity: 0 }, 1500);
 								sleep(1500).then(() => {
-									$("#main-menu").show("fade", {}, 1500);
+									$("#main-menu").animate({ opacity: 1 }, 1500);
+									sleep(1500).then(() => {
+										hide_loading();										
+									});
 								});
 								document.screen = "main-menu";
 								break;
@@ -605,6 +621,7 @@
 								break;
 							case "credits":
 								document.screen = "main-menu";
+								display_loading();
 								$("#credits").animate({ opacity: 0 }, 1500);
 								$("#game_logo").animate({ fontSize: "115px" }, 1500);
 								sleep(1500).then(() => {
@@ -612,7 +629,10 @@
 									$("#credits").hide();
 									$("#credits-container").hide();
 
-									$("#main-menu").show("fade", {}, 1500);
+									$("#main-menu").animate({ opacity: 1 }, 1500);
+									sleep(1500).then(() => {
+										hide_loading();
+									});
 								});
 								break;
 						}
@@ -622,8 +642,18 @@
 						switch (document.screen) {
 							case "splash":
 								DEBUG && console.log("handling confirm button on splash screen");
-								$("#splash-screen").hide();
-								$("#main-menu").show();
+								$("#splash-screen").animate({ opacity: 0 }, 1500);
+
+								// inform master controller to display loading
+								display_loading();
+
+								sleep(1500).then(() => {
+									$("#main-menu").animate({ opacity: 1 }, 1500);
+									sleep(1500).then(() => {
+										// inform master controller to hide loading
+										hide_loading();
+									});
+								});
 								document.screen = "main-menu";
 								break;
 							case "main-menu":
@@ -642,7 +672,8 @@
 										break;
 									case "credits":
 										DEBUG && console.log("showing credits");
-										$("#main-menu").hide();
+										display_loading();
+										$("#main-menu").animate({ opacity: 0 }, 1500);
 										$("#game_logo").animate({ fontSize: "80px" }, 1500);
 										$("#playlist-selector").hide("fade", {}, 1500);
 										$("#credits-container").show();
@@ -650,15 +681,22 @@
 										sleep(1500).then(() => {
 											document.showing_credits = true;
 											$("#credits").animate({ opacity: 1 }, 1500);
+											sleep(1500).then(() => {
+												hide_loading();
+											});
 										});
 										document.screen = "credits";
 										break;
 									case "updates":
 										DEBUG && console.log("displaying latest updates");
-										$("#main-menu").hide();
+										display_loading();
+										$("#main-menu").animate({opacity: 0}, 1500);
 										$("#game_logo").animate({ fontSize: "80px" }, 1500);
 										$("#updates").css("display", "flex");
 										$("#updates").animate({ opacity: 0.9 }, 1500);
+										sleep(1500).then(() => {
+											hide_loading();
+										});
 										document.screen = "updates";
 										break;
 								}
@@ -1209,6 +1247,8 @@
 
 			//	});
 		}
+
+
 
 		function calculateRoundTime() {
 

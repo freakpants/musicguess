@@ -200,6 +200,20 @@
 					return;
 				}
 
+				if(data[0].type === "display_loading"){
+					if(am_i_master()){
+						$("#menu").hide();
+						$("#loading").css("display", "flex");
+					}
+				}
+
+				if(data[0].type === "hide_loading"){
+					if(am_i_master()){
+						$("#menu").css("display", "flex");
+						$("#loading").hide();
+					}
+				}
+
 				if(data[0].type === "disable_start"){
 					$("#confirm").hide();
 					$("#hero-confirm").hide();
@@ -601,7 +615,7 @@
 			}
 		}
 
-		$("#round_change_buttons .vertical-container").click(function (event) {
+		/* $("#round_change_buttons .vertical-container").click(function (event) {
 			// instruct the game to show the credits
 			var command = [];
 			command.push({ type: "credits" });
@@ -615,7 +629,7 @@
 				$("#loading").hide();
 				$("#back_from_credits_area").css("display", "flex");
 			});
-		});
+		}); */
 
 		$(document).ready(function () {
 
