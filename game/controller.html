@@ -58,11 +58,13 @@
 				<i class="fa fa-play play_icon"></i>
 			</span>
 			<div class="button_text">Select with Hero</div>
-			<img id="small-hero-image" src="https://game.airconsole.com/com.airconsole.store.cdn.airconsole.com/2021-12-23-17-05-19/img/hero.45eeb9be.gif" />
+			<img id="small-hero-image"
+				src="https://game.airconsole.com/com.airconsole.store.cdn.airconsole.com/2021-12-23-17-05-19/img/hero.45eeb9be.gif" />
 			<!-- <div class="button_comment">Play with current settings</div> -->
 		</div>
 		<div class="flexbox resizing-button" id="hero-req">
-			<img id="hero-image" src="https://game.airconsole.com/com.airconsole.store.cdn.airconsole.com/2021-12-23-17-05-19/img/hero.45eeb9be.gif" />
+			<img id="hero-image"
+				src="https://game.airconsole.com/com.airconsole.store.cdn.airconsole.com/2021-12-23-17-05-19/img/hero.45eeb9be.gif" />
 			<div class="button_text">Hero</br>required</div>
 		</div>
 	</div>
@@ -188,7 +190,7 @@
 		document.showing_result_screen = false;
 		document.currentScore = 0;
 		// whether or not to display all information
-		const DEBUG = false;
+		const DEBUG = true;
 
 		function init() {
 			air_console = new AirConsole();
@@ -200,33 +202,34 @@
 					return;
 				}
 
-				if(data[0].type === "display_loading"){
-					if(am_i_master()){
+				if (data[0].type === "display_loading") {
+					if (am_i_master()) {
 						$("#menu").hide();
 						$("#loading").css("display", "flex");
 					}
 				}
 
-				if(data[0].type === "hide_loading"){
-					if(am_i_master()){
+				if (data[0].type === "hide_loading") {
+					DEBUG && console.log("hiding loading, and showing menu");
+					if (am_i_master()) {
 						$("#menu").css("display", "flex");
 						$("#loading").hide();
 					}
 				}
 
-				if(data[0].type === "disable_start"){
+				if (data[0].type === "disable_start") {
 					$("#confirm").hide();
 					$("#hero-confirm").hide();
 					$("#hero-req").css("display", "flex");
 				}
 
-				if(data[0].type === "enable_start"){
+				if (data[0].type === "enable_start") {
 					$("#confirm").css("display", "flex");
 					$("#hero-confirm").hide();
 					$("#hero-req").hide();
 				}
 
-				if(data[0].type === "start_with_hero"){
+				if (data[0].type === "start_with_hero") {
 					$("#confirm").hide();
 					$("#hero-confirm").css("display", "flex");
 					$("#hero-req").hide();
@@ -234,7 +237,7 @@
 
 				if (data[0].type === "inactive") {
 					// if there is a round in progress, and the client is inactive hide the menu and display the wait message instead
-					console.log("controller " + air_console.getDeviceId() + " has received message inactive");
+					DEBUG && console.log("controller " + air_console.getDeviceId() + " has received message inactive");
 					$("#menu").hide();
 					$("#waiting_for_next_round").css({ display: "flex" });
 					$("#waiting_for_start").hide();
@@ -242,7 +245,7 @@
 
 				if (data[0].type === "in_progress") {
 					// if there is a game in progress, store that info for check_master
-					console.log("controller " + air_console.getDeviceId() + " has received message in progress");
+					DEBUG && console.log("controller " + air_console.getDeviceId() + " has received message in progress");
 					document.inProgress = true;
 					$("#menu").hide();
 				}
@@ -255,9 +258,15 @@
 				}
 
 				if (data[0].type === "show_back_from_credits") {
-					$("#waiting_for_next_round").hide();
-					$("#waiting_for_start").hide();
-					$("#back_from_credits_area").css({ display: "flex" });
+					DEBUG && console.log("received instruction to show credits on controller");
+					if (am_i_master()) {
+						DEBUG && console.log("hiding menu and showing back from credits area with clickable links");
+						$("#waiting_for_next_round").hide();
+						$("#waiting_for_start").hide();
+						$("#loading").hide();
+						$("#menu").hide();
+						$("#back_from_credits_area").css({ display: "flex" });
+					}
 				}
 
 				if (data[0].type === "show_back_to_main") {
@@ -283,21 +292,21 @@
 					}
 				}
 
-				if(data[0].type === "show_round_change_buttons"){
+				if (data[0].type === "show_round_change_buttons") {
 					if (am_i_master()) {
 						$("#round_change_buttons").css("display", "flex");
 						$(".resizing-button").css("height", "33.333333vh");
 					}
 				}
 
-				if(data[0].type === "hide_round_change_buttons"){
+				if (data[0].type === "hide_round_change_buttons") {
 					$("#round_change_buttons").hide();
 					$(".resizing-button").css("height", "50vh");
 				}
 
 				if (data[0].type === "not_in_progress") {
 					// if there is no game in progress, store that info for check_master
-					console.log("controller " + air_console.getDeviceId() + " has received message NOT in progress");
+					DEBUG && console.log("controller " + air_console.getDeviceId() + " has received message NOT in progress");
 					document.inProgress = false;
 				}
 
@@ -376,7 +385,7 @@
 				}
 
 				if (data[0].type === "score_report") {
-					console.log("controller received score report");
+					DEBUG && console.log("controller received score report");
 					const score = data[0].score;
 					const maxRound = data[0].maxRound;
 					const correctGuesses = score.correctGuesses;
@@ -409,7 +418,7 @@
 
 				if (data[0].type === "game_end") {
 					document.inProgress = false;
-					console.log("handling game end");
+					DEBUG && console.log("handling game end");
 					$("#guessing_buttons_full #choice_1").css('opacity', '1');
 					$("#guessing_buttons_full #choice_2").css('opacity', '1');
 					$("#guessing_buttons_full #choice_3").css('opacity', '1');
@@ -722,7 +731,7 @@
 			$("#back_from_credits").click(function (event) {
 				// inform the screen to display the animation
 				var command = [];
-				command.push({ type: "back_from_credits" });
+				command.push({ type: "back" });
 				air_console.message(0, command);
 
 				$("#back_from_credits_area").hide();

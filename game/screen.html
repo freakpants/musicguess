@@ -579,7 +579,7 @@
 								sleep(1500).then(() => {
 									$("#main-menu").animate({ opacity: 1 }, 1500);
 									sleep(1500).then(() => {
-										hide_loading();										
+										hide_loading();
 									});
 								});
 								document.screen = "main-menu";
@@ -682,7 +682,9 @@
 											document.showing_credits = true;
 											$("#credits").animate({ opacity: 1 }, 1500);
 											sleep(1500).then(() => {
-												hide_loading();
+												if (air_console.getMasterControllerDeviceId() !== undefined) {
+													air_console.message(air_console.getMasterControllerDeviceId(), show_back_from_credits);
+												}
 											});
 										});
 										document.screen = "credits";
@@ -690,7 +692,7 @@
 									case "updates":
 										DEBUG && console.log("displaying latest updates");
 										display_loading();
-										$("#main-menu").animate({opacity: 0}, 1500);
+										$("#main-menu").animate({ opacity: 0 }, 1500);
 										$("#game_logo").animate({ fontSize: "80px" }, 1500);
 										$("#updates").css("display", "flex");
 										$("#updates").animate({ opacity: 0.9 }, 1500);
