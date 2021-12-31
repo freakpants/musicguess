@@ -666,11 +666,14 @@
 								switch (document.menu) {
 									case "new-game":
 										DEBUG && console.log("showing playlist selector for new game");
+										display_loading();
 										$("#main-menu").hide();
 										$("#playlist-selector .dialogue").css("display", "flex");
+										$("#playlist-selector .dialogue-wrapper").css("display", "flex");
 										$("#game_logo").animate({ fontSize: "80px" }, 1500);
 										sleep(1500).then(() => {
 											$("#playlist-selector").css("display", "flex");
+											hide_loading();
 										});
 										document.screen = "playlist-selection";
 										check_if_playlist_needs_hero();
@@ -710,14 +713,14 @@
 								break;
 							case "guessing-type-selector":
 								active_option = $("#guessing-type-selector .active");
-								document.guessingType = $(active_option).attr("id");
+								document.guessing_type = $(active_option).attr("id");
 								$("#guessing-type-selector").hide();
 								$("#specific-options .dialogue").html(specific_options_dialogue);
 								guessingType = $(active_option).html();
 								document.screen = "specific-options";
 								$("#guessing_type").html(guessingType);
 								$("#option-selector").show();
-							break;
+								break;
 							case "round-amount-selector":
 								DEBUG && console.log("saving selected round amount and going back to specific options");
 
@@ -792,6 +795,7 @@
 									DEBUG && console.log("showing specific options");
 									document.screen = "specific-options";
 									$("#specific-options .dialogue").html(specific_options_dialogue);
+									$("#specific-options .dialogue").css("display", "flex");
 									$("#specific-options").css("display", "flex");
 								}
 								break;
@@ -801,6 +805,7 @@
 								document.screen = "default-options";
 								$("#playlist-selector").hide();
 								$("#default-options").css("display", "flex");
+								$("#default-options .dialogue").css("display", "flex");
 
 								// display selected playlist
 								$("#playlist-display").html("Playlist:</br>" + playlists[document.selectedPlaylist].name);
@@ -1660,7 +1665,19 @@
 			// get wrong answers for multiple choice
 			wrong_answers = 0;
 			wrong_answers_array = [];
-			artist_or_title = randomIntFromInterval(0, 1);
+
+			switch (document.guessing_type) {
+				case "guessing-both":
+					artist_or_title = randomIntFromInterval(0, 1);
+					break;
+				case "guessing-artist":
+					artist_or_title = 0;
+					break;
+				case "guessing-title":
+					artist_or_title = 1;
+					break;
+			}
+
 			DEBUG && console.log("determined whether to let the user guess artist or title");
 
 			DEBUG && console.log("entering while loop");
