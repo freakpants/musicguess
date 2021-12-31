@@ -52,7 +52,7 @@
 		document.menu = "new-game";
 		document.default = true;
 		document.setting = "round_amount";
-		document.changingSetting = false;
+		document.guessing_type = "guessing-both";
 
 		document.hero = false;
 
@@ -584,6 +584,13 @@
 								});
 								document.screen = "main-menu";
 								break;
+
+							case "guessing-type-selector":
+								$("#guessing-type-selector").hide();
+								$("#option-selector").show();
+								$("#specific-options .dialogue").html(specific_options_dialogue);
+								document.screen = "specific-options";
+								break;
 							case "round-amount-selector":
 								// inform controller to hide increase/decrease buttons
 								hide_round_change_buttons = [];
@@ -596,13 +603,11 @@
 								document.screen = "specific-options";
 								break;
 							case "specific-options":
-								if (document.changingSetting === true) {
-								} else {
-									// go back to default selection
-									document.screen = "default-options";
-									$("#specific-options").hide();
-									$("#default-options").css("display", "flex");
-								}
+
+								// go back to default selection
+								document.screen = "default-options";
+								$("#specific-options").hide();
+								$("#default-options").css("display", "flex");
 								break;
 							case "default-options":
 								// go back to playlist selection
@@ -703,10 +708,20 @@
 										break;
 								}
 								break;
+							case "guessing-type-selector":
+								active_option = $("#guessing-type-selector .active");
+								document.guessingType = $(active_option).attr("id");
+								$("#guessing-type-selector").hide();
+								$("#specific-options .dialogue").html(specific_options_dialogue);
+								guessingType = $(active_option).html();
+								document.screen = "specific-options";
+								$("#guessing_type").html(guessingType);
+								$("#option-selector").show();
+							break;
 							case "round-amount-selector":
 								DEBUG && console.log("saving selected round amount and going back to specific options");
 
-								const active_option = $("#round-amount-selector .active");
+								active_option = $("#round-amount-selector .active");
 								if ($(active_option).html() === "Custom Amount") {
 									// just go back, since we have already set document.maxRound
 								} else {
@@ -724,39 +739,44 @@
 								break;
 							case "specific-options":
 								DEBUG && console.log("handling confirm button on specific options");
-								if (document.changingSetting === true) {
-								} else {
-									switch (document.setting) {
-										case "round_amount":
-											document.screen = "round-amount-selector";
-											$("#option-selector").hide();
 
-											let max_rounds = "Error: No playlist is selected. Please restart the game.";
-											if (playlists[document.selectedPlaylist] !== undefined) {
-												max_rounds = playlists[document.selectedPlaylist]['amount_of_tracks'];
-											}
+								switch (document.setting) {
+									case "round_amount":
+										document.screen = "round-amount-selector";
+										$("#option-selector").hide();
 
-											$("#specific-options .dialogue").html("How many rounds do you want to play? (Max " + max_rounds + ")");
-											$("#round-amount-selector").css("display", "flex");
+										let max_rounds = "Error: No playlist is selected. Please restart the game.";
+										if (playlists[document.selectedPlaylist] !== undefined) {
+											max_rounds = playlists[document.selectedPlaylist]['amount_of_tracks'];
+										}
 
-											// reset the options to the first setting
-											$("#round-amount-selector li").removeClass("active");
-											const firstOption = $("#round-amount-selector li").first();
-											$(firstOption).addClass("active");
-											$("#roundCounter").html($(firstOption).html() + " Rounds");
+										$("#specific-options .dialogue").html("How many rounds do you want to play? (Max " + max_rounds + ")");
+										$("#round-amount-selector").css("display", "flex");
 
-											break;
-										case "start":
-											DEBUG && console.log("starting the game after specific options were chosen");
-											$(".dialogue").hide();
-											$("#specific-options").hide();
-											// start the game
-											document.getElementById("sound-effect-start").play();
-											document.screen = "playing";
-											start();
-											break;
-									}
+										// reset the options to the first setting
+										$("#round-amount-selector li").removeClass("active");
+										const firstOption = $("#round-amount-selector li").first();
+										$(firstOption).addClass("active");
+										$("#roundCounter").html($(firstOption).html() + " Rounds");
+
+										break;
+									case "guessing_type":
+										document.screen = "guessing-type-selector";
+										$("#option-selector").hide();
+										$("#specific-options .dialogue").html("Select whether each round players have to guess either artist or title randomly, or only one of each.");
+										$("#guessing-type-selector").css("display", "flex");
+										break;
+									case "start":
+										DEBUG && console.log("starting the game after specific options were chosen");
+										$(".dialogue").hide();
+										$("#specific-options").hide();
+										// start the game
+										document.getElementById("sound-effect-start").play();
+										document.screen = "playing";
+										start();
+										break;
 								}
+
 								break;
 							case "default-options":
 								DEBUG && console.log("handling confirm button on default options");
@@ -814,9 +834,18 @@
 						document.getElementById("sound-effect-switch").play();
 						// determine where we are
 						switch (document.screen) {
+							case "guessing-type-selector":
+								active_option = $("#guessing-type-selector .active");
+								if ($(active_option).is(':last-child')) {
+									next_option = $("#guessing-type-selector li").first();
+								} else {
+									next_option = $(active_option).next();
+								}
+								$(active_option).removeClass("active");
+								$(next_option).addClass("active");
+								break;
 							case "round-amount-selector":
-								const active_option = $("#round-amount-selector .active");
-								let next_option;
+								active_option = $("#round-amount-selector .active");
 								if ($(active_option).is(':last-child')) {
 									next_option = $("#round-amount-selector li").first();
 								} else {
@@ -842,27 +871,24 @@
 
 								break;
 							case "specific-options":
-								if (document.changingSetting === true) {
-
-								} else {
-									switch (document.setting) {
-										case "round_amount":
-											document.setting = "guessing_type";
-											$("#round_amount_option").removeClass("active");
-											$("#guessing_type").addClass("active");
-											break;
-										case "guessing_type":
-											document.setting = "start";
-											$("#guessing_type").removeClass("active");
-											$("#specific-start").addClass("active");
-											break;
-										case "start":
-											document.setting = "round_amount";
-											$("#specific-start").removeClass("active");
-											$("#round_amount_option").addClass("active");
-											break;
-									}
+								switch (document.setting) {
+									case "round_amount":
+										document.setting = "guessing_type";
+										$("#round_amount_option").removeClass("active");
+										$("#guessing_type").addClass("active");
+										break;
+									case "guessing_type":
+										document.setting = "start";
+										$("#guessing_type").removeClass("active");
+										$("#specific-start").addClass("active");
+										break;
+									case "start":
+										document.setting = "round_amount";
+										$("#specific-start").removeClass("active");
+										$("#round_amount_option").addClass("active");
+										break;
 								}
+
 								break;
 							case "default-options":
 								if (document.default) {
@@ -904,9 +930,20 @@
 						document.getElementById("sound-effect-switch").play();
 						// determine where we are
 						switch (document.screen) {
+							case "guessing-type-selector":
+								active_option = $("#guessing-type-selector .active");
+								if ($(active_option).is(':first-child')) {
+									previous_option = $("#guessing-type-selector li").last();
+								} else {
+									previous_option = $(active_option).prev();
+								}
+
+								$(active_option).removeClass("active");
+								$(previous_option).addClass("active");
+
+								break;
 							case "round-amount-selector":
-								const active_option = $("#round-amount-selector .active");
-								let previous_option;
+								active_option = $("#round-amount-selector .active");
 								if ($(active_option).is(':first-child')) {
 									previous_option = $("#round-amount-selector li").last();
 								} else {
@@ -932,26 +969,22 @@
 
 								break;
 							case "specific-options":
-								if (document.changingSetting === true) {
-
-								} else {
-									switch (document.setting) {
-										case "round_amount":
-											document.setting = "start";
-											$("#round_amount_option").removeClass("active");
-											$("#specific-start").addClass("active");
-											break;
-										case "guessing_type":
-											document.setting = "round_amount";
-											$("#guessing_type").removeClass("active");
-											$("#round_amount_option").addClass("active");
-											break;
-										case "start":
-											document.setting = "guessing_type";
-											$("#specific-start").removeClass("active");
-											$("#guessing_type").addClass("active");
-											break;
-									}
+								switch (document.setting) {
+									case "round_amount":
+										document.setting = "start";
+										$("#round_amount_option").removeClass("active");
+										$("#specific-start").addClass("active");
+										break;
+									case "guessing_type":
+										document.setting = "round_amount";
+										$("#guessing_type").removeClass("active");
+										$("#round_amount_option").addClass("active");
+										break;
+									case "start":
+										document.setting = "guessing_type";
+										$("#specific-start").removeClass("active");
+										$("#guessing_type").addClass("active");
+										break;
 								}
 								break;
 							case "default-options":
@@ -2382,7 +2415,7 @@
 				Number of Rounds to play
 			</li>
 			<li id="guessing_type">
-				Guess either the artist or the title randomly each round.
+				Randomly guess either artist or title each round
 			</li>
 			<li id="specific-start">
 				Start
@@ -2399,6 +2432,11 @@
 			<li>50</li>
 			<li>100</li>
 			<li>Custom Amount</li>
+		</ul>
+		<ul id="guessing-type-selector">
+			<li id="guessing-artist" class="active">Always guess the artist</li>
+			<li id="guessing-title">Always guess the title</li>
+			<li id="guessing-both">Randomly guess either artist or title each round</li>
 		</ul>
 	</div>
 	<div id="player-results">

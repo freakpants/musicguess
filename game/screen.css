@@ -213,7 +213,7 @@ span.hero-sticker{
 	opacity: 0;
 }
 
-#default-options, #specific-options, #round-amount-selector{
+#default-options, #specific-options, #round-amount-selector, #guessing-type-selector{
 	display:none;
 }
 
@@ -242,14 +242,14 @@ span.hero-sticker{
 	opacity: 0.9;
 }
 
-ul#round-amount-selector{
+ul#round-amount-selector, ul#guessing-type-selector{
 	width: 25vw;
 	display: none;
 	flex-wrap: wrap;
 	flex-direction: unset;
 }
 
-#round-amount-selector li{
+#round-amount-selector li, #guessing-type-selector li{
 	width: unset;
 }
 
