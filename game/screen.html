@@ -421,6 +421,20 @@
 			}, true);
 		});
 
+		function set_guessing_type_message(){
+			switch (document.guessing_type) {
+				case "guessing-both":
+				$("#message").html("Guess the artist or title that is currently playing!");
+					break;
+				case "guessing-artist":
+				$("#message").html("Guess the artist that is currently playing!");
+					break;
+				case "guessing-title":
+				$("#message").html("Guess the title that is currently playing!");
+					break;
+			}
+		}
+
 		function display_loading() {
 			display_loading_object = [];
 			display_loading_object.push({ type: "display_loading" });
@@ -1521,7 +1535,7 @@
 							$("#roundTime").css("display", "flex");
 
 							// override screen with play area
-							$("#message").html("Guess the artist or title that is currently playing!");
+							set_guessing_type_message();
 							$("#playanimation").show();
 							$("#current_song_service").show();
 
@@ -2117,7 +2131,10 @@
 						$("#current_song_service").show();
 						$("#status").html("");
 						$("#status").hide();
-						$("#message").html("Guess the artist or title that is currently playing!");
+
+						set_guessing_type_message();
+
+
 
 						// reset the roundTime again, at the actual start of the round
 						document.RoundTime = document.RoundTimeSetting;
@@ -2142,6 +2159,8 @@
 				});
 			});
 		}
+
+
 
 		function initiate_guessing_area(player_id) {
 			// check if the player already has a guess area
