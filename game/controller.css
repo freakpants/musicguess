@@ -230,9 +230,8 @@ body{
 }
 
 #confirm{
-	width: 100vw;
-	height: 100vh;
-	position: absolute;
+	width: 50vw;
+	height: 50vh;
 }
 
 #hero-confirm{

@@ -48,7 +48,7 @@
 
 		document.selectedPlaylist;
 
-		document.screen = "splash";
+		document.screen = "main-menu";
 		document.menu = "new-game";
 		document.default = true;
 		document.setting = "round_amount";
@@ -399,6 +399,7 @@
 		var air_console;
 
 		$(document).ready(function () {
+			loop1();
 			document.getElementById("player").addEventListener('error', function failed(e) {
 				// audio playback failed - show a message saying why
 				// to get the source of the audio element use $(this).src
@@ -420,6 +421,37 @@
 				}
 			}, true);
 		});
+
+		function loop1() {
+			$("#ticker1").animate({ "margin-left": "-100vw" }, 15000, () => {
+				$("#ticker-wrapper").prepend($("#ticker2"));
+				$("#ticker1").css("margin-left", "unset");
+				$("#ticker1").css("margin-right", "200vw");
+				$("#ticker2").css("margin-right", "unset");
+				loop2();
+			});
+		}
+
+		function loop2() {
+			$("#ticker2").animate({ "margin-left": "-100vw" }, 7500, () => {
+				$("#ticker-wrapper").prepend($("#ticker1"));
+				$("#ticker2").css("margin-left", "unset");
+				$("#ticker2").css("margin-right", "200vw");
+				$("#ticker1").css("margin-right", "unset");
+				loop3();
+			});
+		}
+
+		function loop3() {
+			$("#ticker1").animate({ "margin-left": "-100vw" }, 7500, () => {
+				$("#ticker-wrapper").prepend($("#ticker2"));
+				$("#ticker1").css("margin-left", "unset");
+				$("#ticker1").css("margin-right", "200vw");
+				$("#ticker2").css("margin-right", "unset");
+				loop2();
+			});
+		}
+
 
 		function set_guessing_type_message() {
 			switch (document.guessing_type) {
@@ -2404,7 +2436,7 @@
 					with a lot of cover/live versions of songs or just plain unknown or weird songs.</li>
 				<li>16.12.2021 - Fixed an Issue with wildcard playlist not working.</li>
 				<li>20.12.2021 - Released a new christmas playlist</li>
-				<li>31.12.2012 - The game is now playable for free. Accordingly, some playlists are now exclusive with
+				<li>01.04.2022 - The game is now playable for free. Accordingly, some playlists are now exclusive with
 					AirConsole Hero.
 					There is a new menu system, with improved selection of round amount. Released 3 new playlists:
 					Ballads, Latin, Spain's Most Wanted Dec 2021. Added 10 new songs to Global Hits 2021.
@@ -2438,6 +2470,12 @@
 				Updates
 			</li>
 		</ul>
+		<div id="ticker-wrapper">
+			<div class="ticker" id="ticker1">Follow @MusicGuess1 on Twitter to get updates and give feedback about the
+				game!</div>
+			<div class="ticker" id="ticker2">There are 3 new playlists!</div>
+		</div>
+
 	</div>
 	<div id="default-options">
 		<div class="dialogue">

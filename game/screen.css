@@ -163,6 +163,7 @@ span.hero-sticker{
 }
 
 #splash-screen{
+	display: none;
 	top: 25vh;
 }
 
@@ -218,7 +219,7 @@ span.hero-sticker{
 }
 
 #main-menu{
-	opacity: 0;
+	opacity: 1;
 }
 
 #main-menu ul, #default-options ul, #specific-options ul{
@@ -226,6 +227,39 @@ span.hero-sticker{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#ticker-wrapper{
+	display: flex;
+	width: 100vw;
+	position: absolute;
+	bottom: 1vh;
+	opacity: 0.9;
+	box-shadow: 1px 1px 10px black;
+	height: 10vh;
+	background: #b51d05;
+	flex-direction: column;
+    justify-content: center;
+	flex-wrap: wrap;
+}
+
+div.ticker{
+	width: 100%;
+    color: white;
+	position: relative;
+	left: 0px;
+    bottom: 0vh;
+	background: #b51d05;
+	font-size: 2em;
+	justify-content: center;
+    display: flex;
+}
+
+div#ticker1{
+	margin-left: 100vw;
+}
+div#ticker2{
+	margin-right: 200vw;
 }
 
 #main-menu li, #default-options li, #specific-options li{
