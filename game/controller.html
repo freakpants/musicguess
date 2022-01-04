@@ -670,6 +670,10 @@
 				air_console.message(0, command);
 			});
 
+			$("#hero-req").click(() => {
+				air_console.getPremium();
+			});
+
 			$("#cancel").click(function (event) {
 				$("#hero-confirm").hide();
 				$("#confirm").css("display", "flex");
