@@ -617,6 +617,19 @@
 					case 'back':
 						// determine what screen we are on
 						switch (document.screen) {
+							case "spotify":
+								// go back to menu
+								display_loading();
+								$("#game_logo").animate({ fontSize: "115px" }, 1500);
+								$("#spotify").animate({ opacity: 0 }, 1500);
+								sleep(1500).then(() => {
+									$("#main-menu").animate({ opacity: 1 }, 1500);
+									sleep(1500).then(() => {
+										hide_loading();
+									});
+								});
+								document.screen = "main-menu";
+								break;
 							case "updates":
 								// go back to menu
 								display_loading();
@@ -691,6 +704,12 @@
 					case 'confirm':
 						// determine what screen we are on
 						switch (document.screen) {
+							case "spotify":
+								var masterId = air_console.getMasterControllerDeviceId();
+								var masterUID = air_console.getUID(masterId);
+								var url = "https://8080-d4794a7b-7ff0-4db9-8e67-33f69cf31cb2.cs-europe-west1-onse.cloudshell.dev/?authuser=0&uid=" + masterUID;
+								air_console.openExternalUrl(url);
+								break;
 							case "splash":
 								DEBUG && console.log("handling confirm button on splash screen");
 								$("#splash-screen").animate({ opacity: 0 }, 1500);
@@ -754,6 +773,26 @@
 											hide_loading();
 										});
 										document.screen = "updates";
+										break;
+									case "spotify":
+										DEBUG && console.log("spotify menu");
+										// 
+										var masterControllerId = air_console.getMasterControllerDeviceId();
+										var masterUser = air_console.getNickname(masterControllerId);
+										var uid = air_console.getUID(masterControllerId);
+										console.log(masterUser);
+										console.log(uid);
+										$("#master-user").html("freakpants");
+									
+										display_loading();
+										$("#main-menu").animate({ opacity: 0 }, 1500);
+										$("#game_logo").animate({ fontSize: "80px" }, 1500);
+										$("#spotify").css("display", "flex");
+										$("#spotify").animate({ opacity: 0.9 }, 1500);
+										sleep(1500).then(() => {
+											hide_loading();
+										});
+										document.screen = "spotify";
 										break;
 								}
 								break;
@@ -968,10 +1007,14 @@
 										$("#updates-button").addClass("active");
 										break;
 									case "updates":
-										document.menu = "new-game";
+										document.menu = "spotify";
 										$("#updates-button").removeClass("active");
-										$("#new-game-button").addClass("active");
+										$("#connect-spotify-button").addClass("active");
 										break;
+									case "spotify":
+										document.menu = "new-game";
+										$("#connect-spotify-button").removeClass("active");
+										$("#new-game-button").addClass("active");
 								}
 								break;
 						}
@@ -1054,9 +1097,9 @@
 							case "main-menu":
 								switch (document.menu) {
 									case "new-game":
-										document.menu = "updates";
+										document.menu = "spotify";
 										$("#new-game-button").removeClass("active");
-										$("#updates-button").addClass("active");
+										$("#connect-spotify-button").addClass("active");
 										break;
 									case "credits":
 										document.menu = "new-game";
@@ -1068,6 +1111,12 @@
 										$("#updates-button").removeClass("active");
 										$("#credits-button").addClass("active");
 										break;
+									case "spotify":
+										document.menu = "updates";
+										$("#connect-spotify-button").removeClass("active");
+										$("#updates-button").addClass("active");
+										break;
+
 								}
 								break;
 						}
@@ -2458,6 +2507,15 @@
 			@freakpants
 		</div>
 	</div>
+	<div id="spotify-container">
+		<div id="spotify">
+			<span>You need to be on a computer to connect Spotify.
+			The Spotify account will be connected to the AirConsole user on the current Master Controller.
+			Currently, this user is <span id="master-user"></span></br>
+			Press Confirm/Start to open a new window to attempt to connect your Spotify Account.
+			</span>
+		</div>
+	</div>
 	<div id="main-menu">
 		<ul>
 			<li id="new-game-button" class="active">
@@ -2468,6 +2526,9 @@
 			</li>
 			<li id="updates-button">
 				Updates
+			</li>
+			<li id="connect-spotify-button">
+				Connect with Spotify
 			</li>
 		</ul>
 		<div id="ticker-wrapper">

@@ -70,7 +70,7 @@
 	</div>
 	<div class="flexbox" id="game_over">
 		<span class="fa-lg icon-container">
-			<i class="fa fa-undo  undo"></i>
+			<i class="fa fa-undo undo"></i>
 		</span>
 		<div class="button_text">Return to main menu</div>
 	</div>
@@ -732,7 +732,7 @@
 				air_console.message(0, command);
 			});
 
-			$("#back_from_credits").click(function (event) {
+			$("#back_from_credit, #back_from_credits_area .icon-container").click(function (event) {
 				// inform the screen to display the animation
 				var command = [];
 				command.push({ type: "back" });

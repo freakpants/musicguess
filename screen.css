@@ -151,7 +151,7 @@ span.hero-sticker{
     width: 3em;
 }
 
-#credits-container, #splash-screen, #updates-container, #spotify-container{
+#credits-container, #splash-screen, #updates-container{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -167,11 +167,11 @@ span.hero-sticker{
 	top: 25vh;
 }
 
-#credits, #victory_screen, #splash-text, #updates, #spotify{
+#credits, #victory_screen, #splash-text, #updates{
 	width: 50vw;
 }
 
-#credits, #victory_screen, #splash-text, .dialogue, #playlist-details, #updates, #spotify{
+#credits, #victory_screen, #splash-text, .dialogue, #playlist-details, #updates{
 	box-shadow: 1px 1px 10px black;
 	font-size: 1.8em;
 	flex-direction: column;
@@ -179,7 +179,7 @@ span.hero-sticker{
 	text-transform:none;
 }
 
-#credits, #victory_screen, #splash-text, .dialogue, #updates, #spotify{
+#credits, #victory_screen, #splash-text, .dialogue, #updates{
 	background-color: #b51d05;
 }
 
@@ -209,18 +209,9 @@ span.hero-sticker{
 	display: flex;
 }
 
-#credits, #victory_screen, #updates, #spotify{
+#credits, #victory_screen, #updates{
 	display:none;
 	opacity: 0;
-}
-
-#spotify{
-	padding: 1em;
-}
-
-#master-user{
-	font-weight: bold;
-    color: #ffdc40;
 }
 
 #default-options, #specific-options, #round-amount-selector, #guessing-type-selector{
