@@ -67,6 +67,10 @@ text white: white;
 	}	
 }
 
+#main-menu li#connect-spotify-button{
+	display: none;
+}
+
 #playlist-selector .album_art img#hero-image{
 	object-position: center;
 	max-width: 100%;

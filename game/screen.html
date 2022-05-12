@@ -10,7 +10,7 @@
 	<script type="text/javascript">
 
 		// whether or not to display all information
-		const DEBUG = false;
+		const DEBUG = true;
 
 		// scroll the result areas or not
 		document.scroll_results = false;
@@ -453,6 +453,23 @@
 			});
 		}
 
+		function check_for_freakpants() {
+			// get all controller ids
+			var controller_ids = air_console.getControllerDeviceIds();
+			const freakpants_uid = "89a1f2d330e4349b867e6341c6fcc892";
+			var result = false;
+			// loop each id with foreach
+			controller_ids.forEach((controller_id) => {
+				DEBUG && console.log("controller uid: " + air_console.getUID(controller_id));
+				DEBUG && console.log("comparing with:" + freakpants_uid);
+				DEBUG && console.log("result: " + (air_console.getUID(controller_id) === freakpants_uid));
+				if (air_console.getUID(controller_id) === freakpants_uid) {
+					result = true;
+				}
+			});
+			return result;
+		}
+
 
 		function set_guessing_type_message() {
 			switch (document.guessing_type) {
@@ -568,6 +585,10 @@
 						air_console.message(device_id, hide_menu);
 					}
 
+				}
+
+				if (check_for_freakpants()) {
+					$("#connect-spotify-button").css("display", "flex");
 				}
 			};
 
@@ -784,7 +805,7 @@
 										console.log(masterUser);
 										console.log(uid);
 										$("#master-user").html("freakpants");
-									
+
 										display_loading();
 										$("#main-menu").animate({ opacity: 0 }, 1500);
 										$("#game_logo").animate({ fontSize: "80px" }, 1500);
@@ -1008,9 +1029,16 @@
 										$("#updates-button").addClass("active");
 										break;
 									case "updates":
-										document.menu = "spotify";
-										$("#updates-button").removeClass("active");
-										$("#connect-spotify-button").addClass("active");
+										if (check_for_freakpants()) {
+											document.menu = "spotify";
+											$("#updates-button").removeClass("active");
+											$("#connect-spotify-button").addClass("active");
+										} else {
+											document.menu = "new-game";
+											$("#updates-button").removeClass("active");
+											$("#new-game-button").addClass("active");
+										}
+
 										break;
 									case "spotify":
 										document.menu = "new-game";
@@ -1098,9 +1126,16 @@
 							case "main-menu":
 								switch (document.menu) {
 									case "new-game":
-										document.menu = "spotify";
-										$("#new-game-button").removeClass("active");
-										$("#connect-spotify-button").addClass("active");
+										if (check_for_freakpants()) {
+											document.menu = "spotify";
+											$("#new-game-button").removeClass("active");
+											$("#connect-spotify-button").addClass("active");
+										} else {
+											document.menu = "updates";
+											$("#new-game-button").removeClass("active");
+											$("#updates-button").addClass("active");
+										}
+
 										break;
 									case "credits":
 										document.menu = "new-game";
@@ -2502,9 +2537,9 @@
 	<div id="spotify-container">
 		<div id="spotify">
 			<span>You need to be on a computer to connect Spotify.
-			The Spotify account will be connected to the AirConsole user on the current Master Controller.
-			Currently, this user is <span id="master-user"></span></br>
-			Press Confirm/Start to open a new window to attempt to connect your Spotify Account.
+				The Spotify account will be connected to the AirConsole user on the current Master Controller.
+				Currently, this user is <span id="master-user"></span></br>
+				Press Confirm/Start to open a new window to attempt to connect your Spotify Account.
 			</span>
 		</div>
 	</div>
