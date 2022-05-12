@@ -5,6 +5,58 @@ text yellow: #ffdc40;
 text white: white;
 */
 @media (max-width: 960px) {
+
+
+	.active span.new-sticker, .active span.hero-sticker {
+		height: 2em;
+		line-height: 2em;
+		font-size: 2em;
+		border-radius: 2em;
+		width: 2em;
+	}
+
+	span.new-sticker, span.hero-sticker{
+		left: 2em;
+		top: 2em;
+	}
+
+	#playlist_details {
+		font-size: 0.8em;
+	}
+
+	#game_logo#game_logo {
+		font-size: 60px;
+		-webkit-text-stroke: 1px #fc3756;
+	}
+
+	#playlist-selector .album_art {
+		border-radius: 11vw;
+		min-width: 22vw;
+		min-height: 22vw;
+		width: 22vw;
+	}
+
+	#playlist-selector .album_art.active .playlist-text-wrapper {
+		width: 28vw;
+	}
+
+	#playlist-selector .album_art.active {
+		min-width: 28vw;
+		width: 28vw;
+		height: 28vw;
+		border-radius: 28vw;
+	}
+
+	#playlist-selector .album_art img {
+		width: 11vw;
+		height: 11vw;
+	}
+
+	#playlist-selector .album_art.active img {
+		width: 14vw;
+		height: 14vw;
+	}
+
 	#playlist-selector#playlist-selector .playlist-text{
 		font-size: 1.5em;
 	}
