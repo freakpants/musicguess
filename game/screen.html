@@ -857,6 +857,7 @@
 
 								switch (document.setting) {
 									case "round_amount":
+										controller_boundary_option("first");
 										document.screen = "round-amount-selector";
 										$("#option-selector").hide();
 
@@ -968,9 +969,16 @@
 							case "round-amount-selector":
 								active_option = $("#round-amount-selector .active");
 								if ($(active_option).is(':last-child')) {
-									next_option = $("#round-amount-selector li").first();
+									break;
+									//next_option = $("#round-amount-selector li").first();
 								} else {
 									next_option = $(active_option).next();
+								}
+
+								if ($(next_option).is(':last-child')) {
+									controller_boundary_option("last");
+								} else {
+									controller_boundary_option(false);
 								}
 
 								$(active_option).removeClass("active");
@@ -1091,9 +1099,16 @@
 							case "round-amount-selector":
 								active_option = $("#round-amount-selector .active");
 								if ($(active_option).is(':first-child')) {
-									previous_option = $("#round-amount-selector li").last();
+									break;
+									// previous_option = $("#round-amount-selector li").last();
 								} else {
 									previous_option = $(active_option).prev();
+								}
+
+								if ($(previous_option).is(':first-child')) {
+									controller_boundary_option("first");
+								} else {
+									controller_boundary_option(false);
 								}
 
 								$(active_option).removeClass("active");

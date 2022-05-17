@@ -359,6 +359,13 @@ ul#round-amount-selector, ul#guessing-type-selector{
 	flex-direction: unset;
 }
 
+#round-amount-selector li.active.active,  #round-amount-selector li{
+	width: unset;
+    min-width: 2vw;
+	height: 8vh;
+	font-size: 1.8em;
+}
+
 #round-amount-selector li, #guessing-type-selector li{
 	width: unset;
 }
