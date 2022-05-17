@@ -507,6 +507,10 @@
 				check_if_playlist_needs_hero();
 			}
 
+			air_console.onReady = function (){
+				controller_boundary_option("first");
+			}
+
 			// watch for new controllers connecting
 			air_console.onConnect = function (device_id) {
 				// let the new controller know how many rounds are currently selected
@@ -890,6 +894,7 @@
 
 								break;
 							case "default-options":
+								controller_boundary_option("first");
 								DEBUG && console.log("handling confirm button on default options");
 								$("#default-options").hide();
 								if (document.default) {
@@ -908,6 +913,9 @@
 								}
 								break;
 							case "playlist-selection":
+
+								controller_boundary_option("first");
+
 								DEBUG && console.log("going to default options");
 								// go to default option prompt
 								document.screen = "default-options";
@@ -989,17 +997,21 @@
 										document.setting = "guessing_type";
 										$("#round_amount_option").removeClass("active");
 										$("#guessing_type").addClass("active");
+										controller_boundary_option(false);
 										break;
 									case "guessing_type":
 										document.setting = "start";
 										$("#guessing_type").removeClass("active");
 										$("#specific-start").addClass("active");
+										controller_boundary_option("last");
 										break;
 									case "start":
+										/* 
 										document.setting = "round_amount";
 										$("#specific-start").removeClass("active");
 										$("#round_amount_option").addClass("active");
-										break;
+										controller_boundary_option("last");
+										break; */
 								}
 
 								break;
@@ -1008,10 +1020,12 @@
 									document.default = false;
 									$("#default-no").addClass("active");
 									$("#default-yes").removeClass("active");
+									controller_boundary_option("last");
 								} else {
+									/* controller_boundary_option("first");
 									document.default = true;
 									$("#default-yes").addClass("active");
-									$("#default-no").removeClass("active");
+									$("#default-no").removeClass("active"); */
 								}
 								break;
 							case "playlist-selection":
@@ -1023,6 +1037,7 @@
 										document.menu = "credits";
 										$("#new-game-button").removeClass("active");
 										$("#credits-button").addClass("active");
+										controller_boundary_option(false);
 										break;
 									case "credits":
 										document.menu = "updates";
@@ -1102,31 +1117,34 @@
 							case "specific-options":
 								switch (document.setting) {
 									case "round_amount":
-										document.setting = "start";
+										/* document.setting = "start";
 										$("#round_amount_option").removeClass("active");
 										$("#specific-start").addClass("active");
-										break;
+										break; */
 									case "guessing_type":
 										document.setting = "round_amount";
 										$("#guessing_type").removeClass("active");
 										$("#round_amount_option").addClass("active");
+										controller_boundary_option("first");
 										break;
 									case "start":
 										document.setting = "guessing_type";
 										$("#specific-start").removeClass("active");
 										$("#guessing_type").addClass("active");
+										controller_boundary_option(false);
 										break;
 								}
 								break;
 							case "default-options":
 								if (document.default) {
-									document.default = false;
+									/* document.default = false;
 									$("#default-no").addClass("active");
-									$("#default-yes").removeClass("active");
+									$("#default-yes").removeClass("active"); */
 								} else {
 									document.default = true;
 									$("#default-yes").addClass("active");
 									$("#default-no").removeClass("active");
+									controller_boundary_option("first");
 								}
 							case "playlist-selection":
 								switch_playlist('previous');

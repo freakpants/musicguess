@@ -348,6 +348,10 @@ div#ticker2{
 	opacity: 0.9;
 }
 
+#specific-options li{
+	width: 25vw;
+}
+
 ul#round-amount-selector, ul#guessing-type-selector{
 	width: 25vw;
 	display: none;
@@ -366,6 +370,15 @@ ul#round-amount-selector, ul#guessing-type-selector{
 	width: 22vw;
 	height: 10vh;
 	font-size: 2em;
+}
+
+#specific-start{
+	position: absolute;
+    bottom: 15vh;
+}
+
+#specific-options li.active{
+	width: 30vw;
 }
 
 #victory_screen .single-result{
@@ -537,8 +550,8 @@ div .avatar_wrong{
 #roundCounter{
 	bottom: 24vh;
 	font-size: 2em;
-	background:#e8822d;
-	color: white;
+	color: #e8822d;
+	background:#ffdc40;
 }
 
 #playlist-display{
