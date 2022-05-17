@@ -724,6 +724,7 @@
 						}
 						break;
 					case 'confirm':
+						controller_boundary_option(false);
 						// determine what screen we are on
 						switch (document.screen) {
 							case "spotify":
@@ -1187,6 +1188,7 @@
 						}
 						break;
 					case 'cancel':
+						controller_boundary_option(false);
 						$("#message").html("");
 						$("#message").hide();
 						$("#roundCounter").hide();

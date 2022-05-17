@@ -22,6 +22,7 @@ text white: white;
 
 	#playlist_details {
 		font-size: 0.8em;
+		color: #e8822d;
 	}
 
 	#game_logo#game_logo {
@@ -135,7 +136,7 @@ text white: white;
 }
 
 #playlist-details{
-	background-color: #e8822d;
+	background-color: #ffdc40;
 	font-size: 2em;
 	min-width: 36vw;
     display: flex;
@@ -233,10 +234,12 @@ span.hero-sticker{
 	flex-direction: column;
     align-items: center;
 	text-transform:none;
+	color: #e8822d;
 }
 
 #credits, #victory_screen, #splash-text, .dialogue, #updates, #spotify{
-	background-color: #b51d05;
+	background-color: #ffdc40;
+	color: #e8822d;
 }
 
 #default-options, #specific-options{
@@ -302,7 +305,7 @@ span.hero-sticker{
 	opacity: 0.9;
 	box-shadow: 1px 1px 10px black;
 	height: 9vh;
-	background: #b51d05;
+	background: #ffdc40;
 	flex-direction: column;
     justify-content: center;
 	flex-wrap: wrap;
@@ -310,11 +313,11 @@ span.hero-sticker{
 
 div.ticker{
 	width: 100%;
-    color: white;
+    color: #e8822d;
 	position: relative;
 	left: 0px;
     bottom: 0vh;
-	background: #b51d05;
+	background: #ffdc40;
 	font-size: 2em;
 	justify-content: center;
     display: flex;
@@ -380,17 +383,17 @@ ul#round-amount-selector, ul#guessing-type-selector{
 }
 
 #victory_screen .result_category, #credits .category{
-	color: #ffdc40;
+	color: #e8822d;
 	text-transform: uppercase;
 }
 
 #victory_screen .result, #credits .content{
 	text-transform: none;
-	color: white;
+	color: #e8822d;
 }
 
 #credits .content a{
-	color:white;
+	color: #e8822d;
 }
 
 #credits a{
@@ -665,7 +668,6 @@ div .avatar_wrong{
 }
 
 #playlist-selector .playlist-description{
-	color:rgb(255 220 64);
 	text-transform: none;
 }
 
