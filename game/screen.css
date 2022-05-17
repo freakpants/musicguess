@@ -330,13 +330,17 @@ div#ticker2{
 #main-menu li, #default-options li, #specific-options li{
 	background: #e8822d;
     list-style: none;
-    width: 25vw;
+    width: 15vw;
+	height: 8vh;
     padding: 1vw;
     box-shadow: 1px 1px 10px black;
     justify-content: center;
     display: flex;
 	margin: 1vw;
-	font-size: 2em;
+	text-align: center;
+	align-items: center;
+	flex-direction: column;
+	font-size: 1.8em;
 	color: #ffdc40;
 	opacity: 0.9;
 }
@@ -356,6 +360,9 @@ ul#round-amount-selector, ul#guessing-type-selector{
 #main-menu li.active, #default-options li.active, #specific-options li.active{
 	background: #b51d05;
 	color: white;
+	width: 22vw;
+	height: 10vh;
+	font-size: 2em;
 }
 
 #victory_screen .single-result{

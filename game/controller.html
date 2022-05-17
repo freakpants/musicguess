@@ -353,6 +353,22 @@
 					$("#get_ready").css({ display: "flex" });
 				}
 
+				if(data[0].type === "boundary") {
+					if(!data[0].boundary){
+						// show buttons again
+						$("#next-button").css("opacity", 1);
+						$("#previous-button").css("opacity", 1);
+					}
+					if(data[0].boundary === "last") {
+						$("#previous-button").css("opacity", 1);
+						$("#next-button").css("opacity", 0);
+					}
+					if(data[0].boundary === "first") {
+						$("#previous-button").css("opacity", 0);
+						$("#next-button").css("opacity", 1);
+					}
+				}
+
 				if (data[0].type === "score") {
 					// console.log("received score");
 					// also store the current score for display when out of time 

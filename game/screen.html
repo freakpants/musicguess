@@ -1027,23 +1027,30 @@
 										document.menu = "updates";
 										$("#credits-button").removeClass("active");
 										$("#updates-button").addClass("active");
+										if(!check_for_freakpants()){
+											controller_boundary_option("last");
+										} else {
+											controller_boundary_option(false);
+										}
 										break;
 									case "updates":
 										if (check_for_freakpants()) {
+											controller_boundary_option("last");
 											document.menu = "spotify";
 											$("#updates-button").removeClass("active");
 											$("#connect-spotify-button").addClass("active");
 										} else {
-											document.menu = "new-game";
-											$("#updates-button").removeClass("active");
-											$("#new-game-button").addClass("active");
+											// dont do anything at the last spot
+											// document.menu = "new-game";
+											// $("#updates-button").removeClass("active");
+											// $("#new-game-button").addClass("active");
 										}
 
 										break;
 									case "spotify":
-										document.menu = "new-game";
+										/* document.menu = "new-game";
 										$("#connect-spotify-button").removeClass("active");
-										$("#new-game-button").addClass("active");
+										$("#new-game-button").addClass("active"); */
 								}
 								break;
 						}
@@ -1126,6 +1133,8 @@
 							case "main-menu":
 								switch (document.menu) {
 									case "new-game":
+										// dont do anything at the first selection
+										/* 
 										if (check_for_freakpants()) {
 											document.menu = "spotify";
 											$("#new-game-button").removeClass("active");
@@ -1134,18 +1143,20 @@
 											document.menu = "updates";
 											$("#new-game-button").removeClass("active");
 											$("#updates-button").addClass("active");
-										}
+										} */
 
 										break;
 									case "credits":
 										document.menu = "new-game";
 										$("#credits-button").removeClass("active");
 										$("#new-game-button").addClass("active");
+										controller_boundary_option("first");
 										break;
 									case "updates":
 										document.menu = "credits";
 										$("#updates-button").removeClass("active");
 										$("#credits-button").addClass("active");
+										controller_boundary_option(false);
 										break;
 									case "spotify":
 										document.menu = "updates";
@@ -1484,6 +1495,17 @@
 				document.roundEndInitiated = true;
 				round_end();
 			}
+		}
+
+		function controller_boundary_option(type){
+			// let the master controller know not to display the corresponding button
+			// determine master controller
+			master_controller = air_console.getMasterControllerDeviceId();
+			// prepare message
+			message = [];
+			message.push({ type: "boundary", boundary: type });
+			// send message to master controller
+			air_console.message(master_controller, message);
 		}
 
 		function initiateScrollingCheck() {
