@@ -1676,6 +1676,8 @@
 			DEBUG && console.log("start function initiated");
 			document.cancelled = false;
 
+			document.roundDifficultyResults = [];
+
 			// reset in case we cancelled an earlier game
 			document.roundEndInitiated = false;
 
@@ -1993,6 +1995,8 @@
 			album = randomSong.album;
 			album_art = randomSong.album_art;
 			buy_link = randomSong.buy_link;
+			id = randomSong.id;
+			service = randomSong.service;
 
 			$("#current_song_service").html("<div id='disclaimer'>This song is provided by the Itunes Search API Preview</div><div id='get_it_link'><a href='" + buy_link + "'' target='_blank'><img src='images/itunes.svg' class='itunes' /></a></div>");
 
@@ -2007,7 +2011,9 @@
 				album_art: album_art,
 				wrongAnswers: wrong_answers_array,
 				answerType: artist_or_title,
-				buy_link: buy_link
+				buy_link: buy_link,
+				id: id,
+				service: service
 			});
 
 			// send the solution to all clients
@@ -2147,6 +2153,24 @@
 			air_console.broadcast(hide_cancel);
 
 			DEBUG && console.log("round end function was called");
+			DEBUG && console.log("attempting to log results for song difficulty");
+
+			let result = {correct: 0, correctTime: 0, incorrect: 0, id: document.solution[0].id, service:  document.solution[0].service};
+
+			document.playerScores.forEach(function (score) {
+				// document.solution
+				if(score.correct){
+					result.correct++;
+					result.correctTime += score.currentGuessTime;
+				} else {
+					result.incorrect++;
+				}
+			});
+
+			DEBUG && console.log("solution:");
+			DEBUG && console.log(document.solution);
+			document.roundDifficultyResults.push(result);
+
 
 			// determine fastest player
 			// clone array for sorting differently
@@ -2247,6 +2271,13 @@
 					// handle end of game
 					document.game_in_progress = false;
 					document.game_over_screen = true;
+
+					$.ajax(
+					{
+						method: "POST",
+						url: "https://zxxwemywpv.cyon.link/musicguess-data/php/round-difficulty-results.php",
+						data: { roundDifficultyResults: document.roundDifficultyResults }, dataType: "json", crossDomain: true, "headers": {}
+					});
 
 					// let every player know their score for their after game report
 					document.playerScores.forEach(function (score) {
