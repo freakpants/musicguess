@@ -882,6 +882,13 @@
 
 										break;
 									case "guessing_type":
+										controller_boundary_option("first");
+										$(".guessing-option").removeClass("active");
+										$("#guessing-artist").addClass("active");
+										document.guessing_type = "guessing-artist";
+										guessingType = $("#guessing-artist").html();
+										$("#guessing_type").html(guessingType);
+
 										document.screen = "guessing-type-selector";
 										$("#option-selector").hide();
 										$("#specific-options .dialogue").html("Select whether each round players have to guess either artist or title randomly, or only one of each.");
@@ -971,10 +978,18 @@
 							case "guessing-type-selector":
 								active_option = $("#guessing-type-selector .active");
 								if ($(active_option).is(':last-child')) {
-									next_option = $("#guessing-type-selector li").first();
+									break;
+									// next_option = $("#guessing-type-selector li").first();
 								} else {
 									next_option = $(active_option).next();
 								}
+
+								if ($(next_option).is(':last-child')) {
+									controller_boundary_option("last");
+								} else {
+									controller_boundary_option(false);
+								}
+
 								$(active_option).removeClass("active");
 								$(next_option).addClass("active");
 								break;
@@ -1099,9 +1114,16 @@
 							case "guessing-type-selector":
 								active_option = $("#guessing-type-selector .active");
 								if ($(active_option).is(':first-child')) {
-									previous_option = $("#guessing-type-selector li").last();
+									break;
+									// previous_option = $("#guessing-type-selector li").last();
 								} else {
 									previous_option = $(active_option).prev();
+								}
+
+								if ($(active_option).is(':first-child')) {
+									controller_boundary_option("first");
+								} else {
+									controller_boundary_option(false);
 								}
 
 								$(active_option).removeClass("active");
