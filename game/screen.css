@@ -5,6 +5,11 @@ text yellow: #ffdc40;
 text white: white;
 */
 
+/* reset browser padding for lists */
+ul{
+	padding-inline-start: 0;
+}
+
 #game_logo {
 	margin-top: 0.2em;
 	margin-bottom: 0.2em;
@@ -95,115 +100,6 @@ span.hero-sticker{
 #game_logo.smallLogo{
 	font-size: 80px;
 	transition: font-size 1.5s;
-}
-
-@media (max-width: 960px) {
-	#game_logo{
-		font-size: 2em;
-	}
-	#game_logo.smallLogo{
-		font-size: 60px;
-		-webkit-text-stroke: 1px #fc3756;
-		margin-bottom: 0.1em;
-		margin-top: 0.1em;
-	}
-
-	.active span.new-sticker, .active span.hero-sticker {
-		height: 2em;
-		line-height: 2em;
-		font-size: 2em;
-		border-radius: 2em;
-		width: 2em;
-	}
-
-	#playlist_details {
-		font-size: 0.8em;
-		color: #e8822d;
-	}
-
-	#playlist-selector .album_art {
-		border-radius: 11vw;
-		min-width: 22vw;
-		min-height: 22vw;
-		width: 22vw;
-	}
-
-	#playlist-selector .album_art.active .playlist-text-wrapper {
-		width: 28vw;
-	}
-
-	#playlist-selector .album_art.active {
-		min-width: 28vw;
-		width: 28vw;
-		height: 28vw;
-		border-radius: 28vw;
-	}
-
-	#playlist-selector .album_art img {
-		width: 11vw;
-		height: 11vw;
-	}
-
-	#playlist-selector .album_art.active img {
-		width: 14vw;
-		height: 14vw;
-	}
-
-	#playlist-selector#playlist-selector .playlist-text{
-		font-size: 1.5em;
-	}
-	#playlist-selector#playlist-selector .album_art.active{
-		font-size: 0.6em;
-	}
-	#roundTime#roundTime{
-		font-size: 5em;
-	}
-	.single-result.single-result img{
-		width: 60px;
-		height: 60px;
-	}
-	.single-result.single-result{
-		width: 60px;
-		font-size: 0.8em;
-	}
-	#playanimation#playanimation{
-		/* width: unset; */
-		display: none;
-	}
-	img.itunes.itunes{
-		width: 120px;
-	}
-	div#current_song_service #disclaimer#disclaimer{
-		font-size: 0.5em;
-	}
-	#message#message{
-		font-size: 0.8em;
-	}
-	#status#status{
-		font-size: 2em;
-	}
-	div .darken_image.darken_image {
-		width: 60px;
-		height: 60px;
-		font-size: 0.8em;
-	}
-	.player_score.player_score, .player_name.player_name{
-		font-size: 0.8em;
-		width: 60px;
-	}
-	.position_display.position_display{
-		width: 60px;
-		font-size: 2em;
-	}
-	#victory_screen .game_over.game_over{
-		font-size: 1em;
-	}
-	#credits#credits, #victory_screen#victory_screen{
-		font-size: 1em;
-	}
-	#victory_screen#victory_screen .player_score, #victory_screen#victory_screen .player_name{
-		font-size: 1.5em;
-	}	
 }
 
 #main-menu li#connect-spotify-button{
@@ -328,6 +224,7 @@ span.hero-sticker{
 
 #default-options, #specific-options, #round-amount-selector, #guessing-type-selector{
 	display:none;
+	margin-top: 20px;
 }
 
 #specific-options .guessing-option{
@@ -764,7 +661,7 @@ div#current_song_service #disclaimer, div#current_song_service #get_it_link{
 	font-size:28px;
 }
 div#current_song_service{
-	display:block;
+	display:none;
 	padding-top:20px;
 	text-align: center;
 	font-size: 40px;
@@ -778,4 +675,116 @@ div#current_song_service #get_it_link a{
 img.itunes{
 	width:250px;
 	padding-top:20px;
+}
+
+@media (max-width: 960px) {
+	body{
+		font-size: 9px;
+	}
+	#game_logo{
+		font-size: 2em;
+	}
+	#game_logo.smallLogo{
+		font-size: 60px;
+		-webkit-text-stroke: 1px #fc3756;
+		margin-bottom: 0.1em;
+		margin-top: 0.1em;
+	}
+
+	.active span.new-sticker, .active span.hero-sticker {
+		height: 2em;
+		line-height: 2em;
+		font-size: 2em;
+		border-radius: 2em;
+		width: 2em;
+	}
+
+	#playlist_details {
+		font-size: 0.8em;
+		color: #e8822d;
+	}
+
+	#playlist-selector .album_art {
+		border-radius: 11vw;
+		min-width: 22vw;
+		min-height: 22vw;
+		width: 22vw;
+	}
+
+	#playlist-selector .album_art.active .playlist-text-wrapper {
+		width: 28vw;
+	}
+
+	#playlist-selector .album_art.active {
+		min-width: 28vw;
+		width: 28vw;
+		height: 28vw;
+		border-radius: 28vw;
+	}
+
+	#playlist-selector .album_art img {
+		width: 11vw;
+		height: 11vw;
+	}
+
+	#playlist-selector .album_art.active img {
+		width: 14vw;
+		height: 14vw;
+	}
+
+	#playlist-selector#playlist-selector .playlist-text{
+		font-size: 1.5em;
+	}
+	#playlist-selector#playlist-selector .album_art.active{
+		font-size: 0.6em;
+	}
+	#roundTime#roundTime{
+		font-size: 5em;
+	}
+	.single-result.single-result img{
+		width: 60px;
+		height: 60px;
+	}
+	.single-result.single-result{
+		width: 60px;
+		font-size: 0.8em;
+	}
+	#playanimation#playanimation{
+		/* width: unset; */
+		display: none;
+	}
+	img.itunes.itunes{
+		width: 120px;
+	}
+	div#current_song_service #disclaimer#disclaimer{
+		font-size: 0.5em;
+	}
+	#message#message{
+		font-size: 0.8em;
+	}
+	#status#status{
+		font-size: 2em;
+	}
+	div .darken_image.darken_image {
+		width: 60px;
+		height: 60px;
+		font-size: 0.8em;
+	}
+	.player_score.player_score, .player_name.player_name{
+		font-size: 0.8em;
+		width: 60px;
+	}
+	.position_display.position_display{
+		width: 60px;
+		font-size: 2em;
+	}
+	#victory_screen .game_over.game_over{
+		font-size: 1em;
+	}
+	#credits#credits, #victory_screen#victory_screen{
+		font-size: 1em;
+	}
+	#victory_screen#victory_screen .player_score, #victory_screen#victory_screen .player_name{
+		font-size: 1.5em;
+	}	
 }

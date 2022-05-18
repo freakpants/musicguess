@@ -1295,6 +1295,9 @@
 						$("#victory_screen").html("");
 
 						$("#game_logo").show("fade", {}, 1500);
+						// remove small logo class to trigger transition to big
+						$("#game_logo").removeClass("smallLogo");
+
 						// $("#playlist-selector").show("fade", {}, 1500);
 						$("#main-menu").show();
 						document.screen = "main-menu";
