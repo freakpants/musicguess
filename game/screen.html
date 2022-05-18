@@ -646,7 +646,7 @@
 							case "spotify":
 								// go back to menu
 								display_loading();
-								$("#game_logo").animate({ fontSize: "115px" }, 1500);
+								$("#game_logo").removeClass("smallLogo");
 								$("#spotify").animate({ opacity: 0 }, 1500);
 								sleep(1500).then(() => {
 									$("#main-menu").animate({ opacity: 1 }, 1500);
@@ -659,7 +659,7 @@
 							case "updates":
 								// go back to menu
 								display_loading();
-								$("#game_logo").animate({ fontSize: "115px" }, 1500);
+								$("#game_logo").removeClass("smallLogo");
 								$("#updates").animate({ opacity: 0 }, 1500);
 								sleep(1500).then(() => {
 									$("#main-menu").animate({ opacity: 1 }, 1500);
@@ -708,7 +708,7 @@
 							case "playlist-selection":
 								// go back to menu
 
-								$("#game_logo").animate({ fontSize: "115px" }, 1500);
+								$("#game_logo").removeClass("smallLogo");
 								document.screen = "main-menu";
 								$("#playlist-selector").hide();
 								$("#main-menu").show();
@@ -718,7 +718,7 @@
 								document.screen = "main-menu";
 								display_loading();
 								$("#credits").animate({ opacity: 0 }, 1500);
-								$("#game_logo").animate({ fontSize: "115px" }, 1500);
+								$("#game_logo").removeClass("smallLogo");
 								sleep(1500).then(() => {
 									document.showing_credits = false;
 									$("#credits").hide();
@@ -767,7 +767,7 @@
 										$("#main-menu").hide();
 										$("#playlist-selector .dialogue").css("display", "flex");
 										$("#playlist-selector .dialogue-wrapper").css("display", "flex");
-										$("#game_logo").animate({ fontSize: "80px" }, 1500);
+										$("#game_logo").addClass("smallLogo");
 										sleep(1500).then(() => {
 											$("#playlist-selector").css("display", "flex");
 											hide_loading();
@@ -779,7 +779,7 @@
 										DEBUG && console.log("showing credits");
 										display_loading();
 										$("#main-menu").animate({ opacity: 0 }, 1500);
-										$("#game_logo").animate({ fontSize: "80px" }, 1500);
+										$("#game_logo").addClass("smallLogo");
 										$("#playlist-selector").hide("fade", {}, 1500);
 										$("#credits-container").show();
 										$("#credits").css({ display: "flex" });
@@ -798,7 +798,7 @@
 										DEBUG && console.log("displaying latest updates");
 										display_loading();
 										$("#main-menu").animate({ opacity: 0 }, 1500);
-										$("#game_logo").animate({ fontSize: "80px" }, 1500);
+										$("#game_logo").addClass("smallLogo");
 										$("#updates").css("display", "flex");
 										$("#updates").animate({ opacity: 0.9 }, 1500);
 										sleep(1500).then(() => {
@@ -818,7 +818,7 @@
 
 										display_loading();
 										$("#main-menu").animate({ opacity: 0 }, 1500);
-										$("#game_logo").animate({ fontSize: "80px" }, 1500);
+										$("#game_logo").addClass("smallLogo");
 										$("#spotify").css("display", "flex");
 										$("#spotify").animate({ opacity: 0.9 }, 1500);
 										sleep(1500).then(() => {
@@ -1320,7 +1320,7 @@
 						/* back_to_main = [];
 						back_to_main.push({ type: "back_to_main" }); */
 
-						$("#game_logo").css("fontSize", "115px");
+						$("#game_logo").removeClass("smallLogo");
 						$("#game_logo").show("fade", {}, 1500);
 
 						$("#main-menu").show();

@@ -4,8 +4,109 @@ secondary orange: #e8822d;
 text yellow: #ffdc40;
 text white: white;
 */
-@media (max-width: 960px) {
 
+#game_logo {
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+    font-family: 'DiscoFont';
+    font-weight: 500;
+    font-size: 3em;
+    line-height: 1em;
+    -webkit-text-stroke: 2px #fc3756;
+    text-shadow: -1px 1px 5px rgb(181 29 5), 
+	-2px 2px 5px rgb(181 29 5), 
+	-3px 3px 5px rgb(181 29 5), 
+	-4px 4px 5px rgb(181 29 5), 
+	-5px 5px 5px rgb(181 29 5), 
+	-6px 6px 5px rgb(181 29 5), 
+	-7px 7px 5px rgb(181 29 5), 
+	-8px 8px 5px rgb(181 29 5), 
+	-9px 9px 5px rgb(181 29 5), 
+	-10px 10px 5px rgb(181 29 5), 
+	-11px 11px 5px #e8822d, 
+	-12px 12px 5px #e8822d, 
+	-13px 13px 5px #e8822d, 
+	-14px 14px 5px #e8822d, 
+	-15px 15px 5px #e8822d, 
+	-16px 16px 5px #e8822d, 
+	-17px 17px 5px #e8822d, 
+	-18px 18px 5px #e8822d, 
+	-19px 19px 5px #e8822d, 
+	-20px 20px 5px #e8822d, 
+	-21px 21px 5px rgb(255 220 64), 
+	-22px 22px 5px rgb(255 220 64), 
+	-23px 23px 5px rgb(255 220 64), 
+	-24px 24px 5px rgb(255 220 64), 
+	-25px 25px 5px rgb(255 220 64), 
+	-26px 26px 5px rgb(255 220 64), 
+	-27px 27px 5px rgb(255 220 64), 
+	-28px 28px 5px rgb(255 220 64), 
+	-29px 29px 5px rgb(255 220 64), 
+	-30px 30px 5px rgb(255 220 64);
+}
+
+span.new-sticker{
+	position: absolute;
+	left: 15%;
+    top: 15%;
+    margin-left: 0.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+    font-size: 2.5em;
+    padding: 0.2em;
+    color: white;
+    border-radius: 2.5em;
+    width: 2.5em;
+    font-family: 'Oswald';
+    background-color: #b51d05;
+	text-align: center;
+}
+
+span.hero-sticker{
+	position: absolute;
+	right: 15%;
+    top: 15%;
+    margin-left: 0.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+    font-size: 2.5em;
+    padding: 0.2em;
+    color: white;
+    border-radius: 2.5em;
+    width: 2.5em;
+    font-family: 'Oswald';
+    background-color:  #2e2e2e;
+	text-align: center;
+}
+
+.active span.new-sticker, .active span.hero-sticker{
+    height: 3em;
+    line-height: 3em;
+    font-size: 3em;
+    border-radius: 3em;
+    width: 3em;
+}
+
+#game_logo{
+	font-size: 115px;
+	transition: font-size 1.5s;
+}
+
+#game_logo.smallLogo{
+	font-size: 80px;
+	transition: font-size 1.5s;
+}
+
+@media (max-width: 960px) {
+	#game_logo{
+		font-size: 2em;
+	}
+	#game_logo.smallLogo{
+		font-size: 60px;
+		-webkit-text-stroke: 1px #fc3756;
+		margin-bottom: 0.1em;
+		margin-top: 0.1em;
+	}
 
 	.active span.new-sticker, .active span.hero-sticker {
 		height: 2em;
@@ -15,19 +116,9 @@ text white: white;
 		width: 2em;
 	}
 
-	span.new-sticker, span.hero-sticker{
-		left: 2em;
-		top: 2em;
-	}
-
 	#playlist_details {
 		font-size: 0.8em;
 		color: #e8822d;
-	}
-
-	#game_logo#game_logo {
-		font-size: 60px;
-		-webkit-text-stroke: 1px #fc3756;
 	}
 
 	#playlist-selector .album_art {
@@ -60,11 +151,6 @@ text white: white;
 
 	#playlist-selector#playlist-selector .playlist-text{
 		font-size: 1.5em;
-	}
-	#game_logo#game_logo{
-		font-size: 2em;
-		margin-bottom: 0.1em;
-		margin-top: 0.1em;
 	}
 	#playlist-selector#playlist-selector .album_art.active{
 		font-size: 0.6em;
@@ -131,8 +217,8 @@ text white: white;
 	width: unset;
     height: unset;
 	position: absolute;
-    left: 0.8em;
-    top: 0.6em;
+	left: 25%;
+    top: 20%;
 }
 
 #playlist-details{
@@ -164,48 +250,6 @@ text white: white;
     height: 6vw;
     border-radius: 3vw;
     background-color: #121111b0;
-}
-
-span.new-sticker{
-	position: absolute;
-	left: 3em;
-    top: 3em;
-    margin-left: 0.5em;
-    height: 2.5em;
-    line-height: 2.5em;
-    font-size: 2.5em;
-    padding: 0.2em;
-    color: white;
-    border-radius: 2.5em;
-    width: 2.5em;
-    font-family: 'Oswald';
-    background-color: #b51d05;
-	text-align: center;
-}
-
-span.hero-sticker{
-	position: absolute;
-	right: 3em;
-    top: 3em;
-    margin-left: 0.5em;
-    height: 2.5em;
-    line-height: 2.5em;
-    font-size: 2.5em;
-    padding: 0.2em;
-    color: white;
-    border-radius: 2.5em;
-    width: 2.5em;
-    font-family: 'Oswald';
-    background-color:  #2e2e2e;
-	text-align: center;
-}
-
-.active span.new-sticker, .active span.hero-sticker{
-    height: 3em;
-    line-height: 3em;
-    font-size: 3em;
-    border-radius: 3em;
-    width: 3em;
 }
 
 #credits-container, #splash-screen, #updates-container, #spotify-container{
@@ -713,45 +757,7 @@ video#bgvid {
 	object-fit:cover;
 }
 
-#game_logo {
-	margin-top: 0.2em;
-	margin-bottom: 0.2em;
-    font-family: 'DiscoFont';
-    font-weight: 500;
-    font-size: 3em;
-    line-height: 1em;
-    -webkit-text-stroke: 2px #fc3756;
-    text-shadow: -1px 1px 5px rgb(181 29 5), 
-	-2px 2px 5px rgb(181 29 5), 
-	-3px 3px 5px rgb(181 29 5), 
-	-4px 4px 5px rgb(181 29 5), 
-	-5px 5px 5px rgb(181 29 5), 
-	-6px 6px 5px rgb(181 29 5), 
-	-7px 7px 5px rgb(181 29 5), 
-	-8px 8px 5px rgb(181 29 5), 
-	-9px 9px 5px rgb(181 29 5), 
-	-10px 10px 5px rgb(181 29 5), 
-	-11px 11px 5px #e8822d, 
-	-12px 12px 5px #e8822d, 
-	-13px 13px 5px #e8822d, 
-	-14px 14px 5px #e8822d, 
-	-15px 15px 5px #e8822d, 
-	-16px 16px 5px #e8822d, 
-	-17px 17px 5px #e8822d, 
-	-18px 18px 5px #e8822d, 
-	-19px 19px 5px #e8822d, 
-	-20px 20px 5px #e8822d, 
-	-21px 21px 5px rgb(255 220 64), 
-	-22px 22px 5px rgb(255 220 64), 
-	-23px 23px 5px rgb(255 220 64), 
-	-24px 24px 5px rgb(255 220 64), 
-	-25px 25px 5px rgb(255 220 64), 
-	-26px 26px 5px rgb(255 220 64), 
-	-27px 27px 5px rgb(255 220 64), 
-	-28px 28px 5px rgb(255 220 64), 
-	-29px 29px 5px rgb(255 220 64), 
-	-30px 30px 5px rgb(255 220 64);
-}
+
 
 div#current_song_service #disclaimer, div#current_song_service #get_it_link{
 	width:100%;
