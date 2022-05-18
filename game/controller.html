@@ -557,7 +557,8 @@
 					}
 
 					// handle correct multiple choice answer
-					$(".correct").bind('touchstart mousedown click', function (event) {
+					$(".correct").bind('touchstart mousedown', function (event) {
+						event.preventDefault(); 
 						// disable all buttons
 						disable_guessing_buttons_event_handlers();
 
@@ -595,7 +596,8 @@
 					});
 
 					// handle wrong multiple choice answer
-					$(".wrong").bind('touchstart mousedown click', function (event) {
+					$(".wrong").bind('touchstart mousedown', function (event) {
+						event.preventDefault(); 
 						// disable all buttons
 						disable_guessing_buttons_event_handlers();
 
@@ -644,8 +646,8 @@
 
 		$(document).ready(function () {
 
-			$("#confirm, #hero-confirm ").bind('touchstart mousedown click', function (event) {
-
+			$("#confirm, #hero-confirm ").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				// in case the button was the only button, resize it to normal size
 				$("#confirm").css("width", "46vw");
 				$("#confirm").css("height", "46vh");
@@ -659,11 +661,13 @@
 				air_console.message(0, command);
 			});
 
-			$("#hero-req").bind('touchstart mousedown click', function (event) {
+			$("#hero-req").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				air_console.getPremium();
 			});
 
-			$("#cancel").bind('touchstart mousedown click', function (event) {
+			$("#cancel").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				$("#hero-confirm").hide();
 				$("#hero-req").hide();
 				$("#confirm").css("display", "flex");
@@ -672,19 +676,22 @@
 				air_console.message(0, command);
 			});
 
-			$("#next-button").bind('touchstart mousedown click', function (event) {
+			$("#next-button").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				var command = [];
 				command.push({ type: "next" });
 				air_console.message(0, command);
 			});
 
-			$("#previous-button").bind('touchstart mousedown click', function (event) {
+			$("#previous-button").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				var command = [];
 				command.push({ type: "previous" });
 				air_console.message(0, command);
 			});
 
-			$(".decrease_rounds").bind('touchstart mousedown click', function (event) {
+			$(".decrease_rounds").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				if (document.maxRound == 1) {
 					// dont decrease rounds below 1
 				} else {
@@ -698,7 +705,8 @@
 				}
 			});
 
-			$("#cancel_round").bind('touchstart mousedown click', function (event) {
+			$("#cancel_round").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				$("#round_over_song_details").hide();
 				$("#loading").css({ display: "flex" });
 				sleep(1500).then(() => {
@@ -710,7 +718,8 @@
 				air_console.message(0, command);
 			});
 
-			$("#game_over").bind('touchstart mousedown click', function (event) {
+			$("#game_over").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				$("#game_over").hide();
 				$("#loading").css({ display: "flex" });
 				sleep(1500).then(() => {
@@ -722,7 +731,8 @@
 				air_console.message(0, command);
 			});
 
-			$("#back_from_credit, #back_from_credits_area .icon-container").bind('touchstart mousedown click', function (event) {
+			$("#back_from_credit, #back_from_credits_area .icon-container").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				// inform the screen to display the animation
 				var command = [];
 				command.push({ type: "back" });
@@ -742,7 +752,8 @@
 				});
 			});
 
-			$(".increase_rounds").bind('touchstart mousedown click', function (event) {
+			$(".increase_rounds").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				if (document.maxRound === document.maxPlaylistRounds) {
 					// cant increase further
 				} else {
