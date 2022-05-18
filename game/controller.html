@@ -353,15 +353,21 @@
 					if (!data[0].boundary) {
 						// show buttons again
 						$("#next-button").css("opacity", 1);
+						$("#next-button").css("pointer-events", "auto");
 						$("#previous-button").css("opacity", 1);
+						$("#previous-button").css("pointer-events", "auto");
 					}
 					if (data[0].boundary === "last") {
 						$("#previous-button").css("opacity", 1);
+						$("#previous-button").css("pointer-events", "auto");
 						$("#next-button").css("opacity", 0);
+						$("#next-button").css("pointer-events", "none");
 					}
 					if (data[0].boundary === "first") {
 						$("#previous-button").css("opacity", 0);
+						$("#previous-button").css("pointer-events", "none");
 						$("#next-button").css("opacity", 1);
+						$("#next-button").css("pointer-events", "auto");
 					}
 				}
 
