@@ -286,6 +286,14 @@ span.hero-sticker{
 	display:none;
 }
 
+#specific-options .guessing-option{
+	font-size: 1.5em;
+}
+
+#specific-options .guessing-option.active{
+	font-size: 1.7em;
+}
+
 #main-menu{
 	opacity: 1;
 }
@@ -357,6 +365,10 @@ ul#round-amount-selector, ul#guessing-type-selector{
 	display: none;
 	flex-wrap: wrap;
 	flex-direction: unset;
+}
+
+ul#guessing-type-selector{
+	justify-content: center;
 }
 
 #round-amount-selector li.active.active,  #round-amount-selector li{

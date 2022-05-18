@@ -31,13 +31,11 @@
 			<div class="button_text">Next</div>
 			<!-- <div class="button_comment">Scroll through awesome music</div> -->
 		</div>
-		<div id="round_change_buttons">
-			<span class="fa-lg icon-container minus decrease_rounds">
-				<i class="fa fa-minus minus"></i>
-			</span>
-			<span class="fa-lg icon-container plus increase_rounds">
-				<i class="fa fa-plus plus"></i>
-			</span>
+		<div class="round-change-button flexbox resizing-button fa-lg icon-container minus decrease_rounds">
+			<i class="fa fa-minus minus"></i>
+		</div>
+		<div class="round-change-button flexbox resizing-button fa-lg icon-container plus increase_rounds">
+			<i class="fa fa-plus plus"></i>
 		</div>
 		<div class="flexbox resizing-button" id="cancel">
 			<span class="fa-lg icon-container">
@@ -58,13 +56,11 @@
 				<i class="fa fa-play play_icon"></i>
 			</span>
 			<div class="button_text">Select with Hero</div>
-			<img id="small-hero-image"
-				src="images/hero.gif" />
+			<img id="small-hero-image" src="images/hero.gif" />
 			<!-- <div class="button_comment">Play with current settings</div> -->
 		</div>
 		<div class="flexbox resizing-button" id="hero-req">
-			<img id="hero-image"
-				src="images/hero.gif" />
+			<img id="hero-image" src="images/hero.gif" />
 			<div class="button_text">Hero</br>required</div>
 		</div>
 	</div>
@@ -294,14 +290,14 @@
 
 				if (data[0].type === "show_round_change_buttons") {
 					if (am_i_master()) {
-						$("#round_change_buttons").css("display", "flex");
-						$(".resizing-button").css("height", "33.333333vh");
+						$(".round-change-button").css("display", "flex");
+						$(".resizing-button").css("height", "29.333333vh");
 					}
 				}
 
 				if (data[0].type === "hide_round_change_buttons") {
-					$("#round_change_buttons").hide();
-					$(".resizing-button").css("height", "50vh");
+					$(".round-change-button").hide();
+					$(".resizing-button").css("height", "46vh");
 				}
 
 				if (data[0].type === "not_in_progress") {
@@ -353,17 +349,17 @@
 					$("#get_ready").css({ display: "flex" });
 				}
 
-				if(data[0].type === "boundary") {
-					if(!data[0].boundary){
+				if (data[0].type === "boundary") {
+					if (!data[0].boundary) {
 						// show buttons again
 						$("#next-button").css("opacity", 1);
 						$("#previous-button").css("opacity", 1);
 					}
-					if(data[0].boundary === "last") {
+					if (data[0].boundary === "last") {
 						$("#previous-button").css("opacity", 1);
 						$("#next-button").css("opacity", 0);
 					}
-					if(data[0].boundary === "first") {
+					if (data[0].boundary === "first") {
 						$("#previous-button").css("opacity", 0);
 						$("#next-button").css("opacity", 1);
 					}
@@ -640,42 +636,13 @@
 			}
 		}
 
-		/* $("#round_change_buttons .vertical-container").click(function (event) {
-			// instruct the game to show the credits
-			var command = [];
-			command.push({ type: "credits" });
-			air_console.message(0, command);
-			// display loading animation
-			$("#loading").css("display", "flex");
-			// hide the menu
-			$("#menu").hide();
-			sleep(3100).then(() => {
-				// when the animation on the screen is finished, display the go back to menu button
-				$("#loading").hide();
-				$("#back_from_credits_area").css("display", "flex");
-			});
-		}); */
-
 		$(document).ready(function () {
-
-			/* $("#start_game").click(function (event) {
-				// hide menu 
-				$("#menu").hide();
-
-				// show loading
-				$("#get_ready").css({ display: "flex" });
-
-				// instruct the screen to start the game in full word mode
-				var command = [];
-				command.push({ type: "startGame" });
-				air_console.message(0, command);
-			}); */
 
 			$("#confirm, #hero-confirm ").click(function (event) {
 
 				// in case the button was the only button, resize it to normal size
-				$("#confirm").css("width", "50vw");
-				$("#confirm").css("height", "50vh");
+				$("#confirm").css("width", "46vw");
+				$("#confirm").css("height", "46vh");
 				$("#confirm").css("position", "relative");
 
 				$("#hero-confirm").hide();
@@ -692,6 +659,7 @@
 
 			$("#cancel").click(function (event) {
 				$("#hero-confirm").hide();
+				$("#hero-req").hide();
 				$("#confirm").css("display", "flex");
 				var command = [];
 				command.push({ type: "back" });

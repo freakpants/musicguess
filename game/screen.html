@@ -507,7 +507,7 @@
 				check_if_playlist_needs_hero();
 			}
 
-			air_console.onReady = function (){
+			air_console.onReady = function () {
 				controller_boundary_option("first");
 			}
 
@@ -690,6 +690,9 @@
 							case "specific-options":
 
 								// go back to default selection
+								controller_boundary_option("last");
+
+
 								document.screen = "default-options";
 								$("#specific-options").hide();
 								$("#default-options").css("display", "flex");
@@ -704,10 +707,12 @@
 								break;
 							case "playlist-selection":
 								// go back to menu
+
 								$("#game_logo").animate({ fontSize: "115px" }, 1500);
 								document.screen = "main-menu";
 								$("#playlist-selector").hide();
 								$("#main-menu").show();
+								controller_boundary_option("first");
 								break;
 							case "credits":
 								document.screen = "main-menu";
@@ -917,6 +922,13 @@
 
 								controller_boundary_option("first");
 
+
+
+								// set default yes to active
+								document.default = true;
+								$("#default-yes").addClass("active");
+								$("#default-no").removeClass("active");
+
 								DEBUG && console.log("going to default options");
 								// go to default option prompt
 								document.screen = "default-options";
@@ -1014,12 +1026,12 @@
 										controller_boundary_option("last");
 										break;
 									case "start":
-										/* 
-										document.setting = "round_amount";
-										$("#specific-start").removeClass("active");
-										$("#round_amount_option").addClass("active");
-										controller_boundary_option("last");
-										break; */
+									/* 
+									document.setting = "round_amount";
+									$("#specific-start").removeClass("active");
+									$("#round_amount_option").addClass("active");
+									controller_boundary_option("last");
+									break; */
 								}
 
 								break;
@@ -1051,7 +1063,7 @@
 										document.menu = "updates";
 										$("#credits-button").removeClass("active");
 										$("#updates-button").addClass("active");
-										if(!check_for_freakpants()){
+										if (!check_for_freakpants()) {
 											controller_boundary_option("last");
 										} else {
 											controller_boundary_option(false);
@@ -1072,9 +1084,9 @@
 
 										break;
 									case "spotify":
-										/* document.menu = "new-game";
-										$("#connect-spotify-button").removeClass("active");
-										$("#new-game-button").addClass("active"); */
+									/* document.menu = "new-game";
+									$("#connect-spotify-button").removeClass("active");
+									$("#new-game-button").addClass("active"); */
 								}
 								break;
 						}
@@ -1132,10 +1144,10 @@
 							case "specific-options":
 								switch (document.setting) {
 									case "round_amount":
-										/* document.setting = "start";
-										$("#round_amount_option").removeClass("active");
-										$("#specific-start").addClass("active");
-										break; */
+									/* document.setting = "start";
+									$("#round_amount_option").removeClass("active");
+									$("#specific-start").addClass("active");
+									break; */
 									case "guessing_type":
 										document.setting = "round_amount";
 										$("#guessing_type").removeClass("active");
@@ -1221,7 +1233,7 @@
 						}
 						break;
 					case 'cancel':
-						controller_boundary_option(false);
+						controller_boundary_option("first");
 						$("#message").html("");
 						$("#message").hide();
 						$("#roundCounter").hide();
@@ -1267,6 +1279,7 @@
 
 						break;
 					case 'back_to_main':
+						controller_boundary_option("first");
 						document.screen = "main-menu";
 						$("#message").html("");
 						// $("#message").hide("fade", {}, 1500);
@@ -1532,7 +1545,7 @@
 			}
 		}
 
-		function controller_boundary_option(type){
+		function controller_boundary_option(type) {
 			// let the master controller know not to display the corresponding button
 			// determine master controller
 			master_controller = air_console.getMasterControllerDeviceId();
@@ -2663,9 +2676,9 @@
 			<li>Custom Amount</li>
 		</ul>
 		<ul id="guessing-type-selector">
-			<li id="guessing-artist" class="active">Always guess the artist</li>
-			<li id="guessing-title">Always guess the title</li>
-			<li id="guessing-both">Randomly guess either artist or title each round</li>
+			<li id="guessing-artist" class="guessing-option active">Always guess the artist</li>
+			<li id="guessing-title" class="guessing-option">Always guess the title</li>
+			<li id="guessing-both" class="guessing-option">Randomly guess either artist or title each round</li>
 		</ul>
 	</div>
 	<div id="player-results">

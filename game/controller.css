@@ -179,8 +179,14 @@ body{
     display: flex;
     flex-direction: row;
     width: 100vw;
+	height: 100vh;
     flex-wrap: wrap;	
 	position: relative;
+	background: #b51d05;
+	column-gap: 4vw;
+	row-gap: 3vh;
+    justify-content: center;
+    align-content: center;
 }
 
 .icon-container.info-circle{
@@ -198,12 +204,12 @@ body{
 	left: 1vw;
 }
 
-#round_change_buttons{
+.round-change-button.round-change-button{
 	display: none;
-	height: 33.333333vh;
+	height: 29.333333vh;
 }
 
-#round_change_buttons .icon-container{
+.round-change-button .icon-container{
 	position: relative;
 	left: unset;
 }
@@ -212,9 +218,7 @@ body{
 	font-size: 2em;
 }
 
-#round_change_buttons .icon-container, #round_change_buttons .vertical-container{
-	width: 50vw;
-	height: 33.333333vh;
+.round-change-button .icon-container, .round-change-button .vertical-container{
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -229,32 +233,9 @@ body{
 	line-height: 1;
 }
 
-#confirm{
-	width: 50vw;
-	height: 50vh;
-}
-
 #hero-confirm{
-	width: 50vw;
-	height: 50vh;
-	background-color: #cd1c24;
 	display: none;
 }
-
-.minus, #confirm, #hero-confirm{
-	background-color:  #b51d05;
-}
-
-#next-button, #cancel{
-	background-color: #e8822d;
-    color: #ffdc40;
-}
-
-#previous-button, .vertical-container, .plus{
-	background-color:  #ffdc40;
-    color: #e8822d;
-}
-
 
 #guessing_buttons_full{
 	width: 100vw;
@@ -358,6 +339,14 @@ body{
 
 #score_report{
 	font-size: 1em;
+}
+
+.resizing-button{
+	background-color: #e8822d;
+    color: #ffdc40;
+	border: 4px solid;
+    border-radius: 10vw;
+	box-sizing: border-box;
 }
 
 #round_over_song_details .result_banner{
@@ -468,8 +457,8 @@ body{
 
 .flexbox{
 	display: flex;
-	height: 50vh;
-	width: 50vw;
+	width: 44vw;
+	height: 46vh;
 	justify-content: center;
 	align-items: center;
 	position: relative;
