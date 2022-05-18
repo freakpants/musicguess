@@ -918,6 +918,12 @@
 									start();
 								} else {
 									// go to specific options
+									$("#option-selector li").removeClass("active");
+									$("#option-selector li:first").addClass("active");
+
+									// select number of rounds to play button
+									document.setting = "round_amount";
+
 									DEBUG && console.log("showing specific options");
 									document.screen = "specific-options";
 									$("#specific-options .dialogue").html(specific_options_dialogue);
