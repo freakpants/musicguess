@@ -273,7 +273,7 @@ div#ticker2{
 	text-align: center;
 	align-items: center;
 	flex-direction: column;
-	font-size: 1.8em;
+	font-size: 1.4em;
 	color: black;
 	border-radius: 10em;
 }
@@ -639,12 +639,17 @@ ul{
 	font-size: 1.4em;
 }
 
-#credits{
-	width: 50vw;
+#credits, #updates{
+	width: 75vw;
     background: #ef5532;
     justify-content: center;
 	padding-top: 1em;
 	border-radius: 4em;
+}
+
+#updates .content{
+	max-width: 66vw;
+	font-size: 0.8em;
 }
 
 @media (max-width: 960px) {

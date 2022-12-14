@@ -474,7 +474,7 @@
 										$("#main-menu").animate({ opacity: 0 }, 1500);
 										$("#game_logo").addClass("smallLogo");
 										$("#updates").css("display", "flex");
-										$("#updates").animate({ opacity: 0.9 }, 1500);
+										$("#updates").animate({ opacity: 1 }, 1500);
 										sleep(1500).then(() => {
 											hide_loading();
 										});
@@ -2261,12 +2261,14 @@
 	<div id="updates-container">
 		<div id="updates">
 			<ul>
-				<li>18.05.2022 - Reworked UX to be more intuitive and visually distinct.</li>
-				<li>15.12.2021 - Released new wildcard playlist. This dynamically selects from over 30'000 songs, but
+				<li class="category">18.05.2022</li>
+				<li class="content">Reworked UX to be more intuitive and visually distinct.</li>
+
+				<li class="category">15.12.2021</li><li class="content">Released new wildcard playlist. This dynamically selects from over 30'000 songs, but
 					with a lot of cover/live versions of songs or just plain unknown or weird songs.</li>
-				<li>16.12.2021 - Fixed an Issue with wildcard playlist not working.</li>
-				<li>20.12.2021 - Released a new christmas playlist</li>
-				<li>04.01.2022 - The game is now playable for free. Accordingly, some playlists are now exclusive with
+					<li class="category">16.12.2021</li><li class="content">Fixed an Issue with wildcard playlist not working.</li>
+					<li class="category">20.12.2021</li><li class="content">Released a new christmas playlist</li>
+					<li class="category">04.01.2022</li><li class="content">The game is now playable for free every second week. Accordingly, some playlists are now exclusive with
 					AirConsole Hero.
 					There is a new menu system, with improved selection of round amount. Released 3 new playlists:
 					Ballads, Latin, Spain's Most Wanted Dec 2021. Added 10 new songs to Global Hits 2021.
