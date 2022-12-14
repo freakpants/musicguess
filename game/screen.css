@@ -178,7 +178,10 @@ span.hero-sticker{
 
 .dialogue{
 	padding: 1vw 2vw 1vw 2vw;
-	opacity: 0.9;
+	opacity: 1;
+	background: #b51d05;
+	color: white;
+	border-radius: 1vw;
 }
 
 #playlist-selector .dialogue-wrapper{

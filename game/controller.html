@@ -29,7 +29,7 @@
 			</span>
 			<!-- <div class="button_comment">Scroll through awesome music</div> -->
 		</div>
-		
+
 		<div class="flexbox resizing-button" id="up-button">
 			<span class="fa-lg icon-container">
 				<i class="fa fa-caret-up caret-up"></i>
@@ -92,25 +92,25 @@
 				</li>
 				<li class="category">Music provided by:</li>
 				<li class="content">
-						<span class="link"
-							onclick="air_console.openExternalUrl('https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html')">
-							Itunes Search API Preview
-						</span>
+					<span class="link"
+						onclick="air_console.openExternalUrl('https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html')">
+						Itunes Search API Preview
+					</span>
 				</li>
 				<li class="category">Sound effects by:</li>
 				<li class="content">
-					<span class="link"
-						onclick="air_console.openExternalUrl('https://www.zapsplat.com/')">
+					<span class="link" onclick="air_console.openExternalUrl('https://www.zapsplat.com/')">
 						ZapSplat
 					</span>
 				</li>
 				<li class="category">Svg loaders by:</li>
 				<li class="content">
-					<span class="link" onclick="air_console.openExternalUrl('https://twitter.com/sherb')">Sam Herbert</span>
+					<span class="link" onclick="air_console.openExternalUrl('https://twitter.com/sherb')">Sam
+						Herbert</span>
 					(<span class="link"
 						onclick="air_console.openExternalUrl('https://github.com/SamHerbert/SVG-Loaders')">Github</a>)
 					</span></br>
-				</li>	
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -313,6 +313,15 @@
 				if (data[0].type === "hide_round_change_buttons") {
 					$(".round-change-button").hide();
 					$(".resizing-button").css("height", "46vh");
+				}
+
+				if (data[0].type === "show_main_menu_buttons") {
+					// hide the next and previous buttons
+					$("#next-button").hide();
+					$("#previous-button").hide();
+					// show the up and down buttons
+					$("#up-button").css("display", "flex");
+					$("#down-button").css("display", "flex");
 				}
 
 				if (data[0].type === "not_in_progress") {
@@ -573,7 +582,7 @@
 
 					// handle correct multiple choice answer
 					$(".correct").bind('touchstart mousedown', function (event) {
-						event.preventDefault(); 
+						event.preventDefault();
 						// disable all buttons
 						disable_guessing_buttons_event_handlers();
 
@@ -612,7 +621,7 @@
 
 					// handle wrong multiple choice answer
 					$(".wrong").bind('touchstart mousedown', function (event) {
-						event.preventDefault(); 
+						event.preventDefault();
 						// disable all buttons
 						disable_guessing_buttons_event_handlers();
 
@@ -662,7 +671,7 @@
 		$(document).ready(function () {
 
 			$("#confirm, #hero-confirm ").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				// in case the button was the only button, resize it to normal size
 				$("#confirm").css("position", "relative");
 
@@ -675,12 +684,12 @@
 			});
 
 			$("#hero-req").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				air_console.getPremium();
 			});
 
 			$("#cancel").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				$("#hero-confirm").hide();
 				$("#hero-req").hide();
 				$("#confirm").css("display", "flex");
@@ -690,35 +699,35 @@
 			});
 
 			$("#next-button").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				var command = [];
 				command.push({ type: "next" });
 				air_console.message(0, command);
 			});
 
 			$("#up-button").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				var command = [];
 				command.push({ type: "previous" });
 				air_console.message(0, command);
 			});
 
 			$("#down-button").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				var command = [];
 				command.push({ type: "next" });
 				air_console.message(0, command);
 			});
 
 			$("#previous-button").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				var command = [];
 				command.push({ type: "previous" });
 				air_console.message(0, command);
 			});
 
 			$(".decrease_rounds").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				if (document.maxRound == 1) {
 					// dont decrease rounds below 1
 				} else {
@@ -733,7 +742,7 @@
 			});
 
 			$("#cancel_round").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				$("#round_over_song_details").hide();
 				$("#loading").css({ display: "flex" });
 				sleep(1500).then(() => {
@@ -746,7 +755,7 @@
 			});
 
 			$("#game_over").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				$("#game_over").hide();
 				$("#loading").css({ display: "flex" });
 				sleep(1500).then(() => {
@@ -759,7 +768,7 @@
 			});
 
 			$("#back_from_credit, #back_from_credits_area .icon-container").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				// inform the screen to display the animation
 				var command = [];
 				command.push({ type: "back" });
@@ -780,7 +789,7 @@
 			});
 
 			$(".increase_rounds").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+				event.preventDefault();
 				if (document.maxRound === document.maxPlaylistRounds) {
 					// cant increase further
 				} else {

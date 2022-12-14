@@ -383,6 +383,12 @@
 								// go back to menu
 								$("#game_logo").removeClass("smallLogo");
 								document.screen = "main-menu";
+
+								show_main_menu_buttons = [];
+								show_main_menu_buttons.push({ type: "show_main_menu_buttons" });
+								// let controller know to display the main menu buttons (up down)
+								air_console.broadcast(show_main_menu_buttons);
+
 								$("#playlist-selector").hide();
 								$("#main-menu").show();
 								break;
