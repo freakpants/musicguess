@@ -116,21 +116,20 @@ span.hero-sticker{
 }
 
 #playlist-details{
-	background-color: #ffdc40;
 	font-size: 2em;
 	min-width: 36vw;
     display: flex;
     flex-direction: column;
     align-content: center;
 	padding: 0vw 2vw 0vw 2vw;
-	opacity: 0.9;
 }
 
 #details-wrapper{
-	margin-top: 1vw;
+	position: absolute;
+    bottom: 0px;
 }
 
-#disc-hole-wrapper{
+.disc-hole-wrapper{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -182,6 +181,8 @@ span.hero-sticker{
 	background: #b51d05;
 	color: white;
 	border-radius: 1vw;
+	font-size: 1.6em;
+    border: 5px solid white;
 }
 
 #playlist-selector .dialogue-wrapper{
@@ -507,13 +508,13 @@ div .avatar_wrong{
 #playlist-selector{
 	display:none;
 	width:100%;
-	left:-8px;
-	margin-top:20px;
-	position:relative;
+	position:absolute;
 	justify-content:center;
-	align-items: center;
+	align-content: baseline;
 	letter-spacing: 1px;
 	flex-wrap: wrap;
+	height: calc(100% - 16vh);
+	bottom: 0;
 }
 
 #playlist-selector .album_art{
@@ -521,12 +522,15 @@ div .avatar_wrong{
 	border: 3px solid #1f1f1f;
 	overflow: hidden;
 	float:left;
-	min-width: 25vw;
-	min-height: 25vw;
+	height: 25vw;
 	width: 25vw;
 	font-size: 0.5em;
 	box-shadow: 1px 1px 10px black;
 	position: relative;
+	display: flex;
+    flex-wrap: wrap;
+	margin-top: 3.5vw;
+	filter: brightness(0.5);
 }
 
 #playlist-selector .album_art img{
@@ -534,17 +538,8 @@ div .avatar_wrong{
 	height: 12.5vw;
 }
 
-#playlist-selector .album_art.previous{
-	background-color: #ffdc40;	
-}
-
-#playlist-selector .album_art.next{
-	background: #b51d05;
-	
-}
-
 #playlist-selector .album_art.active{
-	background-color: #e8822d;
+	filter: brightness(1);
     min-width: 32vw;
     width: 32vw;
     height: 32vw;
@@ -552,6 +547,7 @@ div .avatar_wrong{
 	max-height: unset;
 	margin-left: 2em;
 	margin-right: 2em;
+	margin-top: unset;
 	transition: width 1s, height 1s, minWidth 1s, min-width 1s, borderRadius 1s, border-Radius 1s;
 }
 
@@ -584,22 +580,34 @@ div .avatar_wrong{
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	background: rgb(0,0,0, 50%);
+	background: #7e0000;
 	bottom: 3vw;
 	height: 6vw;
 	position: absolute;
 	width: 25vw;
+	font-size: 1em;
 }
 
 #playlist-selector .album_art.active .playlist-text-wrapper{
-	width: 34vw;
-	height: 10em;
+	width: 32vw;
+	height: 14em;
 	
 }
 
 #playlist-selector .playlist-description, #playlist-selector .playlist-track-count{
 	text-align:center;
 }
+
+.playlist-track-count{
+	background: #7e0000;
+}
+
+.playlist-description{
+	background: #b51d05;
+	padding: 0.5em;
+}
+
+
 
 #playlist-selector .playlist-description{
 	text-transform: none;
@@ -653,6 +661,55 @@ ul{
 #updates .content{
 	max-width: 66vw;
 	font-size: 0.8em;
+}
+
+.active .mask{
+	width: 16vw;
+	height: 16vw;
+	mask-size: 32vw;
+	-webkit-mask-size: 32vw;
+}
+
+.mask{
+	width: 12.5vw;
+	height: 12.5vw;
+	mask-size: 25vw;
+	-webkit-mask-size: 25vw;
+	-webkit-mask-image: url(mask.png);
+	-webkit-mask-repeat: no-repeat;
+	mask-image: url(mask.png);
+	mask-repeat: no-repeat;
+}
+
+.mask-top-left{
+	mask-position: top left;
+	-webkit-mask-position: top left;
+}
+
+.mask-top-right{
+	mask-position: top right;
+	-webkit-mask-position: top right;
+}
+
+.mask-bottom-left{
+	mask-position: bottom left;
+	-webkit-mask-position: bottom left;
+}
+
+.mask-bottom-right{
+	mask-position: bottom right;
+	-webkit-mask-position: bottom right;
+}
+
+#playlist-selector .disc-hole-wrapper.disc-hole-wrapper.disc-hole-wrapper img{
+    opacity: 0.7;
+	width: 5vw;
+	height: 5vw;
+}
+
+#playlist-selector .active .disc-hole-wrapper.disc-hole-wrapper.disc-hole-wrapper img{
+	width: 7vw;
+    height: 7vw;
 }
 
 @media (max-width: 960px) {

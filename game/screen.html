@@ -1072,11 +1072,27 @@
 				// dont even add the images on the gamehub app
 				// document.low_performance = true;
 				if (!document.low_performance) {
+					mask_counter = 0;
 					playlist.album_art.forEach(function (element) {
-						if (!add_to_storage_only) {
-							html = html + '<img src="' + element + '" />';
+						switch(mask_counter){
+							case 0:
+								maskClass = 'mask-top-left';
+								break;
+							case 1:
+								maskClass = 'mask-top-right';
+								break;
+							case 2:
+								maskClass = 'mask-bottom-left';
+								break;
+							case 3:
+								maskClass = 'mask-bottom-right';
+								break;
 						}
-						playlist_html += '<img src="' + element + '" />';
+						mask_counter++;
+						if (!add_to_storage_only) {
+							html = html + '<div class="mask ' + maskClass + '"><img src="' + element + '" /></div>';
+						}
+						playlist_html += '<div class="mask ' + maskClass + '"><img src="' + element + '" /></div>';
 					});
 					if (playlist.new === "1") {
 						if (!add_to_storage_only) {
@@ -1102,12 +1118,12 @@
 				}
 				if (!add_to_storage_only) {
 					html += '</div></div>';
-					html += '<div id="disc-hole-wrapper" ><div id="disc-hole"></div></div>';
+					html += '<div class="disc-hole-wrapper"><img src="dischole.png" /></div>';
 					html += '</div>';
 				}
 
 				playlist_html += '</div></div>';
-				playlist_html += '<div id="disc-hole-wrapper" ><div id="disc-hole"></div></div>';
+				playlist_html += '<div class="disc-hole-wrapper"><img src="dischole.png" /></div>';
 				playlist_html += '</div>';
 
 				document.playlist_storage[counter] = playlist_html;
