@@ -62,7 +62,6 @@ span.new-sticker{
     color: white;
     border-radius: 2.5em;
     width: 2.5em;
-    font-family: 'Oswald';
     background-color: #b51d05;
 	text-align: center;
 }
@@ -79,7 +78,6 @@ span.hero-sticker{
     color: white;
     border-radius: 2.5em;
     width: 2.5em;
-    font-family: 'Oswald';
     background-color:  #2e2e2e;
 	text-align: center;
 }
@@ -251,10 +249,8 @@ span.hero-sticker{
 	width: 100vw;
 	position: absolute;
 	bottom: 1vh;
-	opacity: 0.9;
-	box-shadow: 1px 1px 10px black;
 	height: 9vh;
-	background: #ffdc40;
+	background: #7e0000;
 	flex-direction: column;
     justify-content: center;
 	flex-wrap: wrap;
@@ -262,11 +258,11 @@ span.hero-sticker{
 
 div.ticker{
 	width: 100%;
-    color: #e8822d;
+    color: white;
 	position: relative;
 	left: 0px;
     bottom: 0vh;
-	background: #ffdc40;
+	background: #7e0000;
 	font-size: 2em;
 	justify-content: center;
     display: flex;
@@ -280,12 +276,11 @@ div#ticker2{
 }
 
 #main-menu li, #default-options li, #specific-options li{
-	background: #e8822d;
+	background: #ef5532;
     list-style: none;
     width: 15vw;
 	height: 8vh;
     padding: 1vw;
-    box-shadow: 1px 1px 10px black;
     justify-content: center;
     display: flex;
 	margin: 1vw;
@@ -293,8 +288,8 @@ div#ticker2{
 	align-items: center;
 	flex-direction: column;
 	font-size: 1.8em;
-	color: #ffdc40;
-	opacity: 0.9;
+	color: black;
+	border-radius: 10em;
 }
 
 #specific-options li{
@@ -330,6 +325,7 @@ ul#guessing-type-selector{
 	width: 22vw;
 	height: 10vh;
 	font-size: 2em;
+	border: 4px solid;
 }
 
 #specific-start{

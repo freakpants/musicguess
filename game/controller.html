@@ -2,7 +2,7 @@
 	<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
 	<link rel="stylesheet" href="controller.css">
 	<link rel="stylesheet" href="shared.css">
-	<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto|Play" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,18 +19,30 @@
 
 		<div class="flexbox resizing-button" id="previous-button">
 			<span class="fa-lg icon-container">
-				<i class="fa fa-backward backward"></i>
+				<i class="fa fa-caret-left caret-left"></i>
 			</span>
-			<div class="button_text">Last</div>
 			<!-- <div class="button_comment">Same, but different</div> -->
 		</div>
 		<div class="flexbox resizing-button" id="next-button">
 			<span class="fa-lg icon-container">
-				<i class="fa fa-forward forward"></i>
+				<i class="fa fa-caret-right caret-right"></i>
 			</span>
-			<div class="button_text">Next</div>
 			<!-- <div class="button_comment">Scroll through awesome music</div> -->
 		</div>
+		
+		<div class="flexbox resizing-button" id="up-button">
+			<span class="fa-lg icon-container">
+				<i class="fa fa-caret-up caret-up"></i>
+			</span>
+
+		</div>
+
+		<div class="flexbox resizing-button" id="down-button">
+			<span class="fa-lg icon-container">
+				<i class="fa fa-caret-down caret-down"></i>
+			</span>
+		</div>
+
 		<div class="round-change-button flexbox resizing-button fa-lg icon-container minus decrease_rounds">
 			<i class="fa fa-minus minus"></i>
 		</div>
@@ -39,25 +51,14 @@
 		</div>
 		<div class="flexbox resizing-button" id="cancel">
 			<span class="fa-lg icon-container">
-				<i class="fa fa-ban"></i>
+				<i class="fa fa-rotate-left"></i>
 			</span>
-			<div class="button_text">Cancel/</br>Back</div>
-			<!-- <div class="button_comment">Play with current settings</div> -->
 		</div>
 		<div class="flexbox resizing-button" id="confirm">
-			<span class="fa-lg icon-container">
-				<i class="fa fa-play play_icon"></i>
-			</span>
-			<div class="button_text">Confirm/</br>Start</div>
-			<!-- <div class="button_comment">Play with current settings</div> -->
+			<div class="button_text">Select</div>
 		</div>
 		<div class="flexbox resizing-button" id="hero-confirm">
-			<span class="fa-lg icon-container">
-				<i class="fa fa-play play_icon"></i>
-			</span>
-			<div class="button_text">Select with Hero</div>
-			<img id="small-hero-image" src="images/hero.gif" />
-			<!-- <div class="button_comment">Play with current settings</div> -->
+			<div class="button_text">Select</div>
 		</div>
 		<div class="flexbox resizing-button" id="hero-req">
 			<img id="hero-image" src="images/hero.gif" />
@@ -174,7 +175,7 @@
 	</div>
 
 	<div id="waiting_for_start">
-		Please wait for the master controller to start the game.
+		Please wait until the master controller starts the game.
 	</div>
 
 	</div>
@@ -263,6 +264,14 @@
 						$("#menu").hide();
 						$("#back_from_credits_area").css({ display: "flex" });
 					}
+				}
+
+				// show the previous/next button on the playlist selection screen
+				if (data[0].type === "show_playlist_buttons") {
+					$("#up-button").hide();
+					$("#down-button").hide();
+					$("#next-button").css({ display: "flex" });
+					$("#previous-button").css({ display: "flex" });
 				}
 
 				if (data[0].type === "show_back_to_main") {
@@ -649,8 +658,6 @@
 			$("#confirm, #hero-confirm ").bind('touchstart mousedown', function (event) {
 				event.preventDefault(); 
 				// in case the button was the only button, resize it to normal size
-				$("#confirm").css("width", "46vw");
-				$("#confirm").css("height", "46vh");
 				$("#confirm").css("position", "relative");
 
 				$("#hero-confirm").hide();
@@ -677,6 +684,20 @@
 			});
 
 			$("#next-button").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
+				var command = [];
+				command.push({ type: "next" });
+				air_console.message(0, command);
+			});
+
+			$("#up-button").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
+				var command = [];
+				command.push({ type: "previous" });
+				air_console.message(0, command);
+			});
+
+			$("#down-button").bind('touchstart mousedown', function (event) {
 				event.preventDefault(); 
 				var command = [];
 				command.push({ type: "next" });

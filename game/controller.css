@@ -59,6 +59,17 @@ text white: white;
 	font-size: 2em;
 }
 
+#cancel{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	border-radius: 0px;
+	border-left: 0px;
+	border-top: 0px;
+	height: 20vw;
+	width: 20vw;
+}
+
 body{
 	margin:0px;
 }
@@ -87,10 +98,6 @@ body{
 #position .number{
 	font-size: 1.3em;
 	position: r;
-}
-
-#position .letters{
-	font-family: Oswald;
 }
 
 .score_report_title{
@@ -182,7 +189,7 @@ body{
 	height: 100vh;
     flex-wrap: wrap;	
 	position: relative;
-	background: #b51d05;
+	background: #ef5532;
 	column-gap: 4vw;
 	row-gap: 3vh;
     justify-content: center;
@@ -198,6 +205,12 @@ body{
 #next-button .icon-container{
 	left: unset;
 	right: 1vw;
+}
+
+#next-button, #previous-button{
+	display: none;
+	width: 42vw;
+	height: 35vh;
 }
 
 #previous-button .icon-container{
@@ -284,8 +297,8 @@ body{
 }
 
 #menu{
-	/* for easier styling/debug */
 	display:flex;
+	padding-top: 5vh;
 }
 
 
@@ -342,8 +355,8 @@ body{
 }
 
 .resizing-button{
-	background-color: #e8822d;
-    color: #ffdc40;
+	background-color: #b51d05;
+    color: white;
 	border: 4px solid;
     border-radius: 10vw;
 	box-sizing: border-box;
@@ -454,11 +467,10 @@ body{
 	font-size:1.6em !important;
 }
 
-
 .flexbox{
 	display: flex;
-	width: 44vw;
-	height: 46vh;
+	width: 85vw;
+	height: 20vh;
 	justify-content: center;
 	align-items: center;
 	position: relative;
@@ -472,7 +484,6 @@ body{
 }
 
 .button_text, .vertical-container{
-	font-family: Oswald;
     text-transform: uppercase;
     font-size: 2em;
 	transform: uppercase;
@@ -497,4 +508,12 @@ body{
 
 #guessing_buttons_full#guessing_buttons_full .correct-selected.correct-selected, #guessing_buttons_full#guessing_buttons_full .correct-selected div{
 	background-color:green;
+}
+
+#confirm{
+	height: 35vh;
+}
+
+.caret-down.caret-down, .caret-up.caret-up, .caret-left.caret-left, .caret-right.caret-right{
+	font-size: 4em;
 }
