@@ -9,3 +9,30 @@ body{
 	text-transform: uppercase;
 }
 
+#credits li{
+	list-style-type: none;
+}
+
+#credits ul{
+	margin: 0;
+    padding: 0;
+	background: #ef5532;
+}
+
+#credits .content{
+    display: flex;
+    justify-content: center;
+    padding: 0.5em;
+	margin-bottom: 1em;
+	background: #b51d05;
+	text-transform: none;
+ }
+
+#credits .category{
+	background: #7e0000;
+	justify-content: center;
+	text-transform: uppercase;
+    justify-content: center;
+    display: flex;
+    padding: 0.5em;
+}

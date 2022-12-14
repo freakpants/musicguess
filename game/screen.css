@@ -154,7 +154,7 @@ span.hero-sticker{
 	display: flex;
 	position: absolute;
 	top: 150px;
-	opacity: 0.9;
+	opacity: 1;
 }
 
 #splash-screen{
@@ -164,20 +164,6 @@ span.hero-sticker{
 
 #credits, #victory_screen, #splash-text, #updates, #spotify{
 	width: 50vw;
-}
-
-#credits, #victory_screen, #splash-text, .dialogue, #playlist-details, #updates, #spotify{
-	box-shadow: 1px 1px 10px black;
-	font-size: 1.8em;
-	flex-direction: column;
-    align-items: center;
-	text-transform:none;
-	color: #e8822d;
-}
-
-#credits, #victory_screen, #splash-text, .dialogue, #updates, #spotify{
-	background-color: #ffdc40;
-	color: #e8822d;
 }
 
 #default-options, #specific-options{
@@ -351,34 +337,9 @@ ul#guessing-type-selector{
 	margin-bottom: 0.5em;
 }
 
-#victory_screen .result_category, #credits .category{
-	color: #e8822d;
-	text-transform: uppercase;
-}
-
-#victory_screen .result, #credits .content{
-	text-transform: none;
-	color: #e8822d;
-}
-
-#credits .content a{
-	color: #e8822d;
-}
-
-#credits a{
-	color: rgb(255 220 64);
-}
-
 body{
 	overflow:hidden;
 	margin: 0px;
-}
-
-.player_name, .player_score{
-	width:120px;
-	text-align:center;
-	overflow:hidden;
-	color: #ffdc40;
 }
 
 div .position_display{
@@ -672,6 +633,18 @@ div#current_song_service #get_it_link a{
 img.itunes{
 	width:250px;
 	padding-top:20px;
+}
+
+ul{
+	font-size: 1.4em;
+}
+
+#credits{
+	width: 50vw;
+    background: #ef5532;
+    justify-content: center;
+	padding-top: 1em;
+	border-radius: 4em;
 }
 
 @media (max-width: 960px) {
