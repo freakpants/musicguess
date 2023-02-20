@@ -39,8 +39,8 @@ text white: white;
 #hero-image{
     max-height: 30%;
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 0.5em;
+    right: 0.5em;
 }
 
 #small-hero-image{
