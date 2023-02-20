@@ -223,6 +223,10 @@
 				show_playlist_buttons.push({
 					type: "show_playlist_buttons"
 				});
+				show_settings_buttons = [];
+				show_settings_buttons.push({
+					type: "show_settings_buttons"
+				});
 
 				// check if there is currently a round in progress
 				if (document.round > 0 && !document.roundEndInitiated && !document.game_over_screen) {
@@ -374,6 +378,11 @@
 							case "default-options":
 								// go back to playlist selection
 								document.screen = "playlist-selection";
+								// message the controller to display the playlist buttons
+								if(air_console.getMasterControllerDeviceId() !== undefined) {
+									air_console.message(air_console.getMasterControllerDeviceId(), show_playlist_buttons);
+								}
+
 								$("#default-options").hide();
 								$("#playlist-display").hide();
 								$("#roundCounter").hide();
@@ -617,6 +626,12 @@
 								DEBUG && console.log("going to default options");
 								// go to default option prompt
 								document.screen = "default-options";
+
+								// message the controller to show settings buttons
+								if (air_console.getMasterControllerDeviceId() !== undefined) {
+									air_console.message(air_console.getMasterControllerDeviceId(), show_settings_buttons);
+								}
+
 								$("#playlist-selector").hide();
 								$("#default-options").css("display", "flex");
 								$("#default-options .dialogue").css("display", "flex");

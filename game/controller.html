@@ -280,6 +280,13 @@
 					$("#previous-button").css({ display: "flex" });
 				}
 
+				if (data[0].type === "show_settings_buttons") {
+					$("#next-button").hide();
+					$("#previous-button").hide();
+					$("#up-button").css({ display: "flex" });
+					$("#down-button").css({ display: "flex" });
+				}
+
 				if (data[0].type === "show_back_to_main") {
 					$("#waiting_for_next_round").hide();
 					$("#waiting_for_start").hide();
