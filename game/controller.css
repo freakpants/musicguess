@@ -195,8 +195,8 @@ body{
 	display: flex;
 	height: 100%;
 	align-items: center;
-	padding-right: 3em;
-	padding-left: 1em;
+	text-align: center;
+	padding: 1em;
 	overflow: hidden;
 }
 
@@ -271,12 +271,18 @@ body{
 #guessing_buttons_full{
 	width: 100vw;
 	height: 100vh;
+	display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 #guessing_buttons_full .choice_container
 {
 	box-sizing:border-box;
-	width:100%;
+	width: 90vw;
+    height: 20vh;
 	font-size:1.4em;
 	float:left;
     text-transform: uppercase;
@@ -291,23 +297,23 @@ body{
 
 
 #guessing_buttons_full .choice_1, #guessing_buttons_full #choice_1{
-	background-color: #ffdc40;
-    color:  #e8822d;
+	background-color: #cd1c24;
+    color:  white;
 }
 
 #guessing_buttons_full .choice_2, #guessing_buttons_full #choice_2{
-	background-color: #e8822d;
-    color: #ffdc40;
+	background-color: #ef5532;
+	color: black;
 }
 
 #guessing_buttons_full .choice_3, #guessing_buttons_full #choice_3{
-	background-color: #ffdc40;
-    color:  #e8822d;
+	background-color: #cd1c24;
+	color:  white;
 }
 
 #guessing_buttons_full .choice_4, #guessing_buttons_full #choice_4{
-	background-color: #e8822d;
-    color: #ffdc40;
+	background-color: #ef5532;
+	color: black;
 }
 
 #menu, #waiting_for_start, #get_ready, #score_report{
