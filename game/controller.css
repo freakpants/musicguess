@@ -37,7 +37,10 @@ text white: white;
 }
 
 #hero-image{
-	max-width: 80%;
+    max-height: 30%;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
 }
 
 #small-hero-image{
@@ -49,6 +52,14 @@ text white: white;
 
 #hero-req, #hero-confirm{
 	display: none;
+}
+
+#hero-req{
+	flex-direction: row;
+}
+
+#hero-req .button_text{
+	z-index: 1;
 }
 
 #cancel_round{
@@ -515,7 +526,7 @@ body{
 	background-color:green;
 }
 
-#confirm{
+#confirm, #hero-req{
 	height: 35vh;
 }
 
