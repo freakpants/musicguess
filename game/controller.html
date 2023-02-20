@@ -313,13 +313,11 @@
 				if (data[0].type === "show_round_change_buttons") {
 					if (am_i_master()) {
 						$(".round-change-button").css("display", "flex");
-						$(".resizing-button").css("height", "29.333333vh");
 					}
 				}
 
 				if (data[0].type === "hide_round_change_buttons") {
 					$(".round-change-button").hide();
-					$(".resizing-button").css("height", "46vh");
 				}
 
 				if (data[0].type === "show_main_menu_buttons") {

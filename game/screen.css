@@ -712,6 +712,15 @@ ul{
     height: 7vw;
 }
 
+.player_name{
+	margin: 0.5em;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    height: 3.8vh;
+}
+
 @media (max-width: 960px) {
 	body{
 		font-size: 9px;
