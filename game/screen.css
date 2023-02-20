@@ -479,8 +479,6 @@ div .avatar_wrong{
 #playlist-display{
 	bottom: 46vh;
 	font-size: 1.5em;
-	background:#ffdc40;
-	color: #e8822d;
 }
 
 #roundTime, #roundCounter, #playlist-display{
@@ -495,7 +493,11 @@ div .avatar_wrong{
     display: none;
     width: 20vh;
     height: 20vh;
-    box-shadow: 1px 1px 10px black;
+	background: #b51d05;
+    color: white;
+    border-radius: 1vw;
+    font-size: 1.6em;
+    border: 5px solid white;
 	display:none;
 }
 
