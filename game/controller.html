@@ -2,186 +2,164 @@
 	<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
 	<link rel="stylesheet" href="controller.css">
 	<link rel="stylesheet" href="shared.css">
-	<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto|Play" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Georama:wght@800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap" rel="stylesheet">
 </head>
 
 <body onload="init()">
-	<div id="position">
-		<span class="number"></span>
-		<span class="letters"></span>
-	</div>
-	<div id="menu">
-
-		<div class="flexbox resizing-button" id="previous-button">
-			<span class="fa-lg icon-container">
-				<i class="fa fa-caret-left caret-left"></i>
-			</span>
-			<!-- <div class="button_comment">Same, but different</div> -->
-		</div>
-		<div class="flexbox resizing-button" id="next-button">
-			<span class="fa-lg icon-container">
-				<i class="fa fa-caret-right caret-right"></i>
-			</span>
-			<!-- <div class="button_comment">Scroll through awesome music</div> -->
-		</div>
-
-		<div class="flexbox resizing-button" id="up-button">
-			<span class="fa-lg icon-container">
-				<i class="fa fa-caret-up caret-up"></i>
-			</span>
-
-		</div>
-
-		<div class="flexbox resizing-button" id="down-button">
-			<span class="fa-lg icon-container">
-				<i class="fa fa-caret-down caret-down"></i>
-			</span>
-		</div>
-
-		<div class="round-change-button flexbox resizing-button fa-lg icon-container minus decrease_rounds">
-			<i class="fa fa-minus minus"></i>
-		</div>
-		<div class="round-change-button flexbox resizing-button fa-lg icon-container plus increase_rounds">
-			<i class="fa fa-plus plus"></i>
-		</div>
-		<div class="flexbox resizing-button" id="cancel">
-			<span class="fa-lg icon-container">
-				<i class="fa fa-rotate-left"></i>
-			</span>
-		</div>
-		<div class="flexbox resizing-button" id="confirm">
-			<div class="button_text">Select</div>
-		</div>
-		<div class="flexbox resizing-button" id="hero-confirm">
-			<div class="button_text">Select</div>
-		</div>
-		<div class="flexbox resizing-button" id="hero-req">
-			<img id="hero-image" src="images/hero.gif" />
-			<div class="button_text">Hero</br>required</div>
-		</div>
-	</div>
-	<div class="flexbox" id="game_over">
-		<span class="fa-lg icon-container">
-			<i class="fa fa-undo undo"></i>
-		</span>
-		<div class="button_text">Return to main menu</div>
-	</div>
-
-	<div id="back_from_credits_area" class="flexbox">
-		<div id="credits">
-			<div class="flexbox resizing-button" id="back_from_credits">
-				<span class="fa-lg icon-container">
-					<i class="fa fa-rotate-left"></i>
-				</span>
-			</div>
-			<ul>
-				<li class="category">Developed by:</li>
-				<li class="content">Christian Nyffenegger, <span class="link"
-						onclick="air_console.openExternalUrl('https://twitter.com/freakpants')">freakpants</span></li>
-				<li class="category">Background video by:</li>
-				<li class="content">
-					<span class="link"
-						onclick="air_console.openExternalUrl('https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154')">
-						Tomislav Jakupec
-					</span> / Pixabay
-				</li>
-				<li class="category">Music provided by:</li>
-				<li class="content">
-					<span class="link"
-						onclick="air_console.openExternalUrl('https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html')">
-						Itunes Search API Preview
-					</span>
-				</li>
-				<li class="category">Sound effects by:</li>
-				<li class="content">
-					<span class="link" onclick="air_console.openExternalUrl('https://www.zapsplat.com/')">
-						ZapSplat
-					</span>
-				</li>
-				<li class="category">Svg loaders by:</li>
-				<li class="content">
-					<span class="link" onclick="air_console.openExternalUrl('https://twitter.com/sherb')">Sam
-						Herbert</span>
-					(<span class="link"
-						onclick="air_console.openExternalUrl('https://github.com/SamHerbert/SVG-Loaders')">Github</a>)
-					</span></br>
-				</li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="flexbox" id="get_ready">
-		<div class="button_text">Get ready to guess!</div>
-	</div>
-
-	<div class="flexbox" id="score_report">
-		<div class="button_text"></div>
-	</div>
-
-	<div class="flexbox" id="loading">
-		<img id="loading_animation" src="three-dots.svg" />
-	</div>
-	<div id="guessing_buttons_full">
-		<div id="choice_1" class="choice_container unselected">
-			<!-- <span class="fa-stack fa-lg">
-				<i class="fa fa-bars "></i>
-			</span> -->
-			<div class="choice_1 unselected">Text Text Text Text Text Text Text Text Text</div>
-		</div>
-		<div id="choice_2" class="choice_container unselected">
-			<!-- <span class="fa-stack fa-lg">
-				<i class="fa fa-bars "></i>
-			</span> -->
-			<div class="choice_2 unselected"></div>
-		</div>
-		<div id="choice_3" class="choice_container unselected">
-			<!-- <span class="fa-stack fa-lg">
-				<i class="fa fa-bars "></i>
-			</span> -->
-			<div class="choice_3 unselected"></div>
-		</div>
-		<div id="choice_4" class="choice_container unselected">
-			<!-- <span class="fa-stack fa-lg">
-				<i class="fa fa-bars "></i>
-			</span> -->
-			<div class="choice_4 unselected"></div>
-		</div>
-
-	</div>
-
-	<div id="round_over_song_details">
-		<div class="result_banner">
-			<div class="player_round_result"></div>
-			<div class="player_score"></div>
-		</div>
-		<div class="image">
-			<div class="song_albumart" onclick="air_console.openExternalUrl(buy_link)">
-				<div class="song_buylink">
-					<div class='itunes'></div>
+	<div id="background">
+		<div class="screen">
+			<div id="general-buttons">
+				<div id="return-button-image" class="image-button"></div>
+				<div id="select-button-image" class="image-button text-allign">
+				  <div class="button-text">Select</div>
 				</div>
-
 			</div>
-			<div class="text_info">
-				<span id="cancel_round">X</span>
-				<div class="song_title"></div>
-				<div class="song_album"></div>
-				<div class="song_artist"></div>
+			<div id="navigation-buttons">
+				<div id="up-button-image" class="image-button"></div>
+				<div id="down-button-image" class="image-button"></div>
+				<div id="left-button-image" class="image-button"></div>
+				<div id="right-button-image" class="image-button"></div>
+				<div id="miniLeft-button-image" class="image-button"></div>
+				<div id="miniRight-button-image" class="image-button"></div>
 			</div>
-		</div>
-
-	</div>
-
-	<div id="waiting_for_next_round">
-		Please wait for the next round to begin.
-	</div>
-
-	<div id="waiting_for_start">
-		Please wait until the master controller starts the game.
+			<div id="specific-buttons">
+				<div id="heroConfirm-button-image" class="image-button text-allign">
+					<div id="hero-text" class="button-text">Select</br>With Hero</div>
+				</div>
+				<div id="heroReq-button-image" class="image-button text-allign">
+					<div id="hero-text" class="button-text">Hero</br>Required</div></div>
+				</div>
+				<div id="plus-button-image" class="image-button"></div>
+				<div id="minus-button-image" class="image-button"></div>
+			</div>
+			<div id="back_from_updates_area"> 
+				<div id="returnUpdate-button-image" class="image-button"></div>
+		        <div id= "purple-blur" class="image-element text-allign">
+                   <div class="button-text">Return to main menu</div>
+                </div>
+			</div>
+			<div id="back_from_credits_area">
+				<div id="credits" class="image-element text-allign">
+					<span id="category" class="button-text">Developed by:</br></span>
+					<span id="content" class="button-text"></br>Christian Nyffenegger,<span class="link"
+						onclick="air_console.openExternalUrl('https://twitter.com/freakpants')">freakpants</br></span></span><br>
+					<span id="category" class="button-text">Background video by:</br></span>
+					<span id="content" class="button-text">
+					  <span class="link"
+						onclick="air_console.openExternalUrl('https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154')">
+					</br>Tomislav Jakupec
+					  </span> / Pixabay
+					</br></span><br>
+					<span id="category" class="button-text">Music provided by:</br></span>
+					<span id="content" class="button-text">
+					  <span class="link"
+						onclick="air_console.openExternalUrl('https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html')">
+					</br>Itunes Search API Preview
+					</br></span>
+					</span><br>
+					<span id="category" class="button-text">Sound effects by:</br></span>
+					<span id="content" class="button-text">
+					  <span class="link" onclick="air_console.openExternalUrl('https://www.zapsplat.com/')">
+					</br>ZapSplat
+					</br></span>
+					</span><br>
+					<span id="category" class="button-text">Svg loaders by:</br></span>
+					<span id="content" class="button-text">
+					  <span class="link" onclick="air_console.openExternalUrl('https://twitter.com/sherb')"></br>Sam Herbert</span>
+					  (<span class="link" onclick="air_console.openExternalUrl('https://github.com/SamHerbert/SVG-Loaders')">Github</span>)
+					</br></span><br>
+				</div>
+				<div id="returnCredits-button-image" class="image-button"></div>
+		        <div id= "purple-blur-credits" class="image-element text-allign">
+                  <div class="button-text">Return to main menu</div>
+                </div>
+			</div>
+			<div id="loading">
+				<div id="loading-container" class="image-element">
+					<img id="loading_animation" src="three-dots.svg"/>
+				</div>
+				<div id= "purple-blur" class="image-element text-allign">
+			      <div class="button-text">Loading</div>
+			    </div>
+			</div>
+			<div id="get_ready">
+				<div id="message-container" class="image-element text-allign">Get</br>ready</br>to</br>guess!</div>
+			</div>
+			<div id="score_report">
+				<div id="message-container" class="image-element text-allign">
+					<span class='result button-text'></span>
+				</div>
+			</div>
+			<div id="waiting_for_start">
+				<div id="message-container" class="image-element text-allign">Please wait for</br>the master</br>controller to</br>start the game.</div>
+			</div>
+			<div id="waiting_for_next_round">
+				<div id="message-container" class="image-element text-allign">Please wait for</br>the next round</br>to begin.</div>
+			</div>
+			<div id="guessing_buttons_full">
+				<div id="choice_1" class="choice_container unselected">
+					<!-- <span class="fa-stack fa-lg">
+						<i class="fa fa-bars "></i>
+					</span> -->
+					<div class="choice_1 unselected image-button text-allign">Text Text Text Text Text Text Text Text Text</div>
+				</div>
+				<div id="choice_2" class="choice_container unselected">
+					<!-- <span class="fa-stack fa-lg">
+						<i class="fa fa-bars "></i>
+					</span> -->
+					<div class="choice_2 unselected image-button text-allign"></div>
+				</div>
+				<div id="choice_3" class="choice_container unselected">
+					<!-- <span class="fa-stack fa-lg">
+						<i class="fa fa-bars "></i>
+					</span> -->
+					<div class="choice_3 unselected image-button text-allign"></div>
+				</div>
+				<div id="choice_4" class="choice_container unselected">
+					<!-- <span class="fa-stack fa-lg">
+						<i class="fa fa-bars "></i>
+					</span> -->
+					<div class="choice_4 unselected image-button text-allign"></div>
+				</div>
+				<div id="panelguess"></div>
+			</div>
+			<div id="round_over_song_details">
+				<div class="result_banner image-element text-allign">
+					<div class="player_round_result button-text"></div>
+					<div class="player_score button-text"></div>
+				</div>
+				<div id="position-image" class="image-button text-allign">
+					<span class="number button-text"></span>
+					<span class="letters button-text"></span>
+				</div>
+				<div class="image">
+					<div class="song_albumart image-element" onclick="air_console.openExternalUrl(buy_link)">
+						<div class="song_buylink">
+						</div>
+		
+					</div>
+				</div>
+				<div class="text_info image-element text-allign">
+					<span class="song_title button-text"></span>
+					<span class="song_album button-text"></span>
+					<span class="song_artist button-text"></span>
+				</div>
+			</div>
+			<div id="game_over">
+				<div id="returnUpdate-button-image" class="image-button"></div>
+		        <div id= "purple-blur" class="image-element text-allign">
+                   <div class="button-text">Return to main menu</div>
+                </div>
+			</div>
+	    </div>	
 	</div>
 
 	</div>
@@ -192,7 +170,7 @@
 		document.maxRound = 25;
 		document.showing_result_screen = false;
 		document.currentScore = 0;
-		// whether or not to display all information
+		//whether or not to display all information
 		const DEBUG = true;
 
 		function init() {
@@ -207,7 +185,11 @@
 
 				if (data[0].type === "display_loading") {
 					if (am_i_master()) {
-						$("#menu").hide();
+						$("#up-button-image").hide();
+					    $("#down-button-image").hide();
+						$("#left-button-image").hide();
+						$("#right-button-image").hide();
+						$("#select-button-image").hide();
 						$("#loading").css("display", "flex");
 					}
 				}
@@ -215,33 +197,43 @@
 				if (data[0].type === "hide_loading") {
 					DEBUG && console.log("hiding loading, and showing menu");
 					if (am_i_master()) {
-						$("#menu").css("display", "flex");
 						$("#loading").hide();
 					}
 				}
 
 				if (data[0].type === "disable_start") {
-					$("#confirm").hide();
-					$("#hero-confirm").hide();
-					$("#hero-req").css("display", "flex");
+					if (am_i_master()) {
+					$("#select-button-image").hide();
+					$("#heroConfirm-button-image").hide();
+					$("#heroReq-button-image").show();
+					}
 				}
 
-				if (data[0].type === "enable_start") {
-					$("#confirm").css("display", "flex");
-					$("#hero-confirm").hide();
-					$("#hero-req").hide();
+				if (data[0].type === "enable_start" && data[0].type !== "display_loading") {
+					if (am_i_master()) {
+					$("#select-button-image").show();
+					$("#heroConfirm-button-image").hide();
+					$("#heroReq-button-image").hide();
+					}
 				}
 
 				if (data[0].type === "start_with_hero") {
-					$("#confirm").hide();
-					$("#hero-confirm").css("display", "flex");
-					$("#hero-req").hide();
+					if (am_i_master()) {
+					$("#select-button-image").hide();
+					$("#heroConfirm-button-image").show();
+					$("#heroReq-button-image").hide();
+					}
 				}
 
 				if (data[0].type === "inactive") {
 					// if there is a round in progress, and the client is inactive hide the menu and display the wait message instead
 					DEBUG && console.log("controller " + air_console.getDeviceId() + " has received message inactive");
-					$("#menu").hide();
+					$("#up-button-image").hide();
+					$("#down-button-image").hide();
+					$("#left-button-image").hide();
+					$("#right-button-image").hide();
+					$("#select-button-image").hide();
+					$("#return-button-image").hide();
 					$("#waiting_for_next_round").css({ display: "flex" });
 					$("#waiting_for_start").hide();
 				}
@@ -250,14 +242,23 @@
 					// if there is a game in progress, store that info for check_master
 					DEBUG && console.log("controller " + air_console.getDeviceId() + " has received message in progress");
 					document.inProgress = true;
-					$("#menu").hide();
+					$("#up-button-image").hide();
+					$("#down-button-image").hide();
+					$("#left-button-image").hide();
+					$("#right-button-image").hide();
+					$("#select-button-image").hide();
+					$("#return-button-image").hide();
 				}
 
 				if (data[0].type === "show_menu") {
 					$("#waiting_for_next_round").hide();
 					$("#waiting_for_start").hide();
 					$("#game_over").hide();
-					$("#menu").css({ display: "flex" });
+					$("#left-button-image").hide();
+					$("#right-button-image").hide();
+					$("#up-button-image").show();
+					$("#down-button-image").show();
+					$("#select-button-image").show();
 				}
 
 				if (data[0].type === "show_back_from_credits") {
@@ -267,24 +268,86 @@
 						$("#waiting_for_next_round").hide();
 						$("#waiting_for_start").hide();
 						$("#loading").hide();
-						$("#menu").hide();
-						$("#back_from_credits_area").css({ display: "flex" });
+						$("#up-button-image").hide();
+					    $("#down-button-image").hide();
+						$("#select-button-image").hide();
+						$("#back_from_credits_area").show();
+					}
+				}
+
+				if (data[0].type === "show_back_from_updates") {
+					DEBUG && console.log("received instruction to show updates on controller");
+					if (am_i_master()) {
+						DEBUG && console.log("hiding menu and showing back from updates area with clickable links");
+						$("#waiting_for_next_round").hide();
+						$("#waiting_for_start").hide();
+						$("#loading").hide();
+						$("#up-button-image").hide();
+					    $("#down-button-image").hide();
+						$("#select-button-image").hide();
+						$("#back_from_updates_area").show();
 					}
 				}
 
 				// show the previous/next button on the playlist selection screen
 				if (data[0].type === "show_playlist_buttons") {
-					$("#up-button").hide();
-					$("#down-button").hide();
-					$("#next-button").css({ display: "flex" });
-					$("#previous-button").css({ display: "flex" });
+					if (am_i_master()) {
+					$("#waiting_for_start").hide();
+					$("#up-button-image").hide();
+					$("#down-button-image").hide();
+					$("#return-button-image").show();
+					$("#left-button-image").show();
+					$("#right-button-image").show();
+					$("#select-button-image").show();
+					}
+				}
+
+				if (data[0].type === "show_round_number_buttons") {
+					if (am_i_master()) {
+					$("#miniLeft-button-image").hide();
+					$("#miniRight-button-image").hide();
+					$("#plus-button-image").hide();
+					$("#minus-button-image").hide();
+					$("#up-button-image").hide();
+					$("#down-button-image").hide();
+					$("#left-button-image").show();
+					$("#right-button-image").show();
+					}
+				}
+
+				if (data[0].type === "hide_round_number_buttons") {
+					if (am_i_master()) {
+					$("#left-button-image").hide();
+					$("#right-button-image").hide();
+					$("#return-button-image").show();
+					$("#up-button-image").show();
+					$("#down-button-image").show();
+					}
 				}
 
 				if (data[0].type === "show_settings_buttons") {
-					$("#next-button").hide();
-					$("#previous-button").hide();
-					$("#up-button").css({ display: "flex" });
-					$("#down-button").css({ display: "flex" });
+					if (am_i_master()) {
+					$("#miniLeft-button-image").hide();
+					$("#miniRight-button-image").hide();
+					$("#plus-button-image").hide();
+					$("#minus-button-image").hide();
+					$("#left-button-image").hide();
+					$("#right-button-image").hide();
+					$("#return-button-image").show();
+					$("#up-button-image").show();
+					$("#down-button-image").show();
+					}
+				}
+
+				if (data[0].type === "show_main_menu_buttons") {
+					if (am_i_master()) {
+					$("#return-button-image").hide();
+					$("#left-button-image").hide();
+					$("#right-button-image").hide();
+					$("#up-button-image").show();
+					$("#down-button-image").show();
+					$("#select-button-image").show();
+					}
 				}
 
 				if (data[0].type === "show_back_to_main") {
@@ -303,30 +366,39 @@
 						$("#position").hide();
 						$("#round_over_song_details").hide();
 						$("#waiting_for_next_round").hide();
-						$("#menu").hide();
+						$("#up-button-image").hide();
+						$("#down-button-image").hide();
+						$("#right-button-image").hide();
+						$("#left-button-image").hide();
+						$("#select-button-image").hide();
+						$("#return-button-image").hide();
 						$("#back_from_credits_area").hide();
+						$("#back_from_updates_area").hide();
 						$("#game_over").hide();
-						$("#waiting_for_start").css({ display: "flex" });
+						$("#waiting_for_start").show();
 					}
 				}
 
 				if (data[0].type === "show_round_change_buttons") {
 					if (am_i_master()) {
-						$(".round-change-button").css("display", "flex");
+						$("#left-button-image").hide();
+					    $("#right-button-image").hide();
+						$("#miniLeft-button-image").show();
+					    $("#miniRight-button-image").show();
+					    $("#plus-button-image").show();
+					    $("#minus-button-image").show();
 					}
 				}
 
 				if (data[0].type === "hide_round_change_buttons") {
-					$(".round-change-button").hide();
-				}
-
-				if (data[0].type === "show_main_menu_buttons") {
-					// hide the next and previous buttons
-					$("#next-button").hide();
-					$("#previous-button").hide();
-					// show the up and down buttons
-					$("#up-button").css("display", "flex");
-					$("#down-button").css("display", "flex");
+					if (am_i_master()) {
+					$("#miniLeft-button-image").hide();
+					$("#miniRight-button-image").hide();
+					$("#plus-button-image").hide();
+					$("#minus-button-image").hide();
+					$("#left-button-image").show();
+					$("#right-button-image").show();
+					}
 				}
 
 				if (data[0].type === "not_in_progress") {
@@ -373,30 +445,33 @@
 				}
 
 				if (data[0].type === "get_ready") {
-					$("#menu").hide();
+					$("#up-button-image").hide();
+					$("#down-button-image").hide();
+					$("#select-button-image").hide();
+					$("#return-button-image").hide();
 					$("#waiting_for_start").hide();
-					$("#get_ready").css({ display: "flex" });
+					$("#get_ready").show();
 				}
 
 				if (data[0].type === "boundary") {
 					if (!data[0].boundary) {
 						// show buttons again
-						$("#next-button").css("opacity", 1);
-						$("#next-button").css("pointer-events", "auto");
-						$("#previous-button").css("opacity", 1);
-						$("#previous-button").css("pointer-events", "auto");
+						//$("#right-button-image").css("opacity", 1);
+						//$("#right-button-image").css("pointer-events", "auto");
+						//$("#left-button-image").css("opacity", 1);
+						//$("#left-button-image").css("pointer-events", "auto");
 					}
 					if (data[0].boundary === "last") {
-						$("#previous-button").css("opacity", 1);
-						$("#previous-button").css("pointer-events", "auto");
-						$("#next-button").css("opacity", 0);
-						$("#next-button").css("pointer-events", "none");
+						//$("#left-button-image").css("opacity", 1);
+						//$("#left-button-image").css("pointer-events", "auto");
+						//$("#right-button-image").css("opacity", 0);
+						//$("#right-button-image").css("pointer-events", "none");
 					}
 					if (data[0].boundary === "first") {
-						$("#previous-button").css("opacity", 0);
-						$("#previous-button").css("pointer-events", "none");
-						$("#next-button").css("opacity", 1);
-						$("#next-button").css("pointer-events", "auto");
+						//$("#left-button-image").css("opacity", 0);
+						//$("#left-button-image").css("pointer-events", "none");
+						//$("#right-button-image").css("opacity", 1);
+						//$("#right-button-image").css("pointer-events", "auto");
 					}
 				}
 
@@ -414,19 +489,19 @@
 					// </br>You are on Position " + document.position
 
 					// assign score for the permanent display
-					$("#position .number").html(score.position);
+					$("#round_over_song_details .number").html(score.position);
 					switch (score.position) {
 						case 1:
-							$("#position .letters").html("st");
+							$("#round_over_song_details .number").html(score.position + "ST");
 							break;
 						case 2:
-							$("#position .letters").html("nd");
+							$("#round_over_song_details .number").html(score.position + "ND");
 							break;
 						case 3:
-							$("#position .letters").html("rd");
+							$("#round_over_song_details .number").html(score.position + "RD");
 							break;
 						default:
-							$("#position .letters").html("th");
+							$("#round_over_song_details .number").html(score.position + "TH");
 							break;
 					}
 				}
@@ -438,29 +513,29 @@
 					const correctGuesses = score.correctGuesses;
 					const totalGuessTime = score.totalGuessTime;
 
-					let message = '<span class="score_report_title">';
+					let message = '<span class="score_report_title button-text"</br>';
 					switch (score.position) {
 						case 1:
-							message += "You have won the game!";
+							message += "You have won<br>the game!</br>";
 							break;
 						case 2:
-							message += "You came in second!";
+							message += "You came<br>in second!</br>";
 							break;
 						case 3:
-							message += "You placed third!";
+							message += "You placed third!</br>";
 							break;
 						default:
-							message += "You are on the " + score.position + "th place";
+							message += "You are on the<br>" + score.position + "th place</br>";
 							break;
 					}
-					message += "</span><span class='result_category'>Correct guesses:</span>";
-					message += "<span class='result'>" + correctGuesses + "/" + maxRound + " (" + Math.round(100 / maxRound * correctGuesses) + "%)</span></br>";
-					message += "<span class='result_category'>Total time taken for guesses:</span>";
-					message += "<span class='result'>" + Math.round(totalGuessTime * 10) / 10 + " seconds</span></br>";
-					message += "<span class='result_category'>Average time guessing:</span>";
-					message += "<span class='result'>" + + Math.round(totalGuessTime / maxRound * 10) / 10 + " seconds</span></br>";
-					$("#score_report .button_text").html(message);
-					$("#score_report").css({ display: "flex" });
+					message += "</span><span class='result_category button-text'><br>Correct guesses:</br></span>";
+					message += "<span class='result_count button-text'></br>" + correctGuesses + "/" + maxRound + " (" + Math.round(100 / maxRound * correctGuesses) + "%)</br></span></br>";
+					message += "<span class='result_category button-text'>Total time taken for guesses:</br></span>";
+					message += "<span class='result_count button-text'></br>" + Math.round(totalGuessTime * 10) / 10 + " seconds</br></span></br>";
+					message += "<span class='result_category button-text'>Average time guessing:</br></span>";
+					message += "<span class='result_count button-text'></br>" + + Math.round(totalGuessTime / maxRound * 10) / 10 + " seconds</br></span></br>";
+					$("#score_report .button-text").html(message);
+					$("#score_report").show();
 				}
 
 				if (data[0].type === "game_end") {
@@ -480,11 +555,16 @@
 					$("#round_over_song_details").hide();
 
 					//  hide the menu
-					$("#menu").hide();
+					$("#left-button-image").hide();
+					$("#right-button-image").hide();
+					$("#up-button-image").hide();
+					$("#down-button-image").hide();
+					$("#return-button-image").hide();
+					$("#select-button-image").hide();
 
 					// reset the live score
-					$("#position .number").html("");
-					$("#position .letters").html("");
+					$("#round_over_song_details .number").html("");
+					$("#round_over_song_details .letters").html("");
 
 					// unnattach all event handlers so we dont start triggering multiple messages 
 					$(".correct").off();
@@ -527,21 +607,27 @@
 					$(".wrong").off();
 
 					// hide the song area from previous rounds
-					// $("#round_over_song_details").hide();
+					$("#round_over_song_details").hide();
 
 					// push the correct information from the song to the round over screen
-					$(".song_artist").html(data[0].artist);
-					$(".song_title").html(data[0].title);
-					$(".song_album").html(data[0].album);
+					$(".song_artist").html(data[0].artist + '</br>');
+					$(".song_title").html(data[0].title + '</br>');
+					$(".song_album").html(data[0].album + '</br>');
 					$(".song_albumart").css('background-image', 'url(' + data[0].album_art + ')');
 
 					buy_link = data[0].buy_link;
+
+				
 
 					// reset css on buttons
 					$("#guessing_buttons_full #choice_1").css('opacity', '1');
 					$("#guessing_buttons_full #choice_2").css('opacity', '1');
 					$("#guessing_buttons_full #choice_3").css('opacity', '1');
 					$("#guessing_buttons_full #choice_4").css('opacity', '1');
+					$("#return-button-image").hide();
+					$("#left-button-image").hide();
+					$("#right-button-image").hide();
+					$("#select-button-image").hide();
 
 					$("#guessing_buttons_full #choice_1").removeClass("correct-selected wrong-selected");
 					$("#guessing_buttons_full #choice_2").removeClass("correct-selected wrong-selected");
@@ -587,7 +673,7 @@
 
 					// handle correct multiple choice answer
 					$(".correct").bind('touchstart mousedown', function (event) {
-						event.preventDefault();
+						event.preventDefault(); 
 						// disable all buttons
 						disable_guessing_buttons_event_handlers();
 
@@ -600,15 +686,17 @@
 						air_console.message(0, correctGuess);
 
 						// grey out the other answers
-						$("#guessing_buttons_full #choice_1").css('opacity', '0.5');
-						$("#guessing_buttons_full #choice_2").css('opacity', '0.5');
-						$("#guessing_buttons_full #choice_3").css('opacity', '0.5');
-						$("#guessing_buttons_full #choice_4").css('opacity', '0.5');
+						//$("#guessing_buttons_full #choice_1").css('opacity', '0.5');
+						//$("#guessing_buttons_full #choice_2").css('opacity', '0.5');
+						//$("#guessing_buttons_full #choice_3").css('opacity', '0.5');
+						//$("#guessing_buttons_full #choice_4").css('opacity', '0.5');
 
 						// highlight the correct answer
 						id = $(this).attr("id");
 						// console.log("id of element is " + id);
 						$("#guessing_buttons_full #" + id).css('opacity', '1');
+						$("#panelguess").css('opacity', '0.8');
+						$(".image").css('background-color', '#00A100');
 						$("#guessing_buttons_full #" + id).addClass('correct-selected');
 
 						// this is the scrolling effect for the title, currently not needed, left in just in case
@@ -620,13 +708,14 @@
 						// wait 2 seconds, then display the correct result including link to buy the song
 						sleep(2000).then(() => {
 							DEBUG && console.log("2 seconds after a correct guess have passed, we are showing the result screen");
+							$("#panelguess").css('opacity', '0');
 							show_result_screen("correct");
 						});
 					});
 
 					// handle wrong multiple choice answer
 					$(".wrong").bind('touchstart mousedown', function (event) {
-						event.preventDefault();
+						event.preventDefault(); 
 						// disable all buttons
 						disable_guessing_buttons_event_handlers();
 
@@ -639,15 +728,17 @@
 						air_console.message(0, wrongGuess);
 
 						// grey out the other answers
-						$("#guessing_buttons_full #choice_1").css('opacity', '0.2');
-						$("#guessing_buttons_full #choice_2").css('opacity', '0.2');
-						$("#guessing_buttons_full #choice_3").css('opacity', '0.2');
-						$("#guessing_buttons_full #choice_4").css('opacity', '0.2');
+						//$("#guessing_buttons_full #choice_1").css('opacity', '0.2');
+						//$("#guessing_buttons_full #choice_2").css('opacity', '0.2');
+						//$("#guessing_buttons_full #choice_3").css('opacity', '0.2');
+						//$("#guessing_buttons_full #choice_4").css('opacity', '0.2');
 
 						// highlight the wrong answer
 						id = $(this).attr("id");
 						// console.log("id of element is " + id);
 						$("#guessing_buttons_full #" + id).css('opacity', '1');
+						$("#panelguess").css('opacity', '0.8');
+						$(".image").css('background-color', '#F50B1E');
 						$("#guessing_buttons_full #" + id).addClass('wrong-selected');
 
 						// flash the correct answer 
@@ -663,6 +754,7 @@
 						// wait 2 seconds, then display the correct result including link to buy the song
 						sleep(2000).then(() => {
 							DEBUG && console.log("2 seconds after a wrong guess have passed, we are showing the result screen");
+							$("#panelguess").css('opacity', '0');
 							show_result_screen("wrong");
 						});
 					});
@@ -675,52 +767,34 @@
 
 		$(document).ready(function () {
 
-			$("#confirm, #hero-confirm ").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
-				// in case the button was the only button, resize it to normal size
-				$("#confirm").css("position", "relative");
-
-				$("#hero-confirm").hide();
-				$("#confirm").css("display", "flex");
-
+			$("#select-button-image").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
+				$("#heroConfirm-button-image").hide();
 				var command = [];
-				command.push({ type: "confirm" });
+				command.push({ type: "select" });
 				air_console.message(0, command);
 			});
 
-			$("#hero-req").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
+			$("#heroConfirm-button-image").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
+				$("#heroConfirm-button-image").hide();
+				$("#select-button-image").show();
+				var command = [];
+				command.push({ type: "select" });
+				air_console.message(0, command);
+			});
+
+			$("#heroReq-button-image").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				air_console.getPremium();
 			});
 
-			$("#cancel").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
-				$("#hero-confirm").hide();
-				$("#hero-req").hide();
-				$("#confirm").css("display", "flex");
+			$("#return-button-image, #returnUpdate-button-image, #returnCredits-button-image").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
+				$("#heroConfirm-button-image").hide();
+				$("#heroReq-button-image").hide();
 				var command = [];
 				command.push({ type: "back" });
-				air_console.message(0, command);
-			});
-
-			$("#next-button").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
-				var command = [];
-				command.push({ type: "next" });
-				air_console.message(0, command);
-			});
-
-			$("#up-button").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
-				var command = [];
-				command.push({ type: "previous" });
-				air_console.message(0, command);
-			});
-
-			$("#down-button").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
-				var command = [];
-				command.push({ type: "next" });
 				air_console.message(0, command);
 			});
 
@@ -731,8 +805,29 @@
 				air_console.message(0, command);
 			});
 
-			$(".decrease_rounds").bind('touchstart mousedown', function (event) {
+            $("#next-button").bind('touchstart mousedown', function (event) {
 				event.preventDefault();
+				var command = [];
+				command.push({ type: "next" });
+				air_console.message(0, command);
+			});
+
+			$("#up-button-image, #left-button-image, #miniLeft-button-image").bind('touchstart mousedown', function (event) {
+				event.preventDefault();
+				var command = [];
+				command.push({ type: "previous" });
+				air_console.message(0, command);
+			});
+
+            $("#down-button-image, #right-button-image, #miniRight-button-image").bind('touchstart mousedown', function (event) {
+				event.preventDefault();
+				var command = [];
+				command.push({ type: "next" });
+				air_console.message(0, command);
+			});
+
+			$("#minus-button-image").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				if (document.maxRound == 1) {
 					// dont decrease rounds below 1
 				} else {
@@ -746,55 +841,8 @@
 				}
 			});
 
-			$("#cancel_round").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
-				$("#round_over_song_details").hide();
-				$("#loading").css({ display: "flex" });
-				sleep(1500).then(() => {
-					$("#loading").hide();
-					$("#menu").css({ display: "flex" });
-				});
-				var command = [];
-				command.push({ type: "cancel" });
-				air_console.message(0, command);
-			});
-
-			$("#game_over").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
-				$("#game_over").hide();
-				$("#loading").css({ display: "flex" });
-				sleep(1500).then(() => {
-					$("#loading").hide();
-					$("#menu").css({ display: "flex" });
-				});
-				var command = [];
-				command.push({ type: "back_to_main" });
-				air_console.message(0, command);
-			});
-
-			$("#back_from_credit, #back_from_credits_area .icon-container").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
-				// inform the screen to display the animation
-				var command = [];
-				command.push({ type: "back" });
-				air_console.message(0, command);
-
-				$("#back_from_credits_area").hide();
-				$("#loading").css({ display: "flex" });
-				// wait for the animation on the screen to finish
-				sleep(3100).then(() => {
-					$("#loading").hide();
-					// check if we are the master controller
-					if (am_i_master()) {
-						$("#menu").css({ display: "flex" });
-					} else {
-						$("#waiting_for_start").css({ display: "flex" });
-					}
-				});
-			});
-
-			$(".increase_rounds").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
+			$("#plus-button-image").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
 				if (document.maxRound === document.maxPlaylistRounds) {
 					// cant increase further
 				} else {
@@ -806,6 +854,111 @@
 					command.push({ type: "increase_rounds" });
 					air_console.message(0, command);
 				}
+			});
+
+			$("#cancel_round").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
+				$("#round_over_song_details").hide();
+				$("#loading").css({ display: "flex" });
+				sleep(1500).then(() => {
+					$("#loading").hide();
+					$("#left-button-image").hide();
+					$("#right-button-image").hide();
+					$("#up-button-image").hide();
+					$("#down-button-image").hide();
+					$("#return-button-image").hide();
+					$("#select-button-image").hide();
+				});
+				var command = [];
+				command.push({ type: "cancel" });
+				air_console.message(0, command);
+			});
+
+			$("#game_over").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
+				$("#game_over").hide();
+				$("#loading").css({ display: "flex" });
+				sleep(1500).then(() => {
+					$("#loading").hide();
+					$("#up-button-image").show();
+					$("#down-button-image").show();
+					$("#select-button-image").show();
+				});
+				var command = [];
+				command.push({ type: "back_to_main" });
+				air_console.message(0, command);
+			});
+
+			$("#returnUpdate-button-image, #returnCredits-button-image").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
+				// inform the screen to display the animation
+				var command = [];
+				command.push({ type: "back" });
+				air_console.message(0, command);
+
+				$("#back_from_credits_area").hide();
+				$("#back_from_updates_area").hide();
+				$("#loading").css({ display: "flex" });
+				// wait for the animation on the screen to finish
+				sleep(3100).then(() => {
+					$("#loading").hide();
+					// check if we are the master controller
+					if (am_i_master()) {
+						$("#up-button-image").show();
+						$("#down-button-image").show();
+						$("#select-button-image").show();
+					} else {
+						$("#waiting_for_start").css({ display: "flex" });
+					}
+				});
+			});
+
+			$("#return-menu-button-updates").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
+				// inform the screen to display the animation
+				var command = [];
+				command.push({ type: "back" });
+				air_console.message(0, command);
+
+				$("#back_from_credits_area").hide();
+				$("#back_from_updates_area").hide();
+				$("#loading").css({ display: "flex" });
+				// wait for the animation on the screen to finish
+				sleep(3100).then(() => {
+					$("#loading").hide();
+					// check if we are the master controller
+					if (am_i_master()) {
+						$("#up-button-image").show();
+						$("#down-button-image").show();
+						$("#select-button-image").show();
+					} else {
+						$("#waiting_for_start").css({ display: "flex" });
+					}
+				});
+			});
+
+			$("#return-menu-button-game_over").bind('touchstart mousedown', function (event) {
+				event.preventDefault(); 
+				// inform the screen to display the animation
+				var command = [];
+				command.push({ type: "back" });
+				air_console.message(0, command);
+
+				$("#back_from_credits_area").hide();
+				$("#back_from_updates_area").hide();
+				$("#loading").css({ display: "flex" });
+				// wait for the animation on the screen to finish
+				sleep(3100).then(() => {
+					$("#loading").hide();
+					// check if we are the master controller
+					if (am_i_master()) {
+						$("#up-button-image").show();
+						$("#down-button-image").show();
+						$("#select-button-image").show();
+					} else {
+						$("#waiting_for_start").css({ display: "flex" });
+					}
+				});
 			});
 
 		});

@@ -1,13 +1,12 @@
 <head>
-	<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
+	<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.8.0.js"></script>
 	<link rel="stylesheet" href="screen.css">
 	<link rel="stylesheet" href="shared.css">
-	<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto|Play" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-	<script src="playlists/playlist_info.js"></script>
 	<script type="text/javascript">
 
 		// whether or not to display all information
@@ -31,6 +30,8 @@
 		document.RoundTime = document.RoundTimeSetting;
 		document.defaultMaxRound = 15;
 		document.maxRound = document.defaultMaxRound;
+		document.OfflinePause;
+		document.offlinePauseOffset;
 
 		// store current scores of players
 		document.playerScores = [];
@@ -42,6 +43,8 @@
 		document.showing_credits = false;
 		document.game_over_screen = false;
 		document.playerFailed = false;
+		document.musicFailed = false;
+		document.paused = false;
 
 		document.low_performance = false;
 
@@ -59,23 +62,360 @@
 
 		var specific_options_dialogue = "Choose the Setting you want to change or hit start to play with the current settings.";
 
-		var air_console;
 
-		/*
-					{
-				name: "Wildcard",
-				id: "666",
-				description: "Completely uncurated random selection of songs",
+		var playlists = [
+			{
+				name: "2000's",
+				id: "11",
+				description: "The best and the worst decade.",
 				new: "0",
+				hero: "1",
+				amount_of_tracks: 317,
+				album_art: [
+					"album_art/270842179.jpg",
+					"album_art/723351610.jpg",
+					"album_art/293405771.jpg",
+					"album_art/258056379.jpg"
+				]
+			},
+			{
+				name: "2010's",
+				id: "26",
+				description: "Music from 2010-2019",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 196,
+				album_art: [
+					"album_art/389604528.jpg",
+					"album_art/1209173681.jpg",
+					"album_art/1444609107.jpg",
+					"album_art/1440819356.jpg"
+				]
+			},
+			{
+				name: "70's",
+				id: "9",
+				description: "Rock'n Roll & Funk is born",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 145,
+				album_art: [
+					"album_art/177408365.jpg",
+					"album_art/1423191432.jpg",
+					"album_art/208819125.jpg",
+					"album_art/1423766994.jpg"
+				]
+			},
+			{
+				name: "80's",
+				id: "10",
+				description: "The age of MTV",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 148,
+				album_art: [
+					"album_art/1329359005.jpg",
+					"album_art/1489263727.jpg",
+					"album_art/930166513.jpg",
+					"album_art/1434144397.jpg"
+				]
+			},
+			{
+				name: "90's",
+				id: "2",
+				description: "Eurdance, Teen Pop, Hip Hop and Bravo Hits",
+				new: "0",
+				hero: "1",
+				amount_of_tracks: 222,
+				album_art: [
+					"album_art/526521410.jpg",
+					"album_art/171708494.jpg",
+					"album_art/1288190404.jpg",
+					"album_art/693198382.jpg"
+				]
+			},
+			{
+				name: "Ballads",
+				id: "23",
+				description: "",
+				new: "0",
+				hero: "1",
+				amount_of_tracks: 114,
+				album_art: [
+					"album_art/2294739.jpg",
+					"album_art/1440833098.jpg",
+					"album_art/1235889139.jpg",
+					"album_art/255843292.jpg"
+				]
+			},
+			{
+				name: "Christmas",
+				id: "60",
+				description: "",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 117,
+				album_art: [
+					"album_art/1586667718.jpg",
+					"album_art/1589967724.jpg",
+					"album_art/726136064.jpg",
+					"album_art/1488180530.jpg"
+				]
+			},
+			{
+				name: "Dance Music",
+				id: "3",
+				description: "Electronic Dance Music, mostly Trance.",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 288,
+				album_art: [
+					"album_art/1445144506.jpg",
+					"album_art/878950953.jpg",
+					"album_art/569845385.jpg",
+					"album_art/497230922.jpg"
+				]
+			},
+			{
+				name: "Deutschland",
+				id: "7",
+				description: "Songs in German or from Germany",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 169,
+				album_art: [
+					"album_art/353494891.jpg",
+					"album_art/723748769.jpg",
+					"album_art/250216026.jpg",
+					"album_art/513700005.jpg"
+				]
+			},
+			{
+				name: "Female Artists",
+				id: "35",
+				description: "Female artists & collaborations",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 419,
+				album_art: [
+					"album_art/1494981947.jpg",
+					"album_art/315025768.jpg",
+					"album_art/387193895.jpg",
+					"album_art/1243004209.jpg"
+				]
+			},
+			{
+				name: "freakpants' list of disaster",
+				id: "0",
+				description: "A list of music enjoyed by the creator of MusicGuess.",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 649,
+				album_art: [
+					"album_art/481776149.jpg",
+					"album_art/24141413.jpg",
+					"album_art/279647264.jpg",
+					"album_art/424593855.jpg"
+				]
+			},
+			{
+				name: "Global Hits 2021",
+				id: "15",
+				description: "The most successful global hits of 2021",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 117,
+				album_art: [
+					"album_art/1565442393.jpg",
+					"album_art/1563265502.jpg",
+					"album_art/1576349937.jpg",
+					"album_art/1576713766.jpg"
+				]
+			},
+			{
+				name: "Global Hits All Time",
+				id: "43",
+				description: "The most successful global hits of all Time, From 1950 to today",
+				new: "0",
+				hero: "1",
+				amount_of_tracks: 429,
+				album_art: [
+					"album_art/1088530832.jpg",
+					"album_art/930169184.jpg",
+					"album_art/1308717177.jpg",
+					"album_art/723390477.jpg"
+				]
+			},
+			{
+				name: "Hip-Hop/Rap",
+				id: "21",
+				description: "From Grandmaster Funk to Drake",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 142,
+				album_art: [
+					"album_art/560148910.jpg",
+					"album_art/1495267282.jpg",
+					"album_art/1440819356.jpg",
+					"album_art/1499567361.jpg"
+				]
+			},
+			{
+				name: "Latin",
+				id: "22",
+				description: "Songs in spanish, or from latin artists",
+				new: "0",
+				hero: "1",
+				amount_of_tracks: 145,
+				album_art: [
+					"album_art/1597512989.jpg",
+					"album_art/155658405.jpg",
+					"album_art/1543991915.jpg",
+					"album_art/1570323047.jpg"
+				]
+			},
+			{
+				name: "Pop Music",
+				id: "1",
+				description: "Music that a lot of people like",
+				new: "0",
+				hero: "1",
+				amount_of_tracks: 685,
+				album_art: [
+					"album_art/1571338856.jpg",
+					"album_art/724259722.jpg",
+					"album_art/860304622.jpg",
+					"album_art/389604528.jpg"
+				]
+			},
+			{
+				name: "Pop/Alternative Rock",
+				id: "24",
+				description: "Poprock and indie stuff",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 214,
+				album_art: [
+					"album_art/1440713819.jpg",
+					"album_art/6929336.jpg",
+					"album_art/1320780883.jpg",
+					"album_art/3446432.jpg"
+				]
+			},
+			{
+				name: "Rock & Metal",
+				id: "5",
+				description: "Mostly of the softer persuasion though",
+				new: "0",
+				hero: "0",
 				amount_of_tracks: 100,
 				album_art: [
-					"images/question.svg",
-					"images/question.svg",
-					"images/question.svg",
-					"images/question.svg"
+					"album_art/418710473.jpg",
+					"album_art/3445786.jpg",
+					"album_art/214475427.jpg",
+					"album_art/190655957.jpg"
+				]
+			},
+			{
+				name: "Spain's Most Wanted December 2021",
+				id: "61",
+				description: "Songs that People in Spain shazamed the most",
+				new: "0",
+				hero: "1",
+				amount_of_tracks: 189,
+				album_art: [
+					"album_art/1601594741.jpg",
+					"album_art/1592109188.jpg",
+					"album_art/1444051386.jpg",
+					"album_art/1597422749.jpg"
+				]
+			},
+			{
+				name: "Swiss",
+				id: "12",
+				description: "Songs from Switzerland. mostly in Swiss German",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 105,
+				album_art: [
+					"album_art/1122691144.jpg",
+					"album_art/414917353.jpg",
+					"album_art/1530784862.jpg",
+					"album_art/1458470605.jpg"
+				]
+			},
+			{
+				name: "Today's Top 50",
+				id: "63",
+				description: "The 50 most popular tracks today!",
+				new: "1",
+				hero: "1",
+				amount_of_tracks: 50,
+				album_art: [
+					"album_art/1592844016.jpg",
+					"album_art/1604376321.jpg",
+					"album_art/1590035691.jpg",
+					"album_art/1585274078.jpg"
+				]
+			},
+			{
+				name: "Trance",
+				id: "4",
+				description: "Beats & Vocals",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 103,
+				album_art: [
+					"album_art/453207238.jpg",
+					"album_art/285800013.jpg",
+					"album_art/441665313.jpg",
+					"album_art/692877437.jpg"
+				]
+			},
+			{
+				name: "UK",
+				id: "42",
+				description: "Artists from the Kingdom",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 259,
+				album_art: [
+					"album_art/991509751.jpg",
+					"album_art/415628679.jpg",
+					"album_art/1096967559.jpg",
+					"album_art/1122775993.jpg"
+				]
+			},
+			{
+				name: "US Hits 2020",
+				id: "30",
+				description: "US Hits of last year",
+				new: "0",
+				hero: "1",
+				amount_of_tracks: 100,
+				album_art: [
+					"album_art/1490463311.jpg",
+					"album_art/1551178998.jpg",
+					"album_art/1495267282.jpg",
+					"album_art/1497390717.jpg"
+				]
+			},
+			{
+				name: "Top 100: Germany",
+				id: "413",
+				description: "The most-played songs in Germany, updated every day.",
+				new: "0",
+				hero: "0",
+				amount_of_tracks: 100,
+				album_art: [
+					"album_art/1490463311.jpg",
+					"album_art/1551178998.jpg",
+					"album_art/1495267282.jpg",
+					"album_art/1497390717.jpg"
 				]
 			}
-		*/
+		];
+		var air_console;
 
 		$(document).ready(function () {
 			loop1();
@@ -178,11 +518,46 @@
 		function init() {
 			air_console = new AirConsole();
 
-
 			air_console.onPremium = function (device_id) {
 				DEBUG && console.log("Hero User connected!");
 				document.hero = true;
 				check_if_playlist_needs_hero();
+			}
+
+            air_console.onPause = function (){
+				DEBUG && console.log("OnPause!");
+				document.paused = true;
+				if (player.currentTime <= 0) {
+                    document.offlinePause = 0;
+                } else {
+                   document.offlinePause = new Date().getTime();
+                }
+				player.pause();
+			}
+
+			air_console.onResume = function (){
+				DEBUG && console.log("OnResume!");
+				document.paused = false;
+				if(!document.musicFailed){
+					//calculate the time the game was paused until resume
+					document.offlinePauseOffset += new Date().getTime() - document.offlinePause;
+				    calculateRoundTime();
+				    player.play();
+				} else{
+					document.offlinePause = 0;
+			        document.offlinePauseOffset = 0;
+					start();
+				}	
+			}
+
+			air_console.onReady = function () {
+				controller_boundary_option("first");
+				if (air_console.devices[0].client.app === "bmw-mgu") {
+				  const audioElements = document.querySelectorAll('[id^="sound-effect"]');
+                  for (let i = 0; i < audioElements.length; i++) {
+                    audioElements[i].volume = 0;
+                  }
+			    }
 			}
 
 			// watch for new controllers connecting
@@ -215,6 +590,10 @@
 				show_back_from_credits.push({
 					type: "show_back_from_credits"
 				});
+				show_back_from_updates = [];
+				show_back_from_updates.push({
+					type: "show_back_from_updates"
+				});
 				show_back_to_main = [];
 				show_back_to_main.push({
 					type: "show_back_to_main"
@@ -227,7 +606,22 @@
 				show_settings_buttons.push({
 					type: "show_settings_buttons"
 				});
-
+				show_round_number_buttons = [];
+				show_round_number_buttons.push({
+					type: "show_round_number_buttons"
+				});
+				hide_round_number_buttons = [];
+				hide_round_number_buttons.push({
+					type: "hide_round_number_buttons"
+				});
+				show_round_change_buttons = [];
+				show_round_change_buttons.push({
+					type: "show_round_change_buttons"
+				});
+				hide_round_change_buttons = [];
+				hide_round_change_buttons.push({
+					type: "hide_round_change_buttons"
+				});
 				// check if there is currently a round in progress
 				if (document.round > 0 && !document.roundEndInitiated && !document.game_over_screen) {
 					DEBUG && console.log("we a currently in a game");
@@ -240,6 +634,10 @@
 					// if the client is master, direct him to show the back to main
 					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
 						air_console.message(device_id, show_back_to_main);
+						air_console.getControllerDeviceIds().forEach(function (id) {
+							if (id === device_id) return;
+							air_console.message(id, hide_menu);
+						});
 					} else {
 						// otherwise, just show the regular waiting for start
 						air_console.message(device_id, hide_menu);
@@ -250,11 +648,85 @@
 					// if the client is master, direct him to show the back from credits
 					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
 						air_console.message(device_id, show_back_from_credits);
+						air_console.getControllerDeviceIds().forEach(function (id) {
+							if (id === device_id) return;
+							air_console.message(id, hide_menu);
+						});
 					} else {
 						// otherwise, just show the regular waiting for start
 						air_console.message(device_id, hide_menu);
 					}
-				} else {
+				} else if (document.showing_updates) {
+					DEBUG && console.log("we are currently showing updates");
+					// if we are currently showing credits, let the client know what to display
+					// if the client is master, direct him to show the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
+						air_console.message(device_id, show_back_from_updates);
+						air_console.getControllerDeviceIds().forEach(function (id) {
+							if (id === device_id) return;
+							air_console.message(id, hide_menu);
+						});
+					} else {
+						// otherwise, just show the regular waiting for start
+						air_console.message(device_id, hide_menu);
+					}
+				}else if (document.show_playlist_buttons) {
+					DEBUG && console.log("we are currently showing updates");
+					// if we are currently showing credits, let the client know what to display
+					// if the client is master, direct him to show the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
+						air_console.message(device_id, show_playlist_buttons);
+						air_console.getControllerDeviceIds().forEach(function (id) {
+							if (id === device_id) return;
+							air_console.message(id, hide_menu);
+						});
+					} else {
+						// otherwise, just show the regular waiting for start
+						air_console.message(device_id, hide_menu);
+					}
+				}else if (document.show_round_change_buttons) {
+					DEBUG && console.log("we are currently showing round change buttons");
+					// if we are currently showing credits, let the client know what to display
+					// if the client is master, direct him to show the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
+						air_console.message(device_id, show_round_change_buttons);
+						air_console.getControllerDeviceIds().forEach(function (id) {
+							if (id === device_id) return;
+							air_console.message(id, hide_menu);
+						});
+					} else {
+						// otherwise, just show the regular waiting for start
+						air_console.message(device_id, hide_menu);
+					}
+				}else if (document.show_round_number_buttons) {
+					DEBUG && console.log("we are currently showing round change buttons");
+					// if we are currently showing credits, let the client know what to display
+					// if the client is master, direct him to show the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
+						air_console.message(device_id, show_round_number_buttons);
+						air_console.getControllerDeviceIds().forEach(function (id) {
+							if (id === device_id) return;
+							air_console.message(id, hide_menu);
+						});
+					} else {
+						// otherwise, just show the regular waiting for start
+						air_console.message(device_id, hide_menu);
+					}
+				}else if (document.show_settings_buttons) {
+					DEBUG && console.log("we are currently showing round change buttons");
+					// if we are currently showing credits, let the client know what to display
+					// if the client is master, direct him to show the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
+						air_console.message(device_id, show_settings_buttons);
+						air_console.getControllerDeviceIds().forEach(function (id) {
+							if (id === device_id) return;
+							air_console.message(id, hide_menu);
+						});
+					} else {
+						// otherwise, just show the regular waiting for start
+						air_console.message(device_id, hide_menu);
+					}
+				}else {
 					DEBUG && console.log("There is no round in progress, and we are not showing credits");
 					// if there is no round in progress, check if the connected device is the master
 					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
@@ -303,7 +775,57 @@
 						});
 						air_console.message(air_console.getMasterControllerDeviceId(), message);
 					}
-				} else {
+				} else if (document.showing_updates) {
+					// let the new master know to display the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined) {
+						DEBUG && console.log("informing new master to show the back to updates button");
+						message = [];
+						message.push({
+							type: "show_back_from_updates"
+						});
+						air_console.message(air_console.getMasterControllerDeviceId(), message);
+					}
+				}else if (document.show_playlist_buttons) {
+					// let the new master know to display the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined) {
+						DEBUG && console.log("informing new master to show the back to updates button");
+						message = [];
+						message.push({
+							type: "show_playlist_buttons"
+						});
+						air_console.message(air_console.getMasterControllerDeviceId(), message);
+					}
+				}else if (document.show_round_change_buttons) {
+					// let the new master know to display the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined) {
+						DEBUG && console.log("informing new master to show the back to updates button");
+						message = [];
+						message.push({
+							type: "show_round_change_buttons"
+						});
+						air_console.message(air_console.getMasterControllerDeviceId(), message);
+					}
+				}else if (document.show_round_number_buttons) {
+					// let the new master know to display the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined) {
+						DEBUG && console.log("informing new master to show the back to updates button");
+						message = [];
+						message.push({
+							type: "show_round_number_buttons"
+						});
+						air_console.message(air_console.getMasterControllerDeviceId(), message);
+					}
+				}else if (document.show_settings_buttons) {
+					// let the new master know to display the back from credits
+					if (air_console.getMasterControllerDeviceId() !== undefined) {
+						DEBUG && console.log("informing new master to show the back to updates button");
+						message = [];
+						message.push({
+							type: "show_settings_buttons"
+						});
+						air_console.message(air_console.getMasterControllerDeviceId(), message);
+					}
+				}else {
 					// let the new master know to display the menu
 					if (air_console.getMasterControllerDeviceId() !== undefined) {
 						message = [];
@@ -313,6 +835,11 @@
 						air_console.message(air_console.getMasterControllerDeviceId(), message);
 					}
 				}
+				if(document.hero && air_console.getPremiumDeviceIds() !== undefined){
+					DEBUG && console.log("Hero User Disconnected!");
+				    document.hero = false;
+				    check_if_playlist_needs_hero();
+				}
 			}
 
 			// Listen for messages from other devices
@@ -320,6 +847,8 @@
 				// handle message
 				var type = message[0].type;
 				DEBUG && console.log('handling ' + type + ' message on screen.');
+
+				DEBUG && console.log(document.screen);
 
 				switch (type) {
 					case 'back':
@@ -344,6 +873,7 @@
 								$("#game_logo").removeClass("smallLogo");
 								$("#updates").animate({ opacity: 0 }, 1500);
 								sleep(1500).then(() => {
+									document.showing_updates = false;
 									$("#main-menu").animate({ opacity: 1 }, 1500);
 									sleep(1500).then(() => {
 										hide_loading();
@@ -359,10 +889,17 @@
 								document.screen = "specific-options";
 								break;
 							case "round-amount-selector":
-								// inform controller to hide increase/decrease buttons
-								hide_round_change_buttons = [];
-								hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
-								air_console.broadcast(hide_round_change_buttons);
+
+							    // inform controller to hide increase/decrease buttons
+								document.show_round_change_buttons = false;
+								document.show_round_number_buttons = false;
+								show_settings_buttons = [];
+								show_settings_buttons.push({ type: "show_settings_buttons" });
+								air_console.broadcast(show_settings_buttons);
+								if (air_console.getMasterControllerDeviceId() !== undefined) {
+									document.show_settings_buttons = true;
+									air_console.message(air_console.getMasterControllerDeviceId(), show_settings_buttons);
+								}
 
 								$("#round-amount-selector").hide();
 								$("#option-selector").show();
@@ -370,7 +907,11 @@
 								document.screen = "specific-options";
 								break;
 							case "specific-options":
+
 								// go back to default selection
+								controller_boundary_option("last");
+
+
 								document.screen = "default-options";
 								$("#specific-options").hide();
 								$("#default-options").css("display", "flex");
@@ -378,28 +919,31 @@
 							case "default-options":
 								// go back to playlist selection
 								document.screen = "playlist-selection";
+								document.show_settings_buttons = false;
 								// message the controller to display the playlist buttons
 								if(air_console.getMasterControllerDeviceId() !== undefined) {
+									document.show_playlist_buttons = true;
 									air_console.message(air_console.getMasterControllerDeviceId(), show_playlist_buttons);
 								}
-
 								$("#default-options").hide();
 								$("#playlist-display").hide();
 								$("#roundCounter").hide();
 								$("#playlist-selector").css("display", "flex");
+								check_if_playlist_needs_hero();
 								break;
 							case "playlist-selection":
 								// go back to menu
+
 								$("#game_logo").removeClass("smallLogo");
 								document.screen = "main-menu";
-
 								show_main_menu_buttons = [];
 								show_main_menu_buttons.push({ type: "show_main_menu_buttons" });
 								// let controller know to display the main menu buttons (up down)
 								air_console.broadcast(show_main_menu_buttons);
-
+								document.show_playlist_buttons = false;
 								$("#playlist-selector").hide();
 								$("#main-menu").show();
+								controller_boundary_option("first");
 								break;
 							case "credits":
 								document.screen = "main-menu";
@@ -419,7 +963,8 @@
 								break;
 						}
 						break;
-					case 'confirm':
+					case 'select':
+						controller_boundary_option(false);
 						// determine what screen we are on
 						switch (document.screen) {
 							case "spotify":
@@ -458,11 +1003,12 @@
 											$("#playlist-selector").css("display", "flex");
 											hide_loading();
 											if (air_console.getMasterControllerDeviceId() !== undefined) {
+												document.show_playlist_buttons = true;
 												air_console.message(air_console.getMasterControllerDeviceId(), show_playlist_buttons);
 											}
+											check_if_playlist_needs_hero();
 										});
 										document.screen = "playlist-selection";
-										check_if_playlist_needs_hero();
 										break;
 									case "credits":
 										DEBUG && console.log("showing credits");
@@ -489,9 +1035,13 @@
 										$("#main-menu").animate({ opacity: 0 }, 1500);
 										$("#game_logo").addClass("smallLogo");
 										$("#updates").css("display", "flex");
-										$("#updates").animate({ opacity: 1 }, 1500);
+										$("#updates").animate({ opacity: 0.9 }, 1500);
 										sleep(1500).then(() => {
+											document.showing_updates = true;
 											hide_loading();
+											if (air_console.getMasterControllerDeviceId() !== undefined) {
+												air_console.message(air_console.getMasterControllerDeviceId(), show_back_from_updates);
+											}
 										});
 										document.screen = "updates";
 										break;
@@ -542,15 +1092,23 @@
 								document.screen = "specific-options";
 
 								// inform controller to hide increase/decrease buttons
-								hide_round_change_buttons = [];
-								hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
-								air_console.broadcast(hide_round_change_buttons);
+								document.show_round_change_buttons = false;
+								document.show_round_number_buttons = false;
+								DEBUG && console.log(document.show_round_change_buttons);
+								show_settings_buttons = [];
+								show_settings_buttons.push({ type: "show_settings_buttons" });
+								air_console.broadcast(show_settings_buttons);
+								if (air_console.getMasterControllerDeviceId() !== undefined) {
+									document.show_settings_buttons = true;
+									air_console.message(air_console.getMasterControllerDeviceId(), show_settings_buttons);
+								}
 								break;
 							case "specific-options":
 								DEBUG && console.log("handling confirm button on specific options");
 
 								switch (document.setting) {
 									case "round_amount":
+										controller_boundary_option("first");
 										document.screen = "round-amount-selector";
 										$("#option-selector").hide();
 
@@ -567,9 +1125,17 @@
 										const firstOption = $("#round-amount-selector li").first();
 										$(firstOption).addClass("active");
 										$("#roundCounter").html($(firstOption).html() + " Rounds");
-
+										document.show_settings_buttons = false;
+										show_round_number_buttons = [];
+								        show_round_number_buttons.push({ type: "show_round_number_buttons" });
+								        if (air_console.getMasterControllerDeviceId() !== undefined) {
+											document.show_round_number_buttons = true;
+								            air_console.message(air_console.getMasterControllerDeviceId(), show_round_number_buttons);
+								        }
+								        air_console.broadcast(show_round_number_buttons);
 										break;
 									case "guessing_type":
+										controller_boundary_option("first");
 										$(".guessing-option").removeClass("active");
 										$("#guessing-artist").addClass("active");
 										document.guessing_type = "guessing-artist";
@@ -594,6 +1160,7 @@
 
 								break;
 							case "default-options":
+								controller_boundary_option("first");
 								DEBUG && console.log("handling confirm button on default options");
 								$("#default-options").hide();
 								if (document.default) {
@@ -618,6 +1185,11 @@
 								}
 								break;
 							case "playlist-selection":
+
+								controller_boundary_option("first");
+
+
+
 								// set default yes to active
 								document.default = true;
 								$("#default-yes").addClass("active");
@@ -626,12 +1198,15 @@
 								DEBUG && console.log("going to default options");
 								// go to default option prompt
 								document.screen = "default-options";
-
-								// message the controller to show settings buttons
+								show_settings_buttons = [];
+								show_settings_buttons.push({ type: "show_settings_buttons" });
+								air_console.broadcast(show_settings_buttons);
+								document.show_playlist_buttons = false;
+								document.show_round_number_buttons = false;
 								if (air_console.getMasterControllerDeviceId() !== undefined) {
+									document.show_settings_buttons = true;
 									air_console.message(air_console.getMasterControllerDeviceId(), show_settings_buttons);
 								}
-
 								$("#playlist-selector").hide();
 								$("#default-options").css("display", "flex");
 								$("#default-options .dialogue").css("display", "flex");
@@ -677,6 +1252,12 @@
 									next_option = $(active_option).next();
 								}
 
+								if ($(next_option).is(':last-child')) {
+									controller_boundary_option("last");
+								} else {
+									controller_boundary_option(false);
+								}
+
 								$(active_option).removeClass("active");
 								$(next_option).addClass("active");
 								break;
@@ -689,6 +1270,12 @@
 									next_option = $(active_option).next();
 								}
 
+								if ($(next_option).is(':last-child')) {
+									controller_boundary_option("last");
+								} else {
+									controller_boundary_option(false);
+								}
+
 								$(active_option).removeClass("active");
 								$(next_option).addClass("active");
 								if ($(next_option).html() === "Custom Amount") {
@@ -697,12 +1284,20 @@
 									// inform controller to display increase/decrease buttons
 									show_round_change_buttons = [];
 									show_round_change_buttons.push({ type: "show_round_change_buttons" });
+									document.show_round_change_buttons = true;
+									document.show_playlist_buttons = false;
 									air_console.broadcast(show_round_change_buttons);
 								} else {
 									// inform controller to hide increase/decrease buttons
-									hide_round_change_buttons = [];
-									hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
-									air_console.broadcast(hide_round_change_buttons);
+									document.show_round_change_buttons = false;
+									document.show_playlist_buttons = false;
+									show_round_number_buttons = [];
+								        show_round_number_buttons.push({ type: "show_round_number_buttons" });
+								        if (air_console.getMasterControllerDeviceId() !== undefined) {
+											document.show_round_number_buttons = true;
+								            air_console.message(air_console.getMasterControllerDeviceId(), show_round_number_buttons);
+								        }
+								        air_console.broadcast(show_round_number_buttons);
 									$("#roundCounter").html($(next_option).html() + " Rounds");
 								}
 
@@ -713,17 +1308,21 @@
 										document.setting = "guessing_type";
 										$("#round_amount_option").removeClass("active");
 										$("#guessing_type").addClass("active");
+										controller_boundary_option(false);
 										break;
 									case "guessing_type":
 										document.setting = "start";
 										$("#guessing_type").removeClass("active");
 										$("#specific-start").addClass("active");
+										controller_boundary_option("last");
 										break;
-									case "start":								
-										document.setting = "round_amount";
-										$("#specific-start").removeClass("active");
-										$("#round_amount_option").addClass("active");
-									break; 
+									case "start":
+									/* 
+									document.setting = "round_amount";
+									$("#specific-start").removeClass("active");
+									$("#round_amount_option").addClass("active");
+									controller_boundary_option("last");
+									break; */
 								}
 
 								break;
@@ -732,10 +1331,12 @@
 									document.default = false;
 									$("#default-no").addClass("active");
 									$("#default-yes").removeClass("active");
+									controller_boundary_option("last");
 								} else {
+									/* controller_boundary_option("first");
 									document.default = true;
 									$("#default-yes").addClass("active");
-									$("#default-no").removeClass("active");
+									$("#default-no").removeClass("active"); */
 								}
 								break;
 							case "playlist-selection":
@@ -747,28 +1348,36 @@
 										document.menu = "credits";
 										$("#new-game-button").removeClass("active");
 										$("#credits-button").addClass("active");
-
+										controller_boundary_option(false);
 										break;
 									case "credits":
 										document.menu = "updates";
 										$("#credits-button").removeClass("active");
 										$("#updates-button").addClass("active");
+										if (!check_for_freakpants()) {
+											controller_boundary_option("last");
+										} else {
+											controller_boundary_option(false);
+										}
 										break;
 									case "updates":
 										if (check_for_freakpants()) {
+											controller_boundary_option("last");
 											document.menu = "spotify";
 											$("#updates-button").removeClass("active");
 											$("#connect-spotify-button").addClass("active");
 										} else {
-											document.menu = "new-game";
-											$("#updates-button").removeClass("active");
-											$("#new-game-button").addClass("active");
+											// dont do anything at the last spot
+											// document.menu = "new-game";
+											// $("#updates-button").removeClass("active");
+											// $("#new-game-button").addClass("active");
 										}
+
 										break;
 									case "spotify":
-									document.menu = "new-game";
+									/* document.menu = "new-game";
 									$("#connect-spotify-button").removeClass("active");
-									$("#new-game-button").addClass("active");
+									$("#new-game-button").addClass("active"); */
 								}
 								break;
 						}
@@ -781,10 +1390,18 @@
 							case "guessing-type-selector":
 								active_option = $("#guessing-type-selector .active");
 								if ($(active_option).is(':first-child')) {
-									previous_option = $("#guessing-type-selector li").last();
+									break;
+									// previous_option = $("#guessing-type-selector li").last();
 								} else {
 									previous_option = $(active_option).prev();
 								}
+
+								if ($(active_option).is(':first-child')) {
+									controller_boundary_option("first");
+								} else {
+									controller_boundary_option(false);
+								}
+
 								$(active_option).removeClass("active");
 								$(previous_option).addClass("active");
 
@@ -797,6 +1414,13 @@
 								} else {
 									previous_option = $(active_option).prev();
 								}
+
+								if ($(previous_option).is(':first-child')) {
+									controller_boundary_option("first");
+								} else {
+									controller_boundary_option(false);
+								}
+
 								$(active_option).removeClass("active");
 								$(previous_option).addClass("active");
 								if ($(previous_option).html() === "Custom Amount") {
@@ -805,12 +1429,20 @@
 									// inform controller to display increase/decrease buttons
 									show_round_change_buttons = [];
 									show_round_change_buttons.push({ type: "show_round_change_buttons" });
+									document.show_round_change_buttons = true;
+									document.show_playlist_buttons = false;
 									air_console.broadcast(show_round_change_buttons);
 								} else {
 									// inform controller to hide increase/decrease buttons
-									hide_round_change_buttons = [];
-									hide_round_change_buttons.push({ type: "hide_round_change_buttons" });
-									air_console.broadcast(hide_round_change_buttons);
+									document.show_playlist_buttons = true;
+									document.show_round_change_buttons = false;
+									show_round_number_buttons = [];
+								        show_round_number_buttons.push({ type: "show_round_number_buttons" });
+								        if (air_console.getMasterControllerDeviceId() !== undefined) {
+											document.show_round_number_buttons = true;
+								            air_console.message(air_console.getMasterControllerDeviceId(), show_round_number_buttons);
+								        }
+								        air_console.broadcast(show_round_number_buttons);
 									$("#roundCounter").html($(previous_option).html() + " Rounds");
 								}
 
@@ -826,23 +1458,26 @@
 										document.setting = "round_amount";
 										$("#guessing_type").removeClass("active");
 										$("#round_amount_option").addClass("active");
+										controller_boundary_option("first");
 										break;
 									case "start":
 										document.setting = "guessing_type";
 										$("#specific-start").removeClass("active");
 										$("#guessing_type").addClass("active");
+										controller_boundary_option(false);
 										break;
 								}
 								break;
 							case "default-options":
 								if (document.default) {
-									document.default = false;
+									/* document.default = false;
 									$("#default-no").addClass("active");
-									$("#default-yes").removeClass("active");
+									$("#default-yes").removeClass("active"); */
 								} else {
 									document.default = true;
 									$("#default-yes").addClass("active");
 									$("#default-no").removeClass("active");
+									controller_boundary_option("first");
 								}
 							case "playlist-selection":
 								switch_playlist('previous');
@@ -850,7 +1485,8 @@
 							case "main-menu":
 								switch (document.menu) {
 									case "new-game":
-										// go back to last option
+										// dont do anything at the first selection
+										/* 
 										if (check_for_freakpants()) {
 											document.menu = "spotify";
 											$("#new-game-button").removeClass("active");
@@ -859,18 +1495,20 @@
 											document.menu = "updates";
 											$("#new-game-button").removeClass("active");
 											$("#updates-button").addClass("active");
-										} 
+										} */
 
 										break;
 									case "credits":
 										document.menu = "new-game";
 										$("#credits-button").removeClass("active");
 										$("#new-game-button").addClass("active");
+										controller_boundary_option("first");
 										break;
 									case "updates":
 										document.menu = "credits";
 										$("#updates-button").removeClass("active");
 										$("#credits-button").addClass("active");
+										controller_boundary_option(false);
 										break;
 									case "spotify":
 										document.menu = "updates";
@@ -901,6 +1539,7 @@
 						}
 						break;
 					case 'cancel':
+						controller_boundary_option("first");
 						$("#message").html("");
 						$("#message").hide();
 						$("#roundCounter").hide();
@@ -949,6 +1588,7 @@
 
 						break;
 					case 'back_to_main':
+						controller_boundary_option("first");
 						document.screen = "main-menu";
 						$("#message").html("");
 						// $("#message").hide("fade", {}, 1500);
@@ -1059,7 +1699,13 @@
 			var playlist_html;
 
 			$("#screen-wrapper").append('<img id="playanimation" src="audio.svg" />');
+			$("body").prepend('<div id="fallimg" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background-image:url(images/screen/fallback.jpg); background-size:cover; background-position:center;"></div>');
 			$("body").append('<video playsinline autoplay muted loop id="bgvid"><source src="videos/disco_loop.mp4" type="video/mp4"></video>');
+
+			//remove fallback image when video is loaded
+			$("#bgvid").on("loadedmetadata", function() {
+              $("#fallimg").remove();
+            });
 
 			playlists.every(function (playlist) {
 
@@ -1087,27 +1733,11 @@
 				// dont even add the images on the gamehub app
 				// document.low_performance = true;
 				if (!document.low_performance) {
-					mask_counter = 0;
 					playlist.album_art.forEach(function (element) {
-						switch(mask_counter){
-							case 0:
-								maskClass = 'mask-top-left';
-								break;
-							case 1:
-								maskClass = 'mask-top-right';
-								break;
-							case 2:
-								maskClass = 'mask-bottom-left';
-								break;
-							case 3:
-								maskClass = 'mask-bottom-right';
-								break;
-						}
-						mask_counter++;
 						if (!add_to_storage_only) {
-							html = html + '<div class="mask ' + maskClass + '"><img src="' + element + '" /></div>';
+							html = html + '<img src="' + element + '" />';
 						}
-						playlist_html += '<div class="mask ' + maskClass + '"><img src="' + element + '" /></div>';
+						playlist_html += '<img src="' + element + '" />';
 					});
 					if (playlist.new === "1") {
 						if (!add_to_storage_only) {
@@ -1133,12 +1763,12 @@
 				}
 				if (!add_to_storage_only) {
 					html += '</div></div>';
-					html += '<div class="disc-hole-wrapper"><img src="dischole.png" /></div>';
+					html += '<div id="disc-hole-wrapper" ><div id="disc-hole"></div></div>';
 					html += '</div>';
 				}
 
 				playlist_html += '</div></div>';
-				playlist_html += '<div class="disc-hole-wrapper"><img src="dischole.png" /></div>';
+				playlist_html += '<div id="disc-hole-wrapper" ><div id="disc-hole"></div></div>';
 				playlist_html += '</div>';
 
 				document.playlist_storage[counter] = playlist_html;
@@ -1155,11 +1785,11 @@
 
 			// go to a specific playlist (workaround until rewrite)
 			// switch_playlist("next");
-			switch_playlist("next");
-			switch_playlist("next");
-			switch_playlist("next");
-			switch_playlist("next");
-			switch_playlist("next");
+			switch_playlist("previous");
+			switch_playlist("previous");
+			switch_playlist("previous");
+			switch_playlist("previous");
+			switch_playlist("previous");
 
 			//	});
 		}
@@ -1167,12 +1797,17 @@
 
 
 		function calculateRoundTime() {
-
-			// calculate the difference between the start of the round and now
-			currentTime = new Date().getTime();
-			timePassed = Math.floor((currentTime - document.RoundStartTime) / 1000);
-			// substract the time passed from the roundtime setting (30 secs unless set otherwise)
-			document.RoundTime = document.RoundTimeSetting - timePassed;
+            if(document.paused || player.currentTime <= 0){
+				//Add the time that passed while the game was paused to the round time
+				document.RoundStartTime = new Date().getTime() - (document.RoundTimeSetting - document.RoundTime) * 1000;	
+				document.test = new Date().getTime();
+			} else if(!document.paused || player.currentTime > 0){
+                // calculate the difference between the start of the round and now
+			    currentTime = new Date().getTime();
+			    timePassed = Math.floor((currentTime - document.RoundStartTime) / 1000);
+			    // substract the time passed from the roundtime setting (30 secs unless set otherwise)
+			    document.RoundTime = document.RoundTimeSetting - timePassed;
+			}
 			// display the current time on the UI
 			$("#roundTime").html(document.RoundTime);
 
@@ -1228,6 +1863,17 @@
 				document.roundEndInitiated = true;
 				round_end();
 			}
+		}
+
+		function controller_boundary_option(type) {
+			// let the master controller know not to display the corresponding button
+			// determine master controller
+			master_controller = air_console.getMasterControllerDeviceId();
+			// prepare message
+			message = [];
+			message.push({ type: "boundary", boundary: type });
+			// send message to master controller
+			air_console.message(master_controller, message);
 		}
 
 		function initiateScrollingCheck() {
@@ -1346,29 +1992,44 @@
 
 			// fade logo
 			$("#game_logo").hide("fade", {}, 1500);
-
+            
 			sleep(1500).then(() => {
 
-				// show message again (may have been hidden by end of game)
-				$("#message").css({ display: "flex" });
-				$("#status").css({ display: "flex" });
-
-
-
-				$("#message").html("Get ready for the first round!");
-				$("#status").html("3");
-				document.getElementById("sound-effect-clock").play();
-
+				if(document.paused){
+					document.musicFailed = true;
+					$("#status").html("countdown paused");
+					return;
+				} else{
+                    // show message again (may have been hidden by end of game)
+				    $("#message").css({ display: "flex" });
+				    $("#status").css({ display: "flex" });
+				    $("#message").html("Get ready for the first round!");
+				    $("#status").html("3");
+				    document.getElementById("sound-effect-clock").play();
+				}
 
 				sleep(1000).then(() => {
 
-
-
-					document.getElementById("sound-effect-clock").play();
-					$("#status").html("2");
-					sleep(1000).then(() => {
+					if(document.paused){
+					    document.musicFailed = true;
+						$("#status").html("countdown paused");
+					    return;
+				    } else{
 						document.getElementById("sound-effect-clock").play();
-						$("#status").html("1");
+					    $("#status").html("2");
+					}
+
+					sleep(1000).then(() => {
+
+						if(document.paused){
+					       document.musicFailed = true;
+						   $("#status").html("countdown paused");
+					       return;
+				        }else{
+						   document.getElementById("sound-effect-clock").play();
+						   $("#status").html("1");
+						}
+
 						sleep(1000).then(() => {
 
 							$("#roundCounter").html("Round</br>1/" + document.maxRound);
@@ -1422,14 +2083,17 @@
 										library_copy_for_wrong_answers = library.slice();
 										// console.log(library);
 										DEBUG && console.log("playing random song for the first time");
-
+                                        document.musicFailed = false;
 										play_random_song();
 									})
 									.fail(function (msg) {
 										DEBUG && console.log("ajax for playlist failed");
+										if(!document.paused){
 										start();
-									}
-									);
+										} else{
+											document.musicFailed = true;
+										}
+									});
 							} else {
 								$.ajax(
 									{ method: "GET", url: "playlists/playlist_" + playlists[document.selectedPlaylist].id + ".json", data: {}, dataType: "json" })
@@ -1439,12 +2103,16 @@
 										library_copy_for_wrong_answers = library.slice();
 										// console.log(library);
 										DEBUG && console.log("playing random song for the first time");
-
+                                        document.musicFailed = false;
 										play_random_song();
 									})
 									.fail(function (msg) {
 										DEBUG && console.log("ajax for playlist failed");
+										if(!document.paused){
 										start();
+										} else{
+                                           document.musicFailed = true;
+									    }
 									}
 									);
 							}
@@ -1632,7 +2300,13 @@
 
 			// record start time
 			document.startTime = new Date().getTime();
+			document.offlinePause = 0;
+			document.offlinePauseOffset = 0;
 
+            if(document.paused){
+				player.pause();
+				document.offlinePause = new Date().getTime();
+			}
 
 			// $('#player').get(0).currentTime = 5;
 			$("#playanimation").show();
@@ -1804,11 +2478,11 @@
 			DEBUG && console.log("round end function was called");
 			DEBUG && console.log("attempting to log results for song difficulty");
 
-			let result = { correct: 0, correctTime: 0, incorrect: 0, id: document.solution[0].id, service: document.solution[0].service };
+			let result = {correct: 0, correctTime: 0, incorrect: 0, id: document.solution[0].id, service:  document.solution[0].service};
 
 			document.playerScores.forEach(function (score) {
 				// document.solution
-				if (score.correct) {
+				if(score.correct){
 					result.correct++;
 					result.correctTime += score.currentGuessTime;
 				} else {
@@ -1922,11 +2596,11 @@
 					document.game_over_screen = true;
 
 					$.ajax(
-						{
-							method: "POST",
-							url: "https://zxxwemywpv.cyon.link/musicguess-data/php/round-difficulty-results.php",
-							data: { roundDifficultyResults: document.roundDifficultyResults }, dataType: "json", crossDomain: true, "headers": {}
-						});
+					{
+						method: "POST",
+						url: "https://zxxwemywpv.cyon.link/musicguess-data/php/round-difficulty-results.php",
+						data: { roundDifficultyResults: document.roundDifficultyResults }, dataType: "json", crossDomain: true, "headers": {}
+					});
 
 					// let every player know their score for their after game report
 					document.playerScores.forEach(function (score) {
@@ -2010,16 +2684,34 @@
 			// initiate next round
 			// reset the number of inactive clients (clients that connect in this time can play the next round)
 			document.inactiveClients = 0;
-			$("#message").html("Get ready for the next round!");
-			$("#status").css({ display: "flex" });
-			$("#status").html("3");
-			document.getElementById("sound-effect-clock").play();
+			if(document.paused){
+				document.musicFailed = true;
+				$("#status").html("countdown paused");
+				return;
+			}else{
+			    $("#message").html("Get ready for the next round!");
+			    $("#status").css({ display: "flex" });
+			    $("#status").html("3");
+			    document.getElementById("sound-effect-clock").play();
+			}
 			sleep(1000).then(() => {
-				document.getElementById("sound-effect-clock").play();
-				$("#status").html("2");
+				if(document.paused){
+					document.musicFailed = true;
+					$("#status").html("countdown paused");
+					return;
+				}else{
+				    document.getElementById("sound-effect-clock").play();
+				    $("#status").html("2");
+				}
 				sleep(1000).then(() => {
-					document.getElementById("sound-effect-clock").play();
-					$("#status").html("1");
+					if(document.paused){
+					    document.musicFailed = true;
+						$("#status").html("countdown paused");
+					    return;
+				    }else{
+					    document.getElementById("sound-effect-clock").play();
+					    $("#status").html("1");
+					}
 					sleep(1000).then(() => {
 						$("#current_song_service").show();
 						$("#status").html("");
@@ -2096,7 +2788,7 @@
 
 			initiate_guessing_area(from);
 
-			guessTime = (new Date().getTime() - document.startTime);
+			guessTime = (new Date().getTime() - document.startTime - document.offlinePauseOffset);
 			negative_points = Math.round(0.01 * guessTime);
 
 			actual_points = 300 - negative_points;
@@ -2260,52 +2952,35 @@
 	<div id="roundTime"></div>
 	<div id="credits-container">
 		<div id="credits">
-			<ul>
-				<li class="category">Developed by:</li>
-				<li class="content">Christian Nyffenegger, <span class="link"
-						onclick="air_console.openExternalUrl('https://twitter.com/freakpants')">freakpants</span></li>
-				<li class="category">Background video by:</li>
-				<li class="content">
-					<span class="link"
-						onclick="air_console.openExternalUrl('https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154')">
-						Tomislav Jakupec
-					</span> / Pixabay
-				</li>
-				<li class="category">Music provided by:</li>
-				<li class="content">
-						<span class="link"
-							onclick="air_console.openExternalUrl('https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html')">
-							Itunes Search API Preview
-						</span>
-				</li>
-				<li class="category">Sound effects by:</li>
-				<li class="content">
-					<span class="link"
-						onclick="air_console.openExternalUrl('https://www.zapsplat.com/')">
-						ZapSplat
-					</span>
-				</li>
-				<li class="category">Svg loaders by:</li>
-				<li class="content">
-					<span class="link" onclick="air_console.openExternalUrl('https://twitter.com/sherb')">Sam Herbert</span>
-					(<span class="link"
-						onclick="air_console.openExternalUrl('https://github.com/SamHerbert/SVG-Loaders')">Github</a>)
-					</span></br>
-				</li>	
-			</ul>
+			<span class="category">Developed by:</span>
+			<span class="content">Christian Nyffenegger, <a
+					onclick="air_console.openExternalUrl('https://twitter.com/freakpants')" target="_blank"
+					href="https://twitter.com/freakpants">freakpants</a></span></br>
+			<span class="category">Background video by:</span>
+			<span class="content"><a target="_blank"
+					href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav
+					Jakupec</a> / <a target="_blank"
+					href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a></span></br>
+			<span class="category">Music provided by:</span>
+			<span class="content"><a target="_blank"
+					href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html">Itunes
+					Search API Preview</a></span></br>
+			<span class="category">Sound effects by:</span>
+			<span class="content"><a target="_blank" href="https://www.zapsplat.com">Zapsplat</a></span></br>
+			<span class="category">SVG Loaders by:</span>
+			<span class="content"><a target="_blank" href="https://twitter.com/sherb">Sam Herbert</a> (<a
+					target="_blank" href="https://github.com/SamHerbert/SVG-Loaders">Github</a>)</span></br>
 		</div>
 	</div>
 	<div id="updates-container">
 		<div id="updates">
 			<ul>
-				<li class="category">18.05.2022</li>
-				<li class="content">Reworked UX to be more intuitive and visually distinct.</li>
-
-				<li class="category">15.12.2021</li><li class="content">Released new wildcard playlist. This dynamically selects from over 30'000 songs, but
+				<li>18.05.2022 - Reworked UX to be more intuitive and visually distinct.</li>
+				<li>15.12.2021 - Released new wildcard playlist. This dynamically selects from over 30'000 songs, but
 					with a lot of cover/live versions of songs or just plain unknown or weird songs.</li>
-					<li class="category">16.12.2021</li><li class="content">Fixed an Issue with wildcard playlist not working.</li>
-					<li class="category">20.12.2021</li><li class="content">Released a new christmas playlist</li>
-					<li class="category">04.01.2022</li><li class="content">The game is now playable for free every second week. Accordingly, some playlists are now exclusive with
+				<li>16.12.2021 - Fixed an Issue with wildcard playlist not working.</li>
+				<li>20.12.2021 - Released a new christmas playlist</li>
+				<li>04.01.2022 - The game is now playable for free. Accordingly, some playlists are now exclusive with
 					AirConsole Hero.
 					There is a new menu system, with improved selection of round amount. Released 3 new playlists:
 					Ballads, Latin, Spain's Most Wanted Dec 2021. Added 10 new songs to Global Hits 2021.

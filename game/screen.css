@@ -62,6 +62,7 @@ span.new-sticker{
     color: white;
     border-radius: 2.5em;
     width: 2.5em;
+    font-family: 'Oswald';
     background-color: #b51d05;
 	text-align: center;
 }
@@ -78,6 +79,7 @@ span.hero-sticker{
     color: white;
     border-radius: 2.5em;
     width: 2.5em;
+    font-family: 'Oswald';
     background-color:  #2e2e2e;
 	text-align: center;
 }
@@ -116,20 +118,21 @@ span.hero-sticker{
 }
 
 #playlist-details{
+	background-color: #ffdc40;
 	font-size: 2em;
 	min-width: 36vw;
     display: flex;
     flex-direction: column;
     align-content: center;
 	padding: 0vw 2vw 0vw 2vw;
+	opacity: 0.9;
 }
 
 #details-wrapper{
-	position: absolute;
-    bottom: 0px;
+	margin-top: 1vw;
 }
 
-.disc-hole-wrapper{
+#disc-hole-wrapper{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -153,7 +156,7 @@ span.hero-sticker{
 	display: flex;
 	position: absolute;
 	top: 150px;
-	opacity: 1;
+	opacity: 0.9;
 }
 
 #splash-screen{
@@ -163,6 +166,20 @@ span.hero-sticker{
 
 #credits, #victory_screen, #splash-text, #updates, #spotify{
 	width: 50vw;
+}
+
+#credits, #victory_screen, #splash-text, .dialogue, #playlist-details, #updates, #spotify{
+	box-shadow: 1px 1px 10px black;
+	font-size: 1.8em;
+	flex-direction: column;
+    align-items: center;
+	text-transform:none;
+	color: #e8822d;
+}
+
+#credits, #victory_screen, #splash-text, .dialogue, #updates, #spotify{
+	background-color: #ffdc40;
+	color: #e8822d;
 }
 
 #default-options, #specific-options{
@@ -177,12 +194,7 @@ span.hero-sticker{
 
 .dialogue{
 	padding: 1vw 2vw 1vw 2vw;
-	opacity: 1;
-	background: #b51d05;
-	color: white;
-	border-radius: 1vw;
-	font-size: 1.6em;
-    border: 5px solid white;
+	opacity: 0.9;
 }
 
 #playlist-selector .dialogue-wrapper{
@@ -239,8 +251,10 @@ span.hero-sticker{
 	width: 100vw;
 	position: absolute;
 	bottom: 1vh;
+	opacity: 0.9;
+	box-shadow: 1px 1px 10px black;
 	height: 9vh;
-	background: #7e0000;
+	background: #ffdc40;
 	flex-direction: column;
     justify-content: center;
 	flex-wrap: wrap;
@@ -248,11 +262,11 @@ span.hero-sticker{
 
 div.ticker{
 	width: 100%;
-    color: white;
+    color: #e8822d;
 	position: relative;
 	left: 0px;
     bottom: 0vh;
-	background: #7e0000;
+	background: #ffdc40;
 	font-size: 2em;
 	justify-content: center;
     display: flex;
@@ -266,20 +280,21 @@ div#ticker2{
 }
 
 #main-menu li, #default-options li, #specific-options li{
-	background: #ef5532;
+	background: #e8822d;
     list-style: none;
     width: 15vw;
 	height: 8vh;
     padding: 1vw;
+    box-shadow: 1px 1px 10px black;
     justify-content: center;
     display: flex;
 	margin: 1vw;
 	text-align: center;
 	align-items: center;
 	flex-direction: column;
-	font-size: 1.4em;
-	color: black;
-	border-radius: 10em;
+	font-size: 1.8em;
+	color: #ffdc40;
+	opacity: 0.9;
 }
 
 #specific-options li{
@@ -314,8 +329,7 @@ ul#guessing-type-selector{
 	color: white;
 	width: 22vw;
 	height: 10vh;
-	font-size: 1.5em;
-	border: 4px solid;
+	font-size: 2em;
 }
 
 #specific-start{
@@ -341,9 +355,34 @@ ul#guessing-type-selector{
 	margin-bottom: 0.5em;
 }
 
+#victory_screen .result_category, #credits .category{
+	color: #e8822d;
+	text-transform: uppercase;
+}
+
+#victory_screen .result, #credits .content{
+	text-transform: none;
+	color: #e8822d;
+}
+
+#credits .content a{
+	color: #e8822d;
+}
+
+#credits a{
+	color: rgb(255 220 64);
+}
+
 body{
 	overflow:hidden;
 	margin: 0px;
+}
+
+.player_name, .player_score{
+	width:120px;
+	text-align:center;
+	overflow:hidden;
+	color: #ffdc40;
 }
 
 div .position_display{
@@ -479,6 +518,8 @@ div .avatar_wrong{
 #playlist-display{
 	bottom: 46vh;
 	font-size: 1.5em;
+	background:#ffdc40;
+	color: #e8822d;
 }
 
 #roundTime, #roundCounter, #playlist-display{
@@ -493,11 +534,7 @@ div .avatar_wrong{
     display: none;
     width: 20vh;
     height: 20vh;
-	background: #b51d05;
-    color: white;
-    border-radius: 1vw;
-    font-size: 1.6em;
-    border: 5px solid white;
+    box-shadow: 1px 1px 10px black;
 	display:none;
 }
 
@@ -510,29 +547,26 @@ div .avatar_wrong{
 #playlist-selector{
 	display:none;
 	width:100%;
-	position:absolute;
+	left:-8px;
+	margin-top:20px;
+	position:relative;
 	justify-content:center;
-	align-content: baseline;
+	align-items: center;
 	letter-spacing: 1px;
 	flex-wrap: wrap;
-	height: calc(100% - 16vh);
-	bottom: 0;
 }
 
 #playlist-selector .album_art{
 	border-radius: 12.5vw;
-	border: 4px solid #cfc8c8;
+	border: 3px solid #1f1f1f;
 	overflow: hidden;
 	float:left;
-	height: 25vw;
+	min-width: 25vw;
+	min-height: 25vw;
 	width: 25vw;
 	font-size: 0.5em;
 	box-shadow: 1px 1px 10px black;
 	position: relative;
-	display: flex;
-    flex-wrap: wrap;
-	margin-top: 3.5vw;
-	filter: brightness(0.5);
 }
 
 #playlist-selector .album_art img{
@@ -540,8 +574,17 @@ div .avatar_wrong{
 	height: 12.5vw;
 }
 
+#playlist-selector .album_art.previous{
+	background-color: #ffdc40;	
+}
+
+#playlist-selector .album_art.next{
+	background: #b51d05;
+	
+}
+
 #playlist-selector .album_art.active{
-	filter: brightness(1);
+	background-color: #e8822d;
     min-width: 32vw;
     width: 32vw;
     height: 32vw;
@@ -549,7 +592,6 @@ div .avatar_wrong{
 	max-height: unset;
 	margin-left: 2em;
 	margin-right: 2em;
-	margin-top: unset;
 	transition: width 1s, height 1s, minWidth 1s, min-width 1s, borderRadius 1s, border-Radius 1s;
 }
 
@@ -582,34 +624,22 @@ div .avatar_wrong{
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	background: #7e0000;
+	background: rgb(0,0,0, 50%);
 	bottom: 3vw;
 	height: 6vw;
 	position: absolute;
 	width: 25vw;
-	font-size: 1em;
 }
 
 #playlist-selector .album_art.active .playlist-text-wrapper{
-	width: 32vw;
-	height: 14em;
+	width: 34vw;
+	height: 10em;
 	
 }
 
 #playlist-selector .playlist-description, #playlist-selector .playlist-track-count{
 	text-align:center;
 }
-
-.playlist-track-count{
-	background: #7e0000;
-}
-
-.playlist-description{
-	background: #b51d05;
-	padding: 0.5em;
-}
-
-
 
 #playlist-selector .playlist-description{
 	text-transform: none;
@@ -646,81 +676,6 @@ div#current_song_service #get_it_link a{
 img.itunes{
 	width:250px;
 	padding-top:20px;
-}
-
-ul{
-	font-size: 1.1em;
-}
-
-#credits, #updates{
-	width: 75vw;
-    background: #ef5532;
-    justify-content: center;
-	padding-top: 1em;
-	border-radius: 4em;
-}
-
-#updates .content{
-	max-width: 66vw;
-	font-size: 0.8em;
-}
-
-.active .mask{
-	width: 16vw;
-	height: 16vw;
-	mask-size: 32vw;
-	-webkit-mask-size: 32vw;
-}
-
-.mask{
-	width: 12.5vw;
-	height: 12.5vw;
-	mask-size: 25vw;
-	-webkit-mask-size: 25vw;
-	-webkit-mask-image: url(mask.png);
-	-webkit-mask-repeat: no-repeat;
-	mask-image: url(mask.png);
-	mask-repeat: no-repeat;
-}
-
-.mask-top-left{
-	mask-position: top left;
-	-webkit-mask-position: top left;
-}
-
-.mask-top-right{
-	mask-position: top right;
-	-webkit-mask-position: top right;
-}
-
-.mask-bottom-left{
-	mask-position: bottom left;
-	-webkit-mask-position: bottom left;
-}
-
-.mask-bottom-right{
-	mask-position: bottom right;
-	-webkit-mask-position: bottom right;
-}
-
-#playlist-selector .disc-hole-wrapper.disc-hole-wrapper.disc-hole-wrapper img{
-    opacity: 0.7;
-	width: 5vw;
-	height: 5vw;
-}
-
-#playlist-selector .active .disc-hole-wrapper.disc-hole-wrapper.disc-hole-wrapper img{
-	width: 7vw;
-    height: 7vw;
-}
-
-.player_name{
-	margin: 0.5em;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
-    height: 3.8vh;
 }
 
 @media (max-width: 960px) {

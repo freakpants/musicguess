@@ -4,35 +4,8 @@
 }
 
 body{
-	font-family: Play;
+	font-family: Oswald;
 	color:white;
 	text-transform: uppercase;
 }
 
-#credits li, #updates li{
-	list-style-type: none;
-}
-
-#credits ul, #updates ul{
-	margin: 0;
-    padding: 0;
-	background: #ef5532;
-}
-
-#credits .content, #updates .content{
-    display: flex;
-    justify-content: center;
-    padding: 0.5em;
-	margin-bottom: 1em;
-	background: #b51d05;
-	text-transform: none;
- }
-
-#credits .category, #updates .category{
-	background: #7e0000;
-	justify-content: center;
-	text-transform: uppercase;
-    justify-content: center;
-    display: flex;
-    padding: 0.5em;
-}
