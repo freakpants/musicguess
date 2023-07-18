@@ -6,6 +6,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap" rel="stylesheet">
 
 	<script type="text/javascript">
 
@@ -64,357 +67,441 @@
 
 
 		var playlists = [
-			{
-				name: "2000's",
-				id: "11",
-				description: "The best and the worst decade.",
-				new: "0",
-				hero: "1",
-				amount_of_tracks: 317,
-				album_art: [
-					"album_art/270842179.jpg",
-					"album_art/723351610.jpg",
-					"album_art/293405771.jpg",
-					"album_art/258056379.jpg"
-				]
-			},
-			{
-				name: "2010's",
-				id: "26",
-				description: "Music from 2010-2019",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 196,
-				album_art: [
-					"album_art/389604528.jpg",
-					"album_art/1209173681.jpg",
-					"album_art/1444609107.jpg",
-					"album_art/1440819356.jpg"
-				]
-			},
-			{
-				name: "70's",
-				id: "9",
-				description: "Rock'n Roll & Funk is born",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 145,
-				album_art: [
-					"album_art/177408365.jpg",
-					"album_art/1423191432.jpg",
-					"album_art/208819125.jpg",
-					"album_art/1423766994.jpg"
-				]
-			},
-			{
-				name: "80's",
-				id: "10",
-				description: "The age of MTV",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 148,
-				album_art: [
-					"album_art/1329359005.jpg",
-					"album_art/1489263727.jpg",
-					"album_art/930166513.jpg",
-					"album_art/1434144397.jpg"
-				]
-			},
-			{
-				name: "90's",
-				id: "2",
-				description: "Eurdance, Teen Pop, Hip Hop and Bravo Hits",
-				new: "0",
-				hero: "1",
-				amount_of_tracks: 222,
-				album_art: [
-					"album_art/526521410.jpg",
-					"album_art/171708494.jpg",
-					"album_art/1288190404.jpg",
-					"album_art/693198382.jpg"
-				]
-			},
-			{
-				name: "Ballads",
-				id: "23",
-				description: "",
-				new: "0",
-				hero: "1",
-				amount_of_tracks: 114,
-				album_art: [
-					"album_art/2294739.jpg",
-					"album_art/1440833098.jpg",
-					"album_art/1235889139.jpg",
-					"album_art/255843292.jpg"
-				]
-			},
-			{
-				name: "Christmas",
-				id: "60",
-				description: "",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 117,
-				album_art: [
-					"album_art/1586667718.jpg",
-					"album_art/1589967724.jpg",
-					"album_art/726136064.jpg",
-					"album_art/1488180530.jpg"
-				]
-			},
-			{
-				name: "Dance Music",
-				id: "3",
-				description: "Electronic Dance Music, mostly Trance.",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 288,
-				album_art: [
-					"album_art/1445144506.jpg",
-					"album_art/878950953.jpg",
-					"album_art/569845385.jpg",
-					"album_art/497230922.jpg"
-				]
-			},
-			{
-				name: "Deutschland",
-				id: "7",
-				description: "Songs in German or from Germany",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 169,
-				album_art: [
-					"album_art/353494891.jpg",
-					"album_art/723748769.jpg",
-					"album_art/250216026.jpg",
-					"album_art/513700005.jpg"
-				]
-			},
-			{
-				name: "Female Artists",
-				id: "35",
-				description: "Female artists & collaborations",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 419,
-				album_art: [
-					"album_art/1494981947.jpg",
-					"album_art/315025768.jpg",
-					"album_art/387193895.jpg",
-					"album_art/1243004209.jpg"
-				]
-			},
-			{
-				name: "freakpants' list of disaster",
-				id: "0",
-				description: "A list of music enjoyed by the creator of MusicGuess.",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 649,
-				album_art: [
-					"album_art/481776149.jpg",
-					"album_art/24141413.jpg",
-					"album_art/279647264.jpg",
-					"album_art/424593855.jpg"
-				]
-			},
-			{
-				name: "Global Hits 2021",
-				id: "15",
-				description: "The most successful global hits of 2021",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 117,
-				album_art: [
-					"album_art/1565442393.jpg",
-					"album_art/1563265502.jpg",
-					"album_art/1576349937.jpg",
-					"album_art/1576713766.jpg"
-				]
-			},
-			{
-				name: "Global Hits All Time",
-				id: "43",
-				description: "The most successful global hits of all Time, From 1950 to today",
-				new: "0",
-				hero: "1",
-				amount_of_tracks: 429,
-				album_art: [
-					"album_art/1088530832.jpg",
-					"album_art/930169184.jpg",
-					"album_art/1308717177.jpg",
-					"album_art/723390477.jpg"
-				]
-			},
-			{
-				name: "Hip-Hop/Rap",
-				id: "21",
-				description: "From Grandmaster Funk to Drake",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 142,
-				album_art: [
-					"album_art/560148910.jpg",
-					"album_art/1495267282.jpg",
-					"album_art/1440819356.jpg",
-					"album_art/1499567361.jpg"
-				]
-			},
-			{
-				name: "Latin",
-				id: "22",
-				description: "Songs in spanish, or from latin artists",
-				new: "0",
-				hero: "1",
-				amount_of_tracks: 145,
-				album_art: [
-					"album_art/1597512989.jpg",
-					"album_art/155658405.jpg",
-					"album_art/1543991915.jpg",
-					"album_art/1570323047.jpg"
-				]
-			},
-			{
-				name: "Pop Music",
-				id: "1",
-				description: "Music that a lot of people like",
-				new: "0",
-				hero: "1",
-				amount_of_tracks: 685,
-				album_art: [
-					"album_art/1571338856.jpg",
-					"album_art/724259722.jpg",
-					"album_art/860304622.jpg",
-					"album_art/389604528.jpg"
-				]
-			},
-			{
-				name: "Pop/Alternative Rock",
-				id: "24",
-				description: "Poprock and indie stuff",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 214,
-				album_art: [
-					"album_art/1440713819.jpg",
-					"album_art/6929336.jpg",
-					"album_art/1320780883.jpg",
-					"album_art/3446432.jpg"
-				]
-			},
-			{
-				name: "Rock & Metal",
-				id: "5",
-				description: "Mostly of the softer persuasion though",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 100,
-				album_art: [
-					"album_art/418710473.jpg",
-					"album_art/3445786.jpg",
-					"album_art/214475427.jpg",
-					"album_art/190655957.jpg"
-				]
-			},
-			{
-				name: "Spain's Most Wanted December 2021",
-				id: "61",
-				description: "Songs that People in Spain shazamed the most",
-				new: "0",
-				hero: "1",
-				amount_of_tracks: 189,
-				album_art: [
-					"album_art/1601594741.jpg",
-					"album_art/1592109188.jpg",
-					"album_art/1444051386.jpg",
-					"album_art/1597422749.jpg"
-				]
-			},
-			{
-				name: "Swiss",
-				id: "12",
-				description: "Songs from Switzerland. mostly in Swiss German",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 105,
-				album_art: [
-					"album_art/1122691144.jpg",
-					"album_art/414917353.jpg",
-					"album_art/1530784862.jpg",
-					"album_art/1458470605.jpg"
-				]
-			},
-			{
-				name: "Today's Top 50",
-				id: "63",
-				description: "The 50 most popular tracks today!",
-				new: "1",
-				hero: "1",
-				amount_of_tracks: 50,
-				album_art: [
-					"album_art/1592844016.jpg",
-					"album_art/1604376321.jpg",
-					"album_art/1590035691.jpg",
-					"album_art/1585274078.jpg"
-				]
-			},
-			{
-				name: "Trance",
-				id: "4",
-				description: "Beats & Vocals",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 103,
-				album_art: [
-					"album_art/453207238.jpg",
-					"album_art/285800013.jpg",
-					"album_art/441665313.jpg",
-					"album_art/692877437.jpg"
-				]
-			},
-			{
-				name: "UK",
-				id: "42",
-				description: "Artists from the Kingdom",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 259,
-				album_art: [
-					"album_art/991509751.jpg",
-					"album_art/415628679.jpg",
-					"album_art/1096967559.jpg",
-					"album_art/1122775993.jpg"
-				]
-			},
-			{
-				name: "US Hits 2020",
-				id: "30",
-				description: "US Hits of last year",
-				new: "0",
-				hero: "1",
-				amount_of_tracks: 100,
-				album_art: [
-					"album_art/1490463311.jpg",
-					"album_art/1551178998.jpg",
-					"album_art/1495267282.jpg",
-					"album_art/1497390717.jpg"
-				]
-			},
-			{
-				name: "Top 100: Germany",
-				id: "413",
-				description: "The most-played songs in Germany, updated every day.",
-				new: "0",
-				hero: "0",
-				amount_of_tracks: 100,
-				album_art: [
-					"album_art/1490463311.jpg",
-					"album_art/1551178998.jpg",
-					"album_art/1495267282.jpg",
-					"album_art/1497390717.jpg"
-				]
-			}
-		];
+            {
+                name: "2000's",
+                id: "11",
+                description: "The best and the worst decade",
+                new: "0",
+                hero: "1",
+                amount_of_tracks: 317,
+                album_art: [
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music3/v4/3b/95/81/3b95816b-36c0-e47c-fa14-bd17dc6fc2c9/Livin_On_A_Prayer.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b4/13/e9/b413e91d-40aa-a1a8-b8e3-2bacc3b3e222/00606949329020.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/22/cd/a1/22cda1b6-77d0-00cf-7244-ef1672899547/artwork.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music125/v4/8b/77/0b/8b770b4d-ef1f-561b-5d1b-30bfb85ffb11/00606949084523.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "2010's",
+                id: "26",
+                description: "Music from 2010-2019",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 196,
+                album_art: [
+                    "https://is1-ssl.mzstatic.com/image/thumb/Features124/v4/30/aa/b0/30aab09c-bfb5-a680-adc6-e681971b199c/dj.wbithhkz.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music/14/0b/8e/mzi.vsvfenht.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music/3e/c6/46/mzi.xeajbekq.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music4/v4/47/9c/0c/479c0c1a-3f8f-f45b-c48a-9199827225b5/886444210614.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "70's",
+                id: "9",
+                description: "Rock'n Roll & Funk is born",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 145,
+                album_art: [
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/bb/31/2e/bb312e9f-9a97-a814-c746-d4a49c61d921/00042283017825.rgb.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/09/95/b3/0995b3e6-1dfd-7eed-e4fc-3ec7594c8fde/06UMGIM10542.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/14/31/d5/1431d50a-f822-dbd2-b7aa-7332a1fbd746/06UMGIM10580.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/6b/cc/7a/6bcc7af6-c4df-095c-fd47-c634d1c97879/00602517451810.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "80's",
+                id: "10",
+                description: "The age of MTV",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 148,
+                album_art: [
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music114/v4/1f/ab/23/1fab2319-b4c3-816f-fbfa-a9bb7ea26d03/cover.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music112/v4/5f/16/eb/5f16eb99-3574-faef-b0a8-4f35cc2d658f/07UMGIM01593.rgb.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/f3/e2/c7/f3e2c77f-86c5-7b0a-2303-831999e068e1/884977602111.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music115/v4/48/88/82/48888281-17b1-4fd5-9573-95eb2acb0b9d/06UMGIM07185.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "90's",
+                id: "2",
+                description: "Eurodance, Teen Pop, Hip-Hop and Bravo Hits",
+                new: "0",
+                hero: "1",
+                amount_of_tracks: 222,
+                album_art: [
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music128/v4/d8/d5/80/d8d58018-7e78-542f-6032-a80da080e716/00008811069926.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/77/57/ba/7757ba77-0163-a195-950b-95786aa7a90e/17UMGIM98492.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/92/a3/28/92a32865-96f4-c32a-b95e-4215667bbfc2/00008811310325.rgb.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/b8/df/d6/b8dfd62b-2c13-ddb5-5dd8-0be983460624/06UMGIM10732.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Ballads",
+                id: "23",
+                description: "To move your heart",
+                new: "0",
+                hero: "1",
+                amount_of_tracks: 114,
+                album_art: [
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music112/v4/b0/f7/5d/b0f75dab-7e01-d4c6-61c3-e6253a2cae22/06UMGIM18645.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0d/c0/a3/0dc0a301-d9e5-2980-5141-d8ddb1571398/00602498607497.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/66/63/2e/66632e8a-2cb9-9007-4e91-ea29216d867d/00044006321721.rgb.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music/y2005/m01/d20/h14/s05.bkornbke.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Christmas",
+                id: "60",
+                description: "All the classics",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 117,
+                album_art: [
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/d9/84/16/d98416a4-d960-4602-8f2c-4f03165d434d/mzi.hohpjzfa.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music/fc/91/b9/mzi.ntawvhlc.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music125/v4/cf/a7/f8/cfa7f807-e9a6-758d-97e0-f1cd843b5a20/mzi.vcbwvmqu.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music114/v4/eb/4a/f9/eb4af984-fc68-56ab-7b89-1d070c04e1dd/5099765318524.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Dance Music",
+                id: "3",
+                description: "Electronic Dance Music, mostly Trance",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 288,
+                album_art: [
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/77/57/ba/7757ba77-0163-a195-950b-95786aa7a90e/17UMGIM98492.rgb.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music3/v4/3b/95/81/3b95816b-36c0-e47c-fa14-bd17dc6fc2c9/Livin_On_A_Prayer.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music124/v4/62/a8/9f/62a89f81-d759-1322-e419-2a920b3297b4/859731101155_cover.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music/y2004/m06/d10/h06/s05.rebsmxll.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Deutschland",
+                id: "7",
+                description: "Songs in german or from Germany",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 166,
+                album_art: [
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music4/v4/b5/ad/ee/b5adee0b-cc1c-3f13-67f8-2a710e2276fb/886443290587.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Features/c5/84/60/dj.hntfjoqs.tif/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music/y2004/m06/d10/h06/s05.rebsmxll.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music112/v4/98/51/35/98513533-d5b1-eec8-5d8d-af385a25c323/196589597786.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Female Artists",
+                id: "35",
+                description: "Female artists & collaborations",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 419,
+                album_art: [
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/77/57/ba/7757ba77-0163-a195-950b-95786aa7a90e/17UMGIM98492.rgb.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/f3/e2/c7/f3e2c77f-86c5-7b0a-2303-831999e068e1/884977602111.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music/cd/8b/9a/mzi.kimlabhg.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music124/v4/5d/b7/1c/5db71c9c-5322-0846-fa66-b73892422077/00731454979924.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "freakpants' list of disaster",
+                id: "0",
+                description: "A list of musics enjoyed by the creator of MusicGuess",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 649,
+                album_art: [
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music128/v4/d8/d5/80/d8d58018-7e78-542f-6032-a80da080e716/00008811069926.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/92/a3/28/92a32865-96f4-c32a-b95e-4215667bbfc2/00008811310325.rgb.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music3/v4/3b/95/81/3b95816b-36c0-e47c-fa14-bd17dc6fc2c9/Livin_On_A_Prayer.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/b8/df/d6/b8dfd62b-2c13-ddb5-5dd8-0be983460624/06UMGIM10732.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Global Hits 2021",
+                id: "15",
+                description: "The most successful global hits of 2021",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 117,
+                album_art: [
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/5d/66/e1/5d66e1ad-0c6c-1963-5ec4-676fb5c0468d/024543980063_cover.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music115/v4/2b/c4/c9/2bc4c9d4-3bc6-ab13-3f71-df0b89b173de/886448022213.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music113/v4/4f/7a/b2/4f7ab2d1-7a23-8133-f5bd-773488e371b9/886448106043.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/bb/35/39/bb353980-b0c7-eac5-9509-267feb48d1b3/21UMGIM33221.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Global Hits All Time",
+                id: "43",
+                description: "The most successful global hits of all time, from 1950 to today",
+                new: "0",
+                hero: "1",
+                amount_of_tracks: 429,
+                album_art: [
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/77/57/ba/7757ba77-0163-a195-950b-95786aa7a90e/17UMGIM98492.rgb.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/f3/e2/c7/f3e2c77f-86c5-7b0a-2303-831999e068e1/884977602111.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b4/13/e9/b413e91d-40aa-a1a8-b8e3-2bacc3b3e222/00606949329020.rgb.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music4/v4/b5/ad/ee/b5adee0b-cc1c-3f13-67f8-2a710e2276fb/886443290587.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Hip-Hop/Rap",
+                id: "21",
+                description: "From grand master funk to Drake",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 142,
+                album_art: [
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b4/13/e9/b413e91d-40aa-a1a8-b8e3-2bacc3b3e222/00606949329020.rgb.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music112/v4/ff/18/82/ff18824b-2630-2ea3-9977-32f655b20602/06UMGIM15261.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music1/v4/d2/39/da/d239dac6-df7a-fe73-5e7d-6e9e2724e57b/dj.kjblpccs.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/f6/fb/31/f6fb3104-cded-a755-53c9-be0a5527b5bc/659783313694_cover.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Latin",
+                id: "22",
+                description: "Songs in spanish, or from latin artists",
+                new: "0",
+                hero: "1",
+                amount_of_tracks: 144,
+                album_art: [
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music/y2005/m09/d13/h23/mzi.izmkxvgc.tif/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music/05/c5/44/mzi.vfgdwrvs.tif/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Features4/v4/36/b5/2b/36b52b96-328a-5860-c13d-b0667af1eab7/dj.ywytqpyg.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music/29/ab/24/mzi.nvoslxzs.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Pop Music",
+                id: "1",
+                description: "Music that a lot of people like",
+                new: "0",
+                hero: "1",
+                amount_of_tracks: 685,
+                album_art: [
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music128/v4/d8/d5/80/d8d58018-7e78-542f-6032-a80da080e716/00008811069926.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/92/a3/28/92a32865-96f4-c32a-b95e-4215667bbfc2/00008811310325.rgb.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music3/v4/3b/95/81/3b95816b-36c0-e47c-fa14-bd17dc6fc2c9/Livin_On_A_Prayer.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/b8/df/d6/b8dfd62b-2c13-ddb5-5dd8-0be983460624/06UMGIM10732.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Pop/Alternative Rock",
+                id: "24",
+                description: "Poprock and indie stuff",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 214,
+                album_art: [
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music128/v4/d8/d5/80/d8d58018-7e78-542f-6032-a80da080e716/00008811069926.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/92/a3/28/92a32865-96f4-c32a-b95e-4215667bbfc2/00008811310325.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/22/cd/a1/22cda1b6-77d0-00cf-7244-ef1672899547/artwork.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/6b/cc/7a/6bcc7af6-c4df-095c-fd47-c634d1c97879/00602517451810.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Rock & Metal",
+                id: "5",
+                description: "Mostly of the softer percussion though",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 100,
+                album_art: [
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/92/a3/28/92a32865-96f4-c32a-b95e-4215667bbfc2/00008811310325.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/22/cd/a1/22cda1b6-77d0-00cf-7244-ef1672899547/artwork.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music114/v4/41/22/ab/4122ab9a-ad42-b89a-6457-a71df8117840/00602577027062.rgb.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music124/v4/89/fe/2d/89fe2d04-f3d7-e1f9-eb1f-23fb08756e84/17UM1IM23523.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Spain's Most Wanted December 2021",
+                id: "61",
+                description: "Songs that people in Spain shazamed the most",
+                new: "0",
+                hero: "1",
+                amount_of_tracks: 188,
+                album_art: [
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music/y2005/m09/d13/h23/mzi.izmkxvgc.tif/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music/y2005/m08/d09/h06/mzi.lyanjoww.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music/05/c5/44/mzi.vfgdwrvs.tif/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Features4/v4/36/b5/2b/36b52b96-328a-5860-c13d-b0667af1eab7/dj.ywytqpyg.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Swiss",
+                id: "12",
+                description: "Songs from Switzerland, mostly in swiss german",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 103,
+                album_art: [
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music125/v4/bf/dc/80/bfdc80ad-1671-9ba3-db77-120ad5b2dcbe/21UMGIM50821.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/1e/91/ce/1e91cea7-d70c-9257-c759-ff0a9d67a130/cover_4062851639538.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music123/v4/3c/7f/0a/3c7f0a88-de27-8db0-ed54-4e582428886d/00044006671727.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/c5/f4/6c/c5f46c0f-8fbf-5695-9498-0794f6b32fd1/cover.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Today's Top 50",
+                id: "63",
+                description: "The 50 most popular tracks today!",
+                new: "1",
+                hero: "1",
+                amount_of_tracks: 50,
+                album_art: [
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music114/v4/fb/bf/6d/fbbf6d06-9a6c-9c49-c313-aed403613252/075679900180.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music125/v4/9c/b0/6b/9cb06b1e-1fd4-df2e-b937-21b8b16b497e/20UMGIM13326.rgb.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music115/v4/da/8b/77/da8b7731-6f4f-eacf-5e74-8b23389eefa1/20UMGIM03371.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/8d/84/4c/8d844ca5-e42d-e01c-670e-9ed633aabb67/21UM1IM45433.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Trance",
+                id: "4",
+                description: "Beats & vocals",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 102,
+                album_art: [
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/f4/25/fa/f425faf4-d25d-9ebd-9e5c-c0ff9fced48d/00731453723726.rgb.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music/y2004/m06/d10/h06/s05.rebsmxll.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music124/v4/07/5e/3a/075e3a54-1177-af92-cefe-ee770626dc2e/8718522326899.png/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music/64/1e/f0/mzi.vglugasn.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "UK",
+                id: "42",
+                description: "Artists from the Kingdom",
+                new: "0",
+                hero: "0",
+                amount_of_tracks: 259,
+                album_art: [
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/f3/e2/c7/f3e2c77f-86c5-7b0a-2303-831999e068e1/884977602111.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/b8/df/d6/b8dfd62b-2c13-ddb5-5dd8-0be983460624/06UMGIM10732.rgb.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/09/95/b3/0995b3e6-1dfd-7eed-e4fc-3ec7594c8fde/06UMGIM10542.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/6b/cc/7a/6bcc7af6-c4df-095c-fd47-c634d1c97879/00602517451810.rgb.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "US Hits 2020",
+                id: "30",
+                description: "US hits from 2020",
+                new: "0",
+                hero: "1",
+                amount_of_tracks: 100,
+                album_art: [
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/c6/b7/27/c6b727f7-3a32-6b43-cee2-05bb71daf1cf/dj.itfmdeif.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music128/v4/51/cd/f6/51cdf669-d810-cb4f-d170-016a5b760f0b/886447273807.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/84/9b/0e/849b0e1c-4f15-85f3-628d-355718103cf8/00842812110078.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music125/v4/ac/f5/19/acf51942-e001-2d6e-e0e6-49b3fd09cac4/842812106569_01_img001.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Germany Hits All Time",
+                id: "64",
+                description: "Hit songs in Germany from 1967 to today",
+                new: "1",
+                hero: "0",
+                amount_of_tracks: 128,
+                album_art: [
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music3/v4/3b/95/81/3b95816b-36c0-e47c-fa14-bd17dc6fc2c9/Livin_On_A_Prayer.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music4/v4/b5/ad/ee/b5adee0b-cc1c-3f13-67f8-2a710e2276fb/886443290587.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music112/v4/b0/f7/5d/b0f75dab-7e01-d4c6-61c3-e6253a2cae22/06UMGIM18645.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music1/v4/d2/39/da/d239dac6-df7a-fe73-5e7d-6e9e2724e57b/dj.kjblpccs.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "France",
+                id: "65",
+                description: "Hit songs in France",
+                new: "1",
+                hero: "0",
+                amount_of_tracks: 99,
+                album_art: [
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/05/a6/ea/05a6ea7d-2410-df14-0a05-4321293f1cf1/22UM1IM22865.rgb.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/f5/a3/d7/f5a3d757-55a8-0bfc-d096-06432b91ce7a/cover.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/22/4e/5a/224e5a72-32f4-71f0-7c4d-41cc20e67c1b/cover.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/d5/2b/ee/d52beeff-e3f1-7a6a-92a7-2d00b1264e96/5054197697364.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Italy",
+                id: "66",
+                description: "Hit songs in Italy",
+                new: "1",
+                hero: "0",
+                amount_of_tracks: 97,
+                album_art: [
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/80/2c/f3/802cf3e7-d8b8-659f-b586-460e8356e7b2/5054197688690.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/9e/87/d5/9e87d5c2-3326-ae9a-5748-742ac4a304e7/196871125048.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music126/v4/0b/97/65/0b9765b1-3603-3ac1-556c-932bb7a31182/artwork.jpg/1000x1000bb.jpg",
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/bb/17/58/bb17581c-465c-fae6-0320-e22a1dd9488b/196871071512.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Spain",
+                id: "67",
+                description: "Hit songs in Spain",
+                new: "1",
+                hero: "0",
+                amount_of_tracks: 99,
+                album_art: [
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/ad/b7/0e/adb70ef8-c456-3b31-136c-450d196d7cda/197188909819.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/9d/15/96/9d1596ec-bf49-14cf-1e26-39efda5683bb/22UM1IM44688.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music126/v4/a8/bf/b2/a8bfb26d-20e0-87e0-e465-000685474103/196871105804.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/b0/e4/ac/b0e4ac99-eb38-7370-ea50-0bcf0bcbb054/196589949080.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Portugal",
+                id: "68",
+                description: "Hit songs in Portugal",
+                new: "1",
+                hero: "0",
+                amount_of_tracks: 98,
+                album_art: [
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/38/07/1e/38071eb1-e761-8300-4bca-e6e1d8ae2fdf/23UMGIM44548.rgb.jpg/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e5/eb/29/e5eb29ec-e3ec-9f13-077a-de6bcfb6b66e/8720923452343.png/1000x1000bb.jpg",
+                    "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/9e/15/b7/9e15b79c-8f20-9b78-f27e-853436eef2e1/23UMGIM31987.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/b0/e4/ac/b0e4ac99-eb38-7370-ea50-0bcf0bcbb054/196589949080.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "South Korea",
+                id: "69",
+                description: "Hit songs in South Korea",
+                new: "1",
+                hero: "0",
+                amount_of_tracks: 100,
+                album_art: [
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/af/2c/6d/af2c6d62-0ebc-2dff-17b3-8eeb2b3986a0/888735943621.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/61/82/b5/6182b537-b352-fcfb-c264-bcf79a4508a2/8804775254703_Cover.jpg/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music116/v4/0d/25/f8/0d25f8aa-df75-0b69-00eb-5f5e7cd7c0f5/067003046657.png/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music116/v4/17/ff/ba/17ffba08-f99d-4e23-d8fe-af42ff9e67b2/196922444470_Cover.jpg/1000x1000bb.jpg"
+                ]
+            },
+            {
+                name: "Japan",
+                id: "70",
+                description: "Hit songs in Japan",
+                new: "1",
+                hero: "0",
+                amount_of_tracks: 100,
+                album_art: [
+                    "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/3a/17/eb/3a17eb30-eacb-82eb-51df-d1321dbb55bc/197188492205.jpg/1000x1000bb.jpg",
+                    "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/9b/75/3d/9b753d91-6a17-2534-3e96-a68c8bf0fdee/23UMGIM27687.rgb.jpg/1000x1000bb.jpg",
+                    "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/ee/78/3f/ee783f83-cac8-dafc-ee17-a06acfcc8714/4538182880289.png/1000x1000bb.jpg",
+                    "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/2f/02/20/2f0220a9-01d3-c6d1-34b0-2469239ba211/Wind_Echoes_Tribute_to_Official_Hige_Dandism.jpg/1000x1000bb.jpg"
+                ]
+            }
+        ];
 		var air_console;
 
 		$(document).ready(function () {
@@ -526,6 +613,12 @@
 
             air_console.onPause = function (){
 				DEBUG && console.log("OnPause!");
+
+				const audioElements = document.querySelectorAll('[id^="sound-effect"]');
+                for (let i = 0; i < audioElements.length; i++) {
+                    audioElements[i].volume = 0;
+                }
+
 				document.paused = true;
 				if (player.currentTime <= 0) {
                     document.offlinePause = 0;
@@ -535,8 +628,24 @@
 				player.pause();
 			}
 
+			air_console.onReady = function (){
+				controller_boundary_option("first");
+				if (air_console.devices[0].client.app === "bmw-mgu") {
+					const audioElements = document.querySelectorAll('[id^="sound-effect"]');
+					for (let i = 0; i < audioElements.length; i++) {
+						audioElements[i].volume = 0;
+					}
+				}
+			}
+
 			air_console.onResume = function (){
 				DEBUG && console.log("OnResume!");
+
+				const audioElements = document.querySelectorAll('[id^="sound-effect"]');
+                for (let i = 0; i < audioElements.length; i++) {
+                    audioElements[i].volume = 1;
+                }
+
 				document.paused = false;
 				if(!document.musicFailed){
 					//calculate the time the game was paused until resume
@@ -548,16 +657,6 @@
 			        document.offlinePauseOffset = 0;
 					start();
 				}	
-			}
-
-			air_console.onReady = function () {
-				controller_boundary_option("first");
-				if (air_console.devices[0].client.app === "bmw-mgu") {
-				  const audioElements = document.querySelectorAll('[id^="sound-effect"]');
-                  for (let i = 0; i < audioElements.length; i++) {
-                    audioElements[i].volume = 0;
-                  }
-			    }
 			}
 
 			// watch for new controllers connecting
@@ -606,6 +705,10 @@
 				show_settings_buttons.push({
 					type: "show_settings_buttons"
 				});
+                get_ready = [];
+                get_ready.push({
+                    type: "get_ready"
+                });
 				show_round_number_buttons = [];
 				show_round_number_buttons.push({
 					type: "show_round_number_buttons"
@@ -658,8 +761,8 @@
 					}
 				} else if (document.showing_updates) {
 					DEBUG && console.log("we are currently showing updates");
-					// if we are currently showing credits, let the client know what to display
-					// if the client is master, direct him to show the back from credits
+					// if we are currently showing update, let the client know what to display
+					// if the client is master, direct him to show the back from update
 					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
 						air_console.message(device_id, show_back_from_updates);
 						air_console.getControllerDeviceIds().forEach(function (id) {
@@ -671,9 +774,9 @@
 						air_console.message(device_id, hide_menu);
 					}
 				}else if (document.show_playlist_buttons) {
-					DEBUG && console.log("we are currently showing updates");
-					// if we are currently showing credits, let the client know what to display
-					// if the client is master, direct him to show the back from credits
+					DEBUG && console.log("we are currently show playlist");
+					// if we are currently showing playlist, let the client know what to display
+					// if the client is master, direct him to show the back from playlist
 					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
 						air_console.message(device_id, show_playlist_buttons);
 						air_console.getControllerDeviceIds().forEach(function (id) {
@@ -686,8 +789,8 @@
 					}
 				}else if (document.show_round_change_buttons) {
 					DEBUG && console.log("we are currently showing round change buttons");
-					// if we are currently showing credits, let the client know what to display
-					// if the client is master, direct him to show the back from credits
+					// if we are currently showing round change, let the client know what to display
+					// if the client is master, direct him to show the back from round change
 					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
 						air_console.message(device_id, show_round_change_buttons);
 						air_console.getControllerDeviceIds().forEach(function (id) {
@@ -699,9 +802,8 @@
 						air_console.message(device_id, hide_menu);
 					}
 				}else if (document.show_round_number_buttons) {
-					DEBUG && console.log("we are currently showing round change buttons");
-					// if we are currently showing credits, let the client know what to display
-					// if the client is master, direct him to show the back from credits
+					DEBUG && console.log("we are currently show round number buttons");
+					// if we are currently showing round number buttons, let the client know what to display
 					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
 						air_console.message(device_id, show_round_number_buttons);
 						air_console.getControllerDeviceIds().forEach(function (id) {
@@ -712,10 +814,12 @@
 						// otherwise, just show the regular waiting for start
 						air_console.message(device_id, hide_menu);
 					}
+				}else if (document.get_ready) {
+					DEBUG && console.log("we are currently show get ready container");
+                    air_console.message(device_id, get_ready);
 				}else if (document.show_settings_buttons) {
-					DEBUG && console.log("we are currently showing round change buttons");
-					// if we are currently showing credits, let the client know what to display
-					// if the client is master, direct him to show the back from credits
+					DEBUG && console.log("we are currently show settings buttons");
+					// if we are currently showing settings buttons, let the client know what to display
 					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
 						air_console.message(device_id, show_settings_buttons);
 						air_console.getControllerDeviceIds().forEach(function (id) {
@@ -726,12 +830,12 @@
 						// otherwise, just show the regular waiting for start
 						air_console.message(device_id, hide_menu);
 					}
-				}else {
+                }else {
 					DEBUG && console.log("There is no round in progress, and we are not showing credits");
 					// if there is no round in progress, check if the connected device is the master
 					if (air_console.getMasterControllerDeviceId() !== undefined && air_console.getMasterControllerDeviceId() === device_id) {
 						DEBUG && console.log("device " + device_id + " is the master");
-						// let the new client know to display the menu)
+						// let the new client know to display the menu
 						air_console.message(device_id, show_menu);
 						// also let all other clients know NOT to display the menu anymore
 						air_console.getControllerDeviceIds().forEach(function (id) {
@@ -753,8 +857,8 @@
 			air_console.onDisconnect = function (device_id) {
 				// update_controllers_about_game_status();
 				// check if there is currently a round in progress
-				if (document.round > 0 && !document.roundEndInitiated && !document.game_over_screen) {
-					// do nothing?
+				if (document.round > 0 && !document.roundEndInitiated && !document.game_over_screen || document.get_ready || document.roundEndInitiated) {
+					    removeElementFromRound(device_id)
 				} else if (document.game_over_screen) {
 					// let the new master know to display the back to main
 					if (air_console.getMasterControllerDeviceId() !== undefined) {
@@ -776,7 +880,7 @@
 						air_console.message(air_console.getMasterControllerDeviceId(), message);
 					}
 				} else if (document.showing_updates) {
-					// let the new master know to display the back from credits
+					// let the new master know to display the back from updates
 					if (air_console.getMasterControllerDeviceId() !== undefined) {
 						DEBUG && console.log("informing new master to show the back to updates button");
 						message = [];
@@ -786,9 +890,9 @@
 						air_console.message(air_console.getMasterControllerDeviceId(), message);
 					}
 				}else if (document.show_playlist_buttons) {
-					// let the new master know to display the back from credits
+					// let the new master know to display the back from playlist
 					if (air_console.getMasterControllerDeviceId() !== undefined) {
-						DEBUG && console.log("informing new master to show the back to updates button");
+						DEBUG && console.log("informing new master to show the back to playlist button");
 						message = [];
 						message.push({
 							type: "show_playlist_buttons"
@@ -796,9 +900,9 @@
 						air_console.message(air_console.getMasterControllerDeviceId(), message);
 					}
 				}else if (document.show_round_change_buttons) {
-					// let the new master know to display the back from credits
+					// let the new master know to display the back from round change
 					if (air_console.getMasterControllerDeviceId() !== undefined) {
-						DEBUG && console.log("informing new master to show the back to updates button");
+						DEBUG && console.log("informing new master to show the back to round change button");
 						message = [];
 						message.push({
 							type: "show_round_change_buttons"
@@ -806,9 +910,9 @@
 						air_console.message(air_console.getMasterControllerDeviceId(), message);
 					}
 				}else if (document.show_round_number_buttons) {
-					// let the new master know to display the back from credits
+					// let the new master know to display the back from round number
 					if (air_console.getMasterControllerDeviceId() !== undefined) {
-						DEBUG && console.log("informing new master to show the back to updates button");
+						DEBUG && console.log("informing new master to show the back to round number button");
 						message = [];
 						message.push({
 							type: "show_round_number_buttons"
@@ -816,16 +920,25 @@
 						air_console.message(air_console.getMasterControllerDeviceId(), message);
 					}
 				}else if (document.show_settings_buttons) {
-					// let the new master know to display the back from credits
+					// let the new master know to display the back from settings
 					if (air_console.getMasterControllerDeviceId() !== undefined) {
-						DEBUG && console.log("informing new master to show the back to updates button");
+						DEBUG && console.log("informing new master to show the back to settings button");
 						message = [];
 						message.push({
 							type: "show_settings_buttons"
 						});
 						air_console.message(air_console.getMasterControllerDeviceId(), message);
 					}
-				}else {
+                }else if (document.get_ready) {
+                    // let the new master know to display the back from get ready
+                    DEBUG && console.log("informing new master to show get ready");
+                    message = [];
+                    message.push({
+                        type: "get_ready"
+                    });
+                    air_console.message(device_id, get_ready);
+				}
+				else {
 					// let the new master know to display the menu
 					if (air_console.getMasterControllerDeviceId() !== undefined) {
 						message = [];
@@ -835,7 +948,7 @@
 						air_console.message(air_console.getMasterControllerDeviceId(), message);
 					}
 				}
-				if(document.hero && air_console.getPremiumDeviceIds() !== undefined){
+				if(document.hero && air_console.getPremiumDeviceIds() == device_id){
 					DEBUG && console.log("Hero User Disconnected!");
 				    document.hero = false;
 				    check_if_playlist_needs_hero();
@@ -852,6 +965,8 @@
 
 				switch (type) {
 					case 'back':
+						// play switch sound effect
+						document.getElementById("sound-effect-switch").play();
 						// determine what screen we are on
 						switch (document.screen) {
 							case "spotify":
@@ -875,6 +990,7 @@
 								sleep(1500).then(() => {
 									document.showing_updates = false;
 									$("#main-menu").animate({ opacity: 1 }, 1500);
+									$("#ticker-wrapper").animate({ opacity: 1 }, 1500);
 									sleep(1500).then(() => {
 										hide_loading();
 									});
@@ -883,9 +999,15 @@
 								break;
 
 							case "guessing-type-selector":
+							    if (typeof guessingType === "undefined") {
+									document.guessing_type = "guessing-both";
+								    guessingType = $("#guessing-both").html();
+									$("#guessing_type").html(guessingType);
+								}
+                                $("#guessing_type").html(guessingType);
 								$("#guessing-type-selector").hide();
 								$("#option-selector").show();
-								$("#specific-options .dialogue").html(specific_options_dialogue);
+								$("#titleSpec-options").html("Choose the Setting you want to change or hit start to play with the current settings.");
 								document.screen = "specific-options";
 								break;
 							case "round-amount-selector":
@@ -893,9 +1015,6 @@
 							    // inform controller to hide increase/decrease buttons
 								document.show_round_change_buttons = false;
 								document.show_round_number_buttons = false;
-								show_settings_buttons = [];
-								show_settings_buttons.push({ type: "show_settings_buttons" });
-								air_console.broadcast(show_settings_buttons);
 								if (air_console.getMasterControllerDeviceId() !== undefined) {
 									document.show_settings_buttons = true;
 									air_console.message(air_console.getMasterControllerDeviceId(), show_settings_buttons);
@@ -903,7 +1022,7 @@
 
 								$("#round-amount-selector").hide();
 								$("#option-selector").show();
-								$("#specific-options .dialogue").html(specific_options_dialogue);
+								$("#titleSpec-options").html("Choose the Setting you want to change or hit start to play with the current settings.");
 								document.screen = "specific-options";
 								break;
 							case "specific-options":
@@ -926,6 +1045,7 @@
 									air_console.message(air_console.getMasterControllerDeviceId(), show_playlist_buttons);
 								}
 								$("#default-options").hide();
+								$("#playlist-info").hide();
 								$("#playlist-display").hide();
 								$("#roundCounter").hide();
 								$("#playlist-selector").css("display", "flex");
@@ -943,6 +1063,7 @@
 								document.show_playlist_buttons = false;
 								$("#playlist-selector").hide();
 								$("#main-menu").show();
+								$("#ticker-wrapper").show();
 								controller_boundary_option("first");
 								break;
 							case "credits":
@@ -956,6 +1077,7 @@
 									$("#credits-container").hide();
 
 									$("#main-menu").animate({ opacity: 1 }, 1500);
+									$("#ticker-wrapper").animate({ opacity: 1 }, 1500);
 									sleep(1500).then(() => {
 										hide_loading();
 									});
@@ -965,6 +1087,8 @@
 						break;
 					case 'select':
 						controller_boundary_option(false);
+						// play switch sound effect
+						document.getElementById("sound-effect-switch").play();
 						// determine what screen we are on
 						switch (document.screen) {
 							case "spotify":
@@ -982,6 +1106,7 @@
 
 								sleep(1500).then(() => {
 									$("#main-menu").animate({ opacity: 1 }, 1500);
+									$("#ticker-wrapper").animate({ opacity: 1 }, 1500);
 									sleep(1500).then(() => {
 										// inform master controller to hide loading
 										hide_loading();
@@ -995,7 +1120,9 @@
 									case "new-game":
 										DEBUG && console.log("showing playlist selector for new game");
 										display_loading();
+										document.maxRound = 15;
 										$("#main-menu").hide();
+										$("#ticker-wrapper").hide();
 										$("#playlist-selector .dialogue").css("display", "flex");
 										$("#playlist-selector .dialogue-wrapper").css("display", "flex");
 										$("#game_logo").addClass("smallLogo");
@@ -1014,6 +1141,7 @@
 										DEBUG && console.log("showing credits");
 										display_loading();
 										$("#main-menu").animate({ opacity: 0 }, 1500);
+										$("#ticker-wrapper").animate({ opacity: 0 }, 1500);
 										$("#game_logo").addClass("smallLogo");
 										$("#playlist-selector").hide("fade", {}, 1500);
 										$("#credits-container").show();
@@ -1033,9 +1161,10 @@
 										DEBUG && console.log("displaying latest updates");
 										display_loading();
 										$("#main-menu").animate({ opacity: 0 }, 1500);
+										$("#ticker-wrapper").animate({ opacity: 0 }, 1500);
 										$("#game_logo").addClass("smallLogo");
-										$("#updates").css("display", "flex");
-										$("#updates").animate({ opacity: 0.9 }, 1500);
+										$("#updates").show();
+										$("#updates").animate({ opacity: 1 }, 1500);
 										sleep(1500).then(() => {
 											document.showing_updates = true;
 											hide_loading();
@@ -1057,6 +1186,7 @@
 
 										display_loading();
 										$("#main-menu").animate({ opacity: 0 }, 1500);
+										$("#ticker-wrapper").animate({ opacity: 0 }, 1500);
 										$("#game_logo").addClass("smallLogo");
 										$("#spotify").css("display", "flex");
 										$("#spotify").animate({ opacity: 0.9 }, 1500);
@@ -1071,8 +1201,13 @@
 								active_option = $("#guessing-type-selector .active");
 								document.guessing_type = $(active_option).attr("id");
 								$("#guessing-type-selector").hide();
-								$("#specific-options .dialogue").html(specific_options_dialogue);
+								$("#titleSpec-options").html("Choose the Setting you want to change or hit start to play with the current settings.");
 								guessingType = $(active_option).html();
+								if($(active_option).hasClass("guessType")){
+									$("#guessing_type").addClass("guessType");
+								} else{
+									$("#guessing_type").removeClass("guessType");
+								}
 								document.screen = "specific-options";
 								$("#guessing_type").html(guessingType);
 								$("#option-selector").show();
@@ -1081,23 +1216,19 @@
 								DEBUG && console.log("saving selected round amount and going back to specific options");
 
 								active_option = $("#round-amount-selector .active");
-								if ($(active_option).html() === "Custom Amount") {
+								if ($(active_option).hasClass("custom-amount")) {
 									// just go back, since we have already set document.maxRound
 								} else {
-									document.maxRound = parseInt($(active_option).html());
+									document.maxRound = parseInt($(active_option).find(".button-text").html());
 								}
 								$("#round-amount-selector").hide();
-								$("#specific-options .dialogue").html(specific_options_dialogue);
+								$("#titleSpec-options").html("Choose the Setting you want to change or hit start to play with the current settings.");
 								$("#option-selector").show();
 								document.screen = "specific-options";
 
 								// inform controller to hide increase/decrease buttons
 								document.show_round_change_buttons = false;
 								document.show_round_number_buttons = false;
-								DEBUG && console.log(document.show_round_change_buttons);
-								show_settings_buttons = [];
-								show_settings_buttons.push({ type: "show_settings_buttons" });
-								air_console.broadcast(show_settings_buttons);
 								if (air_console.getMasterControllerDeviceId() !== undefined) {
 									document.show_settings_buttons = true;
 									air_console.message(air_console.getMasterControllerDeviceId(), show_settings_buttons);
@@ -1117,14 +1248,15 @@
 											max_rounds = playlists[document.selectedPlaylist]['amount_of_tracks'];
 										}
 
-										$("#specific-options .dialogue").html("How many rounds do you want to play? (Max " + max_rounds + ")");
+										$("#titleSpec-options").html("How many rounds do you want to play? (Max " + max_rounds + ")");
 										$("#round-amount-selector").css("display", "flex");
 
 										// reset the options to the first setting
 										$("#round-amount-selector li").removeClass("active");
 										const firstOption = $("#round-amount-selector li").first();
 										$(firstOption).addClass("active");
-										$("#roundCounter").html($(firstOption).html() + " Rounds");
+										$("#roundCounter").show();
+										$("#roundCounter").html('<span style="color: #ffdc40; font-weight: 600;">Rounds:</span> ' + $(firstOption).find(".button-text").html() + " Rounds");
 										document.show_settings_buttons = false;
 										show_round_number_buttons = [];
 								        show_round_number_buttons.push({ type: "show_round_number_buttons" });
@@ -1138,13 +1270,13 @@
 										controller_boundary_option("first");
 										$(".guessing-option").removeClass("active");
 										$("#guessing-artist").addClass("active");
-										document.guessing_type = "guessing-artist";
-										guessingType = $("#guessing-artist").html();
-										$("#guessing_type").html(guessingType);
+										//document.guessing_type = "guessing-artist";
+										//guessingType = $("#guessing-artist").html();
+										//$("#guessing_type").html(guessingType);
 
 										document.screen = "guessing-type-selector";
 										$("#option-selector").hide();
-										$("#specific-options .dialogue").html("Select whether each round players have to guess either artist or title randomly, or only one of each.");
+										$("#titleSpec-options").html("Select whether each round players have to guess either artist or title randomly, or only one of each.");
 										$("#guessing-type-selector").css("display", "flex");
 										break;
 									case "start":
@@ -1179,8 +1311,8 @@
 
 									DEBUG && console.log("showing specific options");
 									document.screen = "specific-options";
-									$("#specific-options .dialogue").html(specific_options_dialogue);
-									$("#specific-options .dialogue").css("display", "flex");
+									$("#titleSpec-options").html("Choose the Setting you want to change or hit start to play with the current settings.");
+									$("#titleSpec-options").show();
 									$("#specific-options").css("display", "flex");
 								}
 								break;
@@ -1198,9 +1330,6 @@
 								DEBUG && console.log("going to default options");
 								// go to default option prompt
 								document.screen = "default-options";
-								show_settings_buttons = [];
-								show_settings_buttons.push({ type: "show_settings_buttons" });
-								air_console.broadcast(show_settings_buttons);
 								document.show_playlist_buttons = false;
 								document.show_round_number_buttons = false;
 								if (air_console.getMasterControllerDeviceId() !== undefined) {
@@ -1210,15 +1339,19 @@
 								$("#playlist-selector").hide();
 								$("#default-options").css("display", "flex");
 								$("#default-options .dialogue").css("display", "flex");
-
+								$("#playlist-info").css("top", "86%");
+								$("#playlist-info").css("display", "-webkit-box");
 								// display selected playlist
-								$("#playlist-display").html("Playlist:</br>" + playlists[document.selectedPlaylist].name);
-								$("#playlist-display").css({ display: "flex" });
+								$("#playlist-display").show();
+								var playlistName = playlists[document.selectedPlaylist].name;
+                                if (playlistName.length > 14) {
+                                  playlistName = playlistName.substring(0, 14) + "...";
+                                }
+								$("#playlist-display").html('<span style="color: #ffdc40; font-weight: 600;">Playlist:</span> ' + playlistName);
 
 								// display round amount to play
-								$("#roundCounter").html(document.maxRound + " Rounds");
-								$("#roundCounter").css({ display: "flex" });
-
+								$("#roundCounter").show();
+								$("#roundCounter").html('<span style="color: #ffdc40; font-weight: 600;">Rounds:</span> ' + document.maxRound);
 								break;
 						}
 						break;
@@ -1246,8 +1379,7 @@
 							case "guessing-type-selector":
 								active_option = $("#guessing-type-selector .active");
 								if ($(active_option).is(':last-child')) {
-									break;
-									// next_option = $("#guessing-type-selector li").first();
+									next_option = $("#guessing-type-selector li").first();
 								} else {
 									next_option = $(active_option).next();
 								}
@@ -1263,9 +1395,8 @@
 								break;
 							case "round-amount-selector":
 								active_option = $("#round-amount-selector .active");
-								if ($(active_option).is(':last-child')) {
-									break;
-									//next_option = $("#round-amount-selector li").first();
+								if ($(active_option).hasClass("custom-amount")) {
+									next_option = $("#round-amount-selector li").first();
 								} else {
 									next_option = $(active_option).next();
 								}
@@ -1278,9 +1409,9 @@
 
 								$(active_option).removeClass("active");
 								$(next_option).addClass("active");
-								if ($(next_option).html() === "Custom Amount") {
-									document.maxRound = document.defaultMaxRound;
-									$("#roundCounter").html(document.defaultMaxRound + " Rounds");
+								if ($(next_option).hasClass("custom-amount")) {
+									//document.maxRound = document.defaultMaxRound;
+									$("#roundCounter").html('<span style="color: #ffdc40; font-weight: 600;">Rounds:</span> ' + document.maxRound + " Rounds");
 									// inform controller to display increase/decrease buttons
 									show_round_change_buttons = [];
 									show_round_change_buttons.push({ type: "show_round_change_buttons" });
@@ -1298,7 +1429,7 @@
 								            air_console.message(air_console.getMasterControllerDeviceId(), show_round_number_buttons);
 								        }
 								        air_console.broadcast(show_round_number_buttons);
-									$("#roundCounter").html($(next_option).html() + " Rounds");
+									$("#roundCounter").html('<span style="color: #ffdc40; font-weight: 600;">Rounds:</span> ' + $(next_option).find(".button-text").html() + " Rounds");
 								}
 
 								break;
@@ -1317,12 +1448,11 @@
 										controller_boundary_option("last");
 										break;
 									case "start":
-									/* 
-									document.setting = "round_amount";
-									$("#specific-start").removeClass("active");
-									$("#round_amount_option").addClass("active");
-									controller_boundary_option("last");
-									break; */
+									    document.setting = "round_amount";
+									    $("#specific-start").removeClass("active");
+									    $("#round_amount_option").addClass("active");
+									    controller_boundary_option("last");
+									    break;
 								}
 
 								break;
@@ -1331,12 +1461,12 @@
 									document.default = false;
 									$("#default-no").addClass("active");
 									$("#default-yes").removeClass("active");
-									controller_boundary_option("last");
+									//controller_boundary_option("last");
 								} else {
-									/* controller_boundary_option("first");
+									//controller_boundary_option("first");
 									document.default = true;
 									$("#default-yes").addClass("active");
-									$("#default-no").removeClass("active"); */
+									$("#default-no").removeClass("active");
 								}
 								break;
 							case "playlist-selection":
@@ -1361,6 +1491,7 @@
 										}
 										break;
 									case "updates":
+										/*
 										if (check_for_freakpants()) {
 											controller_boundary_option("last");
 											document.menu = "spotify";
@@ -1372,6 +1503,10 @@
 											// $("#updates-button").removeClass("active");
 											// $("#new-game-button").addClass("active");
 										}
+										*/
+										document.menu = "new-game";
+										$("#updates-button").removeClass("active");
+									    $("#new-game-button").addClass("active");
 
 										break;
 									case "spotify":
@@ -1390,8 +1525,7 @@
 							case "guessing-type-selector":
 								active_option = $("#guessing-type-selector .active");
 								if ($(active_option).is(':first-child')) {
-									break;
-									// previous_option = $("#guessing-type-selector li").last();
+									previous_option = $("#guessing-type-selector li").last();
 								} else {
 									previous_option = $(active_option).prev();
 								}
@@ -1409,8 +1543,7 @@
 							case "round-amount-selector":
 								active_option = $("#round-amount-selector .active");
 								if ($(active_option).is(':first-child')) {
-									break;
-									// previous_option = $("#round-amount-selector li").last();
+									previous_option = $("#round-amount-selector li").last();
 								} else {
 									previous_option = $(active_option).prev();
 								}
@@ -1423,9 +1556,9 @@
 
 								$(active_option).removeClass("active");
 								$(previous_option).addClass("active");
-								if ($(previous_option).html() === "Custom Amount") {
-									document.maxRound = document.defaultMaxRound;
-									$("#roundCounter").html(document.defaultMaxRound + " Rounds");
+								if ($(previous_option).hasClass("custom-amount")) {
+									//document.maxRound = document.defaultMaxRound;
+									$("#roundCounter").html('<span style="color: #ffdc40; font-weight: 600;">Rounds:</span> ' + document.maxRound + " Rounds");
 									// inform controller to display increase/decrease buttons
 									show_round_change_buttons = [];
 									show_round_change_buttons.push({ type: "show_round_change_buttons" });
@@ -1443,17 +1576,17 @@
 								            air_console.message(air_console.getMasterControllerDeviceId(), show_round_number_buttons);
 								        }
 								        air_console.broadcast(show_round_number_buttons);
-									$("#roundCounter").html($(previous_option).html() + " Rounds");
+									$("#roundCounter").html('<span style="color: #ffdc40; font-weight: 600;">Rounds:</span> ' + $(previous_option).find(".button-text").html() + " Rounds");
 								}
 
 								break;
 							case "specific-options":
 								switch (document.setting) {
 									case "round_amount":
-									/* document.setting = "start";
-									$("#round_amount_option").removeClass("active");
-									$("#specific-start").addClass("active");
-									break; */
+									    document.setting = "start";
+									    $("#round_amount_option").removeClass("active");
+									    $("#specific-start").addClass("active");
+									break; 
 									case "guessing_type":
 										document.setting = "round_amount";
 										$("#guessing_type").removeClass("active");
@@ -1470,9 +1603,9 @@
 								break;
 							case "default-options":
 								if (document.default) {
-									/* document.default = false;
+									document.default = false;
 									$("#default-no").addClass("active");
-									$("#default-yes").removeClass("active"); */
+									$("#default-yes").removeClass("active");
 								} else {
 									document.default = true;
 									$("#default-yes").addClass("active");
@@ -1485,6 +1618,9 @@
 							case "main-menu":
 								switch (document.menu) {
 									case "new-game":
+									    document.menu = "updates";
+										$("#new-game-button").removeClass("active");
+										$("#updates-button").addClass("active");
 										// dont do anything at the first selection
 										/* 
 										if (check_for_freakpants()) {
@@ -1502,20 +1638,21 @@
 										document.menu = "new-game";
 										$("#credits-button").removeClass("active");
 										$("#new-game-button").addClass("active");
-										controller_boundary_option("first");
+										//controller_boundary_option("first");
 										break;
 									case "updates":
 										document.menu = "credits";
 										$("#updates-button").removeClass("active");
 										$("#credits-button").addClass("active");
-										controller_boundary_option(false);
+										//controller_boundary_option(false);
 										break;
+                                        /*
 									case "spotify":
 										document.menu = "updates";
 										$("#connect-spotify-button").removeClass("active");
 										$("#updates-button").addClass("active");
 										break;
-
+                                         */
 								}
 								break;
 						}
@@ -1523,7 +1660,7 @@
 					case 'decrease_rounds':
 						document.getElementById("sound-effect-click").play();
 						document.maxRound = document.maxRound - 1;
-						$("#roundCounter").html(document.maxRound + " Rounds");
+						$("#roundCounter").html('<span style="color: #ffdc40; font-weight: 600;">Rounds:</span> ' + document.maxRound + " Rounds");
 						update_selected_rounds_on_controllers();
 						break;
 					case 'increase_rounds':
@@ -1534,14 +1671,15 @@
 						} else {
 							document.getElementById("sound-effect-click").play();
 							document.maxRound = document.maxRound + 1;
-							$("#roundCounter").html(document.maxRound + " Rounds");
+							$("#roundCounter").html('<span style="color: #ffdc40; font-weight: 600;">Rounds:</span> ' + document.maxRound + " Rounds");
 							update_selected_rounds_on_controllers();
 						}
 						break;
 					case 'cancel':
 						controller_boundary_option("first");
 						$("#message").html("");
-						$("#message").hide();
+						$("#message-blur").hide();
+						$("#playlist-info").hide();
 						$("#roundCounter").hide();
 						$("#playlist-display").hide();
 						// inform other controllers
@@ -1566,12 +1704,13 @@
 						player = document.getElementById("player");
 						player.volume = 0;
 
-						$("#roundTime").hide();
+						$("#animationTime").hide();
 						$("#current_song_service").hide();
-						$("#playanimation").hide();
+						$("#animationTime").hide();
 
 						// reset the results area and the round status
 						$("#results-scrollable").html("");
+						$("#status-wrapper").hide();
 						$("#status").hide();
 						$("#status").html("");
 
@@ -1584,6 +1723,7 @@
 
 						// $("#playlist-selector").show("fade", {}, 1500);
 						$("#main-menu").show();
+						$("#ticker-wrapper").show();
 						document.screen = "main-menu";
 
 						break;
@@ -1591,6 +1731,7 @@
 						controller_boundary_option("first");
 						document.screen = "main-menu";
 						$("#message").html("");
+						$("#message-blur").hide();
 						// $("#message").hide("fade", {}, 1500);
 
 						document.game_in_progress = false;
@@ -1598,6 +1739,7 @@
 
 						// reset the results area and the round status
 						$("#results-scrollable").html("");
+						$("#status-wrapper").hide();
 						$("#status").hide();
 						$("#status").html("");
 
@@ -1611,6 +1753,7 @@
 						$("#game_logo").show("fade", {}, 1500);
 
 						$("#main-menu").show();
+						$("#ticker-wrapper").show();
 						// $("#playlist-selector").show("fade", {}, 1500);
 
 						// air_console.broadcast(back_to_main);
@@ -1698,9 +1841,9 @@
 			document.playlist_storage = [];
 			var playlist_html;
 
-			$("#screen-wrapper").append('<img id="playanimation" src="audio.svg" />');
+			//$("#screen-wrapper").append('<img id="playanimation" src="audio.svg" />');
 			$("body").prepend('<div id="fallimg" style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; background-image:url(images/screen/fallback.jpg); background-size:cover; background-position:center;"></div>');
-			$("body").append('<video playsinline autoplay muted loop id="bgvid"><source src="videos/disco_loop.mp4" type="video/mp4"></video>');
+			$("body").append('<video playsinline autoplay muted loop id="bgvid"><source src="videos/disco_loop.mp4" type="video/mp4" muted="muted"></video>');
 
 			//remove fallback image when video is loaded
 			$("#bgvid").on("loadedmetadata", function() {
@@ -1735,7 +1878,8 @@
 				if (!document.low_performance) {
 					playlist.album_art.forEach(function (element) {
 						if (!add_to_storage_only) {
-							html = html + '<img src="' + element + '" />';
+							lowResol = element.replace('/1000x1000bb.jpg', '/100x100bb.jpg');
+							html = html + '<img src="' + lowResol + '" />';
 						}
 						playlist_html += '<img src="' + element + '" />';
 					});
@@ -1758,8 +1902,8 @@
 				}
 				playlist_html += '<div class="playlist-text-wrapper"><div class="playlist-text">' + playlist.name;
 				if (counter === 1) {
-					details = '<div id="details-wrapper"><div id="playlist-details"><span class="playlist-track-count">' + playlist.amount_of_tracks + ' Tracks</span>';
-					details += '<span class="playlist-description">' + playlist.description + '</span></div></div>';
+					details = '<div id="details-wrapper"><div id="playlist-details" class="image-element text-allign"><span class="playlist-track-count button-text">' + playlist.amount_of_tracks + ' Tracks</span>';
+					details += '<span class="playlist-description button-text">' + playlist.description + '</span></div></div>';
 				}
 				if (!add_to_storage_only) {
 					html += '</div></div>';
@@ -1810,6 +1954,7 @@
 			}
 			// display the current time on the UI
 			$("#roundTime").html(document.RoundTime);
+			$("#TimerBlur").show();
 
 			if (document.RoundTime === 6 && !document.animatingVolume) {
 				document.animatingVolume = true;
@@ -1823,7 +1968,8 @@
 
 			if (document.playerFailed) {
 				DEBUG && console.log("player failed, skipping song");
-				$("#roundTime").hide();
+				$("#animationTime").hide();
+				$("#message-blur").show();
 				$("#message").html("Broken song, skipping!");
 
 				skipping = [];
@@ -1861,7 +2007,39 @@
 				out_of_time.push({ type: "out_of_time" });
 				air_console.broadcast(out_of_time);
 				document.roundEndInitiated = true;
+				if(document.game_in_progress){
 				round_end();
+				}
+			}
+		}
+
+		function removeElementFromRound(device_id){
+			var disconnectElement = document.querySelector("[id*='_id_" + device_id + "_result']");
+			if (disconnectElement) {
+				disconnectElement.remove();
+				for (let i = 0; i < document.playerScores.length; i++) {
+					if (device_id === document.playerScores[i].player) {
+						document.playerScores[i] = [];
+						if (i !== -1) {
+							document.playerScores.splice(i, 1);
+						}
+						break;
+					}
+				}
+
+				document.playerScores.sort(function (a, b) {
+					return b.score - a.score;
+				});
+
+				//Update positions of players
+				for (var i = 0; i < document.playerScores.length; i++) {
+					document.playerScores[i].position = i + 1;
+					$("#player_" + air_console.getNickname(document.playerScores[i].player) + "_id_" + document.playerScores[i].player + "_result").find(".position_display").html(document.playerScores[i].position);
+				}
+				send_score();
+				console.log("deleted the element of the player that disconnected");
+			}else{
+				console.log("element not found");
 			}
 		}
 
@@ -1921,7 +2099,7 @@
 
 			full_window_width = $(window).width();
 			// substract the size of the timer
-			available_area_width = full_window_width - $("#roundTime").outerWidth(true);
+			available_area_width = full_window_width - $("#animationTime").outerWidth(true);
 
 			single_result_area_width = $(".single-result").first().outerWidth(true);
 			// console.log("size of one result area: " + single_result_area_width);
@@ -1929,7 +2107,9 @@
 			// console.log("amount of result areas that fit onto the screen before scrolling: " + number_of_possible_result_areas);
 
 			// set the size of the result area so there are no cut off result areas (unless scrolling of course)
-			$("#player-results").width(number_of_possible_result_areas * single_result_area_width);
+
+			//$("#player-results").width(number_of_possible_result_areas * single_result_area_width);
+
 			// also set the margins of the result area, so it is centered on the available space
 			// results_margin_left = (available_area_width - $("#player-results").width()) / 2;
 			// $("#player-results").css('margin-left', results_margin_left + 'px')
@@ -1975,14 +2155,17 @@
 
 			// reset in case we cancelled an earlier game
 			document.roundEndInitiated = false;
+			document.show_settings_buttons = false;
 
 			// inform controllers to display get ready
+			document.get_ready = true;
 			get_ready = [];
 			get_ready.push({ type: "get_ready" });
 			air_console.broadcast(get_ready);
 
 			// reset guessing areas
 			$("#results-scrollable").html("");
+			$("#playlist-info").css("top", "86%");
 
 			// create guessing areas for all controllers
 			const device_ids = air_console.getControllerDeviceIds();
@@ -1994,51 +2177,60 @@
 			$("#game_logo").hide("fade", {}, 1500);
             
 			sleep(1500).then(() => {
-
+				$("#status-wrapper").show();
 				if(document.paused){
 					document.musicFailed = true;
-					$("#status").html("countdown paused");
+					$("#message").html("countdown paused");
 					return;
 				} else{
                     // show message again (may have been hidden by end of game)
 				    $("#message").css({ display: "flex" });
+					$("#message-blur").show();
 				    $("#status").css({ display: "flex" });
 				    $("#message").html("Get ready for the first round!");
 				    $("#status").html("3");
 				    document.getElementById("sound-effect-clock").play();
 				}
-
 				sleep(1000).then(() => {
 
 					if(document.paused){
 					    document.musicFailed = true;
-						$("#status").html("countdown paused");
+						$("#message").html("countdown paused");
 					    return;
 				    } else{
 						document.getElementById("sound-effect-clock").play();
+						$("#message").html("Get ready for the first round!");
 					    $("#status").html("2");
 					}
-
 					sleep(1000).then(() => {
 
 						if(document.paused){
 					       document.musicFailed = true;
-						   $("#status").html("countdown paused");
+						   $("#message").html("countdown paused");
 					       return;
 				        }else{
 						   document.getElementById("sound-effect-clock").play();
+						   $("#message").html("Get ready for the first round!");
 						   $("#status").html("1");
 						}
 
 						sleep(1000).then(() => {
-
-							$("#roundCounter").html("Round</br>1/" + document.maxRound);
-							$("#playlist-display").html(playlists[document.selectedPlaylist].name);
+							$("#roundCounter").show();
+							$("#playlist-display").show();
+							$("#roundCounter").html('<span style="color: #ffdc40; font-weight: 600;">Rounds:</span> ' + "1/" + document.maxRound);
+							var playlistName = playlists[document.selectedPlaylist].name;
+                                if (playlistName.length > 14) {
+                                  playlistName = playlistName.substring(0, 14) + "...";
+                                }
+							$("#playlist-display").html('<span style="color: #ffdc40; font-weight: 600;">Playlist:</span> ' + playlistName);
 
 							$("#status").hide();
 							$("#status").html("");
 
+							$("#message").html("Get ready for the first round!");
+
 							document.game_in_progress = true;
+							document.get_ready = false;
 
 							// start the function that keeps initiating the check for the result areas
 							initiateScrollingCheck();
@@ -2054,15 +2246,17 @@
 							// initiate round time keeptracker
 							calculateRoundTime();
 
-							document.round = 0;
+							//document.round = 0;
 							$("#player-results").show();
+							$("#animationTime").show();
+							$("#TimerBlur").show();
 							$("#roundTime").html(document.RoundTime);
-							$("#roundTime").css("display", "flex");
 
 							// override screen with play area
 							set_guessing_type_message();
-							$("#playanimation").show();
+							$("#animationTime").show();
 							$("#current_song_service").show();
+							$("#get_it_link").show();
 
 							document.playerFailed = false;
 
@@ -2168,7 +2362,10 @@
 			DEBUG && console.log("play random song was called");
 			document.round++;
 			DEBUG && console.log("increased round counter");
-			$("#roundCounter").html("Round</br>" + document.round + "/" + document.maxRound);
+			$("#playlist-info").css("top", "5%");
+			$("#roundCounter").show();
+			$("#player-results").show();
+			$("#roundCounter").html('<span style="color: #ffdc40; font-weight: 600;">Rounds:</span> ' + document.round + "/" + document.maxRound);
 			DEBUG && console.log("set round counter display");
 
 			// test if the start function can be invoked in case of library not being loaded successfully from ajax
@@ -2309,7 +2506,7 @@
 			}
 
 			// $('#player').get(0).currentTime = 5;
-			$("#playanimation").show();
+			$("#animationTime").show();
 			DEBUG && console.log("triggered the bars animation");
 
 
@@ -2392,7 +2589,7 @@
 			$(".album_art.previous").html(document.playlist_storage[previous_id]);
 			$(".album_art.active").html(document.playlist_storage[document.selectedPlaylist]);
 
-			$(".playlist-track-count").html(playlists[document.selectedPlaylist]['amount_of_tracks'] + " Tracks");
+			$(".playlist-track-count").html(playlists[document.selectedPlaylist]['amount_of_tracks'] + " Tracks" + '</br>');
 			$(".playlist-description").html(playlists[document.selectedPlaylist]['description']);
 
 
@@ -2466,6 +2663,7 @@
 		}
 
 		function round_end() {
+			const winnername = air_console.getNickname(document.playerScores[0].player);
 			/* if (document.ad_showing) {
 				document.roundEndInitiated = false;
 				return;
@@ -2493,7 +2691,6 @@
 			DEBUG && console.log("solution:");
 			DEBUG && console.log(document.solution);
 			document.roundDifficultyResults.push(result);
-
 
 			// determine fastest player
 			// clone array for sorting differently
@@ -2538,18 +2735,41 @@
 					// place b higher than a
 					return 1;
 				}
-
 			});
+			for(let i = 0; i < fastestPlayers.length; i++){
+              if(!air_console.getNickname(fastestPlayers[i].player)){
+                document.amount_of_finished_players--;
+			  }
+			}
+			userName = air_console.getNickname(fastestPlayers[0].player);
+            if (userName && userName.length > 25) {
+              userName = userName.substring(0, 25) + "...";
+            } else if(!userName){
+				calculateRoundTime();
+				document.roundEndInitiated = false;
+				document.game_in_progress = true;
+				document.playerScores[0] = [];
+				return;
+			}
 			if (typeof fastestPlayers !== 'undefined' && typeof fastestPlayers[0] !== 'undefined' && fastestPlayers[0].correct) {
-				fastestString = "Fastest player: " + air_console.getNickname(fastestPlayers[0].player) + " with " + fastestPlayers[0].currentGuessTime + " seconds.";
+				fastestString = "Fastest player: <span style='color: white;'>" + userName + "</span> with " + fastestPlayers[0].currentGuessTime + " seconds.";
+				$("#player_" + userName + "_id_" + fastestPlayers[0].player + "_result").find(".darken_image").css("top", "-139%");
+				$("#player_" + userName + "_id_" + fastestPlayers[0].player + "_result").find(".darken_image").css("left", "51%");
+				$("#disclaimer").css("color", "#FEA411");
+				$("#ring-container").addClass("correct_ring");
 			} else if (document.playerFailed) {
 				fastestString = "We apologize for the inconvenience.";
 			} else {
 				fastestString = "Nobody guessed correctly!";
+				$("#player_" + userName + "_id_" + fastestPlayers[0].player + "_result").find(".darken_image").css("top", "-139%");
+				$("#player_" + userName + "_id_" + fastestPlayers[0].player + "_result").find(".darken_image").css("left", "51%");
+				$("#disclaimer").css("color", "#FEA411");
+				$("#ring-container").addClass("incorrect_ring");
 			}
 			// output fastest player to screen
-			$("#status").css({ display: "flex" });
-			$("#status").html(fastestString);
+			$("#disclaimer").show();
+			$("#disclaimer").html(fastestString);
+			$("#get_it_link").hide();
 			// console.log(fastestString);
 
 			// stop animations in progress
@@ -2557,35 +2777,37 @@
 
 			// reset the roundTime so time cant run out in the time between matches
 			document.RoundTime = document.RoundTimeSetting;
-			$("#roundTime").hide();
+			$("#animationTime").hide();
+			$("#TimerBlur").hide();
 
-			$("#current_song_service").hide();
+			//$("#current_song_service").hide();
 
-			$("#playanimation").hide();
+			$("#animationTime").hide();
 
 			if (document.playerFailed) {
 				document.playerFailed = false;
+				$("#message-blur").show();
 				$("#message").html("Skipped a broken song.");
-				$("#roundTime").hide();
-				$("#playanimation").hide();
+				$("#animationTime").hide();
 			} else {
 				if (!document.animatingVolume) {
 					$("#player").animate({ volume: 0 }, 4000);
 					document.animatingVolume = true;
 				}
-
+				$("#message-blur").show();
 				$("#message").html("Round is over!");
+				$("#ring-container").show();
 			}
 
 			sleep(4000).then(() => {
 
-
-
 				document.amount_of_finished_players = 0;
 
 				// remove correct/wrong classes - we wait for the timer to pass because otherwise the last players result wont get highlighted on the screen
-				$(".darken_image").removeClass("avatar_wrong");
-				$(".darken_image").removeClass("avatar_correct");
+				$("#rounded-container").removeClass("avatar_wrong");
+				$("#rounded-container").removeClass("avatar_correct");
+				$("#ring-container").removeClass("correct_ring");
+				$("#ring-container").removeClass("incorrect_ring");
 
 				if (document.round === document.maxRound) {
 					// reset current round to 0 so no part of the game thinks we are still in a game
@@ -2611,43 +2833,58 @@
 						air_console.message(score.player, score_message);
 					});
 
+					$("#playlist-info").hide();
 					$("#roundCounter").hide();
 					$("#roundCounter").html("");
 
 					$("#playlist-display").hide();
 
+					$("#status-wrapper").hide();
 					$("#status").html("");
 					$("#status").hide();
 					const winner_object = document.playerScores[0];
 					let message = '';
 					if (winner_object !== undefined) {
-						const winner = air_console.getNickname(winner_object.player);
 						const winner_correct = winner_object.correctGuesses;
 
 						const winner_html = $("#results-scrollable .single-result").first();
 						$("#victory_screen").append("<span class='game_over'> Game Over! Winner:</span>");
 						$("#victory_screen").append(winner_html);
+						$("#victory_screen .single-result").append("<div id='game_over-ring' class='image-element'></div>");
 
-						$("#victory_screen .position_display").hide();
+						$("#game_over-ring").append($("#victory_screen .position_display"));
+						$("#game_over-ring").append($("#victory_screen .darken_image").find("#rounded-container"));
+						$("#game_over-ring").find("#rounded-container").css({top: "8%", left: "8%", width: "84%", height: "83%"});
+						$("#victory_screen .darken_image").removeAttr("style");
+						var winnerpoints = $("#victory_screen .player_score").text();
+						$("#victory_screen .player_score ").hide();
 						$("#victory_screen .darken_image").hide();
-						$("#victory_screen .player_score").append(" points");
+						$("#victory_screen .position_display").hide();
 
-
-						message += "<span class='result_category'>Correct guesses:</span>";
-						message += "<span class='result'>" + winner_correct + "/" + document.maxRound + " (" + Math.round(100 / document.maxRound * winner_correct) + "%)</span></br>";
-						message += "<span class='result_category'>Total time taken for guesses:</span>";
-						message += "<span class='result'>" + Math.round(winner_object.totalGuessTime * 10) / 10 + " seconds</span></br>";
-						message += "<span class='result_category'>Average time guessing:</span>";
-						message += "<span class='result'>" + + Math.round(winner_object.totalGuessTime / document.maxRound * 10) / 10 + " seconds</span></br>";
+						message += "</div class='credits_text'>";
+                        if(winnername != undefined) {
+                            message += "<span class='result_category' style='font-size: min(5vh, 2.9vw);top: 46%;left: 11%;'>" + winnername + ": ";
+                        }
+                        else{
+                            message += "<span class='result_category' style='font-size: min(5vh, 2.9vw);top: 46%;left: 11%;'>" + "player " + document.playerScores[0].player + ": ";
+                        }
+						message += "<span class='result'>" + winnerpoints + " points</span></span></br>";
+						message += "<span class='result_category'>Correct guesses:";
+						message += "<span class='result'>  " + winner_correct + "/" + document.maxRound + " (" + Math.round(100 / document.maxRound * winner_correct) + "%)</span></span></br>";
+						message += "<span class='result_category'>Total time taken for guesses:";
+						message += "<span class='result'>  " + Math.round(winner_object.totalGuessTime * 10) / 10 + " seconds</span></span></br>";
+						message += "<span class='result_category'>Average time guessing:";
+						message += "<span class='result'>  " + + Math.round(winner_object.totalGuessTime / document.maxRound * 10) / 10 + " seconds</span></span></br></div>";
 
 						$("#victory_screen").append(message);
 
 						$("#message").html("");
-						$("#message").hide();
+						$("#message-blur").hide();
+						$("#status-wrapper").hide();
 						$("#status").hide();
 
-						$("#victory_screen").css({ display: "flex" });
-						$("#victory_screen").animate({ opacity: 0.9 }, 1500);
+						$("#victory_screen").show();
+						$("#victory_screen").animate({ opacity: 1 }, 1500);
 						$("#player-results").hide();
 
 
@@ -2655,6 +2892,7 @@
 						document.getElementById("sound-effect-cheers").play();
 					} else {
 						message = "Game Over!</br> You have managed to never even guess. Either you're away from the game or you're testing an edge case ;)</br>";
+						$("#message-blur").show();
 						$("#message").html(message);
 					}
 
@@ -2689,7 +2927,17 @@
 				$("#status").html("countdown paused");
 				return;
 			}else{
+				$("#message-blur").show();
 			    $("#message").html("Get ready for the next round!");
+				$("#status-wrapper").show();
+				$("#ring-container").hide();
+				$("#player-results").hide();
+				var userName = air_console.getNickname(fastestPlayers[0].player);
+                if (userName && userName.length > 25) {
+                  userName = userName.substring(0, 25) + "...";
+                }
+				fastestPlayers[0].correct = false;
+				$("#player_" + userName + "_id_" + fastestPlayers[0].player + "_result").find(".darken_image").removeAttr("style");
 			    $("#status").css({ display: "flex" });
 			    $("#status").html("3");
 			    document.getElementById("sound-effect-clock").play();
@@ -2714,6 +2962,7 @@
 					}
 					sleep(1000).then(() => {
 						$("#current_song_service").show();
+						$("#get_it_link").show();
 						$("#status").html("");
 						$("#status").hide();
 
@@ -2726,18 +2975,20 @@
 						// also reset the startTime of the current Round so we can keep track of how many seconds have passed
 						document.RoundStartTime = new Date().getTime();
 
+						/*
 						// reset the guessTime and correct/false for every player in case they dont answer
 						document.playerScores.forEach(function (element) {
 							element.correct = false;
 							element.currentGuessTime = 0;
 						});
+						*/
 
 						// initiate round time keeptracker
 						document.roundEndInitiated = false;
 						DEBUG && console.log("start keeping track of roundtime");
 						calculateRoundTime();
 
-						$("#roundTime").css("display", "flex");
+						$("#animationTime").show();
 						DEBUG && console.log("calling play random song for next round");
 						play_random_song();
 					});
@@ -2750,16 +3001,13 @@
 		function initiate_guessing_area(player_id) {
 			// check if the player already has a guess area
 			guessArea = false;
-			$("#player_" + player_id + "_result").each(function () {
+			$("#player_" + air_console.getNickname(player_id) + "_id_" + player_id + "_result").each(function () {
 				guessArea = true;
 			});
 			if (!guessArea) {
-				// determine nickname of player
-				nickname = air_console.getNickname(player_id);
 				// add empty guessArea
 				url = air_console.getProfilePicture(player_id, 120);
-				$("#results-scrollable").append('<div class="single-result" id="player_' + player_id + '_result"><div class="position_display"></div><div class="darken_image"></div><img src="' + url + '"><div class="player_name">' + nickname + '</div><div class="player_score"></div>');
-
+				$("#results-scrollable").append('<div class="single-result" id="player_' + air_console.getNickname(player_id) + "_id_" + player_id + '_result"><div class="darken_image image-element"><div class="position_display"></div><div id="rounded-container" class="image-element"><img src="' + url + '"></div><div class="player_score button-text">0</div></div>');
 			}
 		}
 
@@ -2847,7 +3095,7 @@
 				score.position = index + 1;
 			});
 
-			$("#player_" + from + "_result .player_score").html(newScore);
+			$("#player_" + air_console.getNickname(from) + "_id_" + from + "_result .player_score").html(newScore);
 
 			// send the score to the controller
 			document.score = [];
@@ -2865,18 +3113,17 @@
 			// console.log(document.playerScores);
 
 			url = air_console.getProfilePicture(from, 120);
-			resultArea = $("#player_" + from + "_result");
+			resultArea = $("#player_" + air_console.getNickname(from) + "_id_" + from + "_result");
 			resultArea.find("img").attr("src", url);
 
 			position = 1;
 			document.playerScores.forEach(function (element) {
-				$("#player_" + element.player + "_result").find(".position_display").html(position + ".");
-
+				$("#player_" + air_console.getNickname(element.player) + "_id_" + element.player + "_result").find(".position_display").html(position);
 				if (position === 1) {
-					$("#player_" + element.player + "_result").prependTo("#results-scrollable");
+					$("#player_" + air_console.getNickname(element.player) + "_id_" + element.player + "_result").prependTo("#results-scrollable");
 				} else {
 					// insert after previous element
-					$("#player_" + element.player + "_result").insertAfter("#player_" + previous_element.player + "_result");
+					$("#player_" + air_console.getNickname(element.player) + "_id_" + element.player + "_result").insertAfter("#player_" + air_console.getNickname(previous_element.player) + "_id_" + previous_element.player + "_result");
 				}
 				previous_element = element;
 				position++;
@@ -2886,11 +3133,11 @@
 				resultArea.find(".current_score").html(newScore);
 				resultArea.find(".score_change").html("+ " + actual_points + " Points");
 				resultArea.find(".current_time").html(guessTime + " seconds");
-				resultArea.find(".darken_image").addClass("avatar_correct");
+				resultArea.find("#rounded-container").addClass("avatar_correct");
 			} else {
 				resultArea.find(".score_change").html("No Points");
 				resultArea.find(".current_time").html(guessTime + " seconds");
-				resultArea.find(".darken_image").addClass("avatar_wrong");
+				resultArea.find("#rounded-container").addClass("avatar_wrong");
 				actual_points = 0;
 			}
 
@@ -2929,182 +3176,208 @@
 </head>
 
 <body onload="init()">
-	<div id="screen-wrapper">
-		<div class="instruction logo">
-			<span id="game_logo">MusicGuess</span>
-			<span id="message"></span>
-		</div>
-		<div id="status-wrapper">
-			<span id="status"></span>
-		</div>
-		<div id="current_song_service"></div>
-		<div id="victory_screen"></div>
+	<div id="ticker-wrapper">
+		<div class="ticker" id="ticker1">Follow @MusicGuess1 on Twitter to get updates and give feedback about the
+		   game!</div>
+		<div class="ticker" id="ticker2">There is 1 new playlist, Today's Top 50!</div>
 	</div>
-	<div id="playlist-selector">
-		<div class="dialogue-wrapper">
-			<div class="dialogue">
-				Select your playlist!
+	<div class="screen">
+		<div class="screen-debug"></div>
+	    <div id="screen-wrapper">
+			<div class="instruction logo">
+				<span id="game_logo">MusicGuess</span>
+				<div id="message-blur" class="image-element">
+				  <span id="message" class="image-element text-allign"></span>
+			    </div>
+				<div id="ring-container" class="image-element"></div>
+			</div>
+			<div id="status-wrapper" class="image-element text-allign">
+				<span id="status" class="button-text"></span>
+			</div>
+			<div id="current_song_service" class="image-element"></div>
+			<div id="victory_screen" class="image-element text-allign"></div>
+		</div>
+		<div id="playlist-selector">
+			<div id="title-playlist" class="image-element text-allign">
+				<span class="button-text">Select your playlist!</span>
 			</div>
 		</div>
-	</div>
-	<div id="playlist-display"></div>
-	<div id="roundCounter"></div>
-	<div id="roundTime"></div>
-	<div id="credits-container">
-		<div id="credits">
-			<span class="category">Developed by:</span>
-			<span class="content">Christian Nyffenegger, <a
-					onclick="air_console.openExternalUrl('https://twitter.com/freakpants')" target="_blank"
-					href="https://twitter.com/freakpants">freakpants</a></span></br>
-			<span class="category">Background video by:</span>
-			<span class="content"><a target="_blank"
-					href="https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Tomislav
-					Jakupec</a> / <a target="_blank"
-					href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154">Pixabay</a></span></br>
-			<span class="category">Music provided by:</span>
-			<span class="content"><a target="_blank"
-					href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html">Itunes
-					Search API Preview</a></span></br>
-			<span class="category">Sound effects by:</span>
-			<span class="content"><a target="_blank" href="https://www.zapsplat.com">Zapsplat</a></span></br>
-			<span class="category">SVG Loaders by:</span>
-			<span class="content"><a target="_blank" href="https://twitter.com/sherb">Sam Herbert</a> (<a
-					target="_blank" href="https://github.com/SamHerbert/SVG-Loaders">Github</a>)</span></br>
+		<div id="playlist-info" class="image-element text-allign">
+			<div id="playlist-display" class="button-text"></div>
+			<div id="roundCounter" class="button-text"></div>
 		</div>
-	</div>
-	<div id="updates-container">
-		<div id="updates">
+		<div id="animationTime">
+			<img id="playanimation" src="audio.svg" class="image-element" style="left: -9%;"/>
+			<div id="roundTime" class="image-element"></div>
+			<img id="playanimation" src="audio.svg" class="image-element" style="left: 54.5%;"/>
+		</div>
+		<div id="credits-container">
+			<div id="credits" class="image-element text-allign">
+				<span class="category button-text">Developed by:</span>
+				<span class="content button-text">Christian Nyffenegger, freakpants</a></span></br>
+				<span class="category button-text">Background video by:</span>
+				<span class="content button-text">Tomislav Jakupec / Pixabay</span></br>
+				<span class="category button-text">Music provided by:</span>
+				<span class="content button-text">Itunes Search API Preview</span></br>
+				<span class="category button-text">Sound effects by:</span>
+				<span class="content button-text">Zapsplat</span></br>
+				<span class="category button-text">SVG Loaders by:</span>
+				<span class="content button-text">Sam Herbert (Github)</span></br>
+			</div>
+		</div>
+		<div id="updates-container">
+			<div id="updates" class="image-element text-allign">
+				    <span id="updates-text" class="button-text"></br>16.06.2023 - Complete overhaul of the screen and controller visuals. Inclusion of several country playlists. Several adjustments on general usability and bug fixes. Optimized the artwork system to improve the iteration time of the release of updates and fixes.</span>
+					<span id="updates-text" class="button-text"></br>18.05.2022 - Reworked UX to be more intuitive and visually distinct.</span>
+					<span id="updates-text" class="button-text"></br>04.01.2022 - The game is now playable for free. Accordingly, some playlists are now exclusive with
+						AirConsole Hero.
+						There is a new menu system, with improved selection of round amount. Released 3 new playlists:
+						Ballads, Latin, Spain's Most Wanted Dec 2021. Added 10 new songs to Global Hits 2021.
+					</span>
+					<span id="updates-text" class="button-text"></br>20.12.2021 - Released a new christmas playlist</span>
+					<span id="updates-text" class="button-text"></br>16.12.2021 - Fixed an Issue with wildcard playlist not working.</span>
+					<span id="updates-text" class="button-text"></br>15.12.2021 - Released new wildcard playlist. This dynamically selects from over 30'000 songs, but
+						with a lot of cover/live versions of songs or just plain unknown or weird songs.</span>
+			</div>
+		</div>
+		<div id="splash-screen">
+			<div id="splash-text">
+				Welcome to MusicGuess! MusicGuess is a living game that is constantly being updated with new content and
+				features.
+				To see the latest update, select Updates in the menu. If you want to give feedback/report issues you can
+				follow the official Twitter account
+				@MusicGuess1 </br>
+				I would also love to see pictures of your parties (especially those really big ones with over 10 players and
+				more!).
+				</br></br>
+				Enjoy the game and have fun!</br>
+				@freakpants
+			</div>
+		</div>
+		<div id="spotify-container">
+			<div id="spotify">
+				<span>You need to be on a computer to connect Spotify.
+					The Spotify account will be connected to the AirConsole user on the current Master Controller.
+					Currently, this user is <span id="master-user"></span></br>
+					Press Confirm/Start to open a new window to attempt to connect your Spotify Account.
+				</span>
+			</div>
+		</div>
+		<div id="main-menu">
 			<ul>
-				<li>18.05.2022 - Reworked UX to be more intuitive and visually distinct.</li>
-				<li>15.12.2021 - Released new wildcard playlist. This dynamically selects from over 30'000 songs, but
-					with a lot of cover/live versions of songs or just plain unknown or weird songs.</li>
-				<li>16.12.2021 - Fixed an Issue with wildcard playlist not working.</li>
-				<li>20.12.2021 - Released a new christmas playlist</li>
-				<li>04.01.2022 - The game is now playable for free. Accordingly, some playlists are now exclusive with
-					AirConsole Hero.
-					There is a new menu system, with improved selection of round amount. Released 3 new playlists:
-					Ballads, Latin, Spain's Most Wanted Dec 2021. Added 10 new songs to Global Hits 2021.
+				<li id="new-game-button" class="active image-element text-allign">
+                    <div class="button-text">New Game</div>
+                </li>
+                <li id="credits-button" class="image-element text-allign">
+                    <div class="button-text">Credits</div>
+                </li>
+                <li id="updates-button" class="image-element text-allign">
+                    <div class="button-text">Updates</div>
+                </li>
+                <li id="connect-spotify-button">
+                    Connect with Spotify
+                </li>
+			</ul>
+		</div>
+		<div id="default-options">
+			<div id= "title-options" class="image-element text-allign">
+				<span id="titleText-options" class="button-text" style="width: 86%;">Do you want to play the game with the default options? (15 rounds)</span>
+			</div>
+			<ul>
+				<li id="default-yes" class="active image-element text-allign">
+					<div class="button-text">Yes</div>
+				</li>
+				<li id="default-no" class="image-element text-allign">
+					<div class="button-text">No</div>
 				</li>
 			</ul>
 		</div>
-	</div>
-	<div id="splash-screen">
-		<div id="splash-text">
-			Welcome to MusicGuess! MusicGuess is a living game that is constantly being updated with new content and
-			features.
-			To see the latest update, select Updates in the menu. If you want to give feedback/report issues you can
-			follow the official Twitter account
-			@MusicGuess1 </br>
-			I would also love to see pictures of your parties (especially those really big ones with over 10 players and
-			more!).
-			</br></br>
-			Enjoy the game and have fun!</br>
-			@freakpants
+		<div id="specific-options">
+			<div id= "title-options" class="image-element text-allign title-text">
+				<span id="titleSpec-options" class="button-text"></span>
+			</div>
+			<ul id="option-selector">
+				<li id="round_amount_option" class="active image-element text-allign">
+					<div class="button-text">Number of Rounds to play</div>
+				</li>
+				<li id="guessing_type" class="guessType image-element text-allign">
+					<div class="button-text">Randomly guess either</br> artist or title each round</div>
+				</li>
+				<li id="specific-start" class="image-element text-allign">
+					<div class="button-text">Start</div>
+				</li>
+			</ul>
+			<ul id="round-amount-selector">
+				<li class="image-element text-allign" style="top: 40%;left: 35%;">
+					<div class="button-text">1</div>
+				</li>
+				<li class="image-element text-allign" style="top: 40%;left: 43%;">
+					<div class="button-text">10</div>
+				</li>
+				<li class="image-element text-allign" style="top: 40%;left: 51%;">
+					<div class="button-text">15</div>
+				</li>
+				<li class="image-element text-allign" style="top: 40%;left: 59%;">
+					<div class="button-text">20</div>
+				</li>
+				<li class="image-element text-allign" style="top: 54%;left: 35%;">
+					<div class="button-text">25</div>
+				</li>
+				<li class="image-element text-allign" style="top: 54%;left: 43%;">
+					<div class="button-text">30</div>
+				</li>
+				<li class="image-element text-allign" style="top: 54%;left: 51%;">
+					<div class="button-text">40</div>
+				</li>
+				<li class="image-element text-allign" style="top: 54%;left: 59%;">
+					<div class="button-text">50</div>
+				</li>
+				<li class="image-element text-allign" style="top: 68%;left: 35%;">
+					<div class="button-text">100</div>
+				</li>
+				<li class="image-element text-allign custom-amount">
+					<div class="button-text">Custom Amount</div>
+				</li>
+			</ul>
+			<ul id="guessing-type-selector">
+				<li id="guessing-artist" class="guessing-option active image-element text-allign">
+					<div class="button-text">Always guess the artist</div>
+				</li>
+				<li id="guessing-title" class="guessing-option image-element text-allign">
+					<div class="button-text">Always guess the title</div>
+				</li>
+				<li id="guessing-both" class="guessing-option guessType image-element text-allign">
+					<div class="button-text">Randomly guess either </br> artist or title each round</div>
+				</li>
+			</ul>
 		</div>
-	</div>
-	<div id="spotify-container">
-		<div id="spotify">
-			<span>You need to be on a computer to connect Spotify.
-				The Spotify account will be connected to the AirConsole user on the current Master Controller.
-				Currently, this user is <span id="master-user"></span></br>
-				Press Confirm/Start to open a new window to attempt to connect your Spotify Account.
-			</span>
+		<div id="player-results">
+			<div id="results-scrollable"></div>
 		</div>
-	</div>
-	<div id="main-menu">
-		<ul>
-			<li id="new-game-button" class="active">
-				New Game
-			</li>
-			<li id="credits-button">
-				Credits
-			</li>
-			<li id="updates-button">
-				Updates
-			</li>
-			<li id="connect-spotify-button">
-				Connect with Spotify
-			</li>
-		</ul>
-		<div id="ticker-wrapper">
-			<div class="ticker" id="ticker1">Follow @MusicGuess1 on Twitter to get updates and give feedback about the
-				game!</div>
-			<div class="ticker" id="ticker2">There is 1 new playlist, Today's Top 50!</div>
-		</div>
-
-	</div>
-	<div id="default-options">
-		<div class="dialogue">
-			Do you want to play the game with the default options? (15 rounds)
-		</div>
-		<ul>
-			<li id="default-yes" class="active">
-				Yes
-			</li>
-			<li id="default-no">
-				No
-			</li>
-		</ul>
-	</div>
-	<div id="specific-options">
-		<div class="dialogue">
-			<!-- dialogue is set by variable, as it gets changed and changed back again when going to a specific option -->
-		</div>
-		<ul id="option-selector">
-			<li id="round_amount_option" class="active">
-				Number of Rounds to play
-			</li>
-			<li id="guessing_type">
-				Randomly guess either artist or title each round
-			</li>
-			<li id="specific-start">
-				Start
-			</li>
-		</ul>
-		<ul id="round-amount-selector">
-			<li>1</li>
-			<li>10</li>
-			<li>15</li>
-			<li>20</li>
-			<li>25</li>
-			<li>30</li>
-			<li>40</li>
-			<li>50</li>
-			<li>100</li>
-			<li>Custom Amount</li>
-		</ul>
-		<ul id="guessing-type-selector">
-			<li id="guessing-artist" class="guessing-option active">Always guess the artist</li>
-			<li id="guessing-title" class="guessing-option">Always guess the title</li>
-			<li id="guessing-both" class="guessing-option">Randomly guess either artist or title each round</li>
-		</ul>
-	</div>
-	<div id="player-results">
-		<div id="results-scrollable"></div>
-	</div>
-	<audio id="sound-effect-switch">
-		<source src="sounds/switch.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-clock">
-		<source src="sounds/clock.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-correct">
-		<source src="sounds/correct.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-wrong">
-		<source src="sounds/error.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-cheers">
-		<source src="sounds/cheers.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-click">
-		<source src="sounds/click.mp3" type="audio/mpeg">
-	</audio>
-	<audio id="sound-effect-start">
-		<source src="sounds/start.mp3" type="audio/mpeg">
-	</audio>
-
-	<audio id="player" autoplay>
-		<source src="" type="audio/mpeg">
-	</audio>
+		<audio id="sound-effect-switch">
+			<source src="sounds/switch.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="sound-effect-clock">
+			<source src="sounds/clock.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="sound-effect-correct">
+			<source src="sounds/correct.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="sound-effect-wrong">
+			<source src="sounds/error.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="sound-effect-cheers">
+			<source src="sounds/cheers.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="sound-effect-click">
+			<source src="sounds/click.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="sound-effect-start">
+			<source src="sounds/start.mp3" type="audio/mpeg">
+		</audio>
+	
+		<audio id="player" autoplay>
+			<source src="" type="audio/mpeg">
+		</audio>
+   </div>
 </body>

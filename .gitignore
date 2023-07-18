@@ -1,5 +1,6 @@
 data/
 game/config.php
 game.zip
+game/album_art/
 .vscode/
 *.zip

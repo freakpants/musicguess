@@ -1,0 +1,992 @@
+[
+    {
+        "service": "itunes",
+        "id": 1661142357,
+        "artist": "SDM",
+        "title": "Bolide allemand",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/4d/fe/17/4dfe170b-0de2-11b7-b58e-d2838b759c0e/mzaf_4033802596172538924.plus.aac.p.m4a",
+        "album": "Liens du 100",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/05/a6/ea/05a6ea7d-2410-df14-0a05-4321293f1cf1/22UM1IM22865.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/bolide-allemand/1661142346?i=1661142357&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1684402959,
+        "artist": "Naps",
+        "title": "C'est carre le S (feat. Gazo & Ninho)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/f9/90/f9/f990f95e-e69b-d724-af36-46f8fdf19363/mzaf_8768716905479403946.plus.aac.p.m4a",
+        "album": "En temps reel",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/f5/a3/d7/f5a3d757-55a8-0bfc-d096-06432b91ce7a/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/cest-carr%C3%A9-le-s-feat-gazo-ninho/1684402947?i=1684402959&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687461497,
+        "artist": "Jul",
+        "title": "La faille",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/fe/82/9f/fe829fa3-a672-867e-f575-e4549ef07f55/mzaf_3814323937694447376.plus.aac.p.m4a",
+        "album": "La faille - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/22/4e/5a/224e5a72-32f4-71f0-7c4d-41cc20e67c1b/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/la-faille/1687461245?i=1687461497&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688500757,
+        "artist": "Ninho",
+        "title": "Freestyle LVL UP 3",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/e8/cc/e5/e8cce552-8ae7-b382-4da9-f7393c82eb37/mzaf_11363320719258296804.plus.aac.p.m4a",
+        "album": "Freestyle LVL UP 3 - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/d5/2b/ee/d52beeff-e3f1-7a6a-92a7-2d00b1264e96/5054197697364.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/freestyle-lvl-up-3/1688500601?i=1688500757&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1685961008,
+        "artist": "No Limit, Gazo & Damso",
+        "title": "LA RUE",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/e1/98/5b/e1985ba4-46f4-c857-71c9-e6d41294b729/mzaf_4035219221883703158.plus.aac.p.m4a",
+        "album": "LA RUE - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/65/04/c9/6504c91d-5f0b-761e-10a0-9d3e4f37b043/196871100366.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/la-rue/1685961004?i=1685961008&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1014737786,
+        "artist": "Cappella SF & Ragnar Bohlin",
+        "title": "Jul, Jul, Stralande Jul",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/Music1/v4/e3/22/be/e322beb6-d7a1-b2ef-0947-a4b24fe9d2e0/mzaf_8852428409047800741.plus.aac.p.m4a",
+        "album": "Light of Gold",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music7/v4/1f/03/e8/1f03e8fa-68f2-45a2-96ea-095f44c764b0/013491348520.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/jul-jul-str%C3%A5lande-jul/1014736940?i=1014737786&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1686116039,
+        "artist": "DYSTINCT",
+        "title": "Tek Tek (feat. MHD)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/73/6a/a6/736aa624-2e8a-4f89-45b9-10ebb220c52d/mzaf_18343027853454084032.plus.aac.p.m4a",
+        "album": "Tek Tek (feat. MHD) - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music116/v4/83/04/29/83042999-7b32-02ba-2db2-6e4ab92ee0b0/196871112956.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tek-tek-feat-mhd/1686115678?i=1686116039&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1686690171,
+        "artist": "Ninho",
+        "title": "Freestyle LVL UP 2",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/b4/5e/dd/b45edd63-c31f-4cff-8ca7-f64860290c42/mzaf_4899284608709297767.plus.aac.p.m4a",
+        "album": "Freestyle LVL UP 2 - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/cc/49/58/cc4958ba-23b7-66c0-c642-f652ae26d203/5054197681851.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/freestyle-lvl-up-2/1686690168?i=1686690171&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1621517615,
+        "artist": "Tiakola",
+        "title": "Meuda",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/2e/31/4e/2e314e42-63e3-902c-549d-38f0abebaf5f/mzaf_10374034718466543468.plus.aac.p.m4a",
+        "album": "Melo",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/4d/83/55/4d835585-8eb5-d3cf-341a-1266a5cd0b55/196589070982.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/meuda/1621517604?i=1621517615&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1675835742,
+        "artist": "Werenoi",
+        "title": "Ciao (feat. Ninho)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/d1/1b/2e/d11b2ecc-fce4-e548-a02c-77aa1f47993e/mzaf_11286957275245705044.plus.aac.p.m4a",
+        "album": "Carre",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/95/0a/0b/950a0bc1-f741-e869-525f-3153d8192a1f/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/ciao-feat-ninho/1675835724?i=1675835742&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688174730,
+        "artist": "Joe Dwet File",
+        "title": "Delire (feat. Tiakola)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/77/d6/3d/77d63dfe-013a-a511-7479-736bb584de81/mzaf_2684334663236149610.plus.aac.p.m4a",
+        "album": "Delire (feat. Tiakola) - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/3d/5e/06/3d5e06bb-08a0-4e37-2a0d-2f7096503253/196871147446.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/d%C3%A9lire-feat-tiakola/1688174722?i=1688174730&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1683017598,
+        "artist": "Sparoxzy",
+        "title": "Ayra Starr Rush",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/6c/4d/1e/6c4d1ede-f613-0364-d6b0-82f6948a7538/mzaf_13596853831532257033.plus.aac.p.m4a",
+        "album": "Ayra Starr Rush (Acoustic) - Single",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/e9/2b/90/e92b904c-ed94-9b48-059f-072d739a4c65/artwork.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/ayra-starr-rush-acoustic/1683017597?i=1683017598&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688157370,
+        "artist": "Guy2Bezbar",
+        "title": "Guapa",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/c4/17/5f/c4175fe4-8de2-08aa-3cc3-42ec439311c0/mzaf_3449314847026102177.plus.aac.p.m4a",
+        "album": "Guapa - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/ad/ac/64/adac6487-5144-6ab1-b11b-3abd98e309e3/196871146890.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/guapa/1688157365?i=1688157370&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1661142347,
+        "artist": "SDM",
+        "title": "Mr. Ocho",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/21/27/6d/21276d3d-99d4-09dc-dfa7-95cb6de0b962/mzaf_6266948693514355266.plus.aac.p.m4a",
+        "album": "Liens du 100",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/05/a6/ea/05a6ea7d-2410-df14-0a05-4321293f1cf1/22UM1IM22865.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/mr-ocho/1661142346?i=1661142347&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1664129420,
+        "artist": "GAULOIS",
+        "title": "Jolie (feat. Ninho)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/a3/cd/e2/a3cde22e-2476-6bcb-e637-8913944cf6c5/mzaf_4558859329382312763.plus.aac.p.m4a",
+        "album": "La Gaule, Vol.1",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music113/v4/24/a2/5c/24a25c38-8782-031a-c05a-c34314a7246b/196589805720.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/jolie-feat-ninho/1664128903?i=1664129420&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1685031828,
+        "artist": "Ninho",
+        "title": "Freestyle LVL UP 1",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/a3/a8/72/a3a87229-3a3b-9765-7e00-1e1519c90112/mzaf_18071138250664402501.plus.aac.p.m4a",
+        "album": "Freestyle LVL UP 1 - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/c0/41/b4/c041b41a-3241-d19d-34f9-4be8f2f6da0f/5054197672248.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/freestyle-lvl-up-1/1685031734?i=1685031828&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1680745964,
+        "artist": "PLK",
+        "title": "Demain",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/1e/8e/8c/1e8e8c16-2a52-5c59-a994-c2b649eaf7f1/mzaf_10729720022266853165.plus.aac.p.m4a",
+        "album": "2069'",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/12/e8/7d/12e87df1-67ab-f14c-d492-17d74999627c/3596974388093_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/demain/1680745443?i=1680745964&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1684403307,
+        "artist": "Naps",
+        "title": "La danse du roro (feat. Koba LaD & Maes)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/33/f8/b5/33f8b5b5-2197-3de1-3da9-4edea09fcb0b/mzaf_18284016310129879348.plus.aac.p.m4a",
+        "album": "En temps reel",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/f5/a3/d7/f5a3d757-55a8-0bfc-d096-06432b91ce7a/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/la-danse-du-roro-feat-koba-lad-maes/1684402947?i=1684403307&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1668071829,
+        "artist": "benardo pro",
+        "title": "Miley Cyrus Flowers (reggae version)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/8a/bd/e4/8abde45f-1170-ee08-ca35-4d5a09c39824/mzaf_3317079850952821743.plus.aac.p.m4a",
+        "album": "Miley Cyrus Flowers (reggae version) - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/51/95/ed/5195ed5b-ab5c-e023-a657-85551eb86887/734167642420_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/miley-cyrus-flowers-reggae-version/1668071827?i=1668071829&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1440866139,
+        "artist": "Shay",
+        "title": "La go",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/54/3f/09/543f0929-3580-ac6b-59cf-bfd45ddce9d0/mzaf_5027034154811987267.plus.aac.p.m4a",
+        "album": "Jolie garce",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music128/v4/5b/a9/45/5ba945ff-8607-2546-f302-9aa0727df3e0/00602557261172.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/la-go/1440865594?i=1440866139&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688498986,
+        "artist": "SCH",
+        "title": "Derniere ligne droite (feat. Laylow)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/0e/ea/19/0eea19bf-da5c-f3c8-7412-d9f6b5fcdafd/mzaf_17253111435841920661.plus.aac.p.m4a",
+        "album": "Autobahn",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/0e/c5/58/0ec558da-f528-7369-f06f-5eb200387171/5054197425875.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/derni%C3%A8re-ligne-droite-feat-laylow/1688498129?i=1688498986&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1437300385,
+        "artist": "Aya Nakamura",
+        "title": "Djadja (feat. Afro B) [Remix]",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/d0/91/bb/d091bb77-95a0-4dac-7796-9f66d34a8ab2/mzaf_1900818006393744341.plus.aac.p.m4a",
+        "album": "Djadja (feat. Afro B) [Remix] - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f8/f6/b6/f8f6b657-bd48-c92b-b84f-0790a6bdcb81/190295534554.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/djadja-feat-afro-b-remix/1437300306?i=1437300385&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688227660,
+        "artist": "Lacrim & Mister You",
+        "title": "GOGETA",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/7f/f3/94/7ff39422-090a-d2d5-4299-353fa2719ba1/mzaf_12638786201774988382.plus.aac.p.m4a",
+        "album": "GOGETA - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/33/ca/26/33ca2685-97e1-0fb4-5c44-459de26f32ee/196871148139.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/gogeta/1688227644?i=1688227660&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1647819411,
+        "artist": "Vacra",
+        "title": "Tiki Taka",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/0e/69/bf/0e69bf48-6570-3fed-d368-25563aa597c9/mzaf_11213623927185572890.plus.aac.p.m4a",
+        "album": "Tiki Taka - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music122/v4/0c/f1/c1/0cf1c156-1c65-1595-92d4-cf631144ecc6/22UM1IM13352.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tiki-taka/1647819174?i=1647819411&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1680746238,
+        "artist": "PLK",
+        "title": "Nouvelles",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/a1/f1/36/a1f13619-0cb0-1207-756b-c4b2a3ee3151/mzaf_11232059410117506270.plus.aac.p.m4a",
+        "album": "2069'",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/12/e8/7d/12e87df1-67ab-f14c-d492-17d74999627c/3596974388093_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/nouvelles/1680745443?i=1680746238&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1665942676,
+        "artist": "Aya Nakamura",
+        "title": "Baby",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/85/38/c9/8538c970-1d7d-beb8-41a5-cd8f0cf4fb68/mzaf_6071055319775921683.plus.aac.p.m4a",
+        "album": "DNK",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music113/v4/12/b6/32/12b632e6-7aed-4630-c3b0-a53e4515bbaa/5054197493874.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/baby/1665941234?i=1665942676&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1677622185,
+        "artist": "Werenoi",
+        "title": "Chemin d'or",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/6f/7a/e3/6f7ae36a-dad8-99f9-4795-1de195c630e7/mzaf_7297461041176033071.plus.aac.p.m4a",
+        "album": "Carre",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/51/58/ba/5158ba8c-6773-95fb-63ae-660e32a50fae/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/chemin-dor/1677620113?i=1677622185&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1673376546,
+        "artist": "Werenoi",
+        "title": "10.03.2023",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/c3/0a/b9/c30ab976-db63-96ee-6c5c-2f0e6b7676d9/mzaf_4456477227424440425.plus.aac.p.m4a",
+        "album": "10.03.2023 - Single",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/ed/a5/6f/eda56f1f-e119-cec9-2b92-58dad17c0cab/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/10-03-2023/1673376541?i=1673376546&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1663287497,
+        "artist": "XCESS Entertainment",
+        "title": "Gazo - Die (feat. Future is Offline)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/57/75/19/5775190c-84ee-c638-695e-074774a8b20e/mzaf_13220864094656637281.plus.aac.p.m4a",
+        "album": "Hurt",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/42/4d/6f/424d6f11-7e9e-cbe5-974b-7ee74712e0a4/artwork.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/gazo-die-feat-future-is-offline-remix/1663287406?i=1663287497&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1453399179,
+        "artist": "Ninho",
+        "title": "La vie qu'on mene",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/19/4a/cb/194acb6a-5617-af2b-a1e7-2fcabeb91d12/mzaf_12508874771092551575.plus.aac.p.m4a",
+        "album": "Destin",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/ab/c5/ea/abc5eab6-1a33-3910-6f96-3954d76c5815/190295460259.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/la-vie-quon-m%C3%A8ne/1453399177?i=1453399179&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1675835964,
+        "artist": "Werenoi",
+        "title": "Laboratoire",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/f2/f6/fb/f2f6fb91-3cee-04a5-c293-0c22544abe34/mzaf_5459739810105569961.plus.aac.p.m4a",
+        "album": "Carre",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/95/0a/0b/950a0bc1-f741-e869-525f-3153d8192a1f/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/laboratoire/1675835724?i=1675835964&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1675836602,
+        "artist": "Werenoi",
+        "title": "Escorte (feat. PLK)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/4d/be/20/4dbe20cd-32a6-6c39-3808-1179562c2667/mzaf_9300257724981561404.plus.aac.p.m4a",
+        "album": "Carre",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/95/0a/0b/950a0bc1-f741-e869-525f-3153d8192a1f/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/escorte-feat-plk/1675835724?i=1675836602&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1536468983,
+        "artist": "Ninho",
+        "title": "Tout en Gucci",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/ee/eb/f1/eeebf148-dcaa-6139-9618-10be27f24f18/mzaf_16302451492929118248.plus.aac.p.m4a",
+        "album": "M.I.L.S 3 (Reedition)",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music114/v4/34/9a/4d/349a4d91-1354-932b-4dd4-17fd8ba25a7b/190295127442.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tout-en-gucci/1536468979?i=1536468983&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1453399181,
+        "artist": "Ninho",
+        "title": "Goutte d\u2019eau",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/be/c3/a1/bec3a14a-6bf8-1dcc-e461-d737477f3dbb/mzaf_15264457163302683959.plus.aac.p.m4a",
+        "album": "Destin",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/ab/c5/ea/abc5eab6-1a33-3910-6f96-3954d76c5815/190295460259.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/goutte-deau/1453399177?i=1453399181&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1630765691,
+        "artist": "Gazo",
+        "title": "FLEURS (feat. Tiakola)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/47/4a/d5/474ad5cd-171d-b6e9-5e6e-74f0d1349cf1/mzaf_18123180472553315809.plus.aac.p.m4a",
+        "album": "KMT",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/bd/d1/5d/bdd15d81-f6e3-7ac7-7e90-268912c64567/196589130501.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/fleurs-feat-tiakola/1630765173?i=1630765691&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1686225980,
+        "artist": "Morad",
+        "title": "Maria (feat. Ninho)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/f5/28/da/f528dad2-3d97-19b6-62eb-fc324cb3898d/mzaf_5689547903582698684.plus.aac.p.m4a",
+        "album": "Reinsertado",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/33/73/04/337304cd-dba0-42cd-d1f3-8736424d63ea/197188815073.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/mar%C3%ADa-feat-ninho/1686224733?i=1686225980&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1666538899,
+        "artist": "Jul",
+        "title": "J'ai tout su",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/c5/7a/9e/c57a9e63-e3dc-bd2c-03b7-751025fdb3cc/mzaf_15426169693546273756.plus.aac.p.m4a",
+        "album": "Extraterrestre",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music123/v4/95/87/af/9587aff4-2ad6-422d-0cba-9e6bf4759304/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/jai-tout-su/1666538814?i=1666538899&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1674397897,
+        "artist": "Russian Children",
+        "title": "Nocif Hamza (Damso)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/c2/f7/8e/c2f78e0f-ea6b-cf51-c32b-771224eed12d/mzaf_7195417008508825023.plus.aac.p.m4a",
+        "album": "Nocif Hamza (Damso) - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/8f/c8/25/8fc8254b-6ccc-d1b8-9f9e-f53cf323152a/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/nocif-hamza-damso/1674397894?i=1674397897&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1444175671,
+        "artist": "SCH",
+        "title": "Je la connais",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/f5/f8/ae/f5f8ae7c-8db9-6524-bf42-07c6e86e6aca/mzaf_4871439869421665187.plus.aac.p.m4a",
+        "album": "Anarchie",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/84/23/d3/8423d3a9-f44f-180d-8ca2-34e2c50cebe5/00602547946683.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/je-la-connais/1444175222?i=1444175671&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1677620760,
+        "artist": "Werenoi",
+        "title": "Grisaille",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/2d/92/56/2d9256f9-25b8-e43d-0f43-ad21232e1f9b/mzaf_15445214612893368291.plus.aac.p.m4a",
+        "album": "Carre",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/51/58/ba/5158ba8c-6773-95fb-63ae-660e32a50fae/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/grisaille/1677620113?i=1677620760&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687572451,
+        "artist": "Mig",
+        "title": "Cardio (feat. Niska)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/6e/09/89/6e0989aa-bf16-f835-4ad5-343eadc80510/mzaf_10868389603144516898.plus.aac.p.m4a",
+        "album": "21",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/6e/41/11/6e411117-7b39-180a-b610-4b2bdab76986/23UMGIM25098.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/cardio-feat-niska/1687572191?i=1687572451&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1597121648,
+        "artist": "Ninho",
+        "title": "VVS",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/4d/61/53/4d615387-8cb3-0b07-9fd0-b439a023edaf/mzaf_2681196694805504756.plus.aac.p.m4a",
+        "album": "Jefe",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/5d/b4/53/5db45349-6035-32c8-1faf-0c7e47d62d22/190296368370.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/vvs/1597121321?i=1597121648&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1644872077,
+        "artist": "Alonzo",
+        "title": "TOUT VA BIEN (feat. Ninho & Naps)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/30/c3/b3/30c3b33c-fb33-3b01-c272-f51704db2e23/mzaf_5197294012195661337.plus.aac.p.m4a",
+        "album": "QUARTIERS NORD",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music112/v4/2c/cc/d5/2cccd5e1-ba70-c257-e941-562403174a76/196589468185.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tout-va-bien-feat-ninho-naps/1644871876?i=1644872077&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688149834,
+        "artist": "Nahir",
+        "title": "Piranha (feat. Vacra)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/4c/c1/ff/4cc1ffe5-b306-6150-7a78-3ffeb09667d2/mzaf_13191466340954612841.plus.aac.p.m4a",
+        "album": "Piranha (feat. Vacra) - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/87/50/49/875049a7-17d2-ce70-3c0c-0b9b6a180964/196871147545.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/piranha-feat-vacra/1688149826?i=1688149834&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1621517920,
+        "artist": "Tiakola",
+        "title": "Gasolina (feat. Rsko)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/70/0a/ca/700aca17-dc46-c8de-9e6e-c3715a17e4f4/mzaf_2317645533956607790.plus.aac.p.m4a",
+        "album": "Melo",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/4d/83/55/4d835585-8eb5-d3cf-341a-1266a5cd0b55/196589070982.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/gasolina-feat-rsko/1621517604?i=1621517920&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1605596487,
+        "artist": "SDM",
+        "title": "Passat (feat. Maes)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/10/03/11/10031181-0524-c5fb-c4c5-75d73a0bb7f9/mzaf_12710284815282197559.plus.aac.p.m4a",
+        "album": "OCHO (Deluxe)",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/11/e5/46/11e546be-f554-ae83-083e-e5ec336a838b/21UM1IM38971.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/passat-feat-maes/1605596195?i=1605596487&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1555578202,
+        "artist": "Werenoi",
+        "title": "La League",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/03/9b/7a/039b7a95-869a-af57-19e3-ca738d53cf36/mzaf_11500856789278396593.plus.aac.p.m4a",
+        "album": "La League - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/0c/d2/d6/0cd2d644-79b1-1431-add3-59c4474c3e02/artwork.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/la-league/1555578199?i=1555578202&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1363233587,
+        "artist": "Ninho",
+        "title": "Fendi",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/32/4a/e8/324ae811-7a95-5f19-f971-545fcaedafd7/mzaf_788762046210229510.plus.aac.p.m4a",
+        "album": "M.I.L.S 2.0",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/5c/b2/07/5cb2071c-cd33-db0c-9228-2add489c24b1/190295644376.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/fendi/1363232719?i=1363233587&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1671223367,
+        "artist": "Maes",
+        "title": "Fetty Wap",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/41/fb/be/41fbbe5b-a0d9-5b66-ebf9-a4e01e9858be/mzaf_15448769352094176078.plus.aac.p.m4a",
+        "album": "OMERTA",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/7b/45/1a/7b451a7c-8235-db0c-fba4-14c476120152/23UMGIM12626.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/fetty-wap/1671222783?i=1671223367&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1686226005,
+        "artist": "Morad",
+        "title": "Se Grita (feat. Jul)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/bf/fa/fe/bffafed0-2f04-2c45-b8c9-2b2821ddf3c4/mzaf_12834566259982379530.plus.aac.p.m4a",
+        "album": "Reinsertado",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/33/73/04/337304cd-dba0-42cd-d1f3-8736424d63ea/197188815073.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/se-grita-feat-jul/1686224733?i=1686226005&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1597121648,
+        "artist": "Ninho",
+        "title": "VVS",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/4d/61/53/4d615387-8cb3-0b07-9fd0-b439a023edaf/mzaf_2681196694805504756.plus.aac.p.m4a",
+        "album": "Jefe",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/5d/b4/53/5db45349-6035-32c8-1faf-0c7e47d62d22/190296368370.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/vvs/1597121321?i=1597121648&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1671826891,
+        "artist": "Tayc",
+        "title": "Room 69",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/40/50/6c/40506c90-bd1b-02e8-1635-c936344af095/mzaf_11645413622227443042.plus.aac.p.m4a",
+        "album": "ROOM 96",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/83/74/d1/8374d165-0de3-cccd-7a4c-53388d4f1782/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/room-69/1671826534?i=1671826891&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1653385011,
+        "artist": "Zola",
+        "title": "Amber",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/a1/bc/68/a1bc68e1-e068-b9df-d378-3a8ecfb0ea40/mzaf_6600521781477630177.plus.aac.p.m4a",
+        "album": "Amber - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music122/v4/72/ca/22/72ca22da-3931-8fe2-91b1-3342c15ca77d/196589653741.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/amber/1653384902?i=1653385011&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1686848978,
+        "artist": "Ignite The Beatz",
+        "title": "Rema Charm",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/14/f8/50/14f85075-7537-1160-0112-31bd4f0c3a3a/mzaf_9401568958318851569.plus.aac.p.m4a",
+        "album": "Rema Charm - Single",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/74/84/f1/7484f1c9-aae2-99be-b3b8-bfc4c1d3392f/734167168982_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/rema-charm/1686848977?i=1686848978&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1659339374,
+        "artist": "Lusicas",
+        "title": "Mauvais ordre - Lomepal (by Lusicas)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/c7/64/e7/c764e7d2-8bef-6800-5e69-928396897af9/mzaf_7296538960504044895.plus.aac.p.m4a",
+        "album": "Mauvais ordre, A peu pres & Decrescendo - Lomepal (by Lusicas) - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music112/v4/c3/9a/0e/c39a0e8b-f317-fa3f-be73-a949b8957841/8445888517615.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/mauvais-ordre-lomepal-by-lusicas/1659339372?i=1659339374&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1660776071,
+        "artist": "Lutch Nova",
+        "title": "Libianca People",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/f8/98/ce/f898ce08-1a67-00a8-83c0-50529d10540e/mzaf_14798285818957736472.plus.aac.p.m4a",
+        "album": "Libianca People - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music116/v4/35/4a/c5/354ac5bc-aff2-7c6c-a192-81e525d8e6f1/197077990201_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/libianca-people/1660776070?i=1660776071&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1676840626,
+        "artist": "benardo pro",
+        "title": "Rema, Calm Down",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/07/fb/bf/07fbbf3f-4052-a7de-b191-f76e94546dd6/mzaf_7881380905162064921.plus.aac.p.m4a",
+        "album": "Rema, Calm Down - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/65/18/b1/6518b15d-e8c5-7e88-26aa-fa10b4128894/735910926927_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/rema-calm-down/1676840085?i=1676840626&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1673945264,
+        "artist": "Djadja & Dinaz",
+        "title": "Pas la (Bonus track - edition Aube)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/79/16/13/791613cf-9109-bc0d-01e6-87e35d5b5d1e/mzaf_11597050082180445199.plus.aac.p.m4a",
+        "album": "ALPHA",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music126/v4/7b/61/3c/7b613c19-50cb-0e0c-963b-03e817e3f830/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/pas-l%C3%A0-bonus-track-%C3%A9dition-aube/1673942829?i=1673945264&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1453399195,
+        "artist": "Ninho",
+        "title": "Maman ne le sait pas (feat. Niska)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/e5/82/69/e58269e6-1649-a8fe-d691-7efdff215537/mzaf_1214524791010060705.plus.aac.p.m4a",
+        "album": "Destin",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/ab/c5/ea/abc5eab6-1a33-3910-6f96-3954d76c5815/190295460259.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/maman-ne-le-sait-pas-feat-niska/1453399177?i=1453399195&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1689016559,
+        "artist": "Star one",
+        "title": "David Kushner daylight",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/de/73/57/de7357ef-349e-98b1-bb82-c712c2bf0880/mzaf_5834882976391522646.plus.aac.p.m4a",
+        "album": "David Kushner daylight - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/32/10/05/321005c0-e3f7-8520-2530-b9c2d9eaf832/artwork.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/david-kushner-daylight/1689016557?i=1689016559&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1676343411,
+        "artist": "ROSALIA & Rauw Alejandro",
+        "title": "BESO",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/48/6f/95/486f9539-bca5-3b41-888b-8c12dae6c8e6/mzaf_4242894844414471612.plus.aac.p.m4a",
+        "album": "RR - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/b0/e4/ac/b0e4ac99-eb38-7370-ea50-0bcf0bcbb054/196589949080.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/beso/1676343408?i=1676343411&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 799176215,
+        "artist": "Jul",
+        "title": "J'oublie tout",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/cb/cd/db/cbcddbd9-3acb-f6b4-3cd3-c73a5d30ebb6/mzaf_3519653348990717405.plus.aac.p.m4a",
+        "album": "Dans ma paranoia",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music124/v4/52/1b/66/521b6644-19b6-2c93-e484-ac815d3ec027/3700187655792.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/joublie-tout/799176203?i=799176215&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1673798699,
+        "artist": "Calvin Harris & Ellie Goulding",
+        "title": "Miracle",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/07/30/26/07302625-f440-e2ed-bf8f-17af28429278/mzaf_8729349806497283655.plus.aac.p.m4a",
+        "album": "Miracle - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/66/3b/3c/663b3cbf-4fdc-3806-e6e4-8a61c8a84ec0/196589934475.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/miracle/1673798696?i=1673798699&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1440836655,
+        "artist": "Louane",
+        "title": "Nos secrets",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/1a/6d/33/1a6d336f-e489-7595-72f7-ccc4b0a2339e/mzaf_8659761238131631797.plus.aac.p.m4a",
+        "album": "Chambre 12 (Deluxe)",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/4e/23/e5/4e23e57e-647d-1d88-0db3-6690f4a84d9b/00602547625151.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/nos-secrets/1440836256?i=1440836655&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1676086003,
+        "artist": "Purple Disco Machine & Kungs",
+        "title": "Substitution",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/a3/66/75/a36675ef-9a46-6803-921c-1c682bf2842d/mzaf_17777146965515275274.plus.aac.p.m4a",
+        "album": "Substitution - Single",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/22/55/40/225540ca-c6f7-65ce-a237-f29acfb533b6/196589832481.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/substitution/1676085995?i=1676086003&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1669584235,
+        "artist": "Werenoi",
+        "title": "3 singes (feat. Ninho)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/92/dc/0d/92dc0dd9-7f96-158c-13a8-95a39dd0b974/mzaf_1824838257260466510.plus.aac.p.m4a",
+        "album": "3 singes (feat. Ninho) - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/b0/73/d5/b073d53f-caf4-5579-1139-1211e7e10510/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/3-singes-feat-ninho/1669584230?i=1669584235&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1633260809,
+        "artist": "SDM",
+        "title": "Redescends (feat. Tiakola)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/a9/4e/01/a94e01a7-3c7d-7b38-39f7-d9c5d953c18c/mzaf_3255134053612297509.plus.aac.p.m4a",
+        "album": "Redescends (feat. Tiakola) - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music112/v4/a1/2a/00/a12a0070-de45-a08a-f436-faaaeb25394b/22UMGIM75037.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/redescends-feat-tiakola/1633260639?i=1633260809&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1621517612,
+        "artist": "Tiakola",
+        "title": "Mode AV (feat. Niska & Gazo)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/9a/3d/97/9a3d97ff-4139-e0b9-bb6c-f597a77f94b1/mzaf_6124441130471561631.plus.aac.p.m4a",
+        "album": "Melo",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/4d/83/55/4d835585-8eb5-d3cf-341a-1266a5cd0b55/196589070982.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/mode-av-feat-niska-gazo/1621517604?i=1621517612&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1673739629,
+        "artist": "Gianni",
+        "title": "Acolyte (feat. Dadju & Ninho)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/af/85/99/af8599a1-f9f8-39ab-2238-b36c7476a520/mzaf_4210719428087495681.plus.aac.p.m4a",
+        "album": "MRTHN",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/48/49/e6/4849e6a9-82f2-27bc-3057-329ba9e0d4eb/196589924834.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/acolyte-feat-dadju-ninho/1673738517?i=1673739629&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1636022048,
+        "artist": "InstruRap",
+        "title": "Gazo Rappel",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/0c/49/59/0c4959da-610a-fbb6-d8af-e4325df69cda/mzaf_1871004839754721644.plus.aac.p.m4a",
+        "album": "Gazo Rappel - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music112/v4/b0/38/4c/b0384cde-286b-1682-41e5-0e51289d616f/artwork.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/gazo-rappel/1636022047?i=1636022048&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1665942679,
+        "artist": "Aya Nakamura & SDM",
+        "title": "Daddy",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/68/fc/a3/68fca34b-f694-a719-6bcd-1b1c387682b2/mzaf_11103710814481040630.plus.aac.p.m4a",
+        "album": "DNK",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music113/v4/12/b6/32/12b632e6-7aed-4630-c3b0-a53e4515bbaa/5054197493874.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/daddy/1665941234?i=1665942679&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687809996,
+        "artist": "Bad Bunny",
+        "title": "WHERE SHE GOES",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/64/a6/d4/64a6d4b6-7a59-8d57-ee2e-e53cafdf493d/mzaf_13086997006377790508.plus.aac.p.m4a",
+        "album": "WHERE SHE GOES - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/ad/b7/0e/adb70ef8-c456-3b31-136c-450d196d7cda/197188909819.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/where-she-goes/1687809993?i=1687809996&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1667933755,
+        "artist": "Zola",
+        "title": "TOUTE LA JOURNEE (feat. Tiakola)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/ca/b7/fa/cab7face-2fa5-6013-4ea8-5f7386b8ac87/mzaf_6135673889393198405.plus.aac.p.m4a",
+        "album": "TOUTE LA JOURNEE (feat. Tiakola) - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music113/v4/b5/8c/90/b58c90c0-c64e-2626-ba7c-8f0ad4a66f8f/196589855817.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/toute-la-journ%C3%A9e-feat-tiakola/1667932723?i=1667933755&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688185513,
+        "artist": "L2B",
+        "title": "Dans La Chambre / Money (feat. Franglish)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/38/21/97/3821973f-0317-b381-aa67-700a17db1758/mzaf_11162815271236990748.plus.aac.p.m4a",
+        "album": "Dans La Chambre / Money (feat. Franglish) - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music126/v4/cd/1f/30/cd1f30bd-b76c-2f56-493d-845d152f3344/735910081497_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/dans-la-chambre-money-feat-franglish/1688185512?i=1688185513&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1661142902,
+        "artist": "SDM, Zed & Slkrack",
+        "title": "Franklin Saint",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/0d/1b/d7/0d1bd732-a25b-e35d-078e-c4a1af61a1d8/mzaf_2997076933350519495.plus.aac.p.m4a",
+        "album": "Liens du 100",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/05/a6/ea/05a6ea7d-2410-df14-0a05-4321293f1cf1/22UM1IM22865.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/franklin-saint/1661142346?i=1661142902&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1615585008,
+        "artist": "Harry Styles",
+        "title": "As It Was",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/96/7e/ea/967eea0f-3d8e-9bb6-b4c5-fb255f50b906/mzaf_5689924871570671055.plus.aac.p.m4a",
+        "album": "Harry's House",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/2a/19/fb/2a19fb85-2f70-9e44-f2a9-82abe679b88e/886449990061.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/as-it-was/1615584999?i=1615585008&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1630845277,
+        "artist": "ZEG P",
+        "title": "FADE UP (feat. Hamza & SCH)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/a2/71/5b/a2715b5c-b8b5-9fac-45ae-4eccac25ca33/mzaf_7789077649638303948.plus.aac.p.m4a",
+        "album": "FADE UP (feat. Hamza & SCH) - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music112/v4/92/60/10/926010ec-306f-59e6-3186-d491d003801f/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/fade-up-feat-hamza-sch/1630844613?i=1630845277&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1633555144,
+        "artist": "Kimati",
+        "title": "Burna Boy (Last Last)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/94/a4/e3/94a4e369-609f-79be-74a4-42ed224f32c7/mzaf_429792062527181399.plus.aac.p.m4a",
+        "album": "Burna Boy (Last Last) - Single",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music122/v4/41/16/8e/41168eab-1224-8014-ffee-45d26c0fa403/0.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/burna-boy-last-last/1633555143?i=1633555144&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1684735386,
+        "artist": "Moha K, DYSTINCT & YAM",
+        "title": "DARBA 9ADIYA",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/9c/08/ad/9c08ad14-e5ae-7c39-f800-dad8ed5bb660/mzaf_15677974376138641108.plus.aac.p.m4a",
+        "album": "DARBA 9ADIYA - Single",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/3d/cc/40/3dcc40b2-47d4-93a6-58c5-c38bf33a57ff/3596974410091_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/darba-9adiya/1684735111?i=1684735386&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1275918562,
+        "artist": "Maxence Davo",
+        "title": "PROD RAP DAMSO STYLE MACARENA (feat. HETROD BEATS)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/32/d5/46/32d546da-f56e-aec7-667f-9a50b1d3ea6a/mzaf_8624209419944767280.plus.aac.p.m4a",
+        "album": "PROD RAP DAMSO STYLE MACARENA (feat. HETROD BEATS) - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music118/v4/e2/38/bb/e238bb68-1ec1-e304-61c0-2c33e623adea/800739096950.png/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/prod-rap-damso-style-macarena-feat-hetrod-beats/1275918561?i=1275918562&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1675835970,
+        "artist": "Werenoi",
+        "title": "Tout seul (feat. Tiakola)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/30/d3/92/30d392ba-91fd-e149-6c74-225fc9809410/mzaf_8725758385680209746.plus.aac.p.m4a",
+        "album": "Carre",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/95/0a/0b/950a0bc1-f741-e869-525f-3153d8192a1f/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tout-seul-feat-tiakola/1675835724?i=1675835970&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1684973879,
+        "artist": "Rimkus",
+        "title": "Ali (feat. Lacrim, Werenoi & Mac Tyer)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/14/ed/6f/14ed6fb2-a2a7-00af-c91d-2ca9a7464f14/mzaf_6000039485734752377.plus.aac.p.m4a",
+        "album": "Ali (feat. Lacrim, Werenoi & Mac Tyer) - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/33/9a/be/339abe98-d6cf-b195-3384-c2b65d46fe4c/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/ali-feat-lacrim-werenoi-mac-tyer/1684973646?i=1684973879&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1665266736,
+        "artist": "Niro",
+        "title": "Qui sait ? (feat. ElGrandeToto)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/61/d0/b5/61d0b5b0-f4bb-8be5-e712-c4cd35b7dc3a/mzaf_17733216536061668318.plus.aac.p.m4a",
+        "album": "Taulier",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/77/39/1b/77391b07-1e8e-6af7-ba77-32b084315c96/196589824028.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/qui-sait-feat-elgrandetoto/1665266723?i=1665266736&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1512806019,
+        "artist": "Jonas Brothers",
+        "title": "X (feat. KAROL G)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/b6/87/36/b68736a3-e0a3-8fcd-41c7-62121c6859be/mzaf_6162627016812579952.plus.aac.p.m4a",
+        "album": "XV - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ce/27/bd/ce27bd6b-3cdf-b86f-2aa4-b3cedb3a406a/20UMGIM25072.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/x-feat-karol-g/1512806018?i=1512806019&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1485990711,
+        "artist": "Kebou Officiel",
+        "title": "parodie jul jcvd",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/3e/ed/0b/3eed0bcb-83a0-c2b5-b946-6dd1d79dddda/mzaf_628154066353560395.plus.aac.p.m4a",
+        "album": "mort de rire 2 - EP",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music123/v4/4b/d2/95/4bd29536-d4d9-8e47-628c-cbf6b7bd2d2b/859735355912_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/parodie-jul-jcvd/1485990702?i=1485990711&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1672056675,
+        "artist": "Loreen",
+        "title": "Tattoo",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/28/a3/3e/28a33e92-39f5-ba72-9b18-bba16f9b36de/mzaf_10493108083167243659.plus.aac.p.m4a",
+        "album": "Tattoo - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music126/v4/50/32/fd/5032fddc-e486-956d-a503-7ec6d17af848/22UM1IM46463.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tattoo/1672056674?i=1672056675&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1621517932,
+        "artist": "Tiakola",
+        "title": "Atasante (feat. Hamza)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/c8/62/fb/c862fbad-5cc8-e2da-1e5a-c710f9a51ad6/mzaf_10113101703294279171.plus.aac.p.m4a",
+        "album": "Melo",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/4d/83/55/4d835585-8eb5-d3cf-341a-1266a5cd0b55/196589070982.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/atasant%C3%A9-feat-hamza/1621517604?i=1621517932&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1654475365,
+        "artist": "Jul",
+        "title": "Namek (feat. Omah Lay)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/43/b6/06/43b60657-d995-db73-5d63-9c2f2a1e90b6/mzaf_6391249732111196657.plus.aac.p.m4a",
+        "album": "Namek (feat. Omah Lay) - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music112/v4/5c/fb/bf/5cfbbf14-abf6-001d-741c-6ff1dddee1a7/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/namek-feat-omah-lay/1654475361?i=1654475365&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1677621577,
+        "artist": "Werenoi",
+        "title": "Vroum Vroum",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/8f/d8/ae/8fd8aefc-5c3f-2564-50dc-6f7fd8b4241c/mzaf_9890828849666237710.plus.aac.p.m4a",
+        "album": "Carre",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/51/58/ba/5158ba8c-6773-95fb-63ae-660e32a50fae/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/vroum-vroum/1677620113?i=1677621577&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1630005850,
+        "artist": "Beyonce",
+        "title": "CUFF IT",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/de/0c/d1/de0cd1b7-869d-2552-2693-86e7372f1722/mzaf_9806311456420585015.plus.aac.p.m4a",
+        "album": "RENAISSANCE",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music112/v4/05/05/f3/0505f338-9873-feb4-af7f-27a470405e5f/196589246974.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/cuff-it/1630005298?i=1630005850&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1555102807,
+        "artist": "Naps",
+        "title": "La kiffance",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/33/ea/14/33ea14f1-29ce-fd98-440c-31b61f53bd0b/mzaf_6814718039115243373.plus.aac.p.m4a",
+        "album": "La kiffance - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music114/v4/82/bf/6e/82bf6e9b-8954-be8f-22ee-113ab52e5860/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/la-kiffance/1555102531?i=1555102807&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1689043214,
+        "artist": "Rim'K & Zamdane",
+        "title": "Cicatrice",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/c7/a9/a7/c7a9a7fd-4cd9-c5f6-cc3b-ab37a4a0f7c7/mzaf_3291563046473646418.plus.aac.p.m4a",
+        "album": "Cicatrice - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/d6/40/51/d640511a-3c50-baee-38e1-79dad0f7003d/23UMGIM58869.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/cicatrice/1689043212?i=1689043214&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1501355270,
+        "artist": "Ninho",
+        "title": "Lettre a une femme",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/fa/94/49/fa944964-9eda-1111-8080-662d2faec5bf/mzaf_10741807870928257025.plus.aac.p.m4a",
+        "album": "M.I.L.S 3",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/70/72/48/707248ad-5e7f-683a-6029-8252e56966db/190295256654.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/lettre-%C3%A0-une-femme/1501355159?i=1501355270&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1677188279,
+        "artist": "13 Organise",
+        "title": "Bande organisee (feat. SCH, Kofs, JUL, Naps, Soso Maness, Elams, Solda & Houari)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/c5/0b/8f/c50b8fda-d196-9279-0e8e-fa57ca5f21d7/mzaf_12438508753202880285.plus.aac.p.m4a",
+        "album": "13 Organise",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/64/a0/a5/64a0a5da-8b9e-e5e7-eec5-c5f08c13e7f5/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/bande-organis%C3%A9e-feat-sch-kofs-jul-naps-soso-maness/1677187965?i=1677188279&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1657271974,
+        "artist": "Metro Boomin, The Weeknd & 21 Savage",
+        "title": "Creepin'",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/e4/fd/fd/e4fdfd93-e4aa-4a8a-fdbe-eb123fe27a2b/mzaf_5435599880097296971.plus.aac.p.m4a",
+        "album": "HEROES & VILLAINS",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music122/v4/09/72/3b/09723b88-9b18-e466-7ae0-05a17688bb52/22UM1IM35114.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/creepin/1657271960?i=1657271974&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1525574471,
+        "artist": "PLK",
+        "title": "Pilote (feat. Hamza)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/4e/25/a5/4e25a580-287f-d7af-ad6d-23bb54e3965d/mzaf_16295386961510335017.plus.aac.p.m4a",
+        "album": "Enna",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music125/v4/0f/58/bd/0f58bd86-1503-065d-f33c-5c7e1b91da3e/3596973848420_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/pilote-feat-hamza/1525573024?i=1525574471&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687573191,
+        "artist": "USKY & Booba",
+        "title": "3.5.7",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/c7/d4/f0/c7d4f0d3-d423-719b-da07-be0cb98534fa/mzaf_14742839994119611875.plus.aac.p.m4a",
+        "album": "Retina",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/78/cf/24/78cf2468-9938-4eaf-ed31-5af89f50a4fa/23SYMIM04636.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/3-5-7/1687573060?i=1687573191&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1261270527,
+        "artist": "Weekend",
+        "title": "Fanpost von Gott",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/35/35/ce/3535ce83-21d0-a49f-ce61-cc6b3c55909c/mzaf_10783599019213492258.plus.aac.p.m4a",
+        "album": "Keiner ist gestorben",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/7e/8b/b2/7e8bb2c4-90c9-b403-3b3c-11d24b6a50c9/4018939326357_1448.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/fanpost-von-gott/1261269843?i=1261270527&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1675835968,
+        "artist": "Werenoi",
+        "title": "Virus",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/f7/bc/8a/f7bc8a1c-3a2d-0319-0c90-243c5470be3c/mzaf_15203372979919442696.plus.aac.p.m4a",
+        "album": "Carre",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/95/0a/0b/950a0bc1-f741-e869-525f-3153d8192a1f/cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/virus/1675835724?i=1675835968&uo=4"
+    }
+]

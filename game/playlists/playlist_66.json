@@ -1,0 +1,975 @@
+[
+    {
+        "service": "itunes",
+        "id": 1687943830,
+        "artist": "AVA, ANNA & Capo Plaza",
+        "title": "VETRI NERI",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/9d/e5/e7/9de5e78a-af63-4de7-ca2a-e5e39a823d28/mzaf_11811795116193474411.plus.aac.p.m4a",
+        "album": "VETRI NERI - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/80/2c/f3/802cf3e7-d8b8-659f-b586-460e8356e7b2/5054197688690.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/vetri-neri/1687943817?i=1687943830&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687526187,
+        "artist": "Pinguini Tattici Nucleari",
+        "title": "Rubami la Notte",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/80/ff/3b/80ff3b79-f1b3-8bf7-7bbb-2b77d12dce61/mzaf_18197394580705110982.plus.aac.p.m4a",
+        "album": "Rubami la Notte - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/9e/87/d5/9e87d5c2-3326-ae9a-5748-742ac4a304e7/196871125048.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/rubami-la-notte/1687526184?i=1687526187&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1689666836,
+        "artist": "Mr. Prisa",
+        "title": "Fedez, Annalisa, Articolo 31 (DISCO PARADISE)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/af/9d/4e/af9d4e10-3689-5181-48ef-6ab25f39cf0e/mzaf_6835312713044547905.plus.aac.p.m4a",
+        "album": "Fedez, Annalisa, Articolo 31 (DISCO PARADISE) [Remix] - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music126/v4/0b/97/65/0b9765b1-3603-3ac1-556c-932bb7a31182/artwork.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/fedez-annalisa-articolo-31-disco-paradise-remix/1689666835?i=1689666836&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687346089,
+        "artist": "Emis Killa & Sfera Ebbasta",
+        "title": "ON FIRE",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/67/3c/91/673c91a0-c4d1-2af2-e721-1dbb93b16249/mzaf_15566777403303948401.plus.aac.p.m4a",
+        "album": "Effetto notte",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/bb/17/58/bb17581c-465c-fae6-0320-e22a1dd9488b/196871071512.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/on-fire-paid-in-full/1687345814?i=1687346089&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1680679150,
+        "artist": "BLANCO & Mina",
+        "title": "Un Briciolo Di Allegria",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/83/8e/71/838e71ea-b738-79cc-dfa2-137e86341b77/mzaf_909215846049327725.plus.aac.p.m4a",
+        "album": "Innamorato",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/78/48/01/7848017f-6757-4b80-1134-6ff1086b7956/23UMGIM33754.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/un-briciolo-di-allegria/1680679136?i=1680679150&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1678406943,
+        "artist": "Annalisa",
+        "title": "Mon Amour",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/55/5b/ed/555bed6e-79b7-e2bf-d2ac-7e5ba691d227/mzaf_470883342401577677.plus.aac.p.m4a",
+        "album": "Mon Amour - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/d6/b3/d3/d6b3d3f5-92a8-4144-b2cd-773782de1e2a/5054197631382.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/mon-amour/1678406938?i=1678406943&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1689195093,
+        "artist": "Marco Mengoni & Elodie",
+        "title": "Pazza Musica",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/33/ca/01/33ca01f0-82af-d1ad-7f9e-bef523f58a76/mzaf_13431485861257784406.plus.aac.p.m4a",
+        "album": "Pazza Musica - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/91/5a/2c/915a2c50-dc6f-7d2a-43fc-88bb64a95c2e/196871171960.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/pazza-musica/1689195077?i=1689195093&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1671825584,
+        "artist": "Finesse",
+        "title": "Gelosa (feat. Shiva, Sfera Ebbasta & Gue)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/3a/9d/f5/3a9df568-75e9-541b-5f57-82ab37c2d7e9/mzaf_14467347517013962091.plus.aac.p.m4a",
+        "album": "Gelosa (feat. Shiva, Sfera Ebbasta & Gue) - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music116/v4/ea/0d/f3/ea0df368-8e03-8643-45f3-c562f5c617ce/196589908476.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/gelosa-feat-shiva-sfera-ebbasta-gu%C3%A8/1671825583?i=1671825584&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1681276543,
+        "artist": "Federico Riva",
+        "title": "Cenere Lazza (Remix)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/d4/c6/57/d4c65736-d48b-0fc3-3445-016359964e1f/mzaf_2932847059790444331.plus.aac.p.m4a",
+        "album": "Cenere Lazza (Remix) - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/a3/3a/21/a33a2131-cbe5-f714-97aa-28b7b7a8f607/859772241162_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/cenere-lazza-remix/1681276537?i=1681276543&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1679958681,
+        "artist": "Geolier",
+        "title": "IL MALE CHE MI FAI (feat. Marracash)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/95/8c/76/958c7632-1faa-ba7f-138b-a576fcccc1f1/mzaf_3992762926801319523.plus.aac.p.m4a",
+        "album": "IL CORAGGIO DEI BAMBINI - ATTO II",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/91/e2/e2/91e2e2ce-c9e0-cd73-eb0a-f0c1c346947b/196871019330.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/il-male-che-mi-fai-feat-marracash/1679958676?i=1679958681&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056447,
+        "artist": "Baby Gang",
+        "title": "Cella 4",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/16/83/6f/16836fb9-7c97-23f4-86bd-ada43e19a564/mzaf_2702535864642670298.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/cella-4/1688056446?i=1688056447&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1686755077,
+        "artist": "Angelina Mango",
+        "title": "Ci pensiamo domani",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/45/e3/ee/45e3ee60-3f78-7eb5-b699-e16a32aa08ae/mzaf_15739812961825853163.plus.aac.p.m4a",
+        "album": "Voglia di vivere - EP",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music116/v4/39/45/b3/3945b318-efc1-5bcc-d95f-a1442b697d58/4050538934281.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/ci-pensiamo-domani/1686755076?i=1686755077&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056569,
+        "artist": "Baby Gang",
+        "title": "Restare (feat. Lazza)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/ee/f0/94/eef094df-1811-a191-be24-ddfd7f84cd68/mzaf_15531558727400969481.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/restare-feat-lazza/1688056446?i=1688056569&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1669000321,
+        "artist": "Tananai",
+        "title": "TANGO",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/a8/7c/52/a87c525d-8295-1757-31fa-f21354b70f12/mzaf_1733795356701911678.plus.aac.p.m4a",
+        "album": "TANGO - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/f6/bb/91/f6bb9191-c514-caae-c52b-452ed1943c53/23UMGIM09426.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tango/1669000311?i=1669000321&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1676636003,
+        "artist": "Rhove & MadFingerz",
+        "title": "Pele",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/79/ea/db/79eadb83-47f0-a86a-ed5e-2444219e8172/mzaf_1328922066711141748.plus.aac.p.m4a",
+        "album": "Pele - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/3c/86/7c/3c867c7c-1149-0230-e1b8-4ec8d18f7a9a/23UMGIM26630.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/pel%C3%A9/1676635879?i=1676636003&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056546,
+        "artist": "Baby Gang",
+        "title": "Tony Montana (feat. Gue)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/cf/cd/16/cfcd162d-af90-abd0-0b49-90749cc59ef4/mzaf_4808012312912786579.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tony-montana-feat-gu%C3%A8/1688056446?i=1688056546&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1669050237,
+        "artist": "Marco Mengoni",
+        "title": "Due Vite",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/fe/30/e1/fe30e127-d24a-d522-8d46-4b5547a8dc0d/mzaf_6886129525764608249.plus.aac.p.m4a",
+        "album": "Due Vite - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/56/08/20/56082074-c2f5-d5b7-94b8-37e66a4310d6/196589799500.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/due-vite/1669050234?i=1669050237&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1678098883,
+        "artist": "Rocco Hunt",
+        "title": "Non litighiamo piu",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/a4/a1/15/a4a11567-4773-5f64-75e1-2a202fe6e18e/mzaf_8757456861537413429.plus.aac.p.m4a",
+        "album": "Non litighiamo piu - Single",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/f7/ea/dc/f7eadc9d-52d1-076f-34e0-b86bb013bd94/196589981950.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/non-litighiamo-pi%C3%B9/1678098881?i=1678098883&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688989775,
+        "artist": "Ernia, Bresh & Fabri Fibra",
+        "title": "PARAFULMINI",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/6c/c5/43/6cc543e6-510e-f811-22dc-d328024aa565/mzaf_11934919954147860537.plus.aac.p.m4a",
+        "album": "PARAFULMINI - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/bc/b5/59/bcb55983-b482-d1c1-e5a3-ee17a3ad4962/23UMGIM58676.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/parafulmini/1688989773?i=1688989775&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1660805600,
+        "artist": "Geolier",
+        "title": "COME VUOI",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/3d/f8/fb/3df8fbc7-021a-eb5e-b4c5-b71d915bf86c/mzaf_17444674530933324228.plus.aac.p.m4a",
+        "album": "IL CORAGGIO DEI BAMBINI",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/a7/38/b7/a738b7c3-35ba-4c99-7b74-f59253d1278e/196589700285.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/come-vuoi/1660805404?i=1660805600&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1632746802,
+        "artist": "Bizarrap & Quevedo",
+        "title": "Quevedo: Bzrp Music Sessions, Vol. 52",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/0c/62/9e/0c629e98-c1b7-b9f7-5e3b-50d83afefd62/mzaf_3746580560697223330.plus.aac.p.m4a",
+        "album": "Quevedo: Bzrp Music Sessions, Vol. 52 - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music112/v4/74/37/3d/74373d24-e999-ea75-e101-b9b21b3887c3/196925240499.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/quevedo-bzrp-music-sessions-vol-52/1632746799?i=1632746802&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056449,
+        "artist": "Baby Gang",
+        "title": "Napoletano",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/40/dd/d2/40ddd226-69ec-3c1e-a7bc-f1f3781bea26/mzaf_13827978613921491252.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/napoletano/1688056446?i=1688056449&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1660805409,
+        "artist": "Geolier",
+        "title": "X CASO (feat. Sfera Ebbasta)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/73/36/14/73361479-5035-17bd-aadc-5f46cbdb099e/mzaf_12897205673087915939.plus.aac.p.m4a",
+        "album": "IL CORAGGIO DEI BAMBINI",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/a7/38/b7/a738b7c3-35ba-4c99-7b74-f59253d1278e/196589700285.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/x-caso-feat-sfera-ebbasta/1660805404?i=1660805409&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1677868808,
+        "artist": "AriBeatz",
+        "title": "MIRAGE (feat. Ozuna, Sfera Ebbasta & GIMS)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/cb/5e/59/cb5e59de-b4c5-b2d1-0c18-2e178d89404e/mzaf_8452120765448577905.plus.aac.p.m4a",
+        "album": "MIRAGE (feat. Ozuna, Sfera Ebbasta & GIMS) - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/43/c3/db/43c3db08-ddb6-8aed-080f-2f35af6bcaa8/196589975164.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/mirage-feat-ozuna-sfera-ebbasta-gims/1677868807?i=1677868808&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1673130124,
+        "artist": "Matteo Paolillo - Icaro, Lolloflow & Clara",
+        "title": "ORIGAMI ALL'ALBA - CLARA",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/18/7e/01/187e01fc-cc5a-5eaf-a300-efd4c80b3c3d/mzaf_7994025681845949388.plus.aac.p.m4a",
+        "album": "ORIGAMI ALL'ALBA - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/7a/fb/6c/7afb6cab-84da-8e1f-aea9-c5ad0a7762bc/197338885697.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/origami-allalba-clara/1673130117?i=1673130124&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056451,
+        "artist": "Baby Gang",
+        "title": "Que Lo Ke",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/b5/ee/63/b5ee63b0-f853-be3f-5587-de39a1cb5f43/mzaf_16417613495140028531.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/que-lo-ke/1688056446?i=1688056451&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688247684,
+        "artist": "Anitta, Rvfv & Sfera Ebbasta",
+        "title": "Capitan",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/e0/cb/3f/e0cb3f50-a926-d66b-dada-4cdbe9b7778b/mzaf_9064177955535341019.plus.aac.p.m4a",
+        "album": "Capitan - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music116/v4/4e/86/c7/4e86c7a6-1f1b-a25f-d83a-4eddc7aae093/8445162901581.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/capit%C3%A1n/1688247679?i=1688247684&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687346365,
+        "artist": "Emis Killa & Lazza",
+        "title": "SENZ'ANIMA",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/7c/02/16/7c021608-afda-157b-1f73-adbb401340aa/mzaf_18249172094187296653.plus.aac.p.m4a",
+        "album": "Effetto notte",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/bb/17/58/bb17581c-465c-fae6-0320-e22a1dd9488b/196871071512.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/senzanima-nikita/1687345814?i=1687346365&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1669250376,
+        "artist": "Mr.Rain",
+        "title": "SUPEREROI",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/71/06/43/710643e4-f3f1-243b-7416-01a844270833/mzaf_2889110144873731109.plus.aac.p.m4a",
+        "album": "SUPEREROI - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music126/v4/4a/4b/de/4a4bdedb-8686-4c2b-6f86-881d470c95bf/5054197538360.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/supereroi/1669250375?i=1669250376&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1650810351,
+        "artist": "Geolier",
+        "title": "CHIAGNE (feat. Lazza & Takagi & Ketra)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/26/ba/7d/26ba7dd7-0bd1-0e5d-d2b3-dc6c4e05e279/mzaf_16740166239368684778.plus.aac.p.m4a",
+        "album": "CHIAGNE (feat. Lazza & Takagi & Ketra) - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music122/v4/f3/fb/5a/f3fb5a38-3d91-02be-0061-5f1bf3cbd7f5/196589597939.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/chiagne-feat-lazza-takagi-ketra/1650810001?i=1650810351&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688015974,
+        "artist": "Rhove",
+        "title": "Whip Whip",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/8b/0a/ab/8b0aabdb-6b22-80aa-73fd-a03ceefb0629/mzaf_14416375401767490866.plus.aac.p.m4a",
+        "album": "Whip Whip - Single",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/9d/bf/6e/9dbf6e2e-a882-3f1a-9128-ada5d12b0e00/23UMGIM55389.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/whip-whip/1688015971?i=1688015974&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1681874963,
+        "artist": "Gazzelle",
+        "title": "Flavio",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/c0/66/70/c0667092-baa7-bef6-774b-cd8212ebefb7/mzaf_12133437339790776697.plus.aac.p.m4a",
+        "album": "DENTRO",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/f7/a9/c3/f7a9c386-31c0-e9eb-5024-5cd7bf9ab616/8057715992092.png/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/flavio/1681874956?i=1681874963&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687809996,
+        "artist": "Bad Bunny",
+        "title": "WHERE SHE GOES",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/64/a6/d4/64a6d4b6-7a59-8d57-ee2e-e53cafdf493d/mzaf_13086997006377790508.plus.aac.p.m4a",
+        "album": "WHERE SHE GOES - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/ad/b7/0e/adb70ef8-c456-3b31-136c-450d196d7cda/197188909819.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/where-she-goes/1687809993?i=1687809996&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1668071829,
+        "artist": "benardo pro",
+        "title": "Miley Cyrus Flowers (reggae version)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/8a/bd/e4/8abde45f-1170-ee08-ca35-4d5a09c39824/mzaf_3317079850952821743.plus.aac.p.m4a",
+        "album": "Miley Cyrus Flowers (reggae version) - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/51/95/ed/5195ed5b-ab5c-e023-a657-85551eb86887/734167642420_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/miley-cyrus-flowers-reggae-version/1668071827?i=1668071829&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056553,
+        "artist": "Baby Gang",
+        "title": "Come Mai (feat. Emis Killa)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/fc/82/8f/fc828f87-3597-8b64-9089-cec6c9b8dfa4/mzaf_11897778929573510988.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/come-mai-feat-emis-killa/1688056446?i=1688056553&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1676981937,
+        "artist": "thasup",
+        "title": "Dimmi Che C'e (feat. Tedua)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/9a/16/aa/9a16aaa7-b092-4ef8-353d-75e0cd50da40/mzaf_7265183363870974738.plus.aac.p.m4a",
+        "album": "Dimmi Che C'e (feat. Tedua) - Single",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/3f/1e/7b/3f1e7b86-908d-d20a-c6a8-528ff636931c/196589980243.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/dimmi-che-c%C3%A8-feat-tedua/1676981936?i=1676981937&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1662900256,
+        "artist": "Gue, ANNA & Sfera Ebbasta",
+        "title": "Cookies N' Cream",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/e4/1b/b1/e41bb124-dd0a-9b3a-47f4-fff038fd3bde/mzaf_9519855645586500673.plus.aac.p.m4a",
+        "album": "Madreperla",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music123/v4/b2/b1/7f/b2b17fd3-2419-7570-2772-2bcd76555489/23UMGIM00485.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/cookies-n-cream/1662899105?i=1662900256&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1686487326,
+        "artist": "Achille Lauro & Rose Villain",
+        "title": "Fragole",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/d4/f9/c2/d4f9c29d-8d4c-85f5-da35-95867e6dbcfa/mzaf_3480485501760003058.plus.aac.p.m4a",
+        "album": "Fragole - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/73/db/54/73db543f-863d-4141-9eff-7572b3040e22/5054197680564.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/fragole/1686487307?i=1686487326&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1686499950,
+        "artist": "Mr.Rain & Sangiovanni",
+        "title": "LA FINE DEL MONDO",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/ab/8c/ce/ab8cce66-216e-95f4-049f-9d017c3b6f6e/mzaf_8143956987679038743.plus.aac.p.m4a",
+        "album": "LA FINE DEL MONDO - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/73/12/d5/7312d5d7-2bcd-5b23-9f3a-ddbbd331673a/5054197675584.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/la-fine-del-mondo/1686499944?i=1686499950&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1666525104,
+        "artist": "Bresh & SHUNE",
+        "title": "Guasto D'Amore",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/a3/6d/27/a36d2728-cbd3-e2c4-1e09-5617625419f7/mzaf_592337913249472991.plus.aac.p.m4a",
+        "album": "Guasto D'Amore - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music123/v4/d8/83/46/d88346f9-ecf8-f0fe-6f02-42c968c72d28/196589836687.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/guasto-damore/1666525098?i=1666525104&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056549,
+        "artist": "Baby Gang",
+        "title": "Gustavo (feat. Lacrim)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/1d/e4/91/1de49176-7be5-516c-c5a7-29afa1d65ba6/mzaf_4233542592537196754.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/gustavo-feat-lacrim/1688056446?i=1688056549&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1675548540,
+        "artist": "Elodie",
+        "title": "Due (Acoustic) [Apple Music Home Session]",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/cd/5d/e3/cd5de334-2307-6542-3bb2-951fb18d6f7a/mzaf_18305725899281945924.plus.aac.p.m4a",
+        "album": "Apple Music Home Session: Elodie",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/db/91/d2/db91d2b9-d7f8-c9df-f6c3-6ca92a1eb99c/23UMGIM22165.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/due-acoustic-apple-music-home-session/1675548537?i=1675548540&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1252679645,
+        "artist": "Shout Out Louds",
+        "title": "Paola",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/fa/03/cb/fa03cb67-e90f-370f-d9a3-d1b4300173e5/mzaf_8293020282487808653.plus.aac.p.m4a",
+        "album": "Ease My Mind",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music127/v4/cd/e5/72/cde57284-2a9b-9fd4-2d0c-cb7d8d63ea67/610_shoutoutlouds_2500.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/paola/1252678794?i=1252679645&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1683329595,
+        "artist": "Diss Gacha & Sala",
+        "title": "Captato",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/03/97/b4/0397b4b4-4ae6-8e92-1dfe-0e41f8e8e7c7/mzaf_2013153403088554898.plus.aac.p.m4a",
+        "album": "Cultura",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/bf/48/7b/bf487b35-7470-b5ab-28dd-c4fd81805693/196871068680.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/captato/1683329570?i=1683329595&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1674675537,
+        "artist": "Gazzelle",
+        "title": "Idem",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/42/58/b7/4258b7e7-eece-3353-5bd9-298b445020f7/mzaf_16915439162239815796.plus.aac.p.m4a",
+        "album": "Idem - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/c8/90/75/c8907597-35ce-fc6b-884b-660fb751c100/8057715092228.png/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/idem/1674675536?i=1674675537&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1684682366,
+        "artist": "Emma",
+        "title": "MEZZO MONDO",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/17/20/22/1720225d-caf4-eb0f-ffa2-766b7023195f/mzaf_3291298071801048192.plus.aac.p.m4a",
+        "album": "MEZZO MONDO - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/8b/42/cf/8b42cfc3-3bbc-c8d4-a0fa-437e58e24675/23UMGIM44057.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/mezzo-mondo/1684682358?i=1684682366&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1678598673,
+        "artist": "Pinguini Tattici Nucleari",
+        "title": "Coca zero",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/20/0e/25/200e2518-33fd-95b6-dc10-ca246e608691/mzaf_5733227540313944478.plus.aac.p.m4a",
+        "album": "Coca zero - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/1b/fb/c3/1bfbc390-a571-67cf-632c-9369f8c154c8/196589970916.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/coca-zero/1678598672?i=1678598673&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1676343411,
+        "artist": "ROSALIA & Rauw Alejandro",
+        "title": "BESO",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/48/6f/95/486f9539-bca5-3b41-888b-8c12dae6c8e6/mzaf_4242894844414471612.plus.aac.p.m4a",
+        "album": "RR - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/b0/e4/ac/b0e4ac99-eb38-7370-ea50-0bcf0bcbb054/196589949080.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/beso/1676343408?i=1676343411&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1660098823,
+        "artist": "Bizarrap & Shakira",
+        "title": "Shakira: Bzrp Music Sessions, Vol. 53",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/13/04/c8/1304c860-3d42-f81d-7795-58cc196d6fb0/mzaf_17537316161425354035.plus.aac.p.m4a",
+        "album": "Shakira: Bzrp Music Sessions, Vol. 53 - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music116/v4/a1/93/2b/a1932b39-a892-6705-1afe-1c4908fa1a3f/197187714988.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/shakira-bzrp-music-sessions-vol-53/1660098816?i=1660098823&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1681200847,
+        "artist": "Noizy & Sfera Ebbasta",
+        "title": "Location",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/ce/81/9a/ce819a89-557f-4d1e-c90d-890dc9e8249c/mzaf_7662708670921415504.plus.aac.p.m4a",
+        "album": "Location - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/5f/19/98/5f19986f-d9be-071f-9a29-0e987db6337d/23UMGIM35293.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/location/1681200835?i=1681200847&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1677808387,
+        "artist": "Tony Effe",
+        "title": "BOSS",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/ec/c7/00/ecc70062-8dbe-8efe-945c-c750f4e2a351/mzaf_1856829175409515183.plus.aac.p.m4a",
+        "album": "BOSS - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/30/70/22/30702259-4460-5856-8a27-793d70102c63/23UMGIM26761.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/boss/1677808117?i=1677808387&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1624134050,
+        "artist": "Capo Plaza",
+        "title": "Capri Sun",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/48/7e/e2/487ee2cd-e081-72b1-0350-d636ecf9c6c9/mzaf_15936511692418832304.plus.aac.p.m4a",
+        "album": "Hustle Mixtape",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/60/68/21/60682127-99c3-b563-c797-1ab48753b73a/5054197174667.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/capri-sun/1624133787?i=1624134050&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056551,
+        "artist": "Baby Gang",
+        "title": "Barrio",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/43/58/15/43581563-ee8a-09c4-4e65-cc3099fed217/mzaf_17405070068710254300.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/barrio/1688056446?i=1688056551&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1663835446,
+        "artist": "Medy",
+        "title": "Arai (feat. Capo Plaza)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/af/96/e5/af96e554-0b2b-38b6-fd16-801168fa50e6/mzaf_6058177238274743314.plus.aac.p.m4a",
+        "album": "Nove Chiamate",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music123/v4/34/bb/db/34bbdbe8-f055-53af-e92c-2b8c0ea52ba9/196589781420.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/arai-feat-capo-plaza/1663835294?i=1663835446&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056555,
+        "artist": "Baby Gang",
+        "title": "Mama Africa (feat. Rondodasosa)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/62/0a/61/620a6137-1b78-0ee5-399b-813711b94777/mzaf_3467482800576275056.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/mama-africa-feat-rondodasosa/1688056446?i=1688056555&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687346090,
+        "artist": "Emis Killa",
+        "title": "COL CUORE IN GOLA",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/b7/7e/75/b77e75cd-baf2-ad3e-b19c-8dd5c0a79303/mzaf_228855037043963683.plus.aac.p.m4a",
+        "album": "Effetto notte",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/bb/17/58/bb17581c-465c-fae6-0320-e22a1dd9488b/196871071512.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/col-cuore-in-gola-lords-of-dogtown/1687345814?i=1687346090&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1673804556,
+        "artist": "Ed Sheeran",
+        "title": "Eyes Closed",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/45/d7/48/45d7481e-8ecb-2156-6de7-fbf9f03d3cfd/mzaf_15555494921995384938.plus.aac.p.m4a",
+        "album": "- (Deluxe)",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/c2/4c/36/c24c3631-08b8-b576-345a-259b395f8dbd/5054197591464.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/eyes-closed/1673804537?i=1673804556&uo=4"
+    },
+    {
+        "collectionArtistId": 614321703,
+        "collectionArtistViewUrl": "https://music.apple.com/us/artist/yung-felix/614321703?uo=4",
+        "service": "itunes",
+        "id": 1453107414,
+        "artist": "Poke & Yung Felix",
+        "title": "Loco (feat. MamboLosco)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/88/ae/7a/88ae7af9-9ce0-bf4f-8ac7-171b5a942dcc/mzaf_2542043158886336197.plus.aac.p.m4a",
+        "album": "Loco (feat. MamboLosco) - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music114/v4/6a/3c/2a/6a3c2a7a-0d3c-f446-acda-737c6e6ba76a/896.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/loco-feat-mambolosco/1453107412?i=1453107414&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1668998790,
+        "artist": "Madame",
+        "title": "IL BENE NEL MALE",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/72/c1/e1/72c1e1d3-2d1c-4f23-b64b-6d131c2d38f8/mzaf_3323804005973545741.plus.aac.p.m4a",
+        "album": "IL BENE NEL MALE - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/22/8a/4f/228a4f74-44cb-f9fc-3430-6a55c48b4f99/23UMGIM07247.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/il-bene-nel-male/1668998786?i=1668998790&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1680679151,
+        "artist": "BLANCO",
+        "title": "Lacrime Di Piombo",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/de/12/30/de1230a1-8be0-7bf4-9b20-db42ddbf449d/mzaf_10416608114959575213.plus.aac.p.m4a",
+        "album": "Innamorato",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/78/48/01/7848017f-6757-4b80-1134-6ff1086b7956/23UMGIM33754.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/lacrime-di-piombo/1680679136?i=1680679151&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1666980582,
+        "artist": "BLANCO",
+        "title": "L'Isola Delle Rose",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/7d/a0/ca/7da0cae4-87f7-430f-5525-96efbde44a50/mzaf_12465326106436606059.plus.aac.p.m4a",
+        "album": "L'Isola Delle Rose - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music123/v4/29/ff/69/29ff69f8-d502-9309-7540-0ac4bf3c7beb/23UMGIM06631.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/lisola-delle-rose/1666980518?i=1666980582&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1684971804,
+        "artist": "ZEF e MARZ",
+        "title": "Tilt (feat. Elisa & La rappresentante di lista)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/30/ff/c7/30ffc758-3eb2-c9e1-9a37-27156c7fd673/mzaf_16395821340221961545.plus.aac.p.m4a",
+        "album": "Tilt (feat. Elisa & La rappresentante di lista) - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/0f/03/2a/0f032a99-a9a9-6383-a09f-ae7573aef303/196871096584.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tilt-feat-elisa-la-rappresentante-di-lista/1684971612?i=1684971804&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1641074859,
+        "artist": "Annalisa",
+        "title": "Bellissima",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/ed/bd/b8/edbdb8a1-a53a-dfa6-9f30-c462442bbe6e/mzaf_16723407474916080545.plus.aac.p.m4a",
+        "album": "Bellissima - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music112/v4/1b/86/e6/1b86e6dc-eca8-6b90-f6ac-6bc22c098380/5054197268748.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/bellissima/1641074858?i=1641074859&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1680154623,
+        "artist": "Bresh & SHUNE",
+        "title": "Altamente Mia",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/4f/45/6c/4f456cb5-907c-1756-8224-9c2583635423/mzaf_12383622633379117704.plus.aac.p.m4a",
+        "album": "Altamente Mia - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/99/76/82/9976828d-0189-5a8d-6816-ef1f9906f414/196871029315.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/altamente-mia/1680154621?i=1680154623&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1684812810,
+        "artist": "The Kolors",
+        "title": "ITALODISCO",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/a9/69/15/a9691513-fb4d-874d-f258-860a7ac31ea6/mzaf_1666345543140126704.plus.aac.p.m4a",
+        "album": "ITALODISCO - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music126/v4/e4/f5/24/e4f524c5-9451-287f-d4b1-3e50756917e2/5054197670473.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/italodisco/1684812808?i=1684812810&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1689016559,
+        "artist": "Star one",
+        "title": "David Kushner daylight",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/de/73/57/de7357ef-349e-98b1-bb82-c712c2bf0880/mzaf_5834882976391522646.plus.aac.p.m4a",
+        "album": "David Kushner daylight - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/32/10/05/321005c0-e3f7-8520-2530-b9c2d9eaf832/artwork.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/david-kushner-daylight/1689016557?i=1689016559&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056561,
+        "artist": "Baby Gang",
+        "title": "Freestyle 2",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/92/14/64/92146468-f32e-69c3-a6d2-647a883f88ea/mzaf_7514289558419358154.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/freestyle-2/1688056446?i=1688056561&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1650810351,
+        "artist": "Geolier",
+        "title": "CHIAGNE (feat. Lazza & Takagi & Ketra)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/26/ba/7d/26ba7dd7-0bd1-0e5d-d2b3-dc6c4e05e279/mzaf_16740166239368684778.plus.aac.p.m4a",
+        "album": "CHIAGNE (feat. Lazza & Takagi & Ketra) - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music122/v4/f3/fb/5a/f3fb5a38-3d91-02be-0061-5f1bf3cbd7f5/196589597939.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/chiagne-feat-lazza-takagi-ketra/1650810001?i=1650810351&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1624563284,
+        "artist": "Manuel Turizo",
+        "title": "La Bachata",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/c9/3f/2b/c93f2bd7-8e9a-aa9f-c1e9-423654990c18/mzaf_4183274455740296990.plus.aac.p.m4a",
+        "album": "La Bachata - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music112/v4/df/70/11/df701101-9f0f-3c43-ff6d-2186235d7e9c/196589129123.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/la-bachata/1624563280?i=1624563284&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1645129462,
+        "artist": "Pinguini Tattici Nucleari",
+        "title": "Ricordi",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/28/33/eb/2833eb11-10cd-c5fa-ee10-01b65ee5b318/mzaf_16269244427668699547.plus.aac.p.m4a",
+        "album": "Ricordi - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/ea/1a/84/ea1a84ce-b15e-73ee-9747-f3621b201af0/196589459435.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/ricordi/1645129291?i=1645129462&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1670106520,
+        "artist": "VillaBanks, Linch & Andry The Hitmaker",
+        "title": "Il Doc 3 (feat. Tony Effe, Slings & MamboLosco)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/43/f8/10/43f81086-0f62-ba48-2c6d-bbb30c430305/mzaf_6293650851369549069.plus.aac.p.m4a",
+        "album": "Il Doc 3 (feat. Tony Effe, Slings & MamboLosco) - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/03/4b/cb/034bcb62-14f6-a921-4329-d173edeb4540/23UMGIM12255.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/il-doc-3-feat-tony-effe-slings-mambolosco/1670106519?i=1670106520&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056565,
+        "artist": "Baby Gang",
+        "title": "Reggaeton (feat. Baby K)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/dd/d8/8b/ddd88b45-4259-83b8-4ace-59561c7ad0d6/mzaf_9031526574419702570.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/reggaeton-feat-baby-k/1688056446?i=1688056565&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1669057675,
+        "artist": "Mara Sattei",
+        "title": "Duemilaminuti",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/95/f8/e7/95f8e7ac-579c-a181-3ad2-4b05bacbab24/mzaf_6425153334365507467.plus.aac.p.m4a",
+        "album": "Duemilaminuti - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/4c/12/a0/4c12a078-2c4d-7cf2-cfee-c337d109e6a7/196589814067.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/duemilaminuti/1669057674?i=1669057675&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1499125618,
+        "artist": "Francesca Michielin",
+        "title": "GANGE (feat. Shiva)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/5c/46/64/5c4664b3-5715-40a0-b854-521ffe7840d0/mzaf_11980982931027577334.plus.aac.p.m4a",
+        "album": "GANGE (feat. Shiva) - Single",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music124/v4/2c/58/b5/2c58b5e6-1f03-bfa6-a0d0-cf37ff244a40/886448304494.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/gange-feat-shiva/1499125616?i=1499125618&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1626766764,
+        "artist": "mezuzo",
+        "title": "trap baby gang droga guerrilla (feat. Pussy Money Weed Guerrilla)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/46/79/d0/4679d0d8-86ec-f0e9-2ca3-ee793e41b837/mzaf_3037665247169649375.plus.aac.p.m4a",
+        "album": "trap baby gang droga guerrilla (feat. Pussy Money Weed Guerrilla) - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music112/v4/eb/9f/2d/eb9f2d7a-10cc-584b-5596-318e4dc94844/artwork.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/trap-baby-gang-droga-guerrilla-feat-pussy-money-weed/1626766763?i=1626766764&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1616058378,
+        "artist": "Lazza",
+        "title": "MOLOTOV",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/c9/4d/ca/c94dca90-a72b-1f95-9f96-d82bfcf5e121/mzaf_15737879132040326908.plus.aac.p.m4a",
+        "album": "MOLOTOV - Single",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music112/v4/d3/d0/70/d3d07058-4720-eb32-17d7-db0b0438379c/22UMGIM30895.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/molotov/1616058373?i=1616058378&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1679399030,
+        "artist": "Boomdabash",
+        "title": "L'unica Cosa Che Vuoi",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/e0/e1/70/e0e170cd-fb5c-6f11-d3bd-a3ff5f5eb96e/mzaf_18187661901079300266.plus.aac.p.m4a",
+        "album": "L'unica Cosa Che Vuoi - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/96/79/9d/96799dd3-c623-8668-69de-7746bb7a1a97/23UMGIM35867.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/lunica-cosa-che-vuoi/1679397283?i=1679399030&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1622045635,
+        "artist": "Bad Bunny",
+        "title": "Titi Me Pregunto",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/71/8d/43/718d4318-e091-2897-3594-2dcd30af8888/mzaf_16737374879286103282.plus.aac.p.m4a",
+        "album": "Un Verano Sin Ti",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music112/v4/3e/04/eb/3e04ebf6-370f-f59d-ec84-2c2643db92f1/196626945068.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tit%C3%AD-me-pregunt%C3%B3/1622045624?i=1622045635&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1660805413,
+        "artist": "Geolier",
+        "title": "MONDAY (feat. Shiva & Michelangelo)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/2f/1d/f4/2f1df4aa-ef55-b931-dc53-68c7815968f3/mzaf_1625041869414812542.plus.aac.p.m4a",
+        "album": "IL CORAGGIO DEI BAMBINI",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/a7/38/b7/a738b7c3-35ba-4c99-7b74-f59253d1278e/196589700285.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/monday-feat-shiva-michelangelo/1660805404?i=1660805413&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056568,
+        "artist": "Baby Gang",
+        "title": "Tiffany (feat. Ghali)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/d5/f4/fe/d5f4fec2-bb6b-1081-4756-bbb89e0e02f5/mzaf_4993836770830315445.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/tiffany-feat-ghali/1688056446?i=1688056568&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1624881303,
+        "artist": "Pinguini Tattici Nucleari",
+        "title": "Giovani Wannabe",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/6c/8c/50/6c8c5014-30fb-b107-c6c3-bc57fabad6f5/mzaf_10329757289013378430.plus.aac.p.m4a",
+        "album": "Giovani Wannabe - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music112/v4/c4/22/d3/c422d37e-177a-b1ed-8699-21c2b7008e13/196589098467.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/giovani-wannabe/1624881300?i=1624881303&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688016012,
+        "artist": "sixpm, Ghali & Gue",
+        "title": "PUTA",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/88/6a/21/886a21c3-e6f3-bf73-57d3-ace49b5ff46f/mzaf_17091312952241934194.plus.aac.p.m4a",
+        "album": "PUTA - Single",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/6e/03/61/6e0361f0-b1de-42e4-995f-6b530dd86825/23UMGIM56206.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/puta/1688015999?i=1688016012&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1516776432,
+        "artist": "Shablo, Geolier & Sfera Ebbasta",
+        "title": "M' manc",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/3e/69/8a/3e698a9d-91b2-15b5-e9eb-e72df2ca82ed/mzaf_15972185347729910332.plus.aac.p.m4a",
+        "album": "M' manc - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/bc/1b/ca/bc1bcae5-83cf-02e5-7ed0-bccefb6d9c00/20UMGIM46493.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/m-manc/1516776427?i=1516776432&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1677650811,
+        "artist": "Madame",
+        "title": "QUANTO FORTE TI PENSAVO",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/90/d0/0f/90d00f96-d5e1-c538-8133-9a28a56074cb/mzaf_10595269470203597733.plus.aac.p.m4a",
+        "album": "L'AMORE",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music126/v4/15/79/ca/1579ca36-6187-2a6e-8ead-3492c758d8c1/23UMGIM24035.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/quanto-forte-ti-pensavo/1677650182?i=1677650811&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1683642612,
+        "artist": "Tiziano Ferro",
+        "title": "Destinazione Mare",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/21/7b/dc/217bdcea-bef4-8ed3-5dec-01c60c7f58f6/mzaf_3381663314210055818.plus.aac.p.m4a",
+        "album": "Il Mondo E Nostro",
+        "album_art": "https://is5-ssl.mzstatic.com/image/thumb/Music116/v4/67/4b/fa/674bfa32-6f25-d1da-f968-2fa95d3c06cf/22UM1IM11111.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/destinazione-mare/1683642611?i=1683642612&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1496726312,
+        "artist": "LIBERATO",
+        "title": "ME STAJE APPENNENN' AMO",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/07/1b/5e/071b5ef7-3081-301a-4334-ba63369a9d6b/mzaf_5326704068485704129.plus.aac.p.m4a",
+        "album": "LIBERATO",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music113/v4/74/f4/e7/74f4e719-f47a-a32f-a5ff-d2bcfbaff685/3700551782536_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/me-staje-appennenn-am%C3%B2/1496725804?i=1496726312&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1688056557,
+        "artist": "Baby Gang",
+        "title": "Amigo (feat. Elai)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/35/21/e3/3521e3ae-febd-786c-81f8-131879c281c2/mzaf_16899327652162265843.plus.aac.p.m4a",
+        "album": "INNOCENTE",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/8c/a9/88/8ca988f1-f9c4-7d2c-db21-806f7770f491/5054197685804.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/amigo-feat-elai/1688056446?i=1688056557&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687346110,
+        "artist": "Emis Killa & Gue",
+        "title": "ALBICOCCA",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/6f/b5/1b/6fb51bba-8b61-0c94-3992-ca304c7bfbdd/mzaf_1917098314073794273.plus.aac.p.m4a",
+        "album": "Effetto notte",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/bb/17/58/bb17581c-465c-fae6-0320-e22a1dd9488b/196871071512.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/albicocca-lolita/1687345814?i=1687346110&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1665689832,
+        "artist": "Rose Villain",
+        "title": "Fantasmi (feat. Geolier)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/5b/49/f7/5b49f720-38cc-3765-b345-f2b51989e1b9/mzaf_16826374152304744727.plus.aac.p.m4a",
+        "album": "Radio Gotham",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music123/v4/f9/d0/14/f9d014b6-ec9b-0c11-59b0-cb496bcb24d2/196589725998.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/fantasmi-feat-geolier/1665689649?i=1665689832&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1633483888,
+        "artist": "thasup",
+        "title": "s!r! (feat. Lazza & Sfera Ebbasta)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/12/79/da/1279daa6-244f-7f50-f0fe-1626e8ebacf4/mzaf_9089084371892171667.plus.aac.p.m4a",
+        "album": "s!r! (feat. Lazza & Sfera Ebbasta) - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music112/v4/e9/c7/ae/e9c7ae3c-6290-ba74-07a2-ed86f5255f43/196589305329.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/s-r-feat-lazza-sfera-ebbasta/1633483886?i=1633483888&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1687346113,
+        "artist": "Emis Killa",
+        "title": "BIG BANG",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/02/8d/56/028d5644-dc2b-d09e-f2ac-ffac7d7ac7bb/mzaf_17546864688434121540.plus.aac.p.m4a",
+        "album": "Effetto notte",
+        "album_art": "https://is3-ssl.mzstatic.com/image/thumb/Music116/v4/bb/17/58/bb17581c-465c-fae6-0320-e22a1dd9488b/196871071512.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/big-bang-upside-down/1687345814?i=1687346113&uo=4"
+    },
+    {
+        "collectionArtistId": 36270,
+        "service": "itunes",
+        "id": 1668239573,
+        "artist": "Tananai",
+        "title": "ABISSALE",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/d6/09/14/d6091487-106d-6cd2-9b54-295afe70e8bb/mzaf_16408537434347674471.plus.aac.p.m4a",
+        "album": "SKI TIME PARTY",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music116/v4/ee/db/df/eedbdffa-2d0a-5f41-8e81-dc27ec2de36d/23UMGIM08289.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/abissale/1668239370?i=1668239573&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1676914502,
+        "artist": "Negramaro, Elisa & Jovanotti",
+        "title": "Diamanti",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/86/fe/65/86fe65ae-9bb9-b2c3-494d-37b08917b517/mzaf_11014986294871348880.plus.aac.p.m4a",
+        "album": "Diamanti - Single",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/5f/b6/f8/5fb6f893-5ed1-1219-5bcd-2917f23f2e94/23UMGIM27080.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/diamanti/1676914498?i=1676914502&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1674408126,
+        "artist": "benardo pro",
+        "title": "KAROL G, Shakira TQG",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/5f/c1/d5/5fc1d59d-ec5a-ac87-84c7-0d0c42c4f884/mzaf_7695279492417862343.plus.aac.p.m4a",
+        "album": "KAROL G, Shakira TQG - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/06/2d/ff/062dff42-60a0-4ca5-02c5-f3a7c2ff7b43/732138066138_cover.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/karol-g-shakira-tqg/1674408125?i=1674408126&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1679958684,
+        "artist": "Geolier",
+        "title": "SO FLY",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/d8/c2/70/d8c270f3-9b66-2b35-1272-be8e5c2b8d63/mzaf_6806531609719739845.plus.aac.p.m4a",
+        "album": "IL CORAGGIO DEI BAMBINI - ATTO II",
+        "album_art": "https://is4-ssl.mzstatic.com/image/thumb/Music116/v4/91/e2/e2/91e2e2ce-c9e0-cd73-eb0a-f0c1c346947b/196871019330.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/so-fly/1679958676?i=1679958684&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1683556760,
+        "artist": "MamboLosco & Rondodasosa",
+        "title": "Karma",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/fc/4c/a1/fc4ca1b8-7e75-1eb5-1114-06c6d58cc521/mzaf_12381550486564559547.plus.aac.p.m4a",
+        "album": "Karma - Single",
+        "album_art": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/ed/ff/bb/edffbb27-07e7-1f71-f841-85eaf83cbfd5/23UMGIM43531.rgb.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/karma/1683556330?i=1683556760&uo=4"
+    },
+    {
+        "service": "itunes",
+        "id": 1685254860,
+        "artist": "Artie 5ive",
+        "title": "ANELLI E COLLANE (feat. ANNA)",
+        "preview_url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/e9/7e/2f/e97e2fe8-9654-553a-e0cd-d20b77d64fac/mzaf_6898323523606877240.plus.aac.p.m4a",
+        "album": "ASPETTANDO LA BELLA VITA",
+        "album_art": "https://is2-ssl.mzstatic.com/image/thumb/Music126/v4/81/f5/fb/81f5fb4c-2cc1-a613-1a7f-965375b2afff/5054197674204.jpg/1000x1000bb.jpg",
+        "buy_link": "https://music.apple.com/us/album/anelli-e-collane-feat-anna/1685254161?i=1685254860&uo=4"
+    }
+]

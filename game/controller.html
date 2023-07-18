@@ -1,5 +1,5 @@
 <head>
-	<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.7.0.js"></script>
+	<script type="text/javascript" src="https://www.airconsole.com/api/airconsole-1.8.0.js"></script>
 	<link rel="stylesheet" href="controller.css">
 	<link rel="stylesheet" href="shared.css">
 	<link href="https://fonts.googleapis.com/css?family=Oswald|Roboto" rel="stylesheet">
@@ -31,9 +31,6 @@
 				<div id="miniRight-button-image" class="image-button"></div>
 			</div>
 			<div id="specific-buttons">
-				<div id="heroConfirm-button-image" class="image-button text-allign">
-					<div id="hero-text" class="button-text">Select</br>With Hero</div>
-				</div>
 				<div id="heroReq-button-image" class="image-button text-allign">
 					<div id="hero-text" class="button-text">Hero</br>Required</div></div>
 				</div>
@@ -49,33 +46,15 @@
 			<div id="back_from_credits_area">
 				<div id="credits" class="image-element text-allign">
 					<span id="category" class="button-text">Developed by:</br></span>
-					<span id="content" class="button-text"></br>Christian Nyffenegger,<span class="link"
-						onclick="air_console.openExternalUrl('https://twitter.com/freakpants')">freakpants</br></span></span><br>
+					<span id="content" class="button-text"></br>Christian Nyffenegger, freakpants</br></span></span><br>
 					<span id="category" class="button-text">Background video by:</br></span>
-					<span id="content" class="button-text">
-					  <span class="link"
-						onclick="air_console.openExternalUrl('https://pixabay.com/de/users/tommyvideo-3092371/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=5154')">
-					</br>Tomislav Jakupec
-					  </span> / Pixabay
-					</br></span><br>
+					<span id="content" class="button-text">  </br>Tomislav Jakupec </span> / Pixabay </br></span><br>
 					<span id="category" class="button-text">Music provided by:</br></span>
-					<span id="content" class="button-text">
-					  <span class="link"
-						onclick="air_console.openExternalUrl('https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html')">
-					</br>Itunes Search API Preview
-					</br></span>
-					</span><br>
+					<span id="content" class="button-text"></br>Itunes Search API Preview</br></span></span><br>
 					<span id="category" class="button-text">Sound effects by:</br></span>
-					<span id="content" class="button-text">
-					  <span class="link" onclick="air_console.openExternalUrl('https://www.zapsplat.com/')">
-					</br>ZapSplat
-					</br></span>
-					</span><br>
+					<span id="content" class="button-text"></br>ZapSplat</br></span></span><br>
 					<span id="category" class="button-text">Svg loaders by:</br></span>
-					<span id="content" class="button-text">
-					  <span class="link" onclick="air_console.openExternalUrl('https://twitter.com/sherb')"></br>Sam Herbert</span>
-					  (<span class="link" onclick="air_console.openExternalUrl('https://github.com/SamHerbert/SVG-Loaders')">Github</span>)
-					</br></span><br>
+					<span id="content" class="button-text"></br>Sam Herbert</span>Github</span></br></span><br>
 				</div>
 				<div id="returnCredits-button-image" class="image-button"></div>
 		        <div id= "purple-blur-credits" class="image-element text-allign">
@@ -87,7 +66,7 @@
 					<img id="loading_animation" src="three-dots.svg"/>
 				</div>
 				<div id= "purple-blur" class="image-element text-allign">
-			      <div class="button-text">Loading</div>
+			      <div class="button-text" style="left: 40%; top:44%; position: absolute; font-size: min(2.6vh, 4.2vw);">Loading</div>
 			    </div>
 			</div>
 			<div id="get_ready">
@@ -105,6 +84,10 @@
 				<div id="message-container" class="image-element text-allign">Please wait for</br>the next round</br>to begin.</div>
 			</div>
 			<div id="guessing_buttons_full">
+				<div id="position-image" class="position-display image-button text-allign">
+					<span class="number button-text"></span>
+					<span class="letters button-text"></span>
+				</div>
 				<div id="choice_1" class="choice_container unselected">
 					<!-- <span class="fa-stack fa-lg">
 						<i class="fa fa-bars "></i>
@@ -136,7 +119,7 @@
 					<div class="player_round_result button-text"></div>
 					<div class="player_score button-text"></div>
 				</div>
-				<div id="position-image" class="image-button text-allign">
+				<div id="position-image" class="position-display image-button text-allign">
 					<span class="number button-text"></span>
 					<span class="letters button-text"></span>
 				</div>
@@ -154,7 +137,7 @@
 				</div>
 			</div>
 			<div id="game_over">
-				<div id="returnUpdate-button-image" class="image-button"></div>
+				<div id="returnGameOver-button-image" class="image-button"></div>
 		        <div id= "purple-blur" class="image-element text-allign">
                    <div class="button-text">Return to main menu</div>
                 </div>
@@ -204,7 +187,6 @@
 				if (data[0].type === "disable_start") {
 					if (am_i_master()) {
 					$("#select-button-image").hide();
-					$("#heroConfirm-button-image").hide();
 					$("#heroReq-button-image").show();
 					}
 				}
@@ -212,15 +194,13 @@
 				if (data[0].type === "enable_start" && data[0].type !== "display_loading") {
 					if (am_i_master()) {
 					$("#select-button-image").show();
-					$("#heroConfirm-button-image").hide();
 					$("#heroReq-button-image").hide();
 					}
 				}
 
 				if (data[0].type === "start_with_hero") {
 					if (am_i_master()) {
-					$("#select-button-image").hide();
-					$("#heroConfirm-button-image").show();
+					$("#select-button-image").show();
 					$("#heroReq-button-image").hide();
 					}
 				}
@@ -234,6 +214,7 @@
 					$("#right-button-image").hide();
 					$("#select-button-image").hide();
 					$("#return-button-image").hide();
+                    $("#heroReq-button-image").hide();
 					$("#waiting_for_next_round").css({ display: "flex" });
 					$("#waiting_for_start").hide();
 				}
@@ -304,14 +285,18 @@
 
 				if (data[0].type === "show_round_number_buttons") {
 					if (am_i_master()) {
+					$("#waiting_for_next_round").hide();
+					$("#waiting_for_start").hide();
 					$("#miniLeft-button-image").hide();
 					$("#miniRight-button-image").hide();
 					$("#plus-button-image").hide();
 					$("#minus-button-image").hide();
 					$("#up-button-image").hide();
 					$("#down-button-image").hide();
+					$("#return-button-image").show();
 					$("#left-button-image").show();
 					$("#right-button-image").show();
+					$("#select-button-image").show();
 					}
 				}
 
@@ -327,6 +312,8 @@
 
 				if (data[0].type === "show_settings_buttons") {
 					if (am_i_master()) {
+					$("#waiting_for_next_round").hide();
+					$("#waiting_for_start").hide();
 					$("#miniLeft-button-image").hide();
 					$("#miniRight-button-image").hide();
 					$("#plus-button-image").hide();
@@ -336,6 +323,7 @@
 					$("#return-button-image").show();
 					$("#up-button-image").show();
 					$("#down-button-image").show();
+					$("#select-button-image").show();
 					}
 				}
 
@@ -353,6 +341,10 @@
 				if (data[0].type === "show_back_to_main") {
 					$("#waiting_for_next_round").hide();
 					$("#waiting_for_start").hide();
+					$("#up-button-image").hide();
+					$("#down-button-image").hide();
+					$("#select-button-image").hide();
+					$("#score_report").hide();
 					$("#game_over").css({ display: "flex" });
 				}
 
@@ -368,12 +360,17 @@
 						$("#waiting_for_next_round").hide();
 						$("#up-button-image").hide();
 						$("#down-button-image").hide();
+						$("#miniLeft-button-image").hide();
+					    $("#miniRight-button-image").hide();
+					    $("#plus-button-image").hide();
+					    $("#minus-button-image").hide();
 						$("#right-button-image").hide();
 						$("#left-button-image").hide();
 						$("#select-button-image").hide();
 						$("#return-button-image").hide();
 						$("#back_from_credits_area").hide();
 						$("#back_from_updates_area").hide();
+                        $("#heroReq-button-image").hide();
 						$("#game_over").hide();
 						$("#waiting_for_start").show();
 					}
@@ -381,24 +378,44 @@
 
 				if (data[0].type === "show_round_change_buttons") {
 					if (am_i_master()) {
+						$("#waiting_for_next_round").hide();
+					    $("#waiting_for_start").hide();
 						$("#left-button-image").hide();
 					    $("#right-button-image").hide();
+						$("#up-button-image").hide();
+					    $("#down-button-image").hide();
+						$("#return-button-image").show();
 						$("#miniLeft-button-image").show();
 					    $("#miniRight-button-image").show();
 					    $("#plus-button-image").show();
 					    $("#minus-button-image").show();
+						$("#select-button-image").show();
 					}
 				}
 
 				if (data[0].type === "hide_round_change_buttons") {
 					if (am_i_master()) {
+					$("#waiting_for_next_round").hide();
+					$("#waiting_for_start").hide();
 					$("#miniLeft-button-image").hide();
 					$("#miniRight-button-image").hide();
 					$("#plus-button-image").hide();
 					$("#minus-button-image").hide();
+					$("#return-button-image").show();
 					$("#left-button-image").show();
 					$("#right-button-image").show();
+					$("#select-button-image").show();
 					}
+				}
+				
+				if (data[0].type === "get_ready") {
+					$("#up-button-image").hide();
+					$("#down-button-image").hide();
+					$("#select-button-image").hide();
+					$("#return-button-image").hide();
+					$("#waiting_for_start").hide();
+					$("#message-container").show();
+					$("#get_ready").show();
 				}
 
 				if (data[0].type === "not_in_progress") {
@@ -444,37 +461,6 @@
 					increase_check();
 				}
 
-				if (data[0].type === "get_ready") {
-					$("#up-button-image").hide();
-					$("#down-button-image").hide();
-					$("#select-button-image").hide();
-					$("#return-button-image").hide();
-					$("#waiting_for_start").hide();
-					$("#get_ready").show();
-				}
-
-				if (data[0].type === "boundary") {
-					if (!data[0].boundary) {
-						// show buttons again
-						//$("#right-button-image").css("opacity", 1);
-						//$("#right-button-image").css("pointer-events", "auto");
-						//$("#left-button-image").css("opacity", 1);
-						//$("#left-button-image").css("pointer-events", "auto");
-					}
-					if (data[0].boundary === "last") {
-						//$("#left-button-image").css("opacity", 1);
-						//$("#left-button-image").css("pointer-events", "auto");
-						//$("#right-button-image").css("opacity", 0);
-						//$("#right-button-image").css("pointer-events", "none");
-					}
-					if (data[0].boundary === "first") {
-						//$("#left-button-image").css("opacity", 0);
-						//$("#left-button-image").css("pointer-events", "none");
-						//$("#right-button-image").css("opacity", 1);
-						//$("#right-button-image").css("pointer-events", "auto");
-					}
-				}
-
 				if (data[0].type === "score") {
 					// console.log("received score");
 					// also store the current score for display when out of time 
@@ -486,22 +472,31 @@
 						$(".player_score").html(score.score + " Points (+" + score.increase + ")");
 					}
 
+					$("#message-container").hide();
 					// </br>You are on Position " + document.position
 
 					// assign score for the permanent display
-					$("#round_over_song_details .number").html(score.position);
+					$(".number").html(score.position);
 					switch (score.position) {
 						case 1:
-							$("#round_over_song_details .number").html(score.position + "ST");
+							$(".number").html(score.position + "ST");
+							$("#guessing_buttons_full .position-display").css("opacity", "1");
+							$("#round_over_song_details .position-display").css("opacity", "1");
 							break;
 						case 2:
-							$("#round_over_song_details .number").html(score.position + "ND");
+							$(".number").html(score.position + "ND");
+							$("#guessing_buttons_full .position-display").css("opacity", "1");
+							$("#round_over_song_details .position-display").css("opacity", "1");
 							break;
 						case 3:
-							$("#round_over_song_details .number").html(score.position + "RD");
+							$(".number").html(score.position + "RD");
+							$("#guessing_buttons_full .position-display").css("opacity", "1");
+							$("#round_over_song_details .position-display").css("opacity", "1");
 							break;
 						default:
-							$("#round_over_song_details .number").html(score.position + "TH");
+							$(".number").html(score.position + "TH");
+							$("#guessing_buttons_full .position-display").css("opacity", "1");
+							$("#round_over_song_details .position-display").css("opacity", "1");
 							break;
 					}
 				}
@@ -541,6 +536,8 @@
 				if (data[0].type === "game_end") {
 					document.inProgress = false;
 					DEBUG && console.log("handling game end");
+					$("#guessing_buttons_full .position-display").css("opacity", "0");
+					$("#round_over_song_details .position-display").css("opacity", "0");
 					$("#guessing_buttons_full #choice_1").css('opacity', '1');
 					$("#guessing_buttons_full #choice_2").css('opacity', '1');
 					$("#guessing_buttons_full #choice_3").css('opacity', '1');
@@ -553,8 +550,10 @@
 
 					$("#guessing_buttons_full").hide();
 					$("#round_over_song_details").hide();
+					$("#message-container").hide();
 
 					//  hide the menu
+					$("#message-container").hide();
 					$("#left-button-image").hide();
 					$("#right-button-image").hide();
 					$("#up-button-image").hide();
@@ -610,10 +609,32 @@
 					$("#round_over_song_details").hide();
 
 					// push the correct information from the song to the round over screen
-					$(".song_artist").html(data[0].artist + '</br>');
-					$(".song_title").html(data[0].title + '</br>');
-					$(".song_album").html(data[0].album + '</br>');
-					$(".song_albumart").css('background-image', 'url(' + data[0].album_art + ')');
+					if (data[0].title.length > 25) {
+						$(".song_artist").html(data[0].artist.substring(0, 25) + "..." + '</br>');
+					} else{
+						$(".song_artist").html(data[0].artist + '</br>');
+					}
+                    if (data[0].title.length > 25) {
+						$(".song_title").html(data[0].title.substring(0, 25) + "..." + '</br>');
+                    } else{
+					    $(".song_title").html(data[0].title + '</br>');
+					}
+					if (data[0].album.length > 25) {
+						$(".song_album").html(data[0].album.substring(0, 25) + "..." + '</br>');
+					} else{
+					    $(".song_album").html(data[0].album + '</br>');
+					}
+
+					//Set the low resolution image while the highest resolution image has not finished loading
+					var albumResolution = new Image();
+					albumResolution.src = data[0].album_art.replace('/1000x1000', '/100x100');
+					albumResolution.onload = function(){
+						//if loaded the low resolution image, load the larger one
+						if(albumResolution.src == data[0].album_art.replace('/1000x1000', '/100x100')){
+							albumResolution.src = data[0].album_art;
+						}
+						$(".song_albumart").css('background-image', 'url(' + albumResolution.src + ')');
+					}
 
 					buy_link = data[0].buy_link;
 
@@ -633,6 +654,15 @@
 					$("#guessing_buttons_full #choice_2").removeClass("correct-selected wrong-selected");
 					$("#guessing_buttons_full #choice_3").removeClass("correct-selected wrong-selected");
 					$("#guessing_buttons_full #choice_4").removeClass("correct-selected wrong-selected");
+
+					//  hide the menu
+					$("#message-container").hide();
+					$("#left-button-image").hide();
+					$("#right-button-image").hide();
+					$("#up-button-image").hide();
+					$("#down-button-image").hide();
+					$("#return-button-image").hide();
+					$("#select-button-image").hide();
 
 					artist_or_title = data[0].answerType;
 					choices = data[0].wrongAnswers;
@@ -668,6 +698,10 @@
 								targetElement.addClass("wrong");
 							}
 						}
+						var choiceText = current_choice;
+                        if (choiceText.length > 35) {
+                          choiceText = choiceText.substring(0, 35) + "...";
+                        }
 						$(targetElement).find(".unselected").html(current_choice);
 					}
 
@@ -684,12 +718,6 @@
 						var correctGuess = [];
 						correctGuess.push({ type: "correctGuess", type_of_guess: 'full' });
 						air_console.message(0, correctGuess);
-
-						// grey out the other answers
-						//$("#guessing_buttons_full #choice_1").css('opacity', '0.5');
-						//$("#guessing_buttons_full #choice_2").css('opacity', '0.5');
-						//$("#guessing_buttons_full #choice_3").css('opacity', '0.5');
-						//$("#guessing_buttons_full #choice_4").css('opacity', '0.5');
 
 						// highlight the correct answer
 						id = $(this).attr("id");
@@ -727,12 +755,6 @@
 						wrongGuess.push({ type: "wrongGuess" });
 						air_console.message(0, wrongGuess);
 
-						// grey out the other answers
-						//$("#guessing_buttons_full #choice_1").css('opacity', '0.2');
-						//$("#guessing_buttons_full #choice_2").css('opacity', '0.2');
-						//$("#guessing_buttons_full #choice_3").css('opacity', '0.2');
-						//$("#guessing_buttons_full #choice_4").css('opacity', '0.2');
-
 						// highlight the wrong answer
 						id = $(this).attr("id");
 						// console.log("id of element is " + id);
@@ -767,67 +789,36 @@
 
 		$(document).ready(function () {
 
-			$("#select-button-image").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
-				$("#heroConfirm-button-image").hide();
+			$("#select-button-image").bind('pointerdown', function (event) {
 				var command = [];
 				command.push({ type: "select" });
 				air_console.message(0, command);
 			});
 
-			$("#heroConfirm-button-image").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
-				$("#heroConfirm-button-image").hide();
-				$("#select-button-image").show();
-				var command = [];
-				command.push({ type: "select" });
-				air_console.message(0, command);
-			});
-
-			$("#heroReq-button-image").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+			$("#heroReq-button-image").bind('pointerdown', function (event) {
 				air_console.getPremium();
 			});
 
-			$("#return-button-image, #returnUpdate-button-image, #returnCredits-button-image").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
-				$("#heroConfirm-button-image").hide();
+			$("#return-button-image, #returnUpdate-button-image, #returnCredits-button-image").bind('pointerdown', function (event) {
 				$("#heroReq-button-image").hide();
 				var command = [];
 				command.push({ type: "back" });
 				air_console.message(0, command);
 			});
 
-			$("#previous-button").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
+			$("#up-button-image, #left-button-image, #miniLeft-button-image, #previous-button").bind('pointerdown', function (event) {
 				var command = [];
 				command.push({ type: "previous" });
 				air_console.message(0, command);
 			});
 
-            $("#next-button").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
+            $("#down-button-image, #right-button-image, #miniRight-button-image, #next-button").bind('pointerdown', function (event) {
 				var command = [];
 				command.push({ type: "next" });
 				air_console.message(0, command);
 			});
 
-			$("#up-button-image, #left-button-image, #miniLeft-button-image").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
-				var command = [];
-				command.push({ type: "previous" });
-				air_console.message(0, command);
-			});
-
-            $("#down-button-image, #right-button-image, #miniRight-button-image").bind('touchstart mousedown', function (event) {
-				event.preventDefault();
-				var command = [];
-				command.push({ type: "next" });
-				air_console.message(0, command);
-			});
-
-			$("#minus-button-image").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+			$("#minus-button-image").bind('pointerdown', function (event) {
 				if (document.maxRound == 1) {
 					// dont decrease rounds below 1
 				} else {
@@ -841,8 +832,7 @@
 				}
 			});
 
-			$("#plus-button-image").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+			$("#plus-button-image").bind('pointerdown', function (event) {
 				if (document.maxRound === document.maxPlaylistRounds) {
 					// cant increase further
 				} else {
@@ -856,8 +846,7 @@
 				}
 			});
 
-			$("#cancel_round").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+			$("#cancel_round").bind('pointerdown', function (event) { 
 				$("#round_over_song_details").hide();
 				$("#loading").css({ display: "flex" });
 				sleep(1500).then(() => {
@@ -874,8 +863,7 @@
 				air_console.message(0, command);
 			});
 
-			$("#game_over").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+			$("#returnGameOver-button-image").bind('pointerdown', function (event) {
 				$("#game_over").hide();
 				$("#loading").css({ display: "flex" });
 				sleep(1500).then(() => {
@@ -889,8 +877,7 @@
 				air_console.message(0, command);
 			});
 
-			$("#returnUpdate-button-image, #returnCredits-button-image").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
+			$("#returnUpdate-button-image, #returnCredits-button-image").bind('pointerdown', function (event) {
 				// inform the screen to display the animation
 				var command = [];
 				command.push({ type: "back" });
@@ -912,55 +899,6 @@
 					}
 				});
 			});
-
-			$("#return-menu-button-updates").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
-				// inform the screen to display the animation
-				var command = [];
-				command.push({ type: "back" });
-				air_console.message(0, command);
-
-				$("#back_from_credits_area").hide();
-				$("#back_from_updates_area").hide();
-				$("#loading").css({ display: "flex" });
-				// wait for the animation on the screen to finish
-				sleep(3100).then(() => {
-					$("#loading").hide();
-					// check if we are the master controller
-					if (am_i_master()) {
-						$("#up-button-image").show();
-						$("#down-button-image").show();
-						$("#select-button-image").show();
-					} else {
-						$("#waiting_for_start").css({ display: "flex" });
-					}
-				});
-			});
-
-			$("#return-menu-button-game_over").bind('touchstart mousedown', function (event) {
-				event.preventDefault(); 
-				// inform the screen to display the animation
-				var command = [];
-				command.push({ type: "back" });
-				air_console.message(0, command);
-
-				$("#back_from_credits_area").hide();
-				$("#back_from_updates_area").hide();
-				$("#loading").css({ display: "flex" });
-				// wait for the animation on the screen to finish
-				sleep(3100).then(() => {
-					$("#loading").hide();
-					// check if we are the master controller
-					if (am_i_master()) {
-						$("#up-button-image").show();
-						$("#down-button-image").show();
-						$("#select-button-image").show();
-					} else {
-						$("#waiting_for_start").css({ display: "flex" });
-					}
-				});
-			});
-
 		});
 
 		function am_i_master() {
