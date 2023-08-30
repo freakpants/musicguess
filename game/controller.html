@@ -88,6 +88,7 @@
 					<span class="number button-text"></span>
 					<span class="letters button-text"></span>
 				</div>
+				<div id="return-menu-button" class="image-button"></div>
 				<div id="choice_1" class="choice_container unselected">
 					<!-- <span class="fa-stack fa-lg">
 						<i class="fa fa-bars "></i>
@@ -134,6 +135,17 @@
 					<span class="song_title button-text"></span>
 					<span class="song_album button-text"></span>
 					<span class="song_artist button-text"></span>
+				</div>
+			</div>
+			<div id="quit_match">
+				<div id= "purple-blur-quit" class="image-element text-allign">
+				   <div class="button-text">leave the match?</div>
+				</div>
+				<div id="yes-button-image" class="image-button text-allign">
+				   <div class="button-text">Yes</div>
+				</div>
+				<div id="no-button-image" class="image-button text-allign">
+				   <div class="button-text">No</div>
 				</div>
 			</div>
 			<div id="game_over">
@@ -232,9 +244,11 @@
 				}
 
 				if (data[0].type === "show_menu") {
+					$("#guessing_buttons_full").hide();
 					$("#waiting_for_next_round").hide();
 					$("#waiting_for_start").hide();
 					$("#game_over").hide();
+					$("#quit_match").hide();
 					$("#left-button-image").hide();
 					$("#right-button-image").hide();
 					$("#up-button-image").show();
@@ -329,6 +343,7 @@
 
 				if (data[0].type === "show_main_menu_buttons") {
 					if (am_i_master()) {
+					$("#quit_match").hide();
 					$("#return-button-image").hide();
 					$("#left-button-image").hide();
 					$("#right-button-image").hide();
@@ -372,7 +387,10 @@
 						$("#back_from_updates_area").hide();
                         $("#heroReq-button-image").hide();
 						$("#game_over").hide();
+						$("#quit_match").hide();
 						$("#waiting_for_start").show();
+						$("#panelguess").css('opacity', '0');
+						$("#panelguess").css('pointer-events', 'none');
 					}
 				}
 
@@ -538,6 +556,7 @@
 					DEBUG && console.log("handling game end");
 					$("#guessing_buttons_full .position-display").css("opacity", "0");
 					$("#round_over_song_details .position-display").css("opacity", "0");
+					$("#return-menu-button").hide();
 					$("#guessing_buttons_full #choice_1").css('opacity', '1');
 					$("#guessing_buttons_full #choice_2").css('opacity', '1');
 					$("#guessing_buttons_full #choice_3").css('opacity', '1');
@@ -582,6 +601,26 @@
 
 					});
 
+				}
+
+				if (data[0].type === "quit_match") {
+					if (am_i_master()) {
+					$("#guessing_buttons_full").hide();
+					$("#quit_match").show();
+					} else{
+						$("#panelguess").css('opacity', '1');
+						$("#panelguess").css('pointer-events', 'auto');
+					}
+				}
+
+				if (data[0].type === "return_match") {
+					if (am_i_master()) {
+					$("#guessing_buttons_full").show();
+					$("#quit_match").hide();
+					} else{
+						$("#panelguess").css('opacity', '0');
+						$("#panelguess").css('pointer-events', 'none');
+					}
 				}
 
 				// analyze data
@@ -638,7 +677,9 @@
 
 					buy_link = data[0].buy_link;
 
-				
+					if (am_i_master()) {
+						$("#return-menu-button").show();
+					}
 
 					// reset css on buttons
 					$("#guessing_buttons_full #choice_1").css('opacity', '1');
@@ -844,6 +885,24 @@
 					command.push({ type: "increase_rounds" });
 					air_console.message(0, command);
 				}
+			});
+
+			$("#return-menu-button").bind('pointerdown', function (event) {
+				var command = [];
+				command.push({ type: "quit_match" });
+				air_console.message(0, command);
+			});
+
+			$("#yes-button-image").bind('pointerdown', function (event) {
+				var command = [];
+				command.push({ type: "yes" });
+				air_console.message(0, command);
+			});
+
+			$("#no-button-image").bind('pointerdown', function (event) {
+				var command = [];
+				command.push({ type: "no" });
+				air_console.message(0, command);
 			});
 
 			$("#cancel_round").bind('pointerdown', function (event) { 

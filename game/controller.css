@@ -282,12 +282,15 @@ body{
 }
 
 #return-menu-button{
-	position: relative;
-	width: 26vw;
-	left: -1vw;
-	top: 20.4vh;
-	z-index: 2;
-	pointer-events: auto;
+	display: none;
+	background-image: url(images/controller/BT_Back.png);
+    position: relative;
+    width: 20%;
+    height: 13%;
+    left: 2%;
+    top: 20%;
+    z-index: 2;
+    pointer-events: auto;
 }
 
 #returnUpdate-button-image, #returnGameOver-button-image{
@@ -524,6 +527,38 @@ body{
     color:  white;
 }
 
+#yes-button-image {
+	background-image: url(images/controller/BT_Red.png);
+    width: 88%;
+    height: 22%;
+    top: 38%;
+    left: 6%;
+}
+
+#yes-button-image .button-text{
+	padding-left: 0%;
+    margin-top: -2.5%;
+    font-size: 269%;
+    font-weight: 600;
+    position: initial;
+}
+
+#no-button-image {
+	background-image: url(images/controller/BT_Red.png);
+    width: 88%;
+    height: 22%;
+    top: 66%;
+    left: 6%;
+}
+
+#no-button-image .button-text{
+	padding-left: 0%;
+    margin-top: -2.5%;
+    font-size: 269%;
+    font-weight: 600;
+    position: initial;
+}
+
 #panelguess {
 	position: fixed;
 	top: 0;
@@ -592,6 +627,15 @@ body{
 	height: 35%;
 	z-index: 1;
 	position: absolute;
+}
+
+#purple-blur-quit{
+	background-image: url(images/controller/BG_Purple_Blur.png);
+    height: 63%;
+    width: 140%;
+    left: -19%;
+    top: -12%;
+    font-weight: 600;
 }
 
 #waiting_for_next_round{

@@ -681,6 +681,10 @@
 				hide_menu.push({
 					type: "hide_menu"
 				});
+				quit_match = [];
+				quit_match.push({
+					type: "quit_match"
+				});
 				inactive = [];
 				inactive.push({
 					type: "inactive"
@@ -1675,23 +1679,37 @@
 							update_selected_rounds_on_controllers();
 						}
 						break;
-					case 'cancel':
+					case 'quit_match':
+					  document.paused = true;
+					  air_console.broadcast(quit_match);
+					  player.pause();
+					  if (player.currentTime <= 0) {
+                        document.offlinePause = 0;
+                      } else {
+                        document.offlinePause = new Date().getTime();
+                      }
+					  $("#message").html("Round Paused!");
+					  document.screen = "quitting";
+					break;
+					case 'yes':
+					   switch (document.screen) {
+						case 'quitting':
+						document.paused = false;
 						controller_boundary_option("first");
 						$("#message").html("");
 						$("#message-blur").hide();
 						$("#playlist-info").hide();
 						$("#roundCounter").hide();
 						$("#playlist-display").hide();
+						show_main_menu_buttons = [];
+						show_main_menu_buttons.push({ type: "show_main_menu_buttons" });
 						// inform other controllers
-						hide_menu = [];
-						hide_menu.push({
-							type: "hide_menu"
-						});
+						if (air_console.getMasterControllerDeviceId() !== undefined) {
+						 air_console.message(air_console.getMasterControllerDeviceId(), show_main_menu_buttons);
+					    }
 
 						// in case some controllers were still waiting
-						sleep(2000).then(() => {
-							air_console.broadcast(hide_menu);
-						});
+						air_console.broadcast(hide_menu);
 
 						document.cancelled = true;
 						document.roundEndInitiated = true;
@@ -1725,8 +1743,24 @@
 						$("#main-menu").show();
 						$("#ticker-wrapper").show();
 						document.screen = "main-menu";
-
 						break;
+					   }
+					break;
+					case 'no':
+					   switch (document.screen) {
+						case 'quitting':
+						document.paused = false;
+						player.play();
+						return_match = [];
+						return_match.push({ type: "return_match" });
+						// inform other controllers
+						air_console.broadcast(return_match);
+						//calculate the time the game was paused until resume
+					    document.offlinePauseOffset += new Date().getTime() - document.offlinePause;
+				        calculateRoundTime();
+						break;
+					   }
+					break;
 					case 'back_to_main':
 						controller_boundary_option("first");
 						document.screen = "main-menu";
